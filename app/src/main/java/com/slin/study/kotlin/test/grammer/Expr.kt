@@ -6,9 +6,17 @@ interface Expr
 class Num(val value: Int) : Expr
 class Sum(val left: Int, val right: Int) : Expr
 
+/**
+ * 可以在外面定义变量
+ */
+var count = 0
+
 fun main() {
     println(eval(Sum(eval(Sum(1, 2)), eval(Num(3)))))
     forTest()
+    forMapTest()
+
+    println(count++)
 }
 
 fun eval(e: Expr): Int {
@@ -53,6 +61,14 @@ fun forTest() {
         print(testArray[i])
         print(" ")
     }
+    println()
+}
 
+//测试打印map
+fun forMapTest() {
+    var testMap = hashMapOf(1 to "a", 2 to "b")
+    for ((key, value) in testMap) {
+        println("key: $key, value: $value")
+    }
 }
 

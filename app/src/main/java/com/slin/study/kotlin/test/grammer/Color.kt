@@ -1,8 +1,6 @@
 package com.slin.study.kotlin.test.grammer
 
 import com.slin.study.kotlin.test.grammer.Color.*
-import java.lang.Exception
-import kotlin.math.min
 
 enum class Color(val r: Int, val g: Int, val b: Int) {
     RED(255, 0, 0),
@@ -22,6 +20,7 @@ fun main() {
     println(getMnemonic(VIOLTE))
     println(getWarmth(RED))
     println(mix(RED, YELLOW))
+    println(recognize('a'))
 }
 
 fun getMnemonic(color: Color) =
@@ -48,4 +47,11 @@ fun mix(c1: Color, c2: Color) =
         setOf(YELLOW, BLUE) -> GREEN
         setOf(BLUE, VIOLTE) -> INDIGO
         else -> throw Exception("dirty color")
+    }
+
+fun recognize(c: Char) =
+    when (c) {
+        in 'a'..'z' -> "It's a digit!"
+        in '0'..'9' -> "It's a letter!"
+        else -> "I don't know.."
     }

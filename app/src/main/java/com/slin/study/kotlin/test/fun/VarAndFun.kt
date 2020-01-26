@@ -1,4 +1,4 @@
-package com.slin.study.kotlin.test.grammer
+package com.slin.study.kotlin.test.`fun`
 
 fun main(args: Array<String>) {
     //声明只读变量

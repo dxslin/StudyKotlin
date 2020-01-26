@@ -1,4 +1,4 @@
-package com.slin.study.kotlin.test.grammer
+package com.slin.study.kotlin.test.`fun`
 
 import java.io.File
 
@@ -18,7 +18,8 @@ fun main() {
     println(list.joinToString(separator = " ", prefix = "\"", postfix = "\""))
 
     println("\n扩展函数重写测试")
-    val view: View = Button()
+    val view: View =
+        Button()
     view.showOff()
 
     println("\n扩展属性测试：")

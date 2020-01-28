@@ -43,7 +43,13 @@ fun main() {
     println(
         eval(
             Expr.Sum(
-                Expr.Num(eval(Expr.Sum(Expr.Num(1), Expr.Num(1)))),
+                Expr.Num(
+                    eval(
+                        Expr.Sum(
+                            Expr.Num(1), Expr.Num(1)
+                        )
+                    )
+                ),
                 Expr.Num(eval(Expr.Num(3)))
             )
         )
@@ -82,8 +88,7 @@ interface Focusable {
  * 1. 使用冒号“:”代替了Java的extends和implements关键字
  * 2.
  */
-class TextView : Clickable,
-    Focusable {
+class TextView : Clickable, Focusable {
 
     /**
      * 1. 重写的方法使用override关键字代替@Override注解，且override是必须的
@@ -189,6 +194,12 @@ class RadioButton : RichButton() {
  *
  ***********************************小结结束******************************************/
 
+/**
+ * 1. kotlin中类的基础属性和类型参数列表中用到的所有类或者函数的签名都有与这个类或者函数相同的可见性
+ * 2. protected成员只能在类和它的子类中可见，同一个包中无法访问
+ * 3. kotlin的外部内无法查看其内部或者嵌套类的private成员
+ */
+
 /************************* Kotlin中的可见修饰符 **************************************
  *  修饰符         类成员                    顶层声明
  *  public（默认）      所有地方可见             所有地方可见
@@ -197,12 +208,6 @@ class RadioButton : RichButton() {
  *  private         类中可见                 文件中可见
  *
  ***********************************小结结束******************************************/
-
-/**
- * 1. kotlin中类的基础属性和类型参数列表中用到的所有类或者函数的签名都有与这个类或者函数相同的可见性
- * 2. protected成员只能在类和它的子类中可见，同一个包中无法访问
- * 3. kotlin的外部内无法查看其内部或者嵌套类的private成员
- */
 
 
 interface Type : Serializable {

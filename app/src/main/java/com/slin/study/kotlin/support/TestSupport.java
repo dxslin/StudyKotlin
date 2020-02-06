@@ -1,4 +1,4 @@
-package com.slin.study.kotlin.test;
+package com.slin.study.kotlin.support;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -8,7 +8,7 @@ import java.util.TimerTask;
  * date: 2020-02-03
  * description:
  */
-public class JavaTestSupport {
+public class TestSupport {
 
 
     public static void postponeComputation(long delay, final Runnable runnable) {

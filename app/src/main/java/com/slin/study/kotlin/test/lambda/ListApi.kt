@@ -2,7 +2,7 @@ package com.slin.study.kotlin.test.lambda
 
 import android.content.Context
 import android.widget.TextView
-import com.slin.study.kotlin.test.JavaTestSupport.postponeComputation
+import com.slin.study.kotlin.support.TestSupport.postponeComputation
 import com.slin.study.kotlin.test.`class`.Person
 import java.io.File
 import java.util.*

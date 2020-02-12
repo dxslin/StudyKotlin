@@ -31,4 +31,16 @@ public class TestSupport {
             }
         }, 1000);
     }
+
+    interface XX<T> {
+        T xx();
+    }
+
+    class YY implements XX<Void> {
+
+        @Override
+        public Void xx() {
+            return null;
+        }
+    }
 }

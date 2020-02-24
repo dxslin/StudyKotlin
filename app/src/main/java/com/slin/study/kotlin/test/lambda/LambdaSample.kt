@@ -37,6 +37,16 @@ fun main() {
     printMessageWithPrefix(errors, "Error: ")
     printProblemCounts(errors)
 
+    //可以将代码块作为变量赋值
+    val sum = { x: Int, y: Int -> x + y }
+    println("sum(1, 2): ${sum(1, 2)}")
+    println("加法：compute(1, 2, sum): ${compute(1, 2, sum)}")
+    println(
+        "乘法：compute(2, 3) { x:Int, y:Int -> x * y}: ${compute(
+            2,
+            3
+        ) { x: Int, y: Int -> x * y }}"
+    )
 }
 
 fun printMessageWithPrefix(messages: Collection<String>, prefix: String) {
@@ -59,5 +69,14 @@ fun printProblemCounts(messages: Collection<String>) {
         }
     }
     println("clientError: $clientError, serverError: $serverError")
+}
+
+
+/**
+ * 定义需要lambda为参数的方法
+ *
+ */
+fun compute(x: Int, y: Int, expression: (Int, Int) -> Int): Int {
+    return expression(x, y)
 }
 

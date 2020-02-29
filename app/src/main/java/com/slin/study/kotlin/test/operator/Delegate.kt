@@ -55,7 +55,7 @@ fun main() {
     peopleDelegateObservable.age = 26
     peopleDelegateObservable.salary = 12000
 
-    val peopleMap = PeopleMap();
+    val peopleMap = PeopleMap()
     peopleMap.setAttribute("firstName", "King")
     peopleMap.setAttribute("lastName", "Smith")
     println(peopleMap.firstName)

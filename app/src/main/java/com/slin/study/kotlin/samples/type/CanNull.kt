@@ -1,6 +1,6 @@
 @file:Suppress("IfThenToElvis", "UNNECESSARY_SAFE_CALL", "unused", "DefaultLocale")
 
-package com.slin.study.kotlin.test.type
+package com.slin.study.kotlin.samples.type
 
 import com.slin.study.kotlin.support.JavaPerson
 import com.slin.study.kotlin.support.StringProcessor

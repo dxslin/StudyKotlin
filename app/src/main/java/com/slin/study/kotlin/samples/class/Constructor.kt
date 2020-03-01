@@ -1,4 +1,4 @@
-package com.slin.study.kotlin.test.`class`
+package com.slin.study.kotlin.samples.`class`
 
 import android.content.Context
 import java.util.jar.Attributes

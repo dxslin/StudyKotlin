@@ -1,4 +1,4 @@
-package com.slin.study.kotlin.test.grammer
+package com.slin.study.kotlin.samples.grammer
 
 import kotlin.random.Random
 

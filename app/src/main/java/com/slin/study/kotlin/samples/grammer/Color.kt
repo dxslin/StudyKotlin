@@ -1,6 +1,6 @@
-package com.slin.study.kotlin.test.grammer
+package com.slin.study.kotlin.samples.grammer
 
-import com.slin.study.kotlin.test.grammer.Color.*
+import com.slin.study.kotlin.samples.grammer.Color.*
 
 /**
  * 1. enum class -> 声明一个枚举

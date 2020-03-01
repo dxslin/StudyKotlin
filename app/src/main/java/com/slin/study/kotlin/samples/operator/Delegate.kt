@@ -1,4 +1,4 @@
-package com.slin.study.kotlin.test.operator
+package com.slin.study.kotlin.samples.operator
 
 import java.beans.PropertyChangeListener
 import java.beans.PropertyChangeSupport

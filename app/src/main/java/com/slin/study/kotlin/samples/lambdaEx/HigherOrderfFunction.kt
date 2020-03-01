@@ -1,4 +1,4 @@
-package com.slin.study.kotlin.test.lambdaEx
+package com.slin.study.kotlin.samples.lambdaEx
 
 import java.util.*
 

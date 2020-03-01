@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.slin.study.kotlin.test.type
+package com.slin.study.kotlin.samples.type
 
 /**
  * author: slin

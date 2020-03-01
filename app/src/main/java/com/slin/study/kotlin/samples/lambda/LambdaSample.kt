@@ -1,6 +1,6 @@
-package com.slin.study.kotlin.test.lambda
+package com.slin.study.kotlin.samples.lambda
 
-import com.slin.study.kotlin.test.`class`.Person
+import com.slin.study.kotlin.samples.`class`.Person
 
 /**
  * author: slin

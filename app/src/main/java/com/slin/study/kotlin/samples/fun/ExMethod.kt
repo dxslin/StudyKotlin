@@ -1,4 +1,4 @@
-package com.slin.study.kotlin.test.`fun`
+package com.slin.study.kotlin.samples.`fun`
 
 import java.io.File
 

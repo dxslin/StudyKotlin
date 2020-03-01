@@ -1,4 +1,4 @@
-package com.slin.study.kotlin.test.type
+package com.slin.study.kotlin.samples.type
 
 import com.slin.study.kotlin.support.CollectionUtils
 import java.io.BufferedReader

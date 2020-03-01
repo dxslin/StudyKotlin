@@ -1,9 +1,9 @@
-package com.slin.study.kotlin.test.lambda
+package com.slin.study.kotlin.samples.lambda
 
 import android.content.Context
 import android.widget.TextView
+import com.slin.study.kotlin.samples.`class`.Person
 import com.slin.study.kotlin.support.TestSupport.postponeComputation
-import com.slin.study.kotlin.test.`class`.Person
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList

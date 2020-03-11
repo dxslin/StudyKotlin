@@ -24,6 +24,11 @@ fun main() {
     val user42 = User4("user4_2", isSubscribed = false)
     println("user4_2: ${user42.nickname} isSubscribed: ${user42.isSubscribed}")
 
+    val user = User("user")
+    user.printName()
+    val twitterUser = TwitterUser("twitter user")
+    twitterUser.printName()
+
     val subscribingUser = SubscribingUser("slin@qq.com")
     val subscribingUser2 = SubscribingUser2("slin@qq.com")
     println("subscribingUser nickname: ${subscribingUser.nickname}")
@@ -82,7 +87,11 @@ class User3(val nickname: String)
  */
 class User4(val nickname: String, val isSubscribed: Boolean = true)
 
-open class User(nickname: String)
+open class User(private val nickname: String) {
+    fun printName() {
+        println(nickname)
+    }
+}
 
 /**
  * 继承User类，并且引用父类的构造方法

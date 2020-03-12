@@ -1,6 +1,7 @@
 package com.slin.study.kotlin.samples.generics
 
 import kotlin.random.Random
+import kotlin.reflect.KClass
 
 
 /**
@@ -16,7 +17,10 @@ import kotlin.random.Random
  * 6. 逆变使用`in`修饰声明泛型类型，格式：“<in T : 类型>”
  * 7. 协变泛型类型只能作为输入类型，不能作为输出类型，或者说只能用于输入参数类型，不能作为返回值类型
  * 8. 构造函数中不能包含公共的`val`或者'var'的属性，因为它们具有`getter`方法
- *
+ * 9. 点变型；`<out T>`等同于Java的通配符`<? extends T>`，但是不能访问其输入类型为T的方法；
+ *      `<in T>`等同于Java的通配符`<? super T>`
+ * 10. 星号`<*>`投影用于无引用参数类型或者对参数类型不感兴趣的地方
+ * 11. 星号`<*>`投影能够强制转换为任何类型，但是在调用时很可能报错，因此
  */
 fun main() {
     //协变示例
@@ -79,6 +83,23 @@ fun main() {
     //使用*代替参数类型投影成了<out Any?>，是无法调用输入类型有参数类型的函数
 //    unkownElementList.add(1)
     println(unkownElementList.first())
+
+    val validatorMap = mutableMapOf<KClass<*>, FiledValidator<*>>()
+    validatorMap[String::class] = DefaultStringValidator
+    validatorMap[Int::class] = DefaultIntValidator
+
+    val stringValidator = validatorMap[String::class] as FiledValidator<String>
+    println("stringValidator.validator(\"\"): ${stringValidator.validator("")}")
+
+    //这里强制转换能够成功，但是下面调用时就会报错，因为输入了String类型
+//    val intValidator = validatorMap[Int::class] as FiledValidator<String>
+//    println("intValidator.validator(\"\"): ${intValidator.validator("")}")
+
+    Validators.registerValidator(String::class, DefaultStringValidator)
+    Validators.registerValidator(Int::class, DefaultIntValidator)
+    println("Validators[String::class].validator(\"\"): ${Validators[String::class].validator("")}")
+    println("Validators[Int::class].validator(1): ${Validators[Int::class].validator(1)}")
+
 }
 
 
@@ -208,3 +229,36 @@ fun printFirst(list: List<*>) {
     }
 }
 
+interface FiledValidator<T> {
+    fun validator(intput: T): Boolean
+}
+
+object DefaultStringValidator : FiledValidator<String> {
+    override fun validator(intput: String): Boolean {
+        return intput.isNotEmpty()
+    }
+}
+
+object DefaultIntValidator : FiledValidator<Int> {
+    override fun validator(input: Int): Boolean {
+        return input >= 0
+    }
+}
+
+/**
+ * 将所有不安全的检查隐藏到具体类中，避免调用时出错
+ */
+object Validators {
+    private val validators = mutableMapOf<KClass<*>, FiledValidator<*>>()
+
+    fun <T : Any> registerValidator(kClass: KClass<T>, validator: FiledValidator<T>) {
+        validators[kClass] = validator
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    operator fun <T : Any> get(kClass: KClass<T>): FiledValidator<T> {
+        return validators[kClass] as? FiledValidator<T>
+            ?: throw IllegalArgumentException("no validator for ${kClass.simpleName}")
+    }
+
+}

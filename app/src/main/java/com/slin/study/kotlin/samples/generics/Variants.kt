@@ -20,7 +20,7 @@ import kotlin.reflect.KClass
  * 9. 点变型；`<out T>`等同于Java的通配符`<? extends T>`，但是不能访问其输入类型为T的方法；
  *      `<in T>`等同于Java的通配符`<? super T>`
  * 10. 星号`<*>`投影用于无引用参数类型或者对参数类型不感兴趣的地方
- * 11. 星号`<*>`投影能够强制转换为任何类型，但是在调用时很可能报错，因此
+ * 11. 星号`<*>`投影能够强制转换为任何类型，但是在调用时很可能报错，建议将转换逻辑封装到帮助类中
  */
 fun main() {
     //协变示例
@@ -64,17 +64,17 @@ fun main() {
     zoo.putIn(animal2)
     zoo.putIn(cat1)
 
-    testCopyData<String>("copyDataT: ") { stringList, anyList ->
-        copyDataT(stringList, anyList)
+    testCopyData<String>("copyDataT: ") { sourceList, desList ->
+        copyDataT(sourceList, desList)
     }
-    testCopyData<Any>("copyDataTR: ") { stringList, anyList ->
-        copyDataTR(stringList, anyList)
+    testCopyData<Any>("copyDataTR: ") { sourceList, desList ->
+        copyDataTR(sourceList, desList)
     }
-    testCopyData<Any>("copyDataOutT: ") { stringList, anyList ->
-        copyDataOutT(stringList, anyList)
+    testCopyData<Any>("copyDataOutT: ") { sourceList, desList ->
+        copyDataOutT(sourceList, desList)
     }
-    testCopyData<Any>("copyDataInT: ") { stringList, anyList ->
-        copyDataInT(stringList, anyList)
+    testCopyData<Any>("copyDataInT: ") { sourceList, desList ->
+        copyDataInT(sourceList, desList)
     }
 
     val anyNullList: MutableList<Any?> = mutableListOf(1, "22", 3, "444", null)
@@ -230,12 +230,12 @@ fun printFirst(list: List<*>) {
 }
 
 interface FiledValidator<T> {
-    fun validator(intput: T): Boolean
+    fun validator(input: T): Boolean
 }
 
 object DefaultStringValidator : FiledValidator<String> {
-    override fun validator(intput: String): Boolean {
-        return intput.isNotEmpty()
+    override fun validator(input: String): Boolean {
+        return input.isNotEmpty()
     }
 }
 

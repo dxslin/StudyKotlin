@@ -3,6 +3,7 @@ package com.slin.study.kotlin.samples.coroutines
 import kotlinx.coroutines.*
 import java.util.concurrent.CountDownLatch
 import kotlin.concurrent.thread
+import kotlin.system.measureTimeMillis
 
 /**
  * author: slin
@@ -17,6 +18,11 @@ import kotlin.concurrent.thread
  * 5. 创建一个挂起函数，只需要使用`suspend`修饰函数即可
  * 6. 协程的运行效率比线程高得多
  * 7. 使用`cancel`取消协程，只能取消挂起函数，计算任务是无法取消的，可以通过`isAlive`判断任务是否被取消了
+ * 8. 取消任务会抛出`CancellationException`异常，可以通过`try{...}finally{...}`来捕获并回收资源，
+ *      在`finally`里面调用挂起函数都会直接抛出` CancellationException`，需要使用`withContext(NonCancellable)`包裹
+ * 9. `withTimeout`超时控制，超时后会抛出`TimeoutCancellationException`异常，
+ *      `withTimeoutOrNull`通过返回`null`来表示超时，不会抛出异常
+ * 10. 使用`async`并发；同一个Scope下，如果一个子协程抛出异常，那么主协程和其它子协程都会被取消
  */
 
 fun main() {
@@ -37,7 +43,9 @@ fun main() {
 //    cancelJobTest()
 //    cancelJobTest2()
 //    cancelFinallyTest()
-    timeOutTest()
+//    timeOutTest()
+//    asyncTest();
+    asyncExceptionTest();
 
 }
 
@@ -241,4 +249,70 @@ fun timeOutTest() = runBlocking {
         "DONE"
     }
     println("Result is $result")
+}
+
+suspend fun doSomeThingUsefulOne(): Int {
+    delay(1300)
+    return 13
+}
+
+suspend fun doSomeThingUsefulTwo(): Int {
+    delay(1000)
+    return 29
+}
+
+/**
+ * 使用`async`并发
+ */
+fun asyncTest() = runBlocking {
+    //测量同步计算
+    var time = measureTimeMillis {
+        val one = doSomeThingUsefulOne()
+        val two = doSomeThingUsefulTwo()
+        println("sync: The answer is ${one + two}")
+    }
+    println("sync: Completed in $time ms")
+
+    //测量异步计算，异步可以节省更多时间
+    time = measureTimeMillis {
+        val one = async { doSomeThingUsefulOne() }
+        val two = async { doSomeThingUsefulTwo() }
+        println("async: The answer is ${one.await() + two.await()}")
+    }
+    println("async: Completed in $time ms")
+
+    //懒启动`async`，只有显示调用了`start`或者`await`才会执行，但是调用`await`会一直等待执行完毕才会执行下一个
+    time = measureTimeMillis {
+        val one = async(start = CoroutineStart.LAZY) { doSomeThingUsefulOne() }
+        val two = async(start = CoroutineStart.LAZY) { doSomeThingUsefulTwo() }
+        one.start()
+        two.start()
+        println("lazy async: The answer is ${one.await() + two.await()}")
+    }
+    println("lazy async: Completed in $time ms ")
+}
+
+/**
+ * 同一个Scope下，如果一个子协程发生意外，那么主协程和其它子协程都会被取消
+ */
+fun asyncExceptionTest() = runBlocking {
+    try {
+        coroutineScope {
+            val one = async<Int> {
+                try {
+                    delay(Long.MAX_VALUE)
+                    42
+                } finally {
+                    println("First child was canceled")
+                }
+            }
+            val two = async<Int> {
+                println("Second child throw an exception")
+                throw ArithmeticException()
+            }
+            println("The answer is ${one.await() + two.await()}")
+        }
+    } catch (e: ArithmeticException) {
+        println("Computation failed with Arithmetic")
+    }
 }

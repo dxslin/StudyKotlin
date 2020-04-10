@@ -35,7 +35,7 @@ fun main() {
 //        launch {
 //            doWorld()
 //        }
-//        println("Hello, ")
+//        log("Hello, ")
 //    }
 //
 //    createMassCoroutines()
@@ -44,10 +44,12 @@ fun main() {
 //    cancelJobTest2()
 //    cancelFinallyTest()
 //    timeOutTest()
-//    asyncTest();
-    asyncExceptionTest();
+    asyncTest()
+//    asyncExceptionTest()
 
 }
+
+fun log(msg: String) = println("${Thread.currentThread().name}: $msg")
 
 /**
  * 使用`launch`创建一个协程
@@ -55,12 +57,12 @@ fun main() {
 fun launchTest() {
     GlobalScope.launch {
         delay(1000)
-        println("Hello Coroutines")
+        log("Hello Coroutines")
     }
-    println("Hello launchTest")
+    log("Hello launchTest")
     //延时等待协程打印完毕
     Thread.sleep(2000)
-    println("launchTest end\r\n")
+    log("launchTest end\r\n")
 }
 
 /**
@@ -69,15 +71,15 @@ fun launchTest() {
 fun runBlockingTest() {
     GlobalScope.launch {
         delay(1000)
-        println("Hello Coroutines")
+        log("Hello Coroutines")
     }
-    println("Hello runBlockingTest")
+    log("Hello runBlockingTest")
     //runBlocking里面执行delay函数会阻塞整个线程
     runBlocking {
         delay(2000)
     }
 
-    println("runBlockingTest end\r\n")
+    log("runBlockingTest end\r\n")
 }
 
 /**
@@ -86,13 +88,13 @@ fun runBlockingTest() {
 fun joinTest() = runBlocking {
     val job = launch {
         delay(500)
-        println("Hello Coroutines")
+        log("Hello Coroutines")
     }
-    println("Hello joinTest")
+    log("Hello joinTest")
     //等待任务执行完毕
     job.join()
 
-    println("joinTest end\r\n")
+    log("joinTest end\r\n")
 }
 
 /**
@@ -102,17 +104,17 @@ fun joinTest() = runBlocking {
 fun coroutineScopeTest() = runBlocking {
     launch {
         delay(200)
-        println("Task form Blocking")
+        log("Task form Blocking")
     }
     coroutineScope {
         launch {
             delay(500)
-            println("Task from nested launch")
+            log("Task from nested launch")
         }
         delay(100)
-        println("Task from coroutine scope")
+        log("Task from coroutine scope")
     }
-    println("Coroutine scope is over\r\n")
+    log("Coroutine scope is over\r\n")
 }
 
 /**
@@ -120,7 +122,7 @@ fun coroutineScopeTest() = runBlocking {
  */
 suspend fun doWorld() {
     delay(100)
-    println("World!")
+    log("World!")
 }
 
 /**
@@ -128,7 +130,7 @@ suspend fun doWorld() {
  */
 fun createMassCoroutines() {
     val start = System.currentTimeMillis()
-    println("create coroutine start: $start")
+    log("create coroutine start: $start")
     runBlocking {
         repeat(10000) {
             launch {
@@ -137,7 +139,7 @@ fun createMassCoroutines() {
             }
         }
     }
-    println("\r\ncoroutine run end, usage time: ${System.currentTimeMillis() - start} ${System.currentTimeMillis()}")
+    log("\r\ncoroutine run end, usage time: ${System.currentTimeMillis() - start} ${System.currentTimeMillis()}")
 }
 
 /**
@@ -147,7 +149,7 @@ fun createMassThread() {
     val countThread = 10000
     val countDownLatch = CountDownLatch(countThread)
     val start = System.currentTimeMillis()
-    println("create thread start: $start")
+    log("create thread start: $start")
     repeat(countThread) {
         thread {
             Thread.sleep(1000)
@@ -156,7 +158,7 @@ fun createMassThread() {
         }
     }
     countDownLatch.await()
-    println("\r\nthread run end, usage time: ${System.currentTimeMillis() - start} ${System.currentTimeMillis()}")
+    log("\r\nthread run end, usage time: ${System.currentTimeMillis() - start} ${System.currentTimeMillis()}")
 }
 
 /**
@@ -166,15 +168,15 @@ fun createMassThread() {
 fun cancelJobTest() = runBlocking {
     val job = launch {
         repeat(1000) {
-            println("job： I'm sleeping $it ...")
+            log("job： I'm sleeping $it ...")
             delay(500)
         }
     }
     delay(1300)
-    println("main: I'm tried to waiting")
+    log("main: I'm tried to waiting")
     job.cancel()
     job.join()
-    println("main: Now I can quit")
+    log("main: Now I can quit")
 }
 
 /**
@@ -189,16 +191,16 @@ fun cancelJobTest2() = runBlocking {
         while (isActive) {
 //        while (i <= 5){
             if (System.currentTimeMillis() >= nextPrintTime) {
-                println("job: I'm sleeping ${i++} ...")
+                log("job: I'm sleeping ${i++} ...")
                 nextPrintTime += 500
             }
         }
     }
     delay(1300)
-    println("main: I'm tried to waiting")
+    log("main: I'm tried to waiting")
     //cancel和join合并
     job.cancelAndJoin()
-    println("main: Now I can quit")
+    log("main: Now I can quit")
 }
 
 /**
@@ -209,22 +211,22 @@ fun cancelFinallyTest() = runBlocking {
     val job = launch {
         try {
             repeat(100) {
-                println("job： I'm sleeping $it ...")
+                log("job： I'm sleeping $it ...")
                 delay(500)
             }
         } finally {
             withContext(NonCancellable) {
-                println("job: I'm running finally")
+                log("job: I'm running finally")
                 delay(1000L)
-                println("job: And I've just delayed for 1 sec because I'm non-cancellable")
+                log("job: And I've just delayed for 1 sec because I'm non-cancellable")
             }
         }
     }
 
     delay(1300)
-    println("main: I'm tried to waiting")
+    log("main: I'm tried to waiting")
     job.cancelAndJoin()
-    println("main: Now I can quit")
+    log("main: Now I can quit")
 }
 
 /**
@@ -235,7 +237,7 @@ fun timeOutTest() = runBlocking {
 //    withTimeout(1300){
 //        launch {
 //            repeat(100){
-//                println("job： I'm sleeping $it ...")
+//                log("job： I'm sleeping $it ...")
 //                delay(500)
 //            }
 //        }
@@ -243,12 +245,12 @@ fun timeOutTest() = runBlocking {
 
     val result = withTimeoutOrNull(1300) {
         repeat(100) {
-            println("job1: I'm sleeping $it ..")
+            log("job1: I'm sleeping $it ..")
             delay(500)
         }
         "DONE"
     }
-    println("Result is $result")
+    log("Result is $result")
 }
 
 suspend fun doSomeThingUsefulOne(): Int {
@@ -269,17 +271,17 @@ fun asyncTest() = runBlocking {
     var time = measureTimeMillis {
         val one = doSomeThingUsefulOne()
         val two = doSomeThingUsefulTwo()
-        println("sync: The answer is ${one + two}")
+        log("sync: The answer is ${one + two}")
     }
-    println("sync: Completed in $time ms")
+    log("sync: Completed in $time ms")
 
     //测量异步计算，异步可以节省更多时间
     time = measureTimeMillis {
         val one = async { doSomeThingUsefulOne() }
         val two = async { doSomeThingUsefulTwo() }
-        println("async: The answer is ${one.await() + two.await()}")
+        log("async: The answer is ${one.await() + two.await()}")
     }
-    println("async: Completed in $time ms")
+    log("async: Completed in $time ms")
 
     //懒启动`async`，只有显示调用了`start`或者`await`才会执行，但是调用`await`会一直等待执行完毕才会执行下一个
     time = measureTimeMillis {
@@ -287,9 +289,9 @@ fun asyncTest() = runBlocking {
         val two = async(start = CoroutineStart.LAZY) { doSomeThingUsefulTwo() }
         one.start()
         two.start()
-        println("lazy async: The answer is ${one.await() + two.await()}")
+        log("lazy async: The answer is ${one.await() + two.await()}")
     }
-    println("lazy async: Completed in $time ms ")
+    log("lazy async: Completed in $time ms ")
 }
 
 /**
@@ -303,16 +305,16 @@ fun asyncExceptionTest() = runBlocking {
                     delay(Long.MAX_VALUE)
                     42
                 } finally {
-                    println("First child was canceled")
+                    log("First child was canceled")
                 }
             }
             val two = async<Int> {
-                println("Second child throw an exception")
+                log("Second child throw an exception")
                 throw ArithmeticException()
             }
-            println("The answer is ${one.await() + two.await()}")
+            log("The answer is ${one.await() + two.await()}")
         }
     } catch (e: ArithmeticException) {
-        println("Computation failed with Arithmetic")
+        log("Computation failed with Arithmetic")
     }
 }

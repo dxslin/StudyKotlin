@@ -19,7 +19,8 @@ import kotlinx.coroutines.*
  *      并且新协程启动的Job被称为父协程的子作业，当一个父协程取消时，所有的子协程都会被递归取消，
  *      父协程总是会等待所有的子协程执行完毕
  * 5. 可以使用`CoroutineName`为协程命名，使用`+`组合上下文元素
- *
+ * 6. 可以创建一个`CoroutineScope`与`Activity`生命周期绑定，管理协程的生命周期
+ * 7. `ThreadLocal`可以使用`asContextElement`的指定其在协程中的值
  */
 @ObsoleteCoroutinesApi
 fun main() {
@@ -195,22 +196,39 @@ fun scopeUseTest() = runBlocking {
     delay(1000)
 }
 
+/**
+ * 在协程中使用`ThreadLocal`
+ * 1. 使用`asContextElement`指定`ThreadLocal`的在协程作用域的值
+ * 2. 即使使用`withContext`切换协程获取的也是`asContextElement`设置的值
+ * 3. 使用`threadLocal.set("xxx")`后，只能在遇到第一个可挂载函数之前生效
+ *
+ */
 fun threadLocalValueTest() = runBlocking {
     val threadLocal = ThreadLocal<String>()
     threadLocal.set("main")
-    log("pre main: thread local value: ${threadLocal.get()}")
+    log("pre main: thread local value: ${threadLocal.get()}")       //main
 
     //使用`asContextElement`设置协程中`ThreadLocal`的值
     val job = launch(Dispatchers.Default + threadLocal.asContextElement("launch")) {
-        log("launch start: thread local value: ${threadLocal.get()}")
+        log("launch start: thread local value: ${threadLocal.get()}")   //launch
         yield()
-        log("after yield: thread local value: ${threadLocal.get()}")
+        log("after yield: thread local value: ${threadLocal.get()}")    //launch
+
+        threadLocal.set("update launch")
+        log("after update: thread local value: ${threadLocal.get()}")   //update launch
+
         withContext(this@runBlocking.coroutineContext) {
-            log("with main context: thread local value: ${threadLocal.get()}")
+            log("with main context: thread local value: ${threadLocal.get()}")  //launch
+            threadLocal.set("update with main context")
         }
+        log("after update in main context: thread local value: ${threadLocal.get()}")     //launch
+        withContext(this@runBlocking.coroutineContext + threadLocal.asContextElement("main block")) {
+            log("after update with main context: thread local value: ${threadLocal.get()}") //main block
+        }
+        log("after asContextElement in main context: thread local value: ${threadLocal.get()}")     //launch
     }
     job.join()
-    log("post main: thread local value: ${threadLocal.get()}")
+    log("post main: thread local value: ${threadLocal.get()}")  //main
 }
 
 

@@ -66,7 +66,7 @@ fun main() {
     //groupBy 分组，toSortMap 按key排序
     println("按工资分组：${employees.groupBy(Person::salary).toSortedMap()}}")
 
-    //flatMap & flatten
+    //flatMap & flatten(展平list里面的list)
     val strings = listOf("abc", "def")
     println("展开字符串：${strings.flatMap { it.toList() }}")
 

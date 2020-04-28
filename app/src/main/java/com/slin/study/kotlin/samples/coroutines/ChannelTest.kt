@@ -28,7 +28,8 @@ fun main() {
 //    fanInTest()
 //    bufferChannelTest()
 //    fairChannelTest()
-    tickerChannelTest()
+//    tickerChannelTest()
+    actorTest()
 }
 
 
@@ -281,8 +282,18 @@ fun tickerChannelTest() = runBlocking {
     tickerChannel.cancel()
 }
 
-
-
+/**
+ * actor：启动一个协程接收通道发送的数据
+ */
+fun actorTest() = runBlocking {
+    val c = actor<String> {
+        for (msg in channel) {
+            log("actor receive: $msg")
+        }
+    }
+    c.send("Hello slin")
+    c.close()
+}
 
 
 

@@ -2,16 +2,59 @@ package com.slin.study.kotlin
 
 import org.junit.Test
 
-import org.junit.Assert.*
-
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
+    @Volatile
+    private var isOver = false
+
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+//        assertEquals(4, 2 + 2)
+
+//        println(test())
+
+        val thread = Thread(Runnable {
+            while (!isOver) {
+                println(System.nanoTime())
+            };
+        })
+        thread.start()
+        try {
+            Thread.sleep(500)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        println("main ${System.nanoTime()}")
+        isOver = true
+        println("main ${System.nanoTime()}")
     }
+
+    @Volatile
+    var number = 0
+
+    fun test(): Int {
+        try {
+            println("try...")
+            number = 1
+            return number
+        } catch (e: Exception) {
+            println("catch...")
+        } finally {
+            println("finally")
+            number = 2
+        }
+        return 0
+    }
+
+    fun testReturn(): Int {
+        println("testReturn")
+//        throw ArithmeticException()
+        return 111
+    }
+
+
 }

@@ -119,7 +119,7 @@ fun sendEmailTo(email: String) {
  * 延迟初始化属性
  * 1. 使用“lateinit var”定义属性
  * 2. 属性调用时不需要使用“?.”来调用
- * 3. 自己需要明白什么时候初始化的对象，确保调用该属性时一定被初始化了
+ * 3. 自己需要明白什么时候初始化的对象，确保调用该属性时一定被初始化了，而且该对象可以被重新赋值
  */
 
 class MyService {
@@ -134,7 +134,9 @@ class LateInitTest {
     }
 
     fun testFun() {
-        println("foo==performAction? --> ${"foo".equals(myService.performAction())}")
+        println("foo==performAction? --> ${"foo".equals(myService.performAction())} $myService")
+        myService = MyService()
+        println("foo==performAction? --> ${"foo".equals(myService.performAction())} $myService")
     }
 }
 

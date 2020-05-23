@@ -2,6 +2,7 @@ package com.slin.study.kotlin.ui.home
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,11 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.databinding.FragmentHomeBinding
 import com.slin.study.kotlin.databinding.ItemHomeTestBinding
+import com.slin.study.kotlin.ui.test.DataBindActivity
+import com.slin.study.kotlin.ui.test.ViewBindActivity
 import com.slin.study.kotlin.view.GridDividerItemDivider
+
+const val INTENT_NAME: String = "intent_name"
 
 class HomeFragment : Fragment() {
 
@@ -24,7 +29,8 @@ class HomeFragment : Fragment() {
 
     private val testDataList =
         mutableListOf(
-            HomeTestData("ViewBind", R.mipmap.cartoon_1, ViewBindActivity::class.java)
+            HomeTestData("ViewBind", R.mipmap.cartoon_1, ViewBindActivity::class.java),
+            HomeTestData("DataBind", R.mipmap.cartoon_2, DataBindActivity::class.java)
         )
 
     override fun onCreateView(
@@ -35,11 +41,11 @@ class HomeFragment : Fragment() {
 
         homeViewModel =
             ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        binding = FragmentHomeBinding.inflate(LayoutInflater.from(context))
+        binding = FragmentHomeBinding.inflate(inflater)
 
         binding.rvTestItem.apply {
             layoutManager = GridLayoutManager(context, 2)
-            addItemDecoration(GridDividerItemDivider(context))
+            addItemDecoration(GridDividerItemDivider(10, 10, Color.TRANSPARENT))
             adapter = object : BaseQuickAdapter<HomeTestData, BaseViewHolder>(
                 R.layout.item_home_test,
                 testDataList
@@ -50,11 +56,7 @@ class HomeFragment : Fragment() {
                         text = item.name
                         setCompoundDrawablesRelativeWithIntrinsicBounds(0, item.icon, 0, 0)
                         setOnClickListener {
-                            context?.let { ctx ->
-                                item.activityClass?.let {
-                                    startActivity(Intent(ctx, it))
-                                }
-                            }
+                            jumpToActivity(item)
                         }
                     }
                 }
@@ -64,6 +66,15 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    private fun jumpToActivity(item: HomeTestData) {
+        context?.let { ctx ->
+            item.activityClass?.let {
+                val intent = Intent(ctx, it)
+                intent.putExtra(INTENT_NAME, item.name)
+                startActivity(intent)
+            }
+        }
+    }
 
 }
 

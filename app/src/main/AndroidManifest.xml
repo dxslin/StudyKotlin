@@ -18,8 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.home.ViewBindActivity" />
-        <activity android:name=".ui.home.DataBindActivity" />
+        <activity android:name=".ui.test.ViewBindActivity" />
+        <activity android:name=".ui.test.DataBindActivity" />
     </application>
 
 </manifest>

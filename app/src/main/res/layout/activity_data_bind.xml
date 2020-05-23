@@ -3,6 +3,7 @@
 
     <data>
 
+        <import type="android.view.View" />
         <variable
                 name="testData"
                 type="com.slin.study.kotlin.ui.home.HomeTestData" />
@@ -10,6 +11,10 @@
         <variable
                 name="content"
                 type="String" />
+
+        <variable
+                name="imageId"
+                type="Integer" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,15 +32,27 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:drawableTop="@{testData.icon}"
                 android:gravity="center_horizontal"
-                android:text="@{testData.name, default=测试}" />
+                android:text="@{String.valueOf(imageId + 1) , default=测试}"
+                android:transitionName='@{"cartoon_"+imageId}'
+                android:visibility="@{imageId > 0 ? View.VISIBLE : View.GONE}" />
 
         <TextView
+                android:id="@+id/tv_content1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:text="@{content, default=内容}" />
+
+        <TextView
+                android:id="@+id/tv_content2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:text="content2" />
 
     </LinearLayout>
 </layout>

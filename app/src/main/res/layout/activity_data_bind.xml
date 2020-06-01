@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <import type="android.view.View" />
+
+        <variable
+                name="dataBindActivity"
+                type="com.slin.study.kotlin.ui.test.DataBindActivity" />
+
         <variable
                 name="testData"
                 type="com.slin.study.kotlin.ui.home.HomeTestData" />
@@ -15,6 +20,14 @@
         <variable
                 name="imageId"
                 type="Integer" />
+
+        <variable
+                name="imageTint"
+                type="android.content.res.ColorStateList" />
+
+        <variable
+                name="url"
+                type="String" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -32,7 +45,7 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:drawableTop="@{testData.icon}"
                 android:gravity="center_horizontal"
-                android:text="@{String.valueOf(imageId + 1) , default=测试}"
+                android:text="@{String.valueOf(imageId) , default=测试}"
                 android:transitionName='@{"cartoon_"+imageId}'
                 android:visibility="@{imageId > 0 ? View.VISIBLE : View.GONE}" />
 
@@ -53,6 +66,32 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:text="content2" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                app:text="@{content}" />
+
+        <ImageView
+                android:id="@+id/iv_tint_method"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:src="@mipmap/cartoon_1"
+                app:slinTint="@{imageTint}" />
+
+        <ImageView
+                android:id="@+id/iv_binding_adapter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:onLayoutChange="@{()->dataBindActivity.layoutChange()}"
+                app:error="@{@drawable/cartoon_2}"
+                app:imageUrl="@{url}" />
 
     </LinearLayout>
 </layout>

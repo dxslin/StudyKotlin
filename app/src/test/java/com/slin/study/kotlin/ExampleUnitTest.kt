@@ -56,5 +56,18 @@ class ExampleUnitTest {
         return 111
     }
 
+    @Test
+    fun arrayTest() {
+        val list = mutableListOf("1", "2", "3", "4", "5");
+        var index = 0;
+        for (value in list) {
+            println(value)
+            index++;
+            if (index == 1) {
+                list.remove(value)
+            }
+        }
+    }
+
 
 }

@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.databinding.FragmentHomeBinding
 import com.slin.study.kotlin.databinding.ItemHomeTestBinding
+import com.slin.study.kotlin.ui.bottomsheet.BottomSheetTestActivity
 import com.slin.study.kotlin.ui.test.DataBindActivity
 import com.slin.study.kotlin.ui.test.ViewBindActivity
 import com.slin.study.kotlin.view.GridDividerItemDivider
@@ -30,7 +31,8 @@ class HomeFragment : Fragment() {
     private val testDataList =
         mutableListOf(
             HomeTestData("ViewBind", R.mipmap.cartoon_1, ViewBindActivity::class.java),
-            HomeTestData("DataBind", R.mipmap.cartoon_2, DataBindActivity::class.java)
+            HomeTestData("DataBind", R.mipmap.cartoon_2, DataBindActivity::class.java),
+            HomeTestData("BottomSheet", R.mipmap.cartoon_3, BottomSheetTestActivity::class.java)
         )
 
     override fun onCreateView(

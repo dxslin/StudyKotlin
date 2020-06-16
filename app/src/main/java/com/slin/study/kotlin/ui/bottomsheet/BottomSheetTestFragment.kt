@@ -17,10 +17,15 @@ import kotlin.math.abs
 
 class BottomSheetTestFragment : Fragment() {
 
-    private val TAG = BottomSheetTestFragment::class.simpleName;
+    private val TAG = BottomSheetTestFragment::class.simpleName
 
-    private lateinit var binding: BottomSheetTestFragmentBinding;
-    private lateinit var behavior: BottomSheetBehavior<ConstraintLayout>;
+    private lateinit var binding: BottomSheetTestFragmentBinding
+    private lateinit var behavior: BottomSheetBehavior<ConstraintLayout>
+    private val imageBottomSheetDialog: BaseBottomSheetDialog by lazy {
+        val dialog = BaseBottomSheetDialog(requireContext())
+        dialog.setContentView(R.layout.bottom_shett_dialog_image)
+        dialog
+    }
 
     companion object {
         fun newInstance() =
@@ -34,8 +39,8 @@ class BottomSheetTestFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.bottom_sheet_test_fragment, container, false)
-        binding = BottomSheetTestFragmentBinding.bind(view);
-        return view;
+        binding = BottomSheetTestFragmentBinding.bind(view)
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -49,11 +54,27 @@ class BottomSheetTestFragment : Fragment() {
 //        StatusBarUtil.setTransparentForImageViewInFragment(activity, binding.coordinator)
 
         behavior = BottomSheetBehavior.from(binding.clBottomSheetContent)
-        behavior.setExpandedOffset(400)
+        behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            var slideOffset: Float = 0f
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                this.slideOffset = slideOffset
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_SETTLING) {
+                    if (slideOffset > 0.5) {
+                        behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                    } else {
+                        behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                    }
+                }
+            }
+
+        })
 
         binding.toolbar.apply {
             setContentInsetsAbsolute(0, 0)
-            setNavigationOnClickListener { _: View? -> activity?.finish() }
+            setNavigationOnClickListener { activity?.finish() }
             titleMarginStart = 0
             title = "Title"
         }
@@ -67,11 +88,19 @@ class BottomSheetTestFragment : Fragment() {
 //                binding.toolbar.title = if (percent > 0.8) "Title" else ""
             }
         })
+        binding.tvMessage.setOnClickListener { showBottomSheetDialog() }
     }
 
-    private class MyBottomSheet<T : View> : BottomSheetBehavior<T>() {
-
-
+    private fun showBottomSheetDialog() {
+        context?.let {
+            imageBottomSheetDialog.apply {
+                if (isShowing) {
+                    dismiss()
+                } else {
+                    show()
+                }
+            }
+        }
     }
 
 }

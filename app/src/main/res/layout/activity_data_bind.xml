@@ -10,8 +10,8 @@
                 type="com.slin.study.kotlin.ui.test.DataBindActivity" />
 
         <variable
-                name="testData"
-                type="com.slin.study.kotlin.ui.home.HomeTestData" />
+            name="testData"
+            type="com.slin.study.kotlin.ui.home.TestPageData" />
 
         <variable
                 name="content"

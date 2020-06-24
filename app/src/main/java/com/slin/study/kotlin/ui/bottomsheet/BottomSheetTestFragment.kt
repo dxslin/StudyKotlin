@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.slin.study.kotlin.R
@@ -45,7 +45,7 @@ class BottomSheetTestFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(BottomSheetTestViewModel::class.java)
+        viewModel = ViewModelProvider(this)[BottomSheetTestViewModel::class.java]
         initView()
     }
 
@@ -75,8 +75,7 @@ class BottomSheetTestFragment : Fragment() {
         binding.toolbar.apply {
             setContentInsetsAbsolute(0, 0)
             setNavigationOnClickListener { activity?.finish() }
-            titleMarginStart = 0
-            title = "Title"
+//            title = "Title"
         }
 
         binding.appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->

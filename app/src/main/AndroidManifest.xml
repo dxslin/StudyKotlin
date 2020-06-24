@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.material.MaterialThemingActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
@@ -22,6 +23,7 @@
         </activity>
         <activity android:name=".ui.test.ViewBindActivity" />
         <activity android:name=".ui.test.DataBindActivity" />
+        <activity android:name=".ui.material.MaterialDesignActivity" />
         <activity
             android:name=".ui.bottomsheet.BottomSheetTestActivity"
             android:theme="@style/AppTheme.NoActionBar" />

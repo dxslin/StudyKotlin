@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:paddingEnd="@dimen/activity_vertical_margin"
+    tools:context=".ui.material.MaterialThemingActivity"
+    tools:ignore="HardcodedText">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_text"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Text Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_body1"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Body1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mtv_text" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_body2"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Body2"
+        app:layout_constraintStart_toEndOf="@id/mtv_body1"
+        app:layout_constraintTop_toTopOf="@id/mtv_body1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_display1"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Display1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintStart_toStartOf="@+id/mtv_body1"
+        app:layout_constraintTop_toBottomOf="@+id/mtv_body1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_display2"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Display2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        app:layout_constraintStart_toEndOf="@+id/mtv_display1"
+        app:layout_constraintTop_toTopOf="@+id/mtv_display1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_display3"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Display3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        app:layout_constraintStart_toEndOf="@+id/mtv_display2"
+        app:layout_constraintTop_toTopOf="@+id/mtv_display1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_display4"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Display4"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        app:layout_constraintStart_toEndOf="@+id/mtv_display3"
+        app:layout_constraintTop_toTopOf="@+id/mtv_display1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_large"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Large"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="@+id/mtv_body1"
+        app:layout_constraintTop_toBottomOf="@+id/mtv_display1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_medium"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toEndOf="@id/mtv_large"
+        app:layout_constraintTop_toTopOf="@id/mtv_large" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_small"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Small"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintStart_toEndOf="@id/mtv_medium"
+        app:layout_constraintTop_toTopOf="@id/mtv_large" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

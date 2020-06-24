@@ -10,8 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.databinding.ActivityDataBindBinding
-import com.slin.study.kotlin.ui.home.HomeTestData
 import com.slin.study.kotlin.ui.home.INTENT_NAME
+import com.slin.study.kotlin.ui.home.TestPageData
 
 
 /**
@@ -49,7 +49,7 @@ class DataBindActivity : AppCompatActivity() {
             )
         )
         binding.apply {
-            testData = HomeTestData(
+            testData = TestPageData(
                 "DataBind",
                 R.mipmap.cartoon_1,
                 null

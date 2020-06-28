@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText">
+    <!--        TextView-->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Text Title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Caption"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        app:layout_constraintBaseline_toBaselineOf="@+id/mtv_title"
+        app:layout_constraintStart_toEndOf="@+id/mtv_title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_head_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Headline"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintStart_toStartOf="@+id/mtv_title"
+        app:layout_constraintTop_toBottomOf="@+id/mtv_title" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_subhead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Subhead"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        app:layout_constraintBaseline_toBaselineOf="@id/mtv_head_line"
+        app:layout_constraintStart_toEndOf="@id/mtv_head_line" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Body1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mtv_head_line" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Body2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintStart_toEndOf="@id/mtv_body1"
+        app:layout_constraintTop_toTopOf="@id/mtv_body1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="text"
+        app:layout_constraintStart_toStartOf="@id/mtv_body1"
+        app:layout_constraintTop_toBottomOf="@id/mtv_body1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Small"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintStart_toStartOf="@id/mtv_display4"
+        app:layout_constraintTop_toBottomOf="@id/mtv_text" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="@id/mtv_small"
+        app:layout_constraintTop_toBottomOf="@id/mtv_small" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Large"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintStart_toStartOf="@+id/mtv_medium"
+        app:layout_constraintTop_toBottomOf="@+id/mtv_medium" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_display1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Display1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintStart_toStartOf="@+id/mtv_text"
+        app:layout_constraintTop_toBottomOf="@+id/mtv_large" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_display2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Display2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        app:layout_constraintStart_toStartOf="@+id/mtv_display1"
+        app:layout_constraintTop_toBottomOf="@+id/mtv_display1" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_display3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Display3"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        app:layout_constraintStart_toStartOf="@+id/mtv_display2"
+        app:layout_constraintTop_toBottomOf="@+id/mtv_display2" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_display4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Display4"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+        app:layout_constraintStart_toStartOf="@+id/mtv_display3"
+        app:layout_constraintTop_toBottomOf="@+id/mtv_display3" />
+</androidx.constraintlayout.widget.ConstraintLayout>

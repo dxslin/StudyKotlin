@@ -17,6 +17,8 @@
 
         <include layout="@layout/layout_material_button" />
 
+        <include layout="@layout/layout_material_clip" />
+
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

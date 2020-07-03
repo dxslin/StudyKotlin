@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:ignore="HardcodedText">
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <!--        button-->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_button"
@@ -14,7 +24,7 @@
         android:layout_marginTop="16dp"
         android:text="Button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/mtv_button" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_style_material"
@@ -53,45 +63,6 @@
         android:text="Text Button"
         app:layout_constraintStart_toEndOf="@id/btn_outlined_button"
         app:layout_constraintTop_toTopOf="@id/btn_outlined_button" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_entry"
-        style="@style/Widget.MaterialComponents.Chip.Entry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Entry Chip"
-        app:layout_constraintStart_toStartOf="@id/btn_button"
-        app:layout_constraintTop_toBottomOf="@id/btn_text_button" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_choice"
-        style="@style/Widget.MaterialComponents.Chip.Choice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Choice Chip"
-        app:layout_constraintStart_toEndOf="@id/chip_entry"
-        app:layout_constraintTop_toBottomOf="@id/btn_text_button" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_filter"
-        style="@style/Widget.MaterialComponents.Chip.Filter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Filter Chip"
-        app:layout_constraintStart_toStartOf="@id/chip_entry"
-        app:layout_constraintTop_toBottomOf="@id/chip_entry" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_action"
-        style="@style/Widget.MaterialComponents.Chip.Action"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="Action Chip"
-        app:chipIcon="@drawable/ic_notifications_black_24dp"
-        app:layout_constraintStart_toEndOf="@id/chip_filter"
-        app:layout_constraintTop_toBottomOf="@id/chip_entry" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.slin.study.kotlin.R
+import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.databinding.ActivityDataBindBinding
 import com.slin.study.kotlin.ui.home.INTENT_NAME
 import com.slin.study.kotlin.ui.home.TestPageData
@@ -20,7 +20,7 @@ import com.slin.study.kotlin.ui.home.TestPageData
  * description:
  *
  */
-class DataBindActivity : AppCompatActivity() {
+class DataBindActivity : BaseActivity() {
 
     private val TAG = DataBindActivity::class.simpleName
 
@@ -44,8 +44,8 @@ class DataBindActivity : AppCompatActivity() {
         val colorStateList = ColorStateList(
             arrayOf(intArrayOf(1 shl 4), intArrayOf(0)),
             intArrayOf(
-                ContextCompat.getColor(this, R.color.colorPrimary),
-                ContextCompat.getColor(this, R.color.colorAccent)
+                ContextCompat.getColor(this, R.color.color_primary),
+                ContextCompat.getColor(this, R.color.color_accent)
             )
         )
         binding.apply {

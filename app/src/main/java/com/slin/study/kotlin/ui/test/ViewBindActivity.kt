@@ -3,11 +3,11 @@ package com.slin.study.kotlin.ui.test
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatActivity
+import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.databinding.ActivityViewBindBinding
 import com.slin.study.kotlin.ui.home.INTENT_NAME
 
-class ViewBindActivity : AppCompatActivity() {
+class ViewBindActivity : BaseActivity() {
 
     private lateinit var binding: ActivityViewBindBinding
 

@@ -6,15 +6,40 @@
     android:layout_height="match_parent"
     tools:ignore="HardcodedText">
 
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_entry"
-        style="@style/Widget.MaterialComponents.Chip.Entry"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_chip"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Entry Chip"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:text="3. Chip"
+        android:textAppearance="@style/TextTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--    正常可点击的chip，无选中状态-->
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_action"
+        style="@style/Widget.MaterialComponents.Chip.Action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Action Chip"
+        app:chipEndPadding="10dp"
+        app:chipIcon="@drawable/ic_notifications_black_24dp"
+        app:chipStartPadding="2dp"
+        app:closeIconEndPadding="2dp"
+        app:closeIconStartPadding="2dp"
+        app:iconEndPadding="2dp"
+        app:iconStartPadding="2dp"
+        app:layout_constraintStart_toStartOf="@id/mtv_chip"
+        app:layout_constraintTop_toBottomOf="@id/mtv_chip"
+        app:textEndPadding="2dp"
+        app:textStartPadding="2dp" />
+
+    <!--    可选中的chip，点击后变为选中状态，可以通过singleSelection设置单选或多选-->
     <com.google.android.material.chip.Chip
         android:id="@+id/chip_choice"
         style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -22,26 +47,236 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Choice Chip"
-        app:layout_constraintStart_toEndOf="@id/chip_entry"
-        app:layout_constraintTop_toTopOf="@id/chip_entry" />
+        app:layout_constraintStart_toEndOf="@id/chip_action"
+        app:layout_constraintTop_toTopOf="@id/chip_action" />
 
+    <!--    点击后处于选中状态，显示选中chipIcon-->
     <com.google.android.material.chip.Chip
         android:id="@+id/chip_filter"
         style="@style/Widget.MaterialComponents.Chip.Filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Filter Chip"
-        app:layout_constraintStart_toStartOf="@id/chip_entry"
-        app:layout_constraintTop_toBottomOf="@id/chip_entry" />
+        app:layout_constraintStart_toStartOf="@id/chip_action"
+        app:layout_constraintTop_toBottomOf="@id/chip_action" />
 
+    <!--    末尾显示删除按钮，有选中状态-->
     <com.google.android.material.chip.Chip
-        android:id="@+id/chip_action"
-        style="@style/Widget.MaterialComponents.Chip.Action"
+        android:id="@+id/chip_entry"
+        style="@style/Widget.MaterialComponents.Chip.Entry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Action Chip"
-        app:chipIcon="@drawable/ic_notifications_black_24dp"
+        android:text="Entry Chip"
         app:layout_constraintStart_toEndOf="@id/chip_filter"
-        app:layout_constraintTop_toBottomOf="@id/chip_entry" />
+        app:layout_constraintTop_toBottomOf="@id/chip_action" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_single_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="1). 单选"
+        android:textAppearance="@style/SubTextTitle"
+        app:layout_constraintStart_toStartOf="@id/chip_action"
+        app:layout_constraintTop_toBottomOf="@id/chip_filter" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cg_single_select"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:chipSpacingHorizontal="8dp"
+        app:layout_constraintEnd_toEndOf="@id/mtv_chip"
+        app:layout_constraintStart_toStartOf="@id/chip_action"
+        app:layout_constraintTop_toBottomOf="@id/mtv_single_select"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_single_1"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="单项 1" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_single_2"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="单项 2" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_single_3"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="单项 3" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_single_4"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="单项 4" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_single_5"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="单项 5" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_single_6"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="单项 6" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_multi_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="2). 多选"
+        android:textAppearance="@style/SubTextTitle"
+        app:layout_constraintStart_toStartOf="@id/chip_action"
+        app:layout_constraintTop_toBottomOf="@id/cg_single_select" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/cg_multi_select"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@id/mtv_chip"
+        app:layout_constraintStart_toStartOf="@id/chip_action"
+        app:layout_constraintTop_toBottomOf="@id/mtv_multi_select"
+        app:singleSelection="false">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_multi_1"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="buttonClick"
+            android:text="多选项 1" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_multi_2"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="buttonClick"
+            android:text="多选项 2" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_multi_3"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="buttonClick"
+            android:text="多选项 3" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_multi_4"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="buttonClick"
+            android:text="多选项 4" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_multi_5"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="buttonClick"
+            android:text="多选项 5" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_multi_6"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="buttonClick"
+            android:text="多选项 6" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtv_single_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="3). 单行选择"
+        android:textAppearance="@style/SubTextTitle"
+        app:layout_constraintStart_toStartOf="@id/chip_action"
+        app:layout_constraintTop_toBottomOf="@id/cg_multi_select" />
+
+    <HorizontalScrollView
+        android:id="@+id/hsv_single_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintStart_toStartOf="@id/chip_action"
+        app:layout_constraintTop_toBottomOf="@id/mtv_single_line">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_single_line_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_single_line_1"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:text="单行选择 1" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_single_line_2"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单行选择 2" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_single_line_3"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单行选择 3" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_single_line_4"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单行选择 4" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_single_line_5"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单行选择 5" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_single_line_6"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:text="单行选择 6" />
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

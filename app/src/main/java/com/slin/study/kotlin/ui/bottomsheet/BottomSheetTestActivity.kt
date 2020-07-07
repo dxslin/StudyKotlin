@@ -1,10 +1,10 @@
 package com.slin.study.kotlin.ui.bottomsheet
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.slin.study.kotlin.R
+import com.slin.study.kotlin.base.BaseActivity
 
-class BottomSheetTestActivity : AppCompatActivity() {
+class BottomSheetTestActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

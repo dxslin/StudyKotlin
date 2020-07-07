@@ -7,15 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.slin.study.kotlin.R
+import com.slin.study.kotlin.base.BaseFragment
 import com.slin.study.kotlin.databinding.BottomSheetTestFragmentBinding
 import kotlin.math.abs
 
-class BottomSheetTestFragment : Fragment() {
+class BottomSheetTestFragment : BaseFragment() {
 
     private val TAG = BottomSheetTestFragment::class.simpleName
 

@@ -24,9 +24,7 @@
         <activity android:name=".ui.test.ViewBindActivity" />
         <activity android:name=".ui.test.DataBindActivity" />
         <activity android:name=".ui.material.MaterialDesignActivity" />
-        <activity
-            android:name=".ui.bottomsheet.BottomSheetTestActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.bottomsheet.BottomSheetTestActivity" />
     </application>
 
 </manifest>

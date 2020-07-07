@@ -9,12 +9,12 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.slin.study.kotlin.R
+import com.slin.study.kotlin.base.BaseFragment
 import com.slin.study.kotlin.databinding.FragmentHomeBinding
 import com.slin.study.kotlin.databinding.ItemHomeTestBinding
 import com.slin.study.kotlin.ui.bottomsheet.BottomSheetTestActivity
@@ -26,7 +26,7 @@ import com.slin.study.kotlin.view.GridDividerItemDivider
 const val INTENT_NAME: String = "intent_name"
 const val INTENT_KEY_TEST_PAGE_DATA = "intent_key_test_page_data"
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
     private lateinit var homeViewModel: HomeViewModel
 

@@ -2,12 +2,13 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
-        <!-- Customize your theme here. -->
-        <!-- 您的应用的主要品牌颜色，主要用于主题-->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-
+        <!-- Global color attributes -->
+        <!-- 您的应用的主要品牌颜色，主要用于主题 actionBar默认使用该颜色,Toolbar导航栏的底色-->
+        <item name="colorPrimary">@color/color_primary</item>
+        <!--        应用的主要暗色调,statusBarColor默认使用该颜色-->
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <!--        CheckBox,RadioButton,SwitchCompat等一般控件的选中效果默认采用该颜色-->
+        <item name="colorAccent">@color/color_accent</item>
         <!-- 您的主要品牌颜色的较浅/较暗变体，在主题中很少使用-->
         <item name="colorPrimaryVariant">@color/color_primary_variant</item>
         <!-- 用于显示在原色上方的元素的颜色（例如，文本和图标，根据可访问性，通常为白色或半透明的黑色）-->
@@ -30,12 +31,27 @@
         <item name="android:colorBackground">@color/color_background</item>
         <!-- 用于显示在背景色上方的元素的颜色-->
         <item name="colorOnBackground">@color/color_on_background</item>
-        <item name="android:statusBarColor">@color/color_status_bar</item>
+        <item name="android:statusBarColor">@color/color_primary</item>
+
+        <!-- ToolBar-->
+        <item name="toolbarStyle">@style/toolbar_style</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="toolbar_style" parent="Widget.MaterialComponents.Toolbar">
+        <item name="titleTextColor">@color/white</item>
+        <item name="contentInsetStart">0dp</item>
+    </style>
+
+    <style name="TextTitle" parent="TextAppearance.AppCompat.Title"></style>
+
+    <style name="SubTextTitle" parent="TextAppearance.AppCompat.Subhead">
+
     </style>
 
 </resources>

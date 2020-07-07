@@ -8,7 +8,8 @@ import com.google.android.material.chip.Chip
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.util.toast
-import kotlinx.android.synthetic.main.layout_material_clip.*
+import kotlinx.android.synthetic.main.layout_material_theming_clip.*
+import kotlinx.android.synthetic.main.layout_material_theming_selection.*
 
 class MaterialThemingActivity : BaseActivity() {
 
@@ -18,10 +19,15 @@ class MaterialThemingActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_material_theming)
-        isShowBackButton = true
+        setShowBackButton(true)
+        title = "MaterialTheming"
         chip()
+        selection()
     }
 
+    /**
+     * 监听Chip的一些事件
+     */
     private fun chip() {
         chip_entry.setOnCloseIconClickListener {
             toast("Close icon click")
@@ -45,6 +51,24 @@ class MaterialThemingActivity : BaseActivity() {
             )
 
         }
+    }
+
+    /**
+     * 监听CheckBox，RadioButton，Switch的事件
+     */
+    private fun selection() {
+        mcb_check_box.setOnCheckedChangeListener { buttonView, isChecked ->
+            toast("${if (isChecked) "Check" else "Uncheck"}: ${mcb_check_box.text}")
+        }
+
+        mrb_radio_button.setOnCheckedChangeListener { buttonView, isChecked ->
+            toast("${if (isChecked) "Check" else "Uncheck"}: ${mrb_radio_button.text}")
+        }
+
+        sm_switch.setOnCheckedChangeListener { buttonView, isChecked ->
+            toast("${if (isChecked) "Check" else "Uncheck"}: ${sm_switch.text}")
+        }
+
     }
 
     fun buttonClick(v: View) {

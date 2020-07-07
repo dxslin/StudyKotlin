@@ -15,7 +15,8 @@ class MaterialDesignActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment_content)
-        isShowBackButton = true
+        setShowBackButton(true)
+        title = "MaterialDesign"
         supportFragmentManager.beginTransaction()
             .replace(R.id.fl_content, HomeFragment.newInstance(testPageDataList))
             .commit()

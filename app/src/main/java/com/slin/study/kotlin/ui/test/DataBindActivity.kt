@@ -33,7 +33,7 @@ class DataBindActivity : BaseActivity() {
         intent?.extras?.getString(INTENT_NAME)?.let {
             title = it
         }
-
+        setShowBackButton(true)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_data_bind)
 
         dataBindTest()

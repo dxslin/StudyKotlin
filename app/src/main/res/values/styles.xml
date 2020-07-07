@@ -35,7 +35,8 @@
 
         <!-- ToolBar-->
         <item name="toolbarStyle">@style/toolbar_style</item>
-
+        <!--        ActionBar返回按钮样式-->
+        <item name="android:homeAsUpIndicator">@drawable/ic_baseline_arrow_back_white_24</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
@@ -45,10 +46,14 @@
 
     <style name="toolbar_style" parent="Widget.MaterialComponents.Toolbar">
         <item name="titleTextColor">@color/white</item>
+        <!--        解决左边空白问题-->
         <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
     </style>
 
-    <style name="TextTitle" parent="TextAppearance.AppCompat.Title"></style>
+    <style name="TextTitle" parent="TextAppearance.AppCompat.Title">
+
+    </style>
 
     <style name="SubTextTitle" parent="TextAppearance.AppCompat.Subhead">
 

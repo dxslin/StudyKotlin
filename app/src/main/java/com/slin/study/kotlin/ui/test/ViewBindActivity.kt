@@ -18,6 +18,7 @@ class ViewBindActivity : BaseActivity() {
         intent?.extras?.getString(INTENT_NAME)?.let {
             title = it
         }
+        setShowBackButton(true)
         //获取ViewBinding
         binding = ActivityViewBindBinding.inflate(LayoutInflater.from(this))
 

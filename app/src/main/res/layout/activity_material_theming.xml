@@ -11,11 +11,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/layout_material_text" />
+        <include layout="@layout/layout_material_theming_text" />
 
-        <include layout="@layout/layout_material_button" />
+        <include layout="@layout/layout_material_theming_button" />
 
-        <include layout="@layout/layout_material_clip" />
+        <include layout="@layout/layout_material_theming_clip" />
+
+        <include layout="@layout/layout_material_theming_selection" />
+
+        <include layout="@layout/layout_material_theming_text_field" />
 
 
     </LinearLayout>

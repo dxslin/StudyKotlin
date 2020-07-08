@@ -59,4 +59,6 @@
 
     </style>
 
+    <style name="Body1" parent="TextAppearance.MaterialComponents.Body1" />
+
 </resources>

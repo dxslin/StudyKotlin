@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.CompoundButton
+import androidx.core.widget.addTextChangedListener
 import com.google.android.material.chip.Chip
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.util.toast
 import kotlinx.android.synthetic.main.layout_material_theming_clip.*
 import kotlinx.android.synthetic.main.layout_material_theming_selection.*
+import kotlinx.android.synthetic.main.layout_material_theming_text_field.*
 
 class MaterialThemingActivity : BaseActivity() {
 
@@ -23,6 +25,22 @@ class MaterialThemingActivity : BaseActivity() {
         title = "MaterialTheming"
         chip()
         selection()
+        textInputField()
+    }
+
+    /**
+     * Button click listener
+     */
+    fun buttonClick(v: View) {
+        if (v is Button) {
+            toast("Click: ${v.text}")
+        }
+    }
+
+    private fun chipCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+        if (buttonView is Chip) {
+            toast("Check change: $isChecked")
+        }
     }
 
     /**
@@ -71,16 +89,18 @@ class MaterialThemingActivity : BaseActivity() {
 
     }
 
-    fun buttonClick(v: View) {
-        if (v is Button) {
-            toast("Click: ${v.text}")
-        }
-    }
-
-    private fun chipCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-        if (buttonView is Chip) {
-            toast("Check change: $isChecked")
-        }
+    /**
+     * TextInputLayout
+     */
+    private fun textInputField() {
+        tiet_custom_dense_input.addTextChangedListener(onTextChanged = { text, start, before, count ->
+            if ((tiet_custom_dense_input.text?.length ?: 0) > til_custom_input.counterMaxLength) {
+                til_custom_input.error = "字数不能超过${til_custom_input.counterMaxLength}"
+                til_custom_input.isErrorEnabled = true
+            } else {
+                til_custom_input.isErrorEnabled = false;
+            }
+        })
     }
 
 }

@@ -13,7 +13,7 @@
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="@dimen/activity_vertical_margin"
-        android:text="4. TextField"
+        android:text="5. TextField"
         android:textAppearance="@style/TextTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -86,6 +86,29 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tiet_outlined_dense_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_custom_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Custom box text field"
+        app:boxBackgroundColor="@color/transparent"
+        app:boxStrokeColor="@color/transparent"
+        app:counterEnabled="true"
+        app:counterMaxLength="8"
+        app:helperText="this is help text"
+        app:helperTextEnabled="true"
+        app:layout_constraintEnd_toEndOf="@id/mtv_text_field"
+        app:layout_constraintStart_toStartOf="@id/mtv_text_field"
+        app:layout_constraintTop_toBottomOf="@id/til_outlined_dense_input">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiet_custom_dense_input"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

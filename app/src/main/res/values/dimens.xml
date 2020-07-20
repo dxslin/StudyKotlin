@@ -2,4 +2,23 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="shape_small_size">8dp</dimen>
+    <dimen name="shape_small_top_left">@dimen/shape_small_size</dimen>
+    <dimen name="shape_small_top_right">@dimen/shape_small_size</dimen>
+    <dimen name="shape_small_bottom_left">@dimen/shape_small_size</dimen>
+    <dimen name="shape_small_bottom_right">@dimen/shape_small_size</dimen>
+
+    <dimen name="shape_medium_size">16dp</dimen>
+    <dimen name="shape_medium_top_left">@dimen/shape_medium_size</dimen>
+    <dimen name="shape_medium_top_right">@dimen/shape_medium_size</dimen>
+    <dimen name="shape_medium_bottom_left">@dimen/shape_medium_size</dimen>
+    <dimen name="shape_medium_bottom_right">@dimen/shape_medium_size</dimen>
+
+    <dimen name="shape_large_size">32dp</dimen>
+    <dimen name="shape_large_top_left">@dimen/shape_large_size</dimen>
+    <dimen name="shape_large_top_right">@dimen/shape_large_size</dimen>
+    <dimen name="shape_large_bottom_left">@dimen/shape_large_size</dimen>
+    <dimen name="shape_large_bottom_right">@dimen/shape_large_size</dimen>
+
 </resources>

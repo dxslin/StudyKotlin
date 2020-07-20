@@ -23,7 +23,7 @@
     <!--    正常可点击的chip，无选中状态-->
     <com.google.android.material.chip.Chip
         android:id="@+id/chip_action"
-        style="@style/Widget.MaterialComponents.Chip.Action"
+        style="@style/AppChip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Action Chip"

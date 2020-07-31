@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
     tools:ignore="HardcodedText">
 
     <com.google.android.material.textview.MaterialTextView
@@ -13,25 +14,62 @@
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="@dimen/activity_vertical_margin"
-        android:text="7. Dialog"
+        android:text="8. Dialog"
         android:textAppearance="@style/TextTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_alert_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="showAlertDialog"
         android:text="AlertDialog"
-        android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="@id/mtv_dialog"
         app:layout_constraintTop_toBottomOf="@id/mtv_dialog" />
 
     <Button
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:id="@+id/btn_simple_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SimpleDialog" />
+        android:layout_marginStart="8dp"
+        android:onClick="showSimpleDialog"
+        android:text="SimpleDialog"
+        app:layout_constraintStart_toEndOf="@id/btn_alert_dialog"
+        app:layout_constraintTop_toTopOf="@id/btn_alert_dialog" />
+
+    <Button
+        android:id="@+id/btn_single_choice_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="showSingleChoiceDialog"
+        android:text="SingleChoiceDialog"
+        app:layout_constraintStart_toStartOf="@id/btn_alert_dialog"
+        app:layout_constraintTop_toBottomOf="@id/btn_alert_dialog" />
+
+    <Button
+        android:id="@+id/btn_multi_choice_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:onClick="showMultiChoiceDialog"
+        android:text="SimpleDialog"
+        app:layout_constraintStart_toEndOf="@id/btn_single_choice_dialog"
+        app:layout_constraintTop_toTopOf="@id/btn_single_choice_dialog" />
+
+    <Button
+        android:id="@+id/btn_all_button_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="showAllButtonDialog"
+        android:text="AllButtonDialog"
+        app:layout_constraintStart_toStartOf="@id/btn_single_choice_dialog"
+        app:layout_constraintTop_toBottomOf="@id/btn_single_choice_dialog" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

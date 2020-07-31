@@ -25,6 +25,8 @@
 
         <include layout="@layout/layout_material_theming_card" />
 
+        <include layout="@layout/layout_material_theming_dialog" />
+
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

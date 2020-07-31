@@ -47,6 +47,10 @@
         <item name="chipStyle">@style/AppChip</item>
         <item name="chipStandaloneStyle">@style/AppChip.Standalone</item>
         <item name="textInputStyle">@style/AppTextField</item>
+
+        <item name="materialButtonStyle">@style/AppButton</item>
+        <item name="materialCardViewStyle">@style/AppCard</item>
+        <item name="materialButtonOutlinedStyle">@style/AppButton.Outlined</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
@@ -112,13 +116,11 @@
         <item name="iconTint">@color/button_text_color</item>
         <item name="rippleColor">@color/button_ripple_color</item>
         <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
     <style name="AppButton.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:textColor">@color/button_text_color</item>
-        <item name="iconTint">@color/button_text_color</item>
-        <item name="rippleColor">@color/button_ripple_color</item>
-        <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
     <style name="AppCard" parent="Widget.MaterialComponents.CardView">

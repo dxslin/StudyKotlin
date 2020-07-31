@@ -27,6 +27,7 @@
 
         <include layout="@layout/layout_material_theming_dialog" />
 
+        <include layout="@layout/layout_material_theming_bottom_navigation" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

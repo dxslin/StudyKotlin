@@ -6,13 +6,18 @@ import android.widget.CompoundButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.tabs.TabLayoutMediator
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
+import com.slin.study.kotlin.ui.text.TextFragment
 import com.slin.study.kotlin.util.toast
 import kotlinx.android.synthetic.main.layout_material_theming_clip.*
 import kotlinx.android.synthetic.main.layout_material_theming_selection.*
+import kotlinx.android.synthetic.main.layout_material_theming_tab.*
 import kotlinx.android.synthetic.main.layout_material_theming_text_field.*
 
 class MaterialThemingActivity : BaseActivity() {
@@ -29,6 +34,7 @@ class MaterialThemingActivity : BaseActivity() {
         chip()
         selection()
         textInputField()
+        tab()
     }
 
     /**
@@ -104,6 +110,22 @@ class MaterialThemingActivity : BaseActivity() {
                 til_custom_input.isErrorEnabled = false;
             }
         })
+    }
+
+    private fun tab() {
+        viewpager2.adapter = object : FragmentStateAdapter(this) {
+            override fun getItemCount(): Int {
+                return 3
+            }
+
+            override fun createFragment(position: Int): Fragment {
+                return TextFragment.newInstance("ViewPager2 $position")
+            }
+
+        }
+        TabLayoutMediator(tl_tab_layout, viewpager2) { tab, position ->
+            tab.text = "tab text $position"
+        }.attach()
     }
 
     fun showAlertDialog(v: View) {

@@ -5,9 +5,13 @@ import android.view.View
 import android.widget.CompoundButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.forEach
+import androidx.core.view.forEachIndexed
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
@@ -15,16 +19,19 @@ import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.ui.text.TextFragment
 import com.slin.study.kotlin.util.toast
+import kotlinx.android.synthetic.main.layout_material_theming_bottom_navigation.*
 import kotlinx.android.synthetic.main.layout_material_theming_clip.*
 import kotlinx.android.synthetic.main.layout_material_theming_selection.*
 import kotlinx.android.synthetic.main.layout_material_theming_tab.*
 import kotlinx.android.synthetic.main.layout_material_theming_text_field.*
+import kotlin.math.pow
 
 class MaterialThemingActivity : BaseActivity() {
 
     private val TAG: String? = MaterialThemingActivity::class.simpleName
 
     private val dialogItemFruits = arrayOf("苹果", "梨子", "西瓜", "桃子")
+    private var badgingEnable = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -203,4 +210,87 @@ class MaterialThemingActivity : BaseActivity() {
             .show()
     }
 
+    fun changeLabelVisibilityMode(v: View) {
+        when (bnv_bottom_navigation_view.labelVisibilityMode) {
+            LabelVisibilityMode.LABEL_VISIBILITY_AUTO -> {
+                bnv_bottom_navigation_view.labelVisibilityMode =
+                    LabelVisibilityMode.LABEL_VISIBILITY_SELECTED
+                btn_label_visibility_mode.text = "LabelVisibilityMode:Selected"
+            }
+            LabelVisibilityMode.LABEL_VISIBILITY_SELECTED -> {
+                bnv_bottom_navigation_view.labelVisibilityMode =
+                    LabelVisibilityMode.LABEL_VISIBILITY_LABELED
+                btn_label_visibility_mode.text = "LabelVisibilityMode:Labeled"
+            }
+            LabelVisibilityMode.LABEL_VISIBILITY_LABELED -> {
+                bnv_bottom_navigation_view.labelVisibilityMode =
+                    LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED
+                btn_label_visibility_mode.text = "LabelVisibilityMode:UnLebeled"
+            }
+            LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED -> {
+                bnv_bottom_navigation_view.labelVisibilityMode =
+                    LabelVisibilityMode.LABEL_VISIBILITY_AUTO
+                btn_label_visibility_mode.text = "LabelVisibilityMode:AUTO"
+            }
+
+        }
+    }
+
+    fun changeHorizontalTranslationEnable(v: View) {
+        bnv_bottom_navigation_view.isItemHorizontalTranslationEnabled =
+            !bnv_bottom_navigation_view.isItemHorizontalTranslationEnabled
+        btn_horizontal_translation_enable.text =
+            "HorizontalTranslationEnable:${bnv_bottom_navigation_view.isItemHorizontalTranslationEnabled}"
+    }
+
+
+    fun changeBadgingEnable(v: View) {
+        bnv_bottom_navigation_view.menu.forEachIndexed { index, item ->
+            if (!badgingEnable) {
+                val badgeDrawable = bnv_bottom_navigation_view.getOrCreateBadge(item.itemId)
+                badgeDrawable.number = 10f.pow(index + 1).toInt()
+                if (index == bnv_bottom_navigation_view.menu.size() - 1) {
+                    badgingEnable = true
+                    btn_badging_enable.text = "badgingEnable:true"
+                }
+            } else {
+                bnv_bottom_navigation_view.removeBadge(item.itemId)
+                if (index == bnv_bottom_navigation_view.menu.size() - 1) {
+                    badgingEnable = false
+                    btn_badging_enable.text = "badgingEnable:false"
+                }
+            }
+        }
+    }
+
+    fun changeBadgingGravity(v: View) {
+        var btnText = ""
+        val badgeGravity =
+            when (bnv_bottom_navigation_view.getBadge(R.id.navigation_home)?.badgeGravity) {
+                BadgeDrawable.TOP_END -> {
+                    btnText = "TOP_START"
+                    BadgeDrawable.TOP_START
+                }
+                BadgeDrawable.TOP_START -> {
+                    btnText = "TOP_START"
+                    BadgeDrawable.BOTTOM_START
+                }
+                BadgeDrawable.BOTTOM_START -> {
+                    btnText = "BOTTOM_END"
+                    BadgeDrawable.BOTTOM_END
+                }
+                BadgeDrawable.BOTTOM_END -> {
+                    btnText = "TOP_END"
+                    BadgeDrawable.TOP_END
+                }
+                else -> {
+                    btnText = "TOP_END"
+                    BadgeDrawable.TOP_END
+                }
+            }
+        btn_badging_gravity.text = "BadgingGravity: $btnText"
+        bnv_bottom_navigation_view.menu.forEach { item ->
+            bnv_bottom_navigation_view.getBadge(item.itemId)?.badgeGravity = badgeGravity
+        }
+    }
 }

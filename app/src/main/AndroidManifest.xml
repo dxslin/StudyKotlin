@@ -10,8 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".StudyKotlinApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.material.MaterialThemingActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
@@ -27,6 +27,7 @@
         <activity
             android:name=".ui.bottomsheet.BottomSheetTestActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.material.MaterialThemingActivity" />
     </application>
 
 </manifest>

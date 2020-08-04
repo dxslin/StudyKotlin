@@ -1,7 +1,6 @@
 package com.slin.study.kotlin.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 
@@ -17,10 +16,9 @@ open class BaseActivity : AppCompatActivity() {
     private val TAG: String? = BaseActivity::class.simpleName
 
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setShowBackButton(false)
-
     }
 
     /**

@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
         <!-- Global color attributes -->
         <!-- 您的应用的主要品牌颜色，主要用于主题 actionBar默认使用该颜色,Toolbar导航栏的底色-->
         <item name="colorPrimary">@color/color_primary</item>
@@ -29,9 +29,10 @@
         <item name="colorOnSurface">@color/color_on_surface</item>
         <!-- 所有其他屏幕内容后面的颜色-->
         <item name="android:colorBackground">@color/color_background</item>
+        <item name="android:windowBackground">@color/color_background</item>
         <!-- 用于显示在背景色上方的元素的颜色-->
         <item name="colorOnBackground">@color/color_on_background</item>
-        <item name="android:statusBarColor">@color/color_primary</item>
+        <!--        <item name="android:statusBarColor">@color/color_status_bar</item>-->
 
         <!-- ToolBar-->
         <item name="toolbarStyle">@style/toolbar_style</item>
@@ -52,6 +53,16 @@
         <item name="materialCardViewStyle">@style/AppCard</item>
         <item name="materialButtonOutlinedStyle">@style/AppButton.Outlined</item>
     </style>
+
+    <style name="AppTheme.Pink" parent="AppTheme">
+        <!-- CheckBox,RadioButton,SwitchCompat等一般控件的选中效果默认采用该颜色-->
+        <item name="colorAccent">@color/color_primary</item>
+        <!-- 您应用程式的次要品牌色彩，主要用于强调某些需要突出的小部件-->
+        <item name="colorSecondary">@color/color_secondary_pink</item>
+        <!-- 您的次要品牌颜色的较浅/较深变体，在主题中很少使用-->
+        <item name="colorSecondaryVariant">@color/color_secondary_variant_pink</item>
+    </style>
+
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>

@@ -20,12 +20,15 @@ import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.ui.bottomsheet.BottomSheetTestActivity
 import com.slin.study.kotlin.ui.text.TextFragment
+import com.slin.study.kotlin.util.THEME_ARRAY
+import com.slin.study.kotlin.util.ThemeHelper
 import com.slin.study.kotlin.util.toast
 import kotlinx.android.synthetic.main.layout_material_theming_bottom_navigation.*
 import kotlinx.android.synthetic.main.layout_material_theming_clip.*
 import kotlinx.android.synthetic.main.layout_material_theming_selection.*
 import kotlinx.android.synthetic.main.layout_material_theming_tab.*
 import kotlinx.android.synthetic.main.layout_material_theming_text_field.*
+import kotlinx.android.synthetic.main.layout_material_theming_theme.*
 import kotlin.math.pow
 
 class MaterialThemingActivity : BaseActivity() {
@@ -36,10 +39,13 @@ class MaterialThemingActivity : BaseActivity() {
     private var badgingEnable = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        ThemeHelper.applyTheme(this)
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_material_theming)
         setShowBackButton(true)
         title = "MaterialTheming"
+        tv_change_theme.text = "Theme: ${THEME_ARRAY[ThemeHelper.getThemeIndex()]}"
         chip()
         selection()
         textInputField()
@@ -103,6 +109,7 @@ class MaterialThemingActivity : BaseActivity() {
 
         sm_switch.setOnCheckedChangeListener { buttonView, isChecked ->
             toast("${if (isChecked) "Check" else "Uncheck"}: ${sm_switch.text}")
+
         }
 
     }
@@ -160,17 +167,22 @@ class MaterialThemingActivity : BaseActivity() {
     }
 
     fun showSingleChoiceDialog(v: View) {
+        val theme = ThemeHelper.getThemeIndex()
         MaterialAlertDialogBuilder(this)
-            .setTitle("选择水果")
-            .setSingleChoiceItems(dialogItemFruits, -1) { _, which ->
-                Toast.makeText(this, "选择了${dialogItemFruits[which]}", Toast.LENGTH_SHORT).show()
+            .setTitle("选择主题")
+            .setSingleChoiceItems(THEME_ARRAY, theme) { dialog, which ->
+                Toast.makeText(this, "选择了${THEME_ARRAY[which]}", Toast.LENGTH_SHORT).show()
+                tv_change_theme.text = "Theme: ${THEME_ARRAY[which]}"
+                dialog.dismiss()
+                ThemeHelper.saveThemeIndex(which)
+                recreate()
             }
-            .setPositiveButton("确定") { _, _ ->
-                Toast.makeText(this, "点击确定", Toast.LENGTH_SHORT).show()
-            }
-            .setNegativeButton("取消") { _, _ ->
-                Toast.makeText(this, "点击取消", Toast.LENGTH_SHORT).show()
-            }
+//            .setPositiveButton("确定") { _, _ ->
+//                Toast.makeText(this, "点击确定", Toast.LENGTH_SHORT).show()
+//            }
+//            .setNegativeButton("取消") { _, _ ->
+//                Toast.makeText(this, "点击取消", Toast.LENGTH_SHORT).show()
+//            }
             .show()
 
     }

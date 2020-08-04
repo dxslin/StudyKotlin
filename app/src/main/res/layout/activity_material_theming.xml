@@ -11,6 +11,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <include layout="@layout/layout_material_theming_theme" />
+
         <include layout="@layout/layout_material_theming_text" />
 
         <include layout="@layout/layout_material_theming_button" />

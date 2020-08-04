@@ -13,7 +13,7 @@
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="@dimen/activity_vertical_margin"
-        android:text="6. Bottom Navigation"
+        android:text="9. Bottom Navigation"
         android:textAppearance="@style/TextTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"

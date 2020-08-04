@@ -5,9 +5,9 @@
         <!-- Global color attributes -->
         <!-- 您的应用的主要品牌颜色，主要用于主题 actionBar默认使用该颜色,Toolbar导航栏的底色-->
         <item name="colorPrimary">@color/color_primary</item>
-        <!--        应用的主要暗色调,statusBarColor默认使用该颜色-->
+        <!-- 应用的主要暗色调,statusBarColor默认使用该颜色-->
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
-        <!--        CheckBox,RadioButton,SwitchCompat等一般控件的选中效果默认采用该颜色-->
+        <!-- CheckBox,RadioButton,SwitchCompat等一般控件的选中效果默认采用该颜色-->
         <item name="colorAccent">@color/color_accent</item>
         <!-- 您的主要品牌颜色的较浅/较暗变体，在主题中很少使用-->
         <item name="colorPrimaryVariant">@color/color_primary_variant</item>
@@ -35,9 +35,9 @@
 
         <!-- ToolBar-->
         <item name="toolbarStyle">@style/toolbar_style</item>
-        <!--        ActionBar返回按钮样式-->
+        <!-- ActionBar返回按钮样式-->
         <item name="android:homeAsUpIndicator">@drawable/ic_baseline_arrow_back_white_24</item>
-        <!--        形状系统，可以实现圆角或者剪切三角形-->
+        <!-- 形状系统，可以实现圆角或者剪切三角形-->
         <item name="shapeAppearanceSmallComponent">@style/AppShapeAppearance.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/AppShapeAppearance.MediumComponent</item>
         <item name="shapeAppearanceLargeComponent">@style/AppShapeAppearance.LargeComponent</item>

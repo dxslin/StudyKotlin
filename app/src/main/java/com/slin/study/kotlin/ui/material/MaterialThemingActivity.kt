@@ -1,5 +1,6 @@
 package com.slin.study.kotlin.ui.material
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
@@ -17,6 +18,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
+import com.slin.study.kotlin.ui.bottomsheet.BottomSheetTestActivity
 import com.slin.study.kotlin.ui.text.TextFragment
 import com.slin.study.kotlin.util.toast
 import kotlinx.android.synthetic.main.layout_material_theming_bottom_navigation.*
@@ -292,5 +294,9 @@ class MaterialThemingActivity : BaseActivity() {
         bnv_bottom_navigation_view.menu.forEach { item ->
             bnv_bottom_navigation_view.getBadge(item.itemId)?.badgeGravity = badgeGravity
         }
+    }
+
+    fun startBottomSheetActivity(v: View) {
+        startActivity(Intent(this, BottomSheetTestActivity::class.java))
     }
 }

@@ -21,6 +21,7 @@ import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.ui.bottomsheet.BottomSheetTestActivity
 import com.slin.study.kotlin.ui.text.TextFragment
 import com.slin.study.kotlin.util.THEME_ARRAY
+import com.slin.study.kotlin.util.THEME_NIGHT_MODE
 import com.slin.study.kotlin.util.ThemeHelper
 import com.slin.study.kotlin.util.toast
 import kotlinx.android.synthetic.main.layout_material_theming_bottom_navigation.*
@@ -39,13 +40,14 @@ class MaterialThemingActivity : BaseActivity() {
     private var badgingEnable = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeHelper.applyTheme(this)
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_material_theming)
         setShowBackButton(true)
         title = "MaterialTheming"
-        tv_change_theme.text = "Theme: ${THEME_ARRAY[ThemeHelper.getThemeIndex()]}"
+        btn_change_theme.text = "Theme: ${THEME_ARRAY[ThemeHelper.getThemeIndex()]}"
+        btn_change_night_mode.text =
+            "NightMode: ${THEME_NIGHT_MODE[ThemeHelper.getNightModeIndex()]}"
         chip()
         selection()
         textInputField()
@@ -144,6 +146,44 @@ class MaterialThemingActivity : BaseActivity() {
         }.attach()
     }
 
+    /**
+     * 切换主题
+     */
+    fun changeTheme(v: View) {
+        val theme = ThemeHelper.getThemeIndex()
+        MaterialAlertDialogBuilder(this)
+            .setTitle("选择主题")
+            .setSingleChoiceItems(THEME_ARRAY, theme) { dialog, which ->
+                Toast.makeText(this, "选择了${THEME_ARRAY[which]}", Toast.LENGTH_SHORT).show()
+                btn_change_theme.text = "Theme: ${THEME_ARRAY[which]}"
+                dialog.dismiss()
+                if (theme != which) {
+                    ThemeHelper.saveThemeIndex(which)
+                    recreate()
+                }
+            }
+            .show()
+    }
+
+    /**
+     * 切换夜间模式
+     */
+    fun changeNightMode(v: View) {
+        val nightMode = ThemeHelper.getNightModeIndex()
+        MaterialAlertDialogBuilder(this)
+            .setTitle("夜间模式")
+            .setSingleChoiceItems(THEME_NIGHT_MODE, nightMode) { dialog, which ->
+                Toast.makeText(this, "选择了${THEME_NIGHT_MODE[which]}", Toast.LENGTH_SHORT).show()
+                btn_change_night_mode.text = "NightMode: ${THEME_NIGHT_MODE[which]}"
+                dialog.dismiss()
+                if (nightMode != which) {
+                    ThemeHelper.saveNightModeIndex(which)
+                    recreate()
+                }
+            }
+            .show()
+    }
+
     fun showAlertDialog(v: View) {
         MaterialAlertDialogBuilder(this)
             .setTitle("消息提示")
@@ -170,19 +210,15 @@ class MaterialThemingActivity : BaseActivity() {
         val theme = ThemeHelper.getThemeIndex()
         MaterialAlertDialogBuilder(this)
             .setTitle("选择主题")
-            .setSingleChoiceItems(THEME_ARRAY, theme) { dialog, which ->
+            .setSingleChoiceItems(dialogItemFruits, theme) { dialog, which ->
                 Toast.makeText(this, "选择了${THEME_ARRAY[which]}", Toast.LENGTH_SHORT).show()
-                tv_change_theme.text = "Theme: ${THEME_ARRAY[which]}"
-                dialog.dismiss()
-                ThemeHelper.saveThemeIndex(which)
-                recreate()
             }
-//            .setPositiveButton("确定") { _, _ ->
-//                Toast.makeText(this, "点击确定", Toast.LENGTH_SHORT).show()
-//            }
-//            .setNegativeButton("取消") { _, _ ->
-//                Toast.makeText(this, "点击取消", Toast.LENGTH_SHORT).show()
-//            }
+            .setPositiveButton("确定") { _, _ ->
+                Toast.makeText(this, "点击确定", Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton("取消") { _, _ ->
+                Toast.makeText(this, "点击取消", Toast.LENGTH_SHORT).show()
+            }
             .show()
 
     }

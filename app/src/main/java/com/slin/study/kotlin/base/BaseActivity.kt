@@ -3,6 +3,7 @@ package com.slin.study.kotlin.base
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.slin.study.kotlin.util.ThemeHelper
 
 
 /**
@@ -17,8 +18,17 @@ open class BaseActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        applyTheme()
         super.onCreate(savedInstanceState)
         setShowBackButton(false)
+    }
+
+    /**
+     * 设置主题
+     */
+    protected open fun applyTheme() {
+        ThemeHelper.applyTheme(this)
+        ThemeHelper.applyNightMode()
     }
 
     /**

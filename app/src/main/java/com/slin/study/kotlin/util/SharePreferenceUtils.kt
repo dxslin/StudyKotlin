@@ -32,6 +32,17 @@ class SharePreferenceUtils {
         fun getTheme(): Int {
             return sharedPreferences.getInt("theme", 0)
         }
+
+        fun setNightMode(index: Int) {
+            val editor = sharedPreferences.edit()
+            editor.putInt("night_mode", index)
+            editor.apply()
+        }
+
+        fun getNightMode(): Int {
+            return sharedPreferences.getInt("night_mode", 0)
+        }
+
     }
 }
 

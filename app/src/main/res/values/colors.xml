@@ -19,7 +19,7 @@
     <color name="color_on_surface">#000000</color>
     <color name="color_background">#F3F3F3</color>
     <color name="color_on_background">#000000</color>
-    <!--    <color name="color_status_bar">#FF4081</color>-->
+    <color name="color_status_bar">@color/color_primary</color>
 
 
     <color name="color_secondary_pink">#FF558F</color>

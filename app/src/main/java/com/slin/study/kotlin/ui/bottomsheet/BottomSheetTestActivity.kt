@@ -1,6 +1,7 @@
 package com.slin.study.kotlin.ui.bottomsheet
 
 import android.os.Bundle
+import android.view.Window
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
 
@@ -17,8 +18,9 @@ class BottomSheetTestActivity : BaseActivity() {
         }
     }
 
-    override fun applyTheme() {
-        setTheme(R.style.AppTheme_NoActionBar)
+    override fun onApplyTheme() {
+        super.onApplyTheme()
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
     }
 
 }

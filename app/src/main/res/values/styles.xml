@@ -32,10 +32,9 @@
         <item name="android:windowBackground">@color/color_background</item>
         <!-- 用于显示在背景色上方的元素的颜色-->
         <item name="colorOnBackground">@color/color_on_background</item>
-        <!--        <item name="android:statusBarColor">@color/color_status_bar</item>-->
 
         <!-- ToolBar-->
-        <item name="toolbarStyle">@style/toolbar_style</item>
+        <item name="toolbarStyle">@style/ToolStyle</item>
         <!-- ActionBar返回按钮样式-->
         <item name="android:homeAsUpIndicator">@drawable/ic_baseline_arrow_back_white_24</item>
         <!-- 形状系统，可以实现圆角或者剪切三角形-->
@@ -69,11 +68,13 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="toolbar_style" parent="Widget.MaterialComponents.Toolbar">
+    <style name="ToolStyle" parent="Widget.MaterialComponents.Toolbar">
         <item name="titleTextColor">@color/white</item>
         <!--        解决左边空白问题-->
         <item name="contentInsetStart">0dp</item>
         <item name="contentInsetStartWithNavigation">0dp</item>
+        <item name="background">@color/color_status_bar</item>
+
     </style>
 
     <style name="TextTitle" parent="TextAppearance.AppCompat.Title">

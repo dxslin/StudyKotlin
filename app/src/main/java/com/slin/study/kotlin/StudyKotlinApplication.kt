@@ -1,6 +1,7 @@
 package com.slin.study.kotlin
 
 import android.app.Application
+import com.slin.study.kotlin.util.ThemeHelper
 
 
 /**
@@ -19,7 +20,7 @@ class StudyKotlinApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
-
+        ThemeHelper.init(this)
 
     }
 

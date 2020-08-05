@@ -1,6 +1,7 @@
 package com.slin.study.kotlin.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.slin.study.kotlin.util.ThemeHelper
@@ -18,7 +19,8 @@ open class BaseActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        applyTheme()
+        Log.d(TAG, "onCreate: ${this.javaClass.simpleName}")
+        onApplyTheme()
         super.onCreate(savedInstanceState)
         setShowBackButton(false)
     }
@@ -26,7 +28,7 @@ open class BaseActivity : AppCompatActivity() {
     /**
      * 设置主题
      */
-    protected open fun applyTheme() {
+    protected open fun onApplyTheme() {
         ThemeHelper.applyTheme(this)
         ThemeHelper.applyNightMode()
     }

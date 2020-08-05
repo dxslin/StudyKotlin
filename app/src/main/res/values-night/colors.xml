@@ -1,35 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--    <color name="color_primary">#FF4081</color>-->
-    <!--    <color name="color_accent">#00B0FF</color>-->
-    <!--    <color name="color_primary_variant">#3F51B5</color>-->
-    <!--    <color name="color_on_primary">#FFFFFF</color>-->
-    <!--    <color name="color_secondary">#8BC34A</color>-->
-    <!--    <color name="color_secondary_variant">#4CAF50</color>-->
-    <!--    <color name="color_on_secondary">#FFFFFF</color>-->
-    <!--    <color name="color_error">#F44336</color>-->
-    <!--    <color name="color_on_error">#FFFFFF</color>-->
-    <!--    <color name="color_surface">#FFFFFF</color>-->
-    <!--    <color name="color_on_surface">#000000</color>-->
-    <!--    <color name="color_background">#F3F3F3</color>-->
-    <!--    <color name="color_on_background">#000000</color>-->
-
-
     <color name="color_accent">#00B0FF</color>
-    <color name="color_primary">#F5F5F5</color>
+    <color name="color_primary">#222222</color>
     <color name="color_primary_dark">#000000</color>
     <color name="color_primary_variant">#C2C2C2</color>
-    <color name="color_on_primary">#000000</color>
-    <color name="color_secondary">#768FFF</color>
-    <color name="color_secondary_variant">#3C62CB</color>
-    <color name="color_on_secondary">#000000</color>
+    <color name="color_on_primary">#CBCBCB</color>
+    <color name="color_secondary">#444444</color>
+    <color name="color_secondary_variant">#333333</color>
+    <color name="color_on_secondary">#DDDDDD</color>
     <color name="color_error">#FF7961</color>
     <color name="color_on_error">#000000</color>
     <color name="color_surface">#121212</color>
     <color name="color_on_surface">#FFFFFF</color>
     <color name="color_background">#000000</color>
     <color name="color_on_background">#FFFFFF</color>
-    <!--    <color name="color_status_bar">#000000</color>-->
+    <color name="color_status_bar">@color/color_primary</color>
 
 </resources>

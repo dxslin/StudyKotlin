@@ -159,7 +159,7 @@ class MaterialThemingActivity : BaseActivity() {
                 dialog.dismiss()
                 if (theme != which) {
                     ThemeHelper.saveThemeIndex(which)
-                    recreate()
+                    ThemeHelper.recreate()
                 }
             }
             .show()
@@ -178,7 +178,7 @@ class MaterialThemingActivity : BaseActivity() {
                 dialog.dismiss()
                 if (nightMode != which) {
                     ThemeHelper.saveNightModeIndex(which)
-                    recreate()
+                    ThemeHelper.recreate()
                 }
             }
             .show()

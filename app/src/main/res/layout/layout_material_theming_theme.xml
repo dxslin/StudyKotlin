@@ -25,7 +25,7 @@
         android:layout_marginTop="8dp"
         android:onClick="changeTheme"
         android:text="Theme: 默认"
-        android:textAppearance="@style/Body1"
+        android:textAppearance="@style/TextBody1"
         app:layout_constraintStart_toStartOf="@id/mtv_theme"
         app:layout_constraintTop_toBottomOf="@id/mtv_theme" />
 

@@ -1,7 +1,6 @@
 package com.slin.study.kotlin.base
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.slin.study.kotlin.util.ThemeHelper
@@ -15,11 +14,8 @@ import com.slin.study.kotlin.util.ThemeHelper
  */
 open class BaseActivity : AppCompatActivity() {
 
-    private val TAG: String? = BaseActivity::class.simpleName
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d(TAG, "onCreate: ${this.javaClass.simpleName}")
         onApplyTheme()
         super.onCreate(savedInstanceState)
         setShowBackButton(false)

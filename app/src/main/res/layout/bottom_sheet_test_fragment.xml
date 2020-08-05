@@ -107,7 +107,7 @@
         android:background="@drawable/shape_bottom_sheet_corner15"
         app:behavior_fitToContents="false"
         app:behavior_peekHeight="60dp"
-        app:behavior_expandedOffset="400"
+        app:behavior_expandedOffset="200dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <TextView

@@ -21,12 +21,12 @@
     <!--        button-->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_button"
+        style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Button"
         android:onClick="buttonClick"
-        style="@style/Widget.MaterialComponents.Button"
+        android:text="Button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mtv_button" />
 
@@ -36,8 +36,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="ButtonMaterial"
         android:onClick="buttonClick"
+        android:text="ButtonMaterial"
         app:layout_constraintStart_toEndOf="@id/btn_button"
         app:layout_constraintTop_toTopOf="@id/btn_button" />
 
@@ -46,8 +46,8 @@
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Unelevated Button"
         android:onClick="buttonClick"
+        android:text="Unelevated Button"
         app:layout_constraintStart_toStartOf="@id/btn_button"
         app:layout_constraintTop_toBottomOf="@id/btn_button" />
 
@@ -56,8 +56,8 @@
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Outlined Button"
         android:onClick="buttonClick"
+        android:text="Outlined Button"
         app:layout_constraintStart_toStartOf="@id/btn_unelevated_button"
         app:layout_constraintTop_toBottomOf="@id/btn_unelevated_button" />
 
@@ -67,10 +67,81 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Text Button"
         android:onClick="buttonClick"
+        android:text="Text Button"
         app:layout_constraintStart_toEndOf="@id/btn_outlined_button"
         app:layout_constraintTop_toTopOf="@id/btn_outlined_button" />
 
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleGroupHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@id/btn_unelevated_button"
+        app:layout_constraintTop_toBottomOf="@id/btn_outlined_button">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/toggleButton1Horizontal"
+            style="?attr/materialButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="None" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/toggleButton2Horizontal"
+            style="?attr/materialButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Custom" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/toggleButton3Horizontal"
+            style="?attr/materialButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleGroupVertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="@id/btn_unelevated_button"
+        app:layout_constraintTop_toBottomOf="@id/toggleGroupHorizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/toggleButton1Vertical"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minHeight="36dp"
+            android:text="None" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/toggleButton2Vertical"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minHeight="36dp"
+            android:text="Custom" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/toggleButton3Vertical"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minHeight="36dp"
+            android:text="All" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

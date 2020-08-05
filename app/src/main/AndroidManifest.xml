@@ -26,6 +26,7 @@
         <activity android:name=".ui.material.MaterialDesignActivity" />
         <activity android:name=".ui.bottomsheet.BottomSheetTestActivity" />
         <activity android:name=".ui.material.MaterialThemingActivity" />
+        <activity android:name=".ui.material.TransitionAnimationActivity" />
     </application>
 
 </manifest>

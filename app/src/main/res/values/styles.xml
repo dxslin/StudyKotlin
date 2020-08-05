@@ -81,11 +81,11 @@
 
     </style>
 
-    <style name="SubTextTitle" parent="TextAppearance.AppCompat.Subhead">
+    <style name="TextSubTitle" parent="TextAppearance.AppCompat.Subhead">
 
     </style>
 
-    <style name="Body1" parent="TextAppearance.MaterialComponents.Body1" />
+    <style name="TextBody1" parent="TextAppearance.MaterialComponents.Body1" />
 
     <!--形状-->
     <style name="AppShapeAppearance.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">

@@ -3,6 +3,7 @@ package com.slin.study.kotlin.ui.material
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.ViewAnimationUtils
 import android.widget.CompoundButton
 import android.widget.TextView
 import android.widget.Toast
@@ -24,14 +25,23 @@ import com.slin.study.kotlin.util.THEME_ARRAY
 import com.slin.study.kotlin.util.THEME_NIGHT_MODE
 import com.slin.study.kotlin.util.ThemeHelper
 import com.slin.study.kotlin.util.toast
+import kotlinx.android.synthetic.main.activity_material_theming.*
 import kotlinx.android.synthetic.main.layout_material_theming_bottom_navigation.*
 import kotlinx.android.synthetic.main.layout_material_theming_clip.*
 import kotlinx.android.synthetic.main.layout_material_theming_selection.*
 import kotlinx.android.synthetic.main.layout_material_theming_tab.*
 import kotlinx.android.synthetic.main.layout_material_theming_text_field.*
 import kotlinx.android.synthetic.main.layout_material_theming_theme.*
+import kotlin.math.hypot
 import kotlin.math.pow
 
+/**
+ * author: slin
+ * date: 2020/8/5
+ * description:
+ * 1. 一些常用的控件测试代码
+ * 2. 主题切换测试代码
+ */
 class MaterialThemingActivity : BaseActivity() {
 
     private val TAG: String? = MaterialThemingActivity::class.simpleName
@@ -39,12 +49,28 @@ class MaterialThemingActivity : BaseActivity() {
     private val dialogItemFruits = arrayOf("苹果", "梨子", "西瓜", "桃子")
     private var badgingEnable = false
 
+    /**
+     * 是否是重新创建
+     */
+    private var recreate = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_material_theming)
         setShowBackButton(true)
         title = "MaterialTheming"
+
+        if (recreate) {
+            val cx = resources.displayMetrics.widthPixels / 2
+            val cy = resources.displayMetrics.heightPixels / 2
+            val radius = hypot(cx.toDouble(), cy.toDouble())
+            val anim =
+                ViewAnimationUtils.createCircularReveal(nsv_content, cx, cy, 0f, radius.toFloat())
+            anim.start()
+            recreate = false
+        }
+
         btn_change_theme.text = "Theme: ${THEME_ARRAY[ThemeHelper.getThemeIndex()]}"
         btn_change_night_mode.text =
             "NightMode: ${THEME_NIGHT_MODE[ThemeHelper.getNightModeIndex()]}"
@@ -146,6 +172,11 @@ class MaterialThemingActivity : BaseActivity() {
         }.attach()
     }
 
+    private fun recreateActivity() {
+        recreate = true
+        ThemeHelper.recreate()
+    }
+
     /**
      * 切换主题
      */
@@ -159,7 +190,7 @@ class MaterialThemingActivity : BaseActivity() {
                 dialog.dismiss()
                 if (theme != which) {
                     ThemeHelper.saveThemeIndex(which)
-                    ThemeHelper.recreate()
+                    recreateActivity()
                 }
             }
             .show()
@@ -178,7 +209,7 @@ class MaterialThemingActivity : BaseActivity() {
                 dialog.dismiss()
                 if (nightMode != which) {
                     ThemeHelper.saveNightModeIndex(which)
-                    ThemeHelper.recreate()
+                    recreateActivity()
                 }
             }
             .show()

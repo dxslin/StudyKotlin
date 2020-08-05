@@ -79,8 +79,8 @@ class HomeFragment : BaseFragment() {
                     testBinding.tvTestName.apply {
                         text = item.name
                         setCompoundDrawablesRelativeWithIntrinsicBounds(0, item.icon, 0, 0)
-                        setOnClickListener {
-                            jumpToActivity(item)
+                        setOnClickListener { view ->
+                            jumpToActivity(view, item)
                         }
                     }
                 }
@@ -90,7 +90,7 @@ class HomeFragment : BaseFragment() {
         return binding.root
     }
 
-    private fun jumpToActivity(item: TestPageData) {
+    private fun jumpToActivity(view: View, item: TestPageData) {
         context?.let { ctx ->
             item.activityClass?.let {
                 val intent = Intent(ctx, it)

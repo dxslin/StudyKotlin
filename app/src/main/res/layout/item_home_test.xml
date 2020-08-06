@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:gravity="center_horizontal"
-        tools:drawableTop="@mipmap/cartoon_1"
+        tools:drawableTop="@drawable/img_cartoon_1"
         tools:text="ViewBind" />
 
 </androidx.cardview.widget.CardView>

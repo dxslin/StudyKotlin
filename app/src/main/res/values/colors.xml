@@ -21,6 +21,8 @@
     <color name="color_on_background">#000000</color>
     <color name="color_status_bar">@color/color_primary</color>
 
+    <color name="text_color_primary_inverse">@color/white</color>
+
 
     <color name="color_secondary_pink">#FF558F</color>
     <color name="color_secondary_variant_pink">#C51966</color>

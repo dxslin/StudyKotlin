@@ -80,8 +80,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:src="@mipmap/cartoon_1"
-                app:slinTint="@{imageTint}" />
+            android:src="@drawable/img_cartoon_1"
+            app:slinTint="@{imageTint}" />
 
         <ImageView
                 android:id="@+id/iv_binding_adapter"
@@ -89,9 +89,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:onLayoutChange="@{()->dataBindActivity.layoutChange()}"
-                app:error="@{@drawable/cartoon_2}"
-                app:imageUrl="@{url}" />
+            android:onLayoutChange="@{()->dataBindActivity.layoutChange()}"
+            app:error="@{@drawable/img_cartoon_2}"
+            app:imageUrl="@{url}" />
 
     </LinearLayout>
 </layout>

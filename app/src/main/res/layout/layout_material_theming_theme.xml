@@ -36,6 +36,7 @@
         android:layout_marginStart="8dp"
         android:onClick="changeNightMode"
         android:text="NightMode:"
+        android:textAppearance="@style/TextBody1"
         app:layout_constraintStart_toEndOf="@id/btn_change_theme"
         app:layout_constraintTop_toTopOf="@id/btn_change_theme" />
 

@@ -45,10 +45,18 @@ class HomeFragment : BaseFragment() {
 
     private val testDataList =
         mutableListOf(
-            TestPageData("ViewBind", R.mipmap.cartoon_1, ViewBindActivity::class.java),
-            TestPageData("DataBind", R.mipmap.cartoon_2, DataBindActivity::class.java),
-            TestPageData("BottomSheet", R.mipmap.cartoon_3, BottomSheetTestActivity::class.java),
-            TestPageData("MaterialDesign", R.mipmap.cartoon_cat, MaterialDesignActivity::class.java)
+            TestPageData("ViewBind", R.drawable.img_cartoon_1, ViewBindActivity::class.java),
+            TestPageData("DataBind", R.drawable.img_cartoon_2, DataBindActivity::class.java),
+            TestPageData(
+                "BottomSheet",
+                R.drawable.img_cartoon_3,
+                BottomSheetTestActivity::class.java
+            ),
+            TestPageData(
+                "MaterialDesign",
+                R.drawable.img_cartoon_cat,
+                MaterialDesignActivity::class.java
+            )
         )
 
     override fun onCreateView(

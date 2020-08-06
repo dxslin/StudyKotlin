@@ -74,7 +74,7 @@ class BottomSheetTestFragment : BaseFragment() {
 
         binding.toolbar.apply {
             setContentInsetsAbsolute(0, 0)
-            setNavigationOnClickListener { activity?.finish() }
+            setNavigationOnClickListener { activity?.onBackPressed() }
 //            title = "Title"
         }
 

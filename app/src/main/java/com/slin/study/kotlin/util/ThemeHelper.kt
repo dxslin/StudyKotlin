@@ -15,7 +15,7 @@ import com.slin.study.kotlin.R
  *
  */
 
-val THEME_ARRAY = arrayOf("默认", "暗夜", "粉红", "魔力黑")
+val THEME_ARRAY = arrayOf("默认", "暗夜", "自定义", "魔力黑", "炫彩")
 val THEME_NIGHT_MODE = arrayOf("跟随系统", "白天", "夜间", "跟随电量")
 
 object ThemeHelper {
@@ -65,8 +65,9 @@ object ThemeHelper {
         val theme = when (getThemeIndex()) {
             0 -> R.style.AppTheme
             1 -> R.style.AppTheme_Dark
-            2 -> R.style.AppTheme_Pink
+            2 -> R.style.AppTheme_Custom
             3 -> R.style.AppTheme_Dark2
+            4 -> R.style.AppTheme_Color
             else -> R.style.AppTheme
         }
         context.setTheme(theme)

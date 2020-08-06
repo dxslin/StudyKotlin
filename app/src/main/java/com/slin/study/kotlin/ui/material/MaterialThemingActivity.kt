@@ -287,7 +287,7 @@ class MaterialThemingActivity : BaseActivity() {
             .setNeutralButton("Neutral") { _, _ ->
                 Toast.makeText(this, "Click Neutral", Toast.LENGTH_SHORT).show()
             }
-            .setIcon(R.drawable.cartoon_2)
+            .setIcon(R.drawable.img_cartoon_2)
             .show()
     }
 

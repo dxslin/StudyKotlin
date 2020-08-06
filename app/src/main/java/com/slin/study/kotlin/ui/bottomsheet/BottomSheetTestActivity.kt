@@ -18,8 +18,8 @@ class BottomSheetTestActivity : BaseActivity() {
         }
     }
 
-    override fun onApplyTheme() {
-        super.onApplyTheme()
+    override fun applyThemeResource() {
+        super.applyThemeResource()
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
     }
 

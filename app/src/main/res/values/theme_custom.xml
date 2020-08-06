@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.Custom" parent="AppTheme">
+        <!-- CheckBox,RadioButton,SwitchCompat等一般控件的选中效果默认采用该颜色-->
+        <item name="colorAccent">@color/color_primary</item>
+        <!-- 您应用程式的次要品牌色彩，主要用于强调某些需要突出的小部件-->
+        <item name="colorSecondary">@color/color_secondary_pink</item>
+        <!-- 您的次要品牌颜色的较浅/较深变体，在主题中很少使用-->
+        <item name="colorSecondaryVariant">@color/color_secondary_variant_pink</item>
+
+        <!-- ActionBar返回按钮样式-->
+        <item name="android:homeAsUpIndicator">@drawable/ic_outline_arrow_back_ios_24</item>
+
+        <!-- ToolBar-->
+        <item name="toolbarStyle">@style/ToolStyle</item>
+        <!-- 形状系统，可以实现圆角或者剪切三角形-->
+        <item name="shapeAppearanceSmallComponent">@style/AppShapeAppearance.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/AppShapeAppearance.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/AppShapeAppearance.LargeComponent</item>
+
+        <item name="buttonStyle">@style/AppButton</item>
+        <item name="cardViewStyle">@style/AppCard</item>
+        <item name="chipStyle">@style/AppChip</item>
+        <item name="chipStandaloneStyle">@style/AppChip.Standalone</item>
+        <item name="textInputStyle">@style/AppTextField</item>
+
+        <item name="materialButtonStyle">@style/AppButton</item>
+        <item name="materialCardViewStyle">@style/AppCard</item>
+        <item name="materialButtonOutlinedStyle">@style/AppButton.Outlined</item>
+    </style>
+
+
+    <!--形状-->
+    <style name="AppShapeAppearance.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamilyTopLeft">cut</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerFamilyTopRight">cut</item>
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/shape_small_top_left</item>
+        <item name="cornerSizeTopRight">@dimen/shape_small_top_right</item>
+        <item name="cornerSizeBottomLeft">@dimen/shape_small_bottom_left</item>
+        <item name="cornerSizeBottomRight">@dimen/shape_small_bottom_right</item>
+    </style>
+
+    <style name="AppShapeAppearance.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamilyTopLeft">cut</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerFamilyTopRight">cut</item>
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/shape_medium_top_left</item>
+        <item name="cornerSizeTopRight">@dimen/shape_medium_top_right</item>
+        <item name="cornerSizeBottomLeft">@dimen/shape_medium_bottom_left</item>
+        <item name="cornerSizeBottomRight">@dimen/shape_medium_bottom_right</item>
+    </style>
+
+    <style name="AppShapeAppearance.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamilyTopLeft">cut</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerFamilyTopRight">cut</item>
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerSizeTopLeft">@dimen/shape_large_top_left</item>
+        <item name="cornerSizeTopRight">@dimen/shape_large_top_right</item>
+        <item name="cornerSizeBottomLeft">@dimen/shape_large_bottom_left</item>
+        <item name="cornerSizeBottomRight">@dimen/shape_large_bottom_right</item>
+    </style>
+
+    <!--    各类控件Style-->
+    <style name="AppButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">?attr/colorSecondary</item>
+        <item name="android:textColor">@color/button_text_color</item>
+        <item name="iconTint">@color/button_text_color</item>
+        <item name="rippleColor">@color/button_ripple_color</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="AppButton.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="AppCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">8dp</item>
+        <item name="cornerSize">8dp</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceLargeComponent</item>
+    </style>
+
+    <style name="AppChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
+    </style>
+
+    <style name="AppChip.Standalone" parent="AppChip">
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Chip</item>
+    </style>
+
+    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/text_field_background</item>
+    </style>
+
+</resources>

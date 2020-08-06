@@ -16,7 +16,7 @@ open class BaseActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        onApplyTheme()
+        applyThemeResource()
         super.onCreate(savedInstanceState)
         setShowBackButton(false)
     }
@@ -24,7 +24,7 @@ open class BaseActivity : AppCompatActivity() {
     /**
      * 设置主题
      */
-    protected open fun onApplyTheme() {
+    protected open fun applyThemeResource() {
         ThemeHelper.applyTheme(this)
         ThemeHelper.applyNightMode()
     }

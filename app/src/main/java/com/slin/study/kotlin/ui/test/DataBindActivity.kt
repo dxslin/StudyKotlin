@@ -51,7 +51,7 @@ class DataBindActivity : BaseActivity() {
         binding.apply {
             testData = TestPageData(
                 "DataBind",
-                R.mipmap.cartoon_1,
+                R.drawable.img_cartoon_1,
                 null
             )
             content = "这里是长篇内容..."

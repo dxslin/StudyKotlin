@@ -2,6 +2,7 @@ package com.slin.study.kotlin.base
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import com.slin.study.kotlin.util.ThemeHelper
 
@@ -14,6 +15,7 @@ import com.slin.study.kotlin.util.ThemeHelper
  */
 open class BaseActivity : AppCompatActivity() {
 
+    protected val TAG: String = this::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         applyThemeResource()
@@ -34,6 +36,14 @@ open class BaseActivity : AppCompatActivity() {
      */
     protected fun setShowBackButton(value: Boolean) {
         supportActionBar?.setDisplayHomeAsUpEnabled(value)
+    }
+
+    /**
+     * 设置状态栏颜色，color为透明的时候为沉浸式
+     */
+    protected fun setStatusBarColor(@ColorInt color: Int) {
+        //沉浸式
+        window.statusBarColor = color
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

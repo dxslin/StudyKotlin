@@ -22,7 +22,6 @@ import com.slin.study.kotlin.ui.home.TestPageData
  */
 class DataBindActivity : BaseActivity() {
 
-    private val TAG = DataBindActivity::class.simpleName
 
     private lateinit var binding: ActivityDataBindBinding
     private val handler = Handler()

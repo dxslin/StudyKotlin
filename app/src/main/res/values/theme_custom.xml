@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme.Custom" parent="AppTheme">
+    <style name="AppTheme.Custom" parent="AppTheme.Color">
         <!-- CheckBox,RadioButton,SwitchCompat等一般控件的选中效果默认采用该颜色-->
         <item name="colorAccent">@color/color_primary</item>
         <!-- 您应用程式的次要品牌色彩，主要用于强调某些需要突出的小部件-->
-        <item name="colorSecondary">@color/color_secondary_pink</item>
+        <!--        <item name="colorSecondary">@color/color_secondary_pink</item>-->
         <!-- 您的次要品牌颜色的较浅/较深变体，在主题中很少使用-->
-        <item name="colorSecondaryVariant">@color/color_secondary_variant_pink</item>
+        <!--        <item name="colorSecondaryVariant">@color/color_secondary_variant_pink</item>-->
 
         <!-- ActionBar返回按钮样式-->
         <item name="android:homeAsUpIndicator">@drawable/ic_outline_arrow_back_ios_24</item>
 
         <!-- ToolBar-->
         <item name="toolbarStyle">@style/ToolStyle</item>
+
         <!-- 形状系统，可以实现圆角或者剪切三角形-->
         <item name="shapeAppearanceSmallComponent">@style/AppShapeAppearance.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/AppShapeAppearance.MediumComponent</item>
@@ -28,8 +29,19 @@
         <item name="materialButtonStyle">@style/AppButton</item>
         <item name="materialCardViewStyle">@style/AppCard</item>
         <item name="materialButtonOutlinedStyle">@style/AppButton.Outlined</item>
+
+
     </style>
 
+
+    <style name="ToolStyle" parent="Widget.MaterialComponents.Toolbar">
+        <item name="titleTextColor">@color/white</item>
+        <!--        解决左边空白问题-->
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+        <item name="background">@color/color_status_bar</item>
+
+    </style>
 
     <!--形状-->
     <style name="AppShapeAppearance.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">

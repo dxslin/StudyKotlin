@@ -44,8 +44,6 @@ import kotlin.math.pow
  */
 class MaterialThemingActivity : BaseActivity() {
 
-    private val TAG: String? = MaterialThemingActivity::class.simpleName
-
     private val dialogItemFruits = arrayOf("苹果", "梨子", "西瓜", "桃子")
     private var badgingEnable = false
 

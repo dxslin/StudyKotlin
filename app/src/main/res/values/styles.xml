@@ -5,8 +5,8 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
 
-        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar</item>
-        <item name="actionBarStyle">@style/Widget.MaterialComponents.ActionBar.Primary</item>
+        <!--        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar</item>-->
+        <!--        <item name="actionBarStyle">@style/Widget.MaterialComponents.ActionBar.Primary</item>-->
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
@@ -14,15 +14,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="ToolStyle" parent="Widget.MaterialComponents.Toolbar">
-        <item name="titleTextColor">@color/white</item>
-        <!--        解决左边空白问题-->
-        <item name="contentInsetStart">0dp</item>
-        <item name="contentInsetStartWithNavigation">0dp</item>
-        <item name="background">@color/color_status_bar</item>
 
-    </style>
-
+    <!--    TextAppearance-->
     <style name="TextTitle" parent="TextAppearance.AppCompat.Title">
 
     </style>

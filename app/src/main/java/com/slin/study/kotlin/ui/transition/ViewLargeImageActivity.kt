@@ -1,8 +1,11 @@
 package com.slin.study.kotlin.ui.transition
 
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.util.Log
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
+import com.slin.study.kotlin.util.BitmapUtil
 import kotlinx.android.synthetic.main.activity_view_large_image.*
 
 /**
@@ -28,7 +31,21 @@ class ViewLargeImageActivity : BaseActivity() {
 
 
         val imageResId = intent?.extras?.getInt(INTENT_LARGE_IMAGE_ID)
-        imageResId?.let { iv_center.setImageResource(it) }
+        imageResId?.let {
+            fl_content.post {
+                iv_center.setImageResource(it)
+                val bitmap = BitmapUtil.decodeBitmap(
+                    resources,
+                    imageResId,
+                    fl_content.measuredWidth,
+                    fl_content.measuredHeight
+                )
+                val blurBitmap = BitmapUtil.gaussianBlur(this, bitmap, 25f)
+                fl_content.background = BitmapDrawable(resources, blurBitmap)
+
+                Log.d(TAG, "onCreate: width = ${bitmap.width} height = ${bitmap.height}")
+            }
+        }
 
         val titleStr = intent?.extras?.getString(INTENT_LARGE_IMAGE_TITLE)
         title = if (!titleStr.isNullOrBlank()) {
@@ -37,5 +54,8 @@ class ViewLargeImageActivity : BaseActivity() {
             "Large Image"
         }
 
+        fl_content.setOnClickListener {
+            onBackPressed()
+        }
     }
 }

@@ -35,7 +35,7 @@ class TransitionListActivity : BaseActivity() {
         setShowBackButton(true)
 
         val data = mutableListOf<TransitionData>()
-        for (i in 1..10) {
+        for (i in 1..20) {
             data.add(
                 TransitionData(
                     ConstantResource.IMAGE_RESOURCE[Random.nextInt(

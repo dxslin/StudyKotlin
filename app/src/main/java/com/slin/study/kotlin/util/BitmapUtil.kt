@@ -11,8 +11,7 @@ import android.renderscript.RenderScript
 import android.renderscript.ScriptIntrinsicBlur
 import android.util.Log
 import androidx.annotation.DrawableRes
-import kotlin.math.min
-import kotlin.math.roundToInt
+import androidx.annotation.FloatRange
 
 
 /**
@@ -31,52 +30,63 @@ object BitmapUtil {
 
 
     /**
-     * 按比例缩放图片
-     *
-     * @param origin 原图
-     * @param ratio  比例
-     * @return 新的bitmap
+     * 裁剪缩放图片以适应宽高比
+     * @param bitmap origin bitmap
+     * @param width     目标 宽
+     * @param height    目标 高
      */
-    fun scaleBitmap(origin: Bitmap, vwidth: Int, vheight: Int): Bitmap {
-        val dwidth = origin.width
-        val dheight = origin.height
-
-        var scale = 0f
-        var dx = 0f
-        var dy = 0f
-        if (dwidth * vheight > vwidth * dheight) {
-            scale = vheight.toFloat() / dheight.toFloat()
-            dx = (vwidth - dwidth * scale) * 0.5f
-        } else {
-            scale = vwidth.toFloat() / dwidth.toFloat()
-            dy = (vheight - dheight * scale) * 0.5f
-        }
-
-        val matrix = Matrix()
-        matrix.setScale(scale, scale)
-        matrix.postTranslate(dx.roundToInt().toFloat(), dy.roundToInt().toFloat())
-
-        Log.d(TAG, "scaleBitmap: scale=$scale dx = $dx dy = $dy")
-        return Bitmap.createBitmap(origin, 0, 0, dwidth, dheight, matrix, false)
-    }
-
-    fun cropBitmapTop(bitmap: Bitmap, width: Int, height: Int): Bitmap {
+    fun cropBitmap(bitmap: Bitmap, width: Int, height: Int): Bitmap {
         if (width <= 0 || height <= 0) {
             return bitmap
         }
 
         val w = bitmap.width
         val h = bitmap.height
-        val cropWidth = min(w, width)
-        val cropHeight = min(h.toFloat(), height.toFloat() / width * cropWidth).toInt()
 
-        return Bitmap.createBitmap(bitmap, 0, 0, cropWidth, cropHeight)
+        var cropWidth: Int
+        var cropHeight: Int
+
+        val ratio: Float = width.toFloat() / height
+
+        val matrix = Matrix()
+
+        if (w / h > ratio) {
+            if (h > height) {
+                cropHeight = height
+                val scale = cropHeight.toFloat() / h
+                matrix.setScale(scale, scale)
+            } else {
+                cropHeight = h
+            }
+            cropWidth = (cropHeight * ratio).toInt()
+        } else {
+            if (w > width) {
+                cropWidth = width
+                val scale = cropWidth.toFloat() / w
+                matrix.setScale(scale, scale)
+            } else {
+                cropWidth = w
+            }
+            cropHeight = (cropWidth / ratio).toInt()
+        }
+
+        val b = Bitmap.createBitmap(bitmap, 0, 0, cropWidth, cropHeight, matrix, false)
+        Log.d(
+            TAG,
+            "cropBitmap: w = $w h = $h width = $width height = $height " +
+                    " cropWidth = $cropWidth cropHeight = $cropHeight  matrix = $matrix"
+        )
+        return b
     }
 
     /**
      * 高斯模糊
      */
-    fun gaussianBlur(context: Context, inBitmap: Bitmap, radius: Float = 15f): Bitmap {
+    fun gaussianBlur(
+        context: Context,
+        inBitmap: Bitmap,
+        @FloatRange(fromInclusive = false, from = 0.0, to = 25.0) radius: Float = 15f
+    ): Bitmap {
         val outBitmap = Bitmap.createBitmap(inBitmap)
 
         val renderScript = RenderScript.create(context)
@@ -105,11 +115,13 @@ object BitmapUtil {
         height: Int
     ): Bitmap {
         val option = BitmapFactory.Options()
-        //设置只获取宽高
-        option.inJustDecodeBounds = true
-        BitmapFactory.decodeResource(resource, imageRes, option)
-        //计算合适的比例 2的倍数
-        option.inSampleSize = calculateInSampleSize(option, width, height)
+        if (width > 0 && height > 0) {
+            //设置只获取宽高
+            option.inJustDecodeBounds = true
+            BitmapFactory.decodeResource(resource, imageRes, option)
+            //计算合适的比例 2的倍数
+            option.inSampleSize = calculateInSampleSize(option, width, height)
+        }
         //设置加载资源
         option.inJustDecodeBounds = false
         return BitmapFactory.decodeResource(resource, imageRes, option)
@@ -131,21 +143,26 @@ object BitmapUtil {
      * 计算 bitmap 合适的压缩比例
      */
     private fun calculateInSampleSize(
-        options: BitmapFactory.Options,
-        desWidth: Int,
-        desHeight: Int
+        options: BitmapFactory.Options, reqWidth: Int, reqHeight: Int
     ): Int {
-        val width = options.outWidth
+        // Raw height and width of image
         val height = options.outHeight
-        var sampleSize = 1
-        if (height > desHeight || width > desHeight) {
-            val halfWidth = width / 2
+        val width = options.outWidth
+        var inSampleSize = 1
+        if (height > reqHeight || width > reqWidth) {
             val halfHeight = height / 2
-            while (halfHeight / sampleSize > desHeight && halfWidth / sampleSize > halfWidth) {
-                sampleSize *= 2
+            val halfWidth = width / 2
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while (halfHeight / inSampleSize >= reqHeight
+                && halfWidth / inSampleSize >= reqWidth
+            ) {
+                inSampleSize *= 2
             }
         }
-        return sampleSize
+        Log.d(TAG, "calculateInSampleSize: $inSampleSize")
+        return inSampleSize
     }
 
 }

@@ -1,11 +1,13 @@
 package com.slin.study.kotlin.ui.transition
 
+import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.util.BitmapUtil
+import com.slin.study.kotlin.util.FastBlurUtil
 import kotlinx.android.synthetic.main.activity_view_large_image.*
 
 /**
@@ -34,16 +36,19 @@ class ViewLargeImageActivity : BaseActivity() {
         imageResId?.let {
             fl_content.post {
                 iv_center.setImageResource(it)
+                val scale = 10
                 val bitmap = BitmapUtil.decodeBitmap(
                     resources,
                     imageResId,
-                    fl_content.measuredWidth,
-                    fl_content.measuredHeight
+                    fl_content.measuredWidth / scale,
+                    fl_content.measuredHeight / scale
                 )
-                val blurBitmap = BitmapUtil.gaussianBlur(this, bitmap, 25f)
-                fl_content.background = BitmapDrawable(resources, blurBitmap)
-
-                Log.d(TAG, "onCreate: width = ${bitmap.width} height = ${bitmap.height}")
+                FastBlurUtil.doBlurAsync(bitmap, 80, false, object : FastBlurUtil.DoBlurCallback {
+                    override fun result(bitmap: Bitmap) {
+                        fl_content.background = BitmapDrawable(resources, bitmap)
+                        Log.d(TAG, "onCreate: width = ${bitmap.width} height = ${bitmap.height}")
+                    }
+                })
             }
         }
 

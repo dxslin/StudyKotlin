@@ -1,7 +1,6 @@
 package com.slin.study.kotlin.ui.transition
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
@@ -16,6 +15,7 @@ import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.util.BitmapUtil
 import com.slin.study.kotlin.util.FastBlurUtil
 import kotlinx.android.synthetic.main.activity_transition_detail.*
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlin.math.absoluteValue
 
 
@@ -32,6 +32,7 @@ class TransitionDetailActivity : BaseActivity() {
         const val INTENT_TRANSITION_DATA = "intent_transition_data"
     }
 
+    @OptIn(ObsoleteCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transition_detail)
@@ -87,6 +88,7 @@ class TransitionDetailActivity : BaseActivity() {
                     TAG,
                     "onCreate: backgroundBitmap width = ${backgroundBitmap.width} height = ${backgroundBitmap.height}"
                 )
+
                 sb_gaussianBlurRadius.setOnSeekBarChangeListener(object :
                     SeekBar.OnSeekBarChangeListener {
                     override fun onProgressChanged(
@@ -94,19 +96,18 @@ class TransitionDetailActivity : BaseActivity() {
                         progress: Int,
                         fromUser: Boolean
                     ) {
-                        FastBlurUtil.doBlur(
+                        Log.d(TAG, "onProgressChanged: progress = $progress")
+                        FastBlurUtil.doBlurAsync(
                             backgroundBitmap,
                             progress,
-                            false,
-                            object : FastBlurUtil.DoBlurCallback {
-                                override fun result(bitmap: Bitmap) {
-                                    appbarLayout.background = BitmapDrawable(resources, bitmap)
-                                    Log.d(
-                                        TAG,
-                                        "onCreate: width = ${bitmap.width} height = ${bitmap.height}"
-                                    )
-                                }
-                            })
+                            false
+                        ) { bitmap ->
+                            appbarLayout.background = BitmapDrawable(resources, bitmap)
+                            Log.d(
+                                TAG,
+                                "onCreate: width = ${bitmap.width} height = ${bitmap.height}"
+                            )
+                        }
                     }
 
                     override fun onStartTrackingTouch(seekBar: SeekBar?) {

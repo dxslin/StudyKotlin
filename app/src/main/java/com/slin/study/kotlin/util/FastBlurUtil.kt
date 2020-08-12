@@ -3,7 +3,8 @@ package com.slin.study.kotlin.util
 import android.graphics.Bitmap
 import android.os.Handler
 import android.os.Looper
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
@@ -25,14 +26,13 @@ object FastBlurUtil {
     private var future: Future<Bitmap>? = null
 
 
-    private val executorCoroutineDispatcher = newSingleThreadContext("FastBlur")
     private var job: Job? = null
 
     fun doBlurAsync(
         sentBitmap: Bitmap,
         radius: Int,
         canReuseInBitmap: Boolean,
-        callback: DoBlurCallback
+        callback: (Bitmap) -> Unit
     ) {
         future?.let {
             if (!it.isDone) {
@@ -41,32 +41,37 @@ object FastBlurUtil {
         }
         future = executor.submit(Callable<Bitmap> {
             val bitmap = doBlur(sentBitmap, radius, canReuseInBitmap)
-            handler.post { callback.result(bitmap) }
+            handler.post { callback(bitmap) }
             bitmap
         })
     }
 
     /**
      * 使用协程实现异步
+     * 因为模糊算法执行太久，不能强制打断，因此不采用协程实现异步
      */
-    fun doBlur(
-        sentBitmap: Bitmap,
-        radius: Int,
-        canReuseInBitmap: Boolean,
-        callback: DoBlurCallback
-    ) {
-        runBlocking {
-            job?.isActive?.not()?.let {
-                job?.cancel()
-            }
-            job = launch(executorCoroutineDispatcher) {
-                val bitmap = doBlur(sentBitmap, radius, canReuseInBitmap)
-                withContext(this@runBlocking.coroutineContext) {
-                    callback.result(bitmap)
-                }
-            }
-        }
-    }
+//    fun doBlur(
+//        sentBitmap: Bitmap,
+//        radius: Int,
+//        canReuseInBitmap: Boolean,
+//        callback: DoBlurCallback
+//    ) {
+//        runBlocking {
+//            job?.isActive?.not()?.let {
+//                job?.cancel()
+//                log("cancel ")
+//            }
+//            job = launch(Dispatchers.IO) {
+//                log("exe blur bitmap")
+//                val bitmap = doBlur(sentBitmap, radius, canReuseInBitmap)
+//                withContext(this@runBlocking.coroutineContext) {
+//                    log("result bitmap ${bitmap.width}")
+//                    callback.result(bitmap)
+//                }
+//            }
+//            log("do blur bitmap")
+//        }
+//    }
 
 
     fun doBlur(sentBitmap: Bitmap, radius: Int, canReuseInBitmap: Boolean): Bitmap {
@@ -308,7 +313,4 @@ object FastBlurUtil {
         return bitmap
     }
 
-    interface DoBlurCallback {
-        fun result(bitmap: Bitmap)
-    }
 }

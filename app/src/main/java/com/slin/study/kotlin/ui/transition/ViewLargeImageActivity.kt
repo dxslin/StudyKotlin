@@ -1,6 +1,5 @@
 package com.slin.study.kotlin.ui.transition
 
-import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +8,7 @@ import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.util.BitmapUtil
 import com.slin.study.kotlin.util.FastBlurUtil
 import kotlinx.android.synthetic.main.activity_view_large_image.*
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 
 /**
  * author: slin
@@ -25,6 +25,7 @@ class ViewLargeImageActivity : BaseActivity() {
     }
 
 
+    @ObsoleteCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_large_image)
@@ -43,12 +44,11 @@ class ViewLargeImageActivity : BaseActivity() {
                     fl_content.measuredWidth / scale,
                     fl_content.measuredHeight / scale
                 )
-                FastBlurUtil.doBlurAsync(bitmap, 80, false, object : FastBlurUtil.DoBlurCallback {
-                    override fun result(bitmap: Bitmap) {
-                        fl_content.background = BitmapDrawable(resources, bitmap)
-                        Log.d(TAG, "onCreate: width = ${bitmap.width} height = ${bitmap.height}")
-                    }
-                })
+                FastBlurUtil.doBlurAsync(bitmap, 80, false) { result ->
+                    fl_content.background = BitmapDrawable(resources, result)
+                    Log.d(TAG, "onCreate: width = ${result.width} height = ${result.height}")
+                }
+
             }
         }
 

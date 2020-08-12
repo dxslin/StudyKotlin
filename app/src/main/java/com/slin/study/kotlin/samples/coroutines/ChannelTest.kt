@@ -284,14 +284,29 @@ fun tickerChannelTest() = runBlocking {
 
 /**
  * actor：启动一个协程接收通道发送的数据
+ * send 会等待发送完毕再发送下一个
+ * offer 发送消息是发现通道接收数据未结束便会抛弃数据，可以用来做防止快速点击
+ * 这个api会逐渐被抛弃，不建议使用
  */
 fun actorTest() = runBlocking {
     val c = actor<String> {
         for (msg in channel) {
+            delay(1000)
             log("actor receive: $msg")
         }
     }
-    c.send("Hello slin")
+    repeat(10) {
+        c.send("send $it")
+        log("send $it")
+    }
+
+    delay(3000)
+
+    repeat(10) {
+        c.offer("offer $it")
+        log("offer $it")
+    }
+
     c.close()
 }
 

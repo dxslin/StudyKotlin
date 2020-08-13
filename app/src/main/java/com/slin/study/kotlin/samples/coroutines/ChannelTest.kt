@@ -2,8 +2,12 @@ package com.slin.study.kotlin.samples.coroutines
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.flow.debounce
 import java.util.concurrent.LinkedBlockingQueue
 import kotlin.concurrent.thread
+import kotlin.random.Random
 
 
 /**
@@ -29,7 +33,8 @@ fun main() {
 //    bufferChannelTest()
 //    fairChannelTest()
 //    tickerChannelTest()
-    actorTest()
+//    actorTest()
+    channelAsFlow()
 }
 
 
@@ -308,6 +313,35 @@ fun actorTest() = runBlocking {
     }
 
     c.close()
+}
+
+/**
+ * sample 固定采样时间，在固定的时间窗口里面取最后一次数据
+ * debounce 防抖动，如果两次数据间隔时间少于设定时间则抛弃上一次的数据
+ */
+fun channelAsFlow() = runBlocking {
+    val channel = Channel<Int>()
+    launch {
+        repeat(10) {
+            val random = Random.nextLong(1000)
+//            val random = 300L
+            delay(random)
+            channel.offer(it)
+            log("channel send: $it  delay time: $random")
+        }
+    }
+
+    launch {
+        log("channelAsFlow receive start")
+        channel.consumeAsFlow()
+//            .sample(500)
+            .debounce(500)
+            .collect {
+                log("collect: $it current time: ${System.currentTimeMillis()}")
+            }
+
+        log("channelAsFlow receive end")
+    }
 }
 
 

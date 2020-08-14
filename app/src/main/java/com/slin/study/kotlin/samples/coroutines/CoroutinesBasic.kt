@@ -1,6 +1,8 @@
 package com.slin.study.kotlin.samples.coroutines
 
 import kotlinx.coroutines.*
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.CountDownLatch
 import kotlin.concurrent.thread
 import kotlin.system.measureTimeMillis
@@ -49,7 +51,10 @@ fun main() {
 
 }
 
-fun log(msg: String) = println("${Thread.currentThread().name}: $msg")
+private val simpleDateFormat = SimpleDateFormat("hh:mm:ss SSS", Locale.CHINA)
+
+fun log(msg: String) =
+    println(" ${System.currentTimeMillis()} ${Thread.currentThread().name}: $msg")
 
 /**
  * 使用`launch`创建一个协程

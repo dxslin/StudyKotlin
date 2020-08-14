@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.Window
 import android.widget.SeekBar
@@ -14,8 +13,13 @@ import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.util.BitmapUtil
 import com.slin.study.kotlin.util.FastBlurUtil
+import com.slin.study.kotlin.util.Logger
 import kotlinx.android.synthetic.main.activity_transition_detail.*
-import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.flow.debounce
 import kotlin.math.absoluteValue
 
 
@@ -84,11 +88,40 @@ class TransitionDetailActivity : BaseActivity() {
                     appbarLayout.measuredHeight / scaleRatio
                 )
 
-                Log.d(
+                Logger.log(
                     TAG,
                     "onCreate: backgroundBitmap width = ${backgroundBitmap.width} height = ${backgroundBitmap.height}"
                 )
 
+                val channel = Channel<Int>()
+                GlobalScope.launch(Dispatchers.IO) {
+                    channel.consumeAsFlow()
+                        .debounce(50)
+                        .collect { progress ->
+                            Logger.log(TAG, "channel collect: $progress")
+                            //这里直接使用协程来
+                            val bitmap = FastBlurUtil.doBlur(backgroundBitmap, progress, false)
+                            withContext(Dispatchers.Main) {
+                                appbarLayout.background = BitmapDrawable(resources, bitmap)
+                            }
+
+                            //使用线程处理
+//                            FastBlurUtil.doBlurAsync(
+//                                backgroundBitmap,
+//                                progress,
+//                                false
+//                            ) { bitmap ->
+//                                appbarLayout.background = BitmapDrawable(resources, bitmap)
+//                                Logger.log(
+//                                    TAG,
+//                                    "onCreate: width = ${bitmap.width} height = ${bitmap.height}"
+//                                )
+//                            }
+                        }
+
+                    channel.offer(sb_gaussianBlurRadius.progress)
+                    Logger.log(TAG, "channel offer: ${sb_gaussianBlurRadius.progress}")
+                }
                 sb_gaussianBlurRadius.setOnSeekBarChangeListener(object :
                     SeekBar.OnSeekBarChangeListener {
                     override fun onProgressChanged(
@@ -96,18 +129,8 @@ class TransitionDetailActivity : BaseActivity() {
                         progress: Int,
                         fromUser: Boolean
                     ) {
-                        Log.d(TAG, "onProgressChanged: progress = $progress")
-                        FastBlurUtil.doBlurAsync(
-                            backgroundBitmap,
-                            progress,
-                            false
-                        ) { bitmap ->
-                            appbarLayout.background = BitmapDrawable(resources, bitmap)
-                            Log.d(
-                                TAG,
-                                "onCreate: width = ${bitmap.width} height = ${bitmap.height}"
-                            )
-                        }
+                        Logger.log(TAG, "onProgressChanged: progress = $progress")
+                        channel.offer(progress)
                     }
 
                     override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -117,8 +140,8 @@ class TransitionDetailActivity : BaseActivity() {
                     }
 
                 })
+                sb_gaussianBlurRadius.progress = 100
             }
-            sb_gaussianBlurRadius.progress = 100
         }
     }
 

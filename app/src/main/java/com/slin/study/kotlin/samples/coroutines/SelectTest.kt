@@ -131,13 +131,20 @@ private object SelectTest {
         coroutineContext.cancelChildren()
     }
 
+    /**
+     * onAwait 等待异步协程执行完毕
+     */
     fun testSelectOnAwait() = runBlocking {
         val random = Random(10)
-        val list = List(12) {
+        val list = List(1) {
             async {
                 val times = random.nextLong(1000)
+                log("async-$it wait 1 start $times ms")
                 delay(times)
-                log("async-$it wait $times ms, cur: ${System.currentTimeMillis()}")
+                log("async-$it wait 1 end $times ms")
+                log("async-$it wait 2 start $times ms")
+                delay(times)
+                log("async-$it wait 2 end $times ms")
                 "Wait for $times ms"
             }
         }
@@ -145,18 +152,18 @@ private object SelectTest {
         val result = select<String> {
             list.withIndex().forEach { (index, deferred) ->
                 deferred.onAwait { answer ->
-                    log("onWait: '$answer', cur: ${System.currentTimeMillis()}")
+                    log("onWait: '$answer'")
                     "Deferred $index produced answer '$answer'"
                 }
             }
         }
         log(result)
         val countActive = list.count { it.isActive }
-        log("$countActive coroutines are still active, cur: ${System.currentTimeMillis()}")
+        log("$countActive coroutines are still active")
     }
 
 
-    fun CoroutineScope.switchMapDeferreds(input: ReceiveChannel<Deferred<String>>) =
+    private fun CoroutineScope.switchMapDeferreds(input: ReceiveChannel<Deferred<String>>) =
         produce<String> {
             var current = input.receive() // start with first received deferred value
             log("input receive '$current'")
@@ -182,7 +189,8 @@ private object SelectTest {
             }
         }
 
-    fun CoroutineScope.asyncString(str: String, time: Long) = async {
+    private fun CoroutineScope.stringAsync(str: String, time: Long) = async {
+        log("asyncString delay start str = $str time = $time")
         delay(time)
         log("asyncString str = $str time = $time")
         str
@@ -192,15 +200,16 @@ private object SelectTest {
         val chan = Channel<Deferred<String>>() // the channel for test
         launch { // launch printing coroutine
             for (s in switchMapDeferreds(chan))
-                println(s) // print each received string
+                log(s) // print each received string
         }
-        chan.send(asyncString("BEGIN", 100))
+        log("sending start")
+        chan.send(stringAsync("BEGIN", 100))
         delay(200) // enough time for "BEGIN" to be produced
-        chan.send(asyncString("Slow", 500))
+        chan.send(stringAsync("Slow", 500))
         delay(100) // not enough time to produce slow
-        chan.send(asyncString("Replace", 100))
+        chan.send(stringAsync("Replace", 100))
         delay(500) // give it time before the last one
-        chan.send(asyncString("END", 500))
+        chan.send(stringAsync("END", 500))
         delay(1000) // give it time to process
         chan.close() // close the channel ...
         delay(500) // and wait some time to let it finish

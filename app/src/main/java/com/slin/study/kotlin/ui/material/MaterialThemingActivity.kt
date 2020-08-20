@@ -13,6 +13,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -26,6 +27,7 @@ import com.slin.study.kotlin.util.THEME_NIGHT_MODE
 import com.slin.study.kotlin.util.ThemeHelper
 import com.slin.study.kotlin.util.toast
 import kotlinx.android.synthetic.main.activity_material_theming.*
+import kotlinx.android.synthetic.main.layout_material_theming_bottom_app_bar.*
 import kotlinx.android.synthetic.main.layout_material_theming_bottom_navigation.*
 import kotlinx.android.synthetic.main.layout_material_theming_clip.*
 import kotlinx.android.synthetic.main.layout_material_theming_selection.*
@@ -76,6 +78,7 @@ class MaterialThemingActivity : BaseActivity() {
         selection()
         textInputField()
         tab()
+        bottomAppBar()
     }
 
     /**
@@ -104,8 +107,10 @@ class MaterialThemingActivity : BaseActivity() {
         chip_choice.setOnCheckedChangeListener(this::chipCheckedChanged)
         cg_single_select.setOnCheckedChangeListener { group, checkedId ->
             toast(
-                "single ${if (checkedId == View.NO_ID) "uncheck"
-                else "check:  ${findViewById<Chip>(checkedId).text}"}"
+                "single ${
+                    if (checkedId == View.NO_ID) "uncheck"
+                    else "check:  ${findViewById<Chip>(checkedId).text}"
+                }"
             )
             //这里可以处理总是让选中一个
             if (group.checkedChipId == View.NO_ID) {
@@ -114,8 +119,10 @@ class MaterialThemingActivity : BaseActivity() {
         }
         cg_single_line_select.setOnCheckedChangeListener { group, checkedId ->
             toast(
-                "single line ${if (checkedId == View.NO_ID) "uncheck"
-                else "check:  ${findViewById<Chip>(checkedId).text}"}"
+                "single line ${
+                    if (checkedId == View.NO_ID) "uncheck"
+                    else "check:  ${findViewById<Chip>(checkedId).text}"
+                }"
             )
 
         }
@@ -375,5 +382,114 @@ class MaterialThemingActivity : BaseActivity() {
 
     fun startBottomSheetActivity(v: View) {
         startActivity(Intent(this, BottomSheetTestActivity::class.java))
+    }
+
+    private fun bottomAppBar() {
+        bab_bottom_app_bar.replaceMenu(R.menu.bottom_nav_menu)
+        bab_bottom_app_bar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+        bab_bottom_app_bar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.navigation_home -> {
+                    Toast.makeText(this, "menu home", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.navigation_dashboard -> {
+                    Toast.makeText(this, "menu dashboard", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.navigation_notifications -> {
+                    Toast.makeText(this, "menu notifications", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
+        btn_change_fab_alignment_mode.setOnClickListener {
+            val mode = when (bab_bottom_app_bar.fabAlignmentMode) {
+                BottomAppBar.FAB_ALIGNMENT_MODE_CENTER -> {
+                    btn_change_fab_alignment_mode.text = "Fab alignment mode: END"
+                    BottomAppBar.FAB_ALIGNMENT_MODE_END
+                }
+                BottomAppBar.FAB_ALIGNMENT_MODE_END -> {
+                    btn_change_fab_alignment_mode.text = "Fab alignment mode: CENTER"
+                    BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                }
+                else -> {
+                    btn_change_fab_alignment_mode.text = "Fab alignment mode: CENTER"
+                    BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                }
+            }
+            bab_bottom_app_bar.fabAlignmentMode = mode
+        }
+
+        btn_change_fab_animation_mode.setOnClickListener {
+            val mode = when (bab_bottom_app_bar.fabAnimationMode) {
+                BottomAppBar.FAB_ANIMATION_MODE_SCALE -> {
+                    btn_change_fab_animation_mode.text = "Fab animation mode: SLIDE"
+                    BottomAppBar.FAB_ANIMATION_MODE_SLIDE
+                }
+                BottomAppBar.FAB_ANIMATION_MODE_SLIDE -> {
+                    btn_change_fab_animation_mode.text = "Fab animation mode: SCALE"
+                    BottomAppBar.FAB_ANIMATION_MODE_SCALE
+                }
+                else -> {
+                    btn_change_fab_animation_mode.text = "Fab animation mode: SLIDE"
+                    BottomAppBar.FAB_ANIMATION_MODE_SLIDE
+                }
+            }
+            bab_bottom_app_bar.fabAnimationMode = mode
+        }
+
+        btn_decrease_fab_cradle_margin.setOnClickListener {
+            if (bab_bottom_app_bar.fabCradleMargin > 0) {
+                bab_bottom_app_bar.fabCradleMargin--
+            }
+            btn_fab_cradle_margin_text.text = bab_bottom_app_bar.fabCradleMargin.toString()
+        }
+
+        btn_increase_fab_cradle_margin.setOnClickListener {
+            bab_bottom_app_bar.fabCradleMargin++
+            btn_fab_cradle_margin_text.text = bab_bottom_app_bar.fabCradleMargin.toString()
+        }
+
+
+        btn_decrease_fab_cradle_corner_radius.setOnClickListener {
+            if (bab_bottom_app_bar.fabCradleRoundedCornerRadius > 0) {
+                bab_bottom_app_bar.fabCradleRoundedCornerRadius--
+            }
+            btn_fab_cradle_corner_radius_text.text =
+                bab_bottom_app_bar.fabCradleRoundedCornerRadius.toString()
+        }
+
+        btn_increase_fab_cradle_corner_radius.setOnClickListener {
+            bab_bottom_app_bar.fabCradleRoundedCornerRadius++
+            btn_fab_cradle_corner_radius_text.text =
+                bab_bottom_app_bar.fabCradleRoundedCornerRadius.toString()
+        }
+
+
+        btn_decrease_cradle_vertical_offset.setOnClickListener {
+            if (bab_bottom_app_bar.cradleVerticalOffset > 0) {
+                bab_bottom_app_bar.cradleVerticalOffset--
+                btn_fab_cradle_vertical_offset_text.text =
+                    bab_bottom_app_bar.cradleVerticalOffset.toString()
+            }
+        }
+
+        btn_increase_cradle_vertical_offset.setOnClickListener {
+            bab_bottom_app_bar.cradleVerticalOffset++
+            btn_fab_cradle_vertical_offset_text.text =
+                bab_bottom_app_bar.cradleVerticalOffset.toString()
+        }
+
+        btn_change_fab_alignment_mode.text = "Fab alignment mode: CENTER"
+        btn_change_fab_animation_mode.text = "Fab animation mode: SCALE"
+        btn_fab_cradle_margin_text.text = bab_bottom_app_bar.fabCradleMargin.toString()
+        btn_fab_cradle_corner_radius_text.text =
+            bab_bottom_app_bar.fabCradleRoundedCornerRadius.toString()
+        btn_fab_cradle_vertical_offset_text.text =
+            bab_bottom_app_bar.cradleVerticalOffset.toString()
     }
 }

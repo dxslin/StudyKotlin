@@ -15,7 +15,16 @@ import com.slin.study.kotlin.R
  *
  */
 
-val THEME_ARRAY = arrayOf("默认", "暗夜", "自定义", "魔力黑", "炫彩")
+val THEME_ARRAY = arrayOf("默认", "默认黑夜", "暗夜", "自定义", "魔力黑", "炫彩")
+val THEME_ID_ARRAY = arrayOf(
+    R.style.AppTheme,
+    R.style.AppTheme_DefaultDark,
+    R.style.AppTheme_Dark,
+    R.style.AppTheme_Custom,
+    R.style.AppTheme_Dark2,
+    R.style.AppTheme_Color
+)
+
 val THEME_NIGHT_MODE = arrayOf("跟随系统", "白天", "夜间", "跟随电量")
 
 object ThemeHelper {
@@ -62,14 +71,11 @@ object ThemeHelper {
     }
 
     fun applyTheme(context: Context) {
-        val theme = when (getThemeIndex()) {
-            0 -> R.style.AppTheme
-            1 -> R.style.AppTheme_Dark
-            2 -> R.style.AppTheme_Custom
-            3 -> R.style.AppTheme_Dark2
-            4 -> R.style.AppTheme_Color
-            else -> R.style.AppTheme
+        val themeIndex = getThemeIndex()
+        check(themeIndex >= 0 && themeIndex < THEME_ID_ARRAY.size) {
+            "theme index must be >= 0 and < ${THEME_ID_ARRAY.size}"
         }
+        val theme = THEME_ID_ARRAY[themeIndex]
         context.setTheme(theme)
     }
 

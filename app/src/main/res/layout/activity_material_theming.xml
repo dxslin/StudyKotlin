@@ -34,5 +34,7 @@
 
         <include layout="@layout/layout_material_theming_bottom_sheet" />
 
+        <include layout="@layout/layout_material_theming_bottom_app_bar" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

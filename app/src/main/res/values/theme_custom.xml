@@ -77,6 +77,17 @@
         <item name="cornerSizeBottomRight">@dimen/shape_large_bottom_right</item>
     </style>
 
+    <style name="AppShapeAppearance.Rhombus" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamilyTopLeft">cut</item>
+        <item name="cornerFamilyBottomRight">cut</item>
+        <item name="cornerFamilyTopRight">cut</item>
+        <item name="cornerFamilyBottomLeft">cut</item>
+        <item name="cornerSizeTopLeft">50%</item>
+        <item name="cornerSizeTopRight">50%</item>
+        <item name="cornerSizeBottomLeft">50%</item>
+        <item name="cornerSizeBottomRight">50%</item>
+    </style>
+
     <!--    各类控件Style-->
     <style name="AppButton" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">?attr/colorSecondary</item>

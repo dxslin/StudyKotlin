@@ -43,8 +43,8 @@ object BitmapUtil {
         val w = bitmap.width
         val h = bitmap.height
 
-        var cropWidth: Int
-        var cropHeight: Int
+        var cropWidth: Int = w
+        var cropHeight: Int = h
 
         val ratio: Float = width.toFloat() / height
 
@@ -52,29 +52,26 @@ object BitmapUtil {
 
         if (w / h > ratio) {
             if (h > height) {
-                cropHeight = height
-                val scale = cropHeight.toFloat() / h
+                val scale = height / cropHeight.toFloat()
                 matrix.setScale(scale, scale)
-            } else {
-                cropHeight = h
             }
             cropWidth = (cropHeight * ratio).toInt()
         } else {
             if (w > width) {
-                cropWidth = width
-                val scale = cropWidth.toFloat() / w
+                val scale = width / cropWidth.toFloat()
                 matrix.setScale(scale, scale)
-            } else {
-                cropWidth = w
             }
             cropHeight = (cropWidth / ratio).toInt()
         }
 
+        /**
+         * 最终图片的宽高是cropWidth和cropHeight乘以matrix里面的缩放比
+         */
         val b = Bitmap.createBitmap(bitmap, 0, 0, cropWidth, cropHeight, matrix, false)
         Log.d(
             TAG,
             "cropBitmap: w = $w h = $h width = $width height = $height " +
-                    " cropWidth = $cropWidth cropHeight = $cropHeight  matrix = $matrix"
+                    " cropWidth = $cropWidth cropHeight = $cropHeight b.width = ${b.width} b.height = ${b.height}  matrix = $matrix"
         )
         return b
     }

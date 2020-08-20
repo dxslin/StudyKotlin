@@ -202,6 +202,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="buttonClick"
+            app:shapeAppearanceOverlay="@style/AppShapeAppearance.Rhombus"
             android:src="@drawable/ic_baseline_camera_alt_24"
             app:layout_anchor="@id/bab_bottom_app_bar" />
 

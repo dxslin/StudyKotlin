@@ -140,7 +140,9 @@ class TransitionDetailActivity : BaseActivity() {
                     }
 
                 })
-                sb_gaussianBlurRadius.progress = 100
+                sb_gaussianBlurRadius.post {
+                    sb_gaussianBlurRadius.progress = 40
+                }
             }
         }
     }

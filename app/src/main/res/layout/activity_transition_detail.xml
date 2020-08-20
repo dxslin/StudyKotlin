@@ -36,6 +36,11 @@
                 android:fitsSystemWindows="true"
                 app:layout_collapseMode="parallax">
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#55000000" />
+
                 <ImageView
                     android:id="@+id/iv_pageIcon"
                     android:layout_width="48dp"

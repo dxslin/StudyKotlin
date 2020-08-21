@@ -19,6 +19,7 @@ import com.slin.study.kotlin.databinding.FragmentHomeBinding
 import com.slin.study.kotlin.databinding.ItemHomeTestBinding
 import com.slin.study.kotlin.ui.bottomsheet.BottomSheetTestActivity
 import com.slin.study.kotlin.ui.material.MaterialDesignActivity
+import com.slin.study.kotlin.ui.motion.MotionLayoutTestActivity
 import com.slin.study.kotlin.ui.test.DataBindActivity
 import com.slin.study.kotlin.ui.test.ViewBindActivity
 import com.slin.study.kotlin.view.GridDividerItemDivider
@@ -56,7 +57,13 @@ class HomeFragment : BaseFragment() {
                 "MaterialDesign",
                 R.drawable.img_cartoon_cat,
                 MaterialDesignActivity::class.java
+            ),
+            TestPageData(
+                "MotionLayout",
+                R.drawable.img_cartoon_pig1,
+                MotionLayoutTestActivity::class.java
             )
+
         )
 
     override fun onCreateView(

@@ -27,6 +27,27 @@
     <color name="color_secondary_pink">#FF558F</color>
     <color name="color_secondary_variant_pink">#C51966</color>
 
+    <color name="color_font_dark_level_1">#DB000000</color>
+    <color name="color_font_dark_level_2">#99000000</color>
+    <color name="color_font_dark_level_3">#5E000000</color>
+
+    <color name="color_font_light_level_1">#DBFFFFFF</color>
+    <color name="color_font_light_level_2">#99FFFFFF</color>
+    <color name="color_font_light_level_3">#5EFFFFFF</color>
+
+    <color name="color_custom">#111111</color>
+
+
+    <color name="primaryColor">#ff9800</color>
+    <color name="primaryLightColor">#ffc947</color>
+    <color name="primaryDarkColor">#c66900</color>
+    <color name="secondaryColor">#0097a7</color>
+    <color name="secondaryLightColor">#56c8d8</color>
+    <color name="secondaryDarkColor">#006978</color>
+    <color name="primaryTextColor">#1f1f1f</color>
+    <color name="secondaryTextColor">#1f1f1f</color>
+
+
     <!--    material color -->
     <color name="material_amber_100">#FFECB3</color>
     <color name="material_amber_200">#FFE082</color>

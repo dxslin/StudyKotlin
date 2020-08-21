@@ -15,14 +15,15 @@ import com.slin.study.kotlin.R
  *
  */
 
-val THEME_ARRAY = arrayOf("默认", "默认黑夜", "暗夜", "自定义", "魔力黑", "炫彩")
+val THEME_ARRAY = arrayOf("默认", "默认黑夜", "暗夜", "自定义", "魔力黑", "炫彩", "炫酷橙")
 val THEME_ID_ARRAY = arrayOf(
     R.style.AppTheme,
     R.style.AppTheme_DefaultDark,
     R.style.AppTheme_Dark,
     R.style.AppTheme_Custom,
     R.style.AppTheme_Dark2,
-    R.style.AppTheme_Color
+    R.style.AppTheme_Color,
+    R.style.AppTheme_Orange
 )
 
 val THEME_NIGHT_MODE = arrayOf("跟随系统", "白天", "夜间", "跟随电量")

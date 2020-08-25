@@ -13,13 +13,18 @@
             app:clickAction="toggle"
             app:targetId="@id/iv_flower" />
 
+        <OnSwipe
+            app:dragDirection="dragDown"
+            app:touchAnchorId="@id/iv_windmill" />
+
         <KeyFrameSet>
 
             <KeyPosition
                 app:framePosition="50"
-                app:keyPositionType="deltaRelative"
+                app:keyPositionType="pathRelative"
                 app:motionTarget="@id/iv_flower"
-                app:percentY="1" />
+                app:percentX="0.491"
+                app:percentY="-1.518" />
 
             <KeyAttribute
                 android:rotation="720"
@@ -28,6 +33,71 @@
                 app:curveFit="spline"
                 app:framePosition="50"
                 app:motionTarget="@id/iv_flower" />
+
+            <KeyPosition
+                app:framePosition="25"
+                app:keyPositionType="parentRelative"
+                app:motionTarget="@+id/iv_windmill"
+                app:percentX="0.134"
+                app:percentY="0.56" />
+
+            <KeyCycle
+                android:scaleX="1"
+                android:scaleY="1"
+                app:framePosition="0"
+                app:motionTarget="@+id/iv_windmill"
+                app:waveOffset="1"
+                app:wavePeriod="0.25"
+                app:waveShape="sin" />
+
+            <KeyCycle
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                app:framePosition="25"
+                app:motionTarget="@+id/iv_windmill"
+                app:waveOffset="1"
+                app:wavePeriod="0.25"
+                app:waveShape="sin" />
+
+            <KeyCycle
+                android:scaleX="1"
+                android:scaleY="1"
+                app:framePosition="50"
+                app:motionTarget="@+id/iv_windmill"
+                app:waveOffset="0"
+                app:wavePeriod="0.25"
+                app:waveShape="sin" />
+
+            <KeyCycle
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                app:framePosition="75"
+                app:motionTarget="@+id/iv_windmill"
+                app:waveOffset="0"
+                app:wavePeriod="0.25"
+                app:waveShape="sin" />
+
+            <KeyCycle
+                android:scaleX="1"
+                android:scaleY="1"
+                app:framePosition="100"
+                app:motionTarget="@+id/iv_windmill"
+                app:waveOffset="0"
+                app:wavePeriod="0.25"
+                app:waveShape="sin" />
+
+            <KeyTimeCycle
+                android:alpha="1"
+                app:motionTarget="@+id/iv_windmill"
+                app:waveOffset="1"
+                app:wavePeriod="0.1" />
+
+            <KeyTimeCycle
+                android:rotation="360"
+                app:motionTarget="@+id/iv_windmill"
+                app:waveOffset="0"
+                app:wavePeriod="0.5"
+                app:waveShape="sawtooth" />
 
         </KeyFrameSet>
 
@@ -38,8 +108,22 @@
             android:id="@id/iv_flower"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:layout_marginBottom="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <CustomAttribute
+                app:attributeName="imageAlpha"
+                app:customIntegerValue="255" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/iv_windmill"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </ConstraintSet>
 
@@ -48,8 +132,24 @@
             android:id="@id/iv_flower"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <CustomAttribute
+                app:attributeName="imageAlpha"
+                app:customIntegerValue="100" />
+
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/iv_windmill"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
 
     </ConstraintSet>
 </MotionScene>

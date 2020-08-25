@@ -10,9 +10,19 @@
     tools:context=".ui.motion.SimpleMotionActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_windmill"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/ic_baseline_toys_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_flower"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_marginBottom="50dp"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

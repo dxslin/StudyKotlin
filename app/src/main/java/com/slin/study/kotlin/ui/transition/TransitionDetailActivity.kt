@@ -2,9 +2,14 @@ package com.slin.study.kotlin.ui.transition
 
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.transition.*
+import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.widget.SeekBar
 import androidx.core.app.ActivityOptionsCompat
@@ -47,6 +52,20 @@ class TransitionDetailActivity : BaseActivity() {
         setSupportActionBar(toolbar)
         setShowBackButton(true)
 
+        //共享元素的动画
+        val changeBounds = ChangeBounds()
+        changeBounds.duration = 800
+        window?.sharedElementEnterTransition = changeBounds
+        window?.sharedElementExitTransition = changeBounds
+
+        //界面切换的过渡动画
+//        val slide = Slide()
+//        val explode = Explode()
+        val fade = Fade()
+        fade.duration = 800
+        window?.enterTransition = fade
+        window?.exitTransition = fade
+
         val transitionData: TransitionData? = intent?.extras?.getParcelable(INTENT_TRANSITION_DATA)
         transitionData?.let {
             title = transitionData.title
@@ -69,6 +88,18 @@ class TransitionDetailActivity : BaseActivity() {
                 iv_pageIcon,
                 getString(R.string.key_transition_image_photo)
             )
+//            val  optionsCompat = ActivityOptionsCompat.makeClipRevealAnimation(
+//                iv_pageIcon,
+//                iv_pageIcon.width,
+//                iv_pageIcon.height,
+//                0,
+//                0
+//            )
+            Log.d(
+                TAG,
+                "onCreate: ${(iv_pageIcon.left + iv_pageIcon.right) / 2}  ${(iv_pageIcon.top + iv_pageIcon.bottom) / 2}"
+            )
+
             startActivity(intent, optionsCompat.toBundle())
         }
 
@@ -144,6 +175,26 @@ class TransitionDetailActivity : BaseActivity() {
                     sb_gaussianBlurRadius.progress = 40
                 }
             }
+        }
+    }
+
+    fun textChange(view: View) {
+        val transitionSet = TransitionSet()
+        transitionSet.ordering = TransitionSet.ORDERING_TOGETHER
+        transitionSet.addTransition(ChangeTransform())
+            .addTransition(ChangeBounds())
+            .addTransition(Fade())
+            .addTransition(Slide())
+
+        TransitionManager.beginDelayedTransition(tv_text_change.parent as ViewGroup, transitionSet)
+        if (tv_text_change.tag == 1) {
+            tv_text_change.tag = 0
+            tv_text_change.textSize = 14f
+            tv_text_change.typeface = Typeface.DEFAULT
+        } else {
+            tv_text_change.tag = 1
+            tv_text_change.textSize = 32f
+            tv_text_change.typeface = Typeface.DEFAULT_BOLD
         }
     }
 

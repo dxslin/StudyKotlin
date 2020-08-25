@@ -60,7 +60,9 @@ class ViewLargeImageActivity : BaseActivity() {
         }
 
         fl_content.setOnClickListener {
-            onBackPressed()
+            finishAfterTransition()
         }
     }
+
+
 }

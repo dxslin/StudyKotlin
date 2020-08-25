@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:clipToPadding="true"
     android:fitsSystemWindows="true"
+    tools:context=".ui.transition.TransitionDetailActivity"
     tools:ignore="HardcodedText">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -22,10 +23,10 @@
             android:clipToPadding="true"
             android:fitsSystemWindows="true"
             app:collapsedTitleTextAppearance="@style/TextTitle.Inverse"
+            app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginBottom="48dp"
             app:expandedTitleMarginStart="@dimen/activity_horizontal_margin"
             app:expandedTitleTextAppearance="@style/TextTitle.Inverse"
-            app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="exitUntilCollapsed|scroll">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,11 +75,11 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                app:titleTextAppearance="@style/TextTitle.Inverse"
-                tools:title="@string/app_name"
                 android:layout_width="match_parent"
                 android:layout_height="?android:actionBarSize"
-                app:layout_collapseMode="pin">
+                app:layout_collapseMode="pin"
+                app:titleTextAppearance="@style/TextTitle.Inverse"
+                tools:title="@string/app_name">
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -115,6 +116,18 @@
                 android:lineSpacingExtra="6dp"
                 android:text="@string/transition_page_detail"
                 android:transitionName="@string/key_transition_detail" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_text_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:onClick="textChange"
+                android:text="测试文字"
+                android:textColor="@color/color_font_dark_level_1"
+                android:textSize="14sp" />
 
         </LinearLayout>
 

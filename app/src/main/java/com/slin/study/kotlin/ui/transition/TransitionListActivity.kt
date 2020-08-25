@@ -87,7 +87,8 @@ class TransitionListActivity : BaseActivity() {
                     p2,
                     p3,
                     p4
-                );
+                )
+
                 val intent =
                     Intent(this@TransitionListActivity, TransitionDetailActivity::class.java)
                 intent.putExtra(TransitionDetailActivity.INTENT_TRANSITION_DATA, item)

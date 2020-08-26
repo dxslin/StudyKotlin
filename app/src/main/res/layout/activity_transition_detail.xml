@@ -40,7 +40,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#55000000" />
+                    android:background="@color/mask_surface_color" />
 
                 <ImageView
                     android:id="@+id/iv_pageIcon"

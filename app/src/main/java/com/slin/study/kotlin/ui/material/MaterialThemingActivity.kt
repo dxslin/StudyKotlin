@@ -44,6 +44,9 @@ import kotlin.math.pow
  * 1. 一些常用的控件测试代码
  * 2. 主题切换测试代码
  */
+
+const val BUNDLE_KEY_RECREATE = "bundle_key_recreate"
+
 class MaterialThemingActivity : BaseActivity() {
 
     private val dialogItemFruits = arrayOf("苹果", "梨子", "西瓜", "桃子")
@@ -61,13 +64,28 @@ class MaterialThemingActivity : BaseActivity() {
         setShowBackButton(true)
         title = "MaterialTheming"
 
+        recreate = savedInstanceState?.getBoolean(BUNDLE_KEY_RECREATE) ?: false
         if (recreate) {
-            val cx = resources.displayMetrics.widthPixels / 2
-            val cy = resources.displayMetrics.heightPixels / 2
-            val radius = hypot(cx.toDouble(), cy.toDouble())
-            val anim =
-                ViewAnimationUtils.createCircularReveal(nsv_content, cx, cy, 0f, radius.toFloat())
-            anim.start()
+            nsv_content.post {
+//                val cx = btn_change_theme.width / 2 + btn_change_theme.left
+//                val cy = btn_change_theme.height / 2 + btn_change_theme.top
+                val cx = resources.displayMetrics.widthPixels / 2
+                val cy = resources.displayMetrics.heightPixels / 2
+                val radius = hypot(
+                    resources.displayMetrics.widthPixels.toDouble(),
+                    resources.displayMetrics.heightPixels.toDouble()
+                )
+                val anim =
+                    ViewAnimationUtils.createCircularReveal(
+                        nsv_content,
+                        cx,
+                        cy,
+                        0f,
+                        radius.toFloat()
+                    )
+                anim.duration = 1000
+                anim.start()
+            }
             recreate = false
         }
 
@@ -79,6 +97,11 @@ class MaterialThemingActivity : BaseActivity() {
         textInputField()
         tab()
         bottomAppBar()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(BUNDLE_KEY_RECREATE, recreate)
     }
 
     /**
@@ -493,3 +516,4 @@ class MaterialThemingActivity : BaseActivity() {
             bab_bottom_app_bar.cradleVerticalOffset.toString()
     }
 }
+

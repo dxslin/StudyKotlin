@@ -6,89 +6,89 @@
         <import type="android.view.View" />
 
         <variable
-                name="dataBindActivity"
-                type="com.slin.study.kotlin.ui.test.DataBindActivity" />
+            name="dataBindActivity"
+            type="com.slin.study.kotlin.ui.jetpack.DataBindActivity" />
 
         <variable
             name="testData"
             type="com.slin.study.kotlin.ui.home.TestPageData" />
 
         <variable
-                name="content"
-                type="String" />
+            name="content"
+            type="String" />
 
         <variable
-                name="imageId"
-                type="Integer" />
+            name="imageId"
+            type="Integer" />
 
         <variable
-                name="imageTint"
-                type="android.content.res.ColorStateList" />
+            name="imageTint"
+            type="android.content.res.ColorStateList" />
 
         <variable
-                name="url"
-                type="String" />
+            name="url"
+            type="String" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:viewBindingIgnore="true">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:viewBindingIgnore="true">
 
         <TextView
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:drawableTop="@{testData.icon}"
-                android:gravity="center_horizontal"
-                android:text="@{String.valueOf(imageId) , default=测试}"
-                android:transitionName='@{"cartoon_"+imageId}'
-                android:visibility="@{imageId > 0 ? View.VISIBLE : View.GONE}" />
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:drawableTop="@{testData.icon}"
+            android:gravity="center_horizontal"
+            android:text="@{String.valueOf(imageId) , default=测试}"
+            android:transitionName='@{"cartoon_"+imageId}'
+            android:visibility="@{imageId > 0 ? View.VISIBLE : View.GONE}" />
 
         <TextView
-                android:id="@+id/tv_content1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:text="@{content, default=内容}" />
+            android:id="@+id/tv_content1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:text="@{content, default=内容}" />
 
         <TextView
-                android:id="@+id/tv_content2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:text="content2" />
+            android:id="@+id/tv_content2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:text="content2" />
 
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                app:text="@{content}" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            app:text="@{content}" />
 
         <ImageView
-                android:id="@+id/iv_tint_method"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:id="@+id/iv_tint_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:src="@drawable/img_cartoon_1"
             app:slinTint="@{imageTint}" />
 
         <ImageView
-                android:id="@+id/iv_binding_adapter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:id="@+id/iv_binding_adapter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:onLayoutChange="@{()->dataBindActivity.layoutChange()}"
             app:error="@{@drawable/img_cartoon_2}"
             app:imageUrl="@{url}" />

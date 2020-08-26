@@ -1,4 +1,4 @@
-package com.slin.study.kotlin.ui.test
+package com.slin.study.kotlin.ui.jetpack
 
 import android.graphics.Color
 import android.os.Bundle

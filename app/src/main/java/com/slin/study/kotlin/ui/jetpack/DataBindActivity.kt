@@ -1,4 +1,4 @@
-package com.slin.study.kotlin.ui.test
+package com.slin.study.kotlin.ui.jetpack
 
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -6,6 +6,8 @@ import android.os.Handler
 import android.util.Log
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.text.PrecomputedTextCompat
+import androidx.core.widget.TextViewCompat
 import androidx.databinding.DataBindingUtil
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
@@ -68,6 +70,11 @@ class DataBindActivity : BaseActivity() {
     fun layoutChange() {
         Log.d(TAG, "onLayoutChange")
         binding.content = "onLayoutChange"
+        val params = TextViewCompat.getTextMetricsParams(binding.tvContent1)
+        val precomputedTextCompat = PrecomputedTextCompat.create("ddddxasdad你哈哦啊", params)
+        TextViewCompat.setPrecomputedText(binding.tvContent1, precomputedTextCompat)
+
+
     }
 
 

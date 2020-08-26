@@ -36,7 +36,10 @@
 
         <item name="android:textColorPrimaryInverse">@color/white</item>
 
+        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Primary</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_baseline_arrow_back_white_24</item>
     </style>
+
 
     <!-- Base application theme. -->
     <style name="AppTheme.Orange" parent="Theme.MaterialComponents.Light">

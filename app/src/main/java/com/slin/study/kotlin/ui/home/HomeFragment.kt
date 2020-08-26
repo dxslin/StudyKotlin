@@ -18,10 +18,10 @@ import com.slin.study.kotlin.base.BaseFragment
 import com.slin.study.kotlin.databinding.FragmentHomeBinding
 import com.slin.study.kotlin.databinding.ItemHomeTestBinding
 import com.slin.study.kotlin.ui.bottomsheet.BottomSheetTestActivity
+import com.slin.study.kotlin.ui.jetpack.DataBindActivity
+import com.slin.study.kotlin.ui.jetpack.ViewBindActivity
 import com.slin.study.kotlin.ui.material.MaterialDesignActivity
 import com.slin.study.kotlin.ui.motion.MotionLayoutTestActivity
-import com.slin.study.kotlin.ui.test.DataBindActivity
-import com.slin.study.kotlin.ui.test.ViewBindActivity
 import com.slin.study.kotlin.view.GridDividerItemDivider
 
 const val INTENT_NAME: String = "intent_name"

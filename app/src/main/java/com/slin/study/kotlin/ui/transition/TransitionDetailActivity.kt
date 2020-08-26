@@ -62,7 +62,7 @@ class TransitionDetailActivity : BaseActivity() {
 //        val slide = Slide()
 //        val explode = Explode()
         val fade = Fade()
-        fade.duration = 800
+        fade.duration = 500
         window?.enterTransition = fade
         window?.exitTransition = fade
 

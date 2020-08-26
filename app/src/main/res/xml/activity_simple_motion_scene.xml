@@ -38,8 +38,8 @@
                 app:framePosition="25"
                 app:keyPositionType="parentRelative"
                 app:motionTarget="@+id/iv_windmill"
-                app:percentX="0.134"
-                app:percentY="0.56" />
+                app:percentX="0.244"
+                app:percentY="0.617" />
 
             <KeyCycle
                 android:scaleX="1"

@@ -23,8 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.test.ViewBindActivity" />
-        <activity android:name=".ui.test.DataBindActivity" />
+        <activity android:name=".ui.jetpack.ViewBindActivity" />
+        <activity android:name=".ui.jetpack.DataBindActivity" />
         <activity android:name=".ui.material.MaterialDesignActivity" />
         <activity android:name=".ui.bottomsheet.BottomSheetTestActivity" />
         <activity android:name=".ui.material.MaterialThemingActivity" />

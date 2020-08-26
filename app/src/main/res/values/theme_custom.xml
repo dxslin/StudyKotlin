@@ -46,9 +46,9 @@
     <!--形状-->
     <style name="AppShapeAppearance.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamilyTopLeft">cut</item>
-        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerFamilyBottomRight">cut</item>
         <item name="cornerFamilyTopRight">cut</item>
-        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyBottomLeft">cut</item>
         <item name="cornerSizeTopLeft">@dimen/shape_small_top_left</item>
         <item name="cornerSizeTopRight">@dimen/shape_small_top_right</item>
         <item name="cornerSizeBottomLeft">@dimen/shape_small_bottom_left</item>
@@ -57,9 +57,9 @@
 
     <style name="AppShapeAppearance.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamilyTopLeft">cut</item>
-        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerFamilyBottomRight">cut</item>
         <item name="cornerFamilyTopRight">cut</item>
-        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyBottomLeft">cut</item>
         <item name="cornerSizeTopLeft">@dimen/shape_medium_top_left</item>
         <item name="cornerSizeTopRight">@dimen/shape_medium_top_right</item>
         <item name="cornerSizeBottomLeft">@dimen/shape_medium_bottom_left</item>
@@ -68,9 +68,9 @@
 
     <style name="AppShapeAppearance.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamilyTopLeft">cut</item>
-        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerFamilyBottomRight">cut</item>
         <item name="cornerFamilyTopRight">cut</item>
-        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyBottomLeft">cut</item>
         <item name="cornerSizeTopLeft">@dimen/shape_large_top_left</item>
         <item name="cornerSizeTopRight">@dimen/shape_large_top_right</item>
         <item name="cornerSizeBottomLeft">@dimen/shape_large_bottom_left</item>

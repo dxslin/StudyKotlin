@@ -1,3 +1,5 @@
+include ':git:core'
+include ':git'
 include ':study'
 rootProject.name="StudyKotlin"
 include ':jkid'

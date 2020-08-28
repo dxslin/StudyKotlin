@@ -71,5 +71,13 @@
 
     </style>
 
+    <style name="PrimaryPalette" parent="">
+        <item name="colorPrimary">#8e24aa</item>
+        <item name="colorPrimaryDark">#5c007a</item>
+    </style>
+
+    <style name="SecondaryPalette" parent="">
+        <item name="colorSecondary">#43a047</item>
+    </style>
 
 </resources>

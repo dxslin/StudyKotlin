@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.material.MaterialThemeActivity"
+    tools:ignore="HardcodedText">
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/btn_theme_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btn_change_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:onClick="changeTheme"
+            android:text="Theme: 默认"
+            android:textAppearance="@style/TextBody1" />
+
+        <Button
+            android:id="@+id/btn_change_night_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:onClick="changeNightMode"
+            android:text="NightMode:"
+            android:textAppearance="@style/TextBody1" />
+
+        <Button
+            android:id="@+id/btn_primary_palette"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#8e24aa"
+            android:onClick="changeThemePalette"
+            android:text="PrimaryPalette" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_secondary_palette"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#43a047"
+            android:onClick="changeThemePalette"
+            android:text="SecondaryPalette" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mix_palette"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#8e24aa"
+            android:onClick="changeThemePalette"
+            android:text="MixPalette"
+            android:textColor="#43a047" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        app:chipSpacingHorizontal="8dp"
+        app:chipSpacingVertical="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_theme_button">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="secondary color test" />
+
+        <com.google.android.material.chip.Chip
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="primary color test" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

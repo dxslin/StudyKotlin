@@ -11,7 +11,8 @@ class MaterialDesignActivity : BaseActivity() {
 
     private val testPageDataList: ArrayList<TestPageData> = arrayListOf(
         TestPageData("Theming", R.drawable.img_cartoon_bear, MaterialThemingActivity::class.java),
-        TestPageData("Transition", R.drawable.img_cartoon_pig1, TransitionListActivity::class.java)
+        TestPageData("Transition", R.drawable.img_cartoon_pig1, TransitionListActivity::class.java),
+        TestPageData("Theme", R.drawable.img_cartoon_pig2, MaterialThemeActivity::class.java)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

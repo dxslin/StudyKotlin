@@ -31,6 +31,7 @@
         <activity android:name=".ui.transition.TransitionDetailActivity" />
         <activity android:name=".ui.transition.ViewLargeImageActivity" />
         <activity android:name=".ui.transition.TransitionListActivity" />
+        <activity android:name=".ui.material.MaterialThemeActivity" />
     </application>
 
 </manifest>

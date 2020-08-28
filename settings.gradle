@@ -1,3 +1,3 @@
-include ':app'
+include ':study'
 rootProject.name="StudyKotlin"
 include ':jkid'

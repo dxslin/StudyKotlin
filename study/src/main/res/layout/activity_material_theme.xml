@@ -16,31 +16,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_change_theme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:onClick="changeTheme"
             android:text="Theme: 默认"
+            android:textAllCaps="false"
             android:textAppearance="@style/TextBody1" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_change_night_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:onClick="changeNightMode"
             android:text="NightMode:"
+            android:textAllCaps="false"
             android:textAppearance="@style/TextBody1" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_primary_palette"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#8e24aa"
             android:onClick="changeThemePalette"
-            android:text="PrimaryPalette" />
+            android:text="PrimaryPalette"
+            android:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_secondary_palette"
@@ -48,7 +51,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#43a047"
             android:onClick="changeThemePalette"
-            android:text="SecondaryPalette" />
+            android:text="SecondaryPalette"
+            android:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/mix_palette"
@@ -57,6 +61,7 @@
             android:backgroundTint="#8e24aa"
             android:onClick="changeThemePalette"
             android:text="MixPalette"
+            android:textAllCaps="false"
             android:textColor="#43a047" />
 
     </com.google.android.material.chip.ChipGroup>
@@ -76,11 +81,6 @@
             android:checked="true"
             android:text="secondary color test" />
 
-        <com.google.android.material.chip.Chip
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="primary color test" />
 
     </com.google.android.material.chip.ChipGroup>
 

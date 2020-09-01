@@ -1,31 +1,22 @@
 package com.slin.study.kotlin.ui.home
 
-import android.app.Activity
-import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseFragment
 import com.slin.study.kotlin.databinding.FragmentHomeBinding
-import com.slin.study.kotlin.databinding.ItemHomeTestBinding
 import com.slin.study.kotlin.ui.bottomsheet.BottomSheetTestActivity
 import com.slin.study.kotlin.ui.jetpack.DataBindActivity
 import com.slin.study.kotlin.ui.jetpack.ViewBindActivity
+import com.slin.study.kotlin.ui.librarycase.LibraryCaseActivity
 import com.slin.study.kotlin.ui.material.MaterialDesignActivity
 import com.slin.study.kotlin.ui.motion.MotionLayoutTestActivity
-import com.slin.study.kotlin.view.GridDividerItemDivider
+import com.slin.study.kotlin.ui.testlist.TestListFragment
+import com.slin.study.kotlin.ui.testlist.TestPageData
 
-const val INTENT_NAME: String = "intent_name"
-const val INTENT_KEY_TEST_PAGE_DATA = "intent_key_test_page_data"
 
 class HomeFragment : BaseFragment() {
 
@@ -33,19 +24,9 @@ class HomeFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    companion object {
-        fun newInstance(testPageData: ArrayList<TestPageData>): HomeFragment {
-            val homeFragment = HomeFragment()
-            val bundle = Bundle()
-            bundle.putParcelableArrayList(INTENT_KEY_TEST_PAGE_DATA, testPageData)
-            homeFragment.arguments = bundle
-            return homeFragment
-        }
-    }
-
 
     private val testDataList =
-        mutableListOf(
+        arrayListOf(
             TestPageData("ViewBind", R.drawable.img_cartoon_1, ViewBindActivity::class.java),
             TestPageData("DataBind", R.drawable.img_cartoon_2, DataBindActivity::class.java),
             TestPageData(
@@ -62,6 +43,11 @@ class HomeFragment : BaseFragment() {
                 "MotionLayout",
                 R.drawable.img_cartoon_pig1,
                 MotionLayoutTestActivity::class.java
+            ),
+            TestPageData(
+                "LibraryCase",
+                R.drawable.img_cartoon_pig1,
+                LibraryCaseActivity::class.java
             )
 
         )
@@ -71,87 +57,21 @@ class HomeFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val dataList: java.util.ArrayList<TestPageData>? =
-            arguments?.getParcelableArrayList(INTENT_KEY_TEST_PAGE_DATA)
-        if (!dataList.isNullOrEmpty()) {
-            testDataList.clear()
-            testDataList.addAll(dataList)
-        }
 
         homeViewModel =
             ViewModelProvider(this)[HomeViewModel::class.java]
         binding = FragmentHomeBinding.inflate(inflater)
 
-        binding.rvTestItem.apply {
-            layoutManager = GridLayoutManager(context, 2)
-            addItemDecoration(GridDividerItemDivider(10, 10, Color.TRANSPARENT))
-            adapter = object : BaseQuickAdapter<TestPageData, BaseViewHolder>(
-                R.layout.item_home_test,
-                testDataList
-            ) {
-                override fun convert(holder: BaseViewHolder, item: TestPageData) {
-                    val testBinding = ItemHomeTestBinding.bind(holder.itemView)
-                    testBinding.tvTestName.apply {
-                        text = item.name
-                        setCompoundDrawablesRelativeWithIntrinsicBounds(0, item.icon, 0, 0)
-                        setOnClickListener { view ->
-                            jumpToActivity(view, item)
-                        }
-                    }
-                }
-            }
-        }
+        val testListFragment = TestListFragment.newInstance(testDataList)
+
+        childFragmentManager.beginTransaction()
+            .replace(R.id.fl_home_content, testListFragment, testListFragment.TAG)
+            .addToBackStack(testListFragment.TAG)
+            .commit()
+
 
         return binding.root
     }
 
-    private fun jumpToActivity(view: View, item: TestPageData) {
-        context?.let { ctx ->
-            item.activityClass?.let {
-                val intent = Intent(ctx, it)
-                intent.putExtra(INTENT_NAME, item.name)
-                startActivity(intent)
-            }
-        }
-    }
 
-}
-
-data class TestPageData(val name: String, val icon: Int, var activityClass: Class<out Activity>?) :
-    Parcelable {
-    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-    constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readInt(),
-        null
-    ) {
-        val className = parcel.readString()
-        try {
-            @Suppress("UNCHECKED_CAST")
-            activityClass = Class.forName(className) as Class<out Activity>?
-        } catch (e: ClassNotFoundException) {
-            e.printStackTrace()
-        }
-
-    }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeInt(icon)
-        parcel.writeString(activityClass?.name)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<TestPageData> {
-        override fun createFromParcel(parcel: Parcel): TestPageData {
-            return TestPageData(parcel)
-        }
-
-        override fun newArray(size: Int): Array<TestPageData?> {
-            return arrayOfNulls(size)
-        }
-    }
 }

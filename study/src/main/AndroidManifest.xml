@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.motion.SimpleMotionActivity"></activity>
+        <activity android:name=".ui.librarycase.kodein.KodeinCaseActivity"></activity>
+        <activity android:name=".ui.librarycase.LibraryCaseActivity" />
+        <activity android:name=".ui.transition.LayoutTransitionActivity" />
+        <activity android:name=".ui.motion.SimpleMotionActivity" />
         <activity android:name=".ui.motion.MotionLayoutTestActivity" />
         <activity
             android:name=".MainActivity"

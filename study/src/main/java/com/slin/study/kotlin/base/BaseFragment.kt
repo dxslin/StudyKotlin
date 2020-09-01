@@ -11,4 +11,9 @@ import androidx.fragment.app.Fragment
  */
 open class BaseFragment : Fragment() {
 
+    val TAG: String by lazy {
+        this::class.simpleName ?: "BaseFragment $this"
+    }
+
+
 }

@@ -78,6 +78,7 @@
 
     <style name="SecondaryPalette" parent="">
         <item name="colorSecondary">#43a047</item>
+        <item name="colorAccent">#43a047</item>
     </style>
 
 </resources>

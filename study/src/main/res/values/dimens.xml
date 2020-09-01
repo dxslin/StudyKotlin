@@ -3,6 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="grid_list_horizontal_margin">12dp</dimen>
+
     <dimen name="shape_small_size">8dp</dimen>
     <dimen name="shape_small_top_left">@dimen/shape_small_size</dimen>
     <dimen name="shape_small_top_right">@dimen/shape_small_size</dimen>

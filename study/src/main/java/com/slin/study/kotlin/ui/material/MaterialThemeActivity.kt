@@ -25,16 +25,17 @@ class MaterialThemeActivity : BaseActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        themeList.forEach {
-            setTheme(it)
-        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_material_theme)
         title = "Theme"
+        setShowBackButton(true)
     }
 
     override fun applyThemeResource() {
-        // 覆盖BaseActivity方法，防止被其设置全局
+        super.applyThemeResource()
+        themeList.forEach {
+            setTheme(it)
+        }
     }
 
     fun changeThemePalette(v: View) {

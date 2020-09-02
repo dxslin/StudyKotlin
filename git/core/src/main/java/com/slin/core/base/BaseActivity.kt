@@ -1,7 +1,10 @@
-package com.slin.core.ui
+package com.slin.core.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import org.kodein.di.*
+import org.kodein.di.android.di
+import org.kodein.di.android.retainedSubDI
 
 
 /**
@@ -10,7 +13,11 @@ import androidx.appcompat.app.AppCompatActivity
  * description: BaseActivity
  *
  */
-open abstract class BaseActivity : AppCompatActivity() {
+open abstract class BaseActivity : AppCompatActivity(), DIAware {
+
+    override val di: DI by retainedSubDI(di(), copy = Copy.All) {}
+
+    override val diContext: DIContext<*> = diContext { this }
 
     /**
      * 布局文件id

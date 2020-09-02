@@ -10,7 +10,7 @@ package com.slin.study.kotlin.ui.librarycase.kodein
 class User private constructor(val name: String) {
 
     private object SingletonHolder {
-        val holder = User("user slin")
+        val holder = User("user_slin")
     }
 
     companion object {

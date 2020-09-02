@@ -12,8 +12,8 @@ import androidx.databinding.DataBindingUtil
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.databinding.ActivityDataBindBinding
-import com.slin.study.kotlin.ui.home.INTENT_NAME
-import com.slin.study.kotlin.ui.home.TestPageData
+import com.slin.study.kotlin.ui.testlist.TestListFragment.Companion.INTENT_NAME
+import com.slin.study.kotlin.ui.testlist.TestPageData
 
 
 /**

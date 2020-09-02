@@ -1,6 +1,7 @@
 package com.slin.study.kotlin
 
 import android.app.Application
+import com.slin.study.kotlin.ui.librarycase.kodein.moduleUser
 import com.slin.study.kotlin.util.ThemeHelper
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -25,7 +26,7 @@ class StudyKotlinApplication : Application(), KodeinAware {
             import(androidModule(this@StudyKotlinApplication))
             import(androidXModule(this@StudyKotlinApplication))
 
-
+            import(moduleUser)
         }
 
 

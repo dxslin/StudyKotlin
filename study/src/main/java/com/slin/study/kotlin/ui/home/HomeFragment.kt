@@ -46,7 +46,7 @@ class HomeFragment : BaseFragment() {
             ),
             TestPageData(
                 "LibraryCase",
-                R.drawable.img_cartoon_pig1,
+                R.drawable.img_cartoon_pig2,
                 LibraryCaseActivity::class.java
             )
 

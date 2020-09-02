@@ -44,13 +44,17 @@ class TestListFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_test_list, container, false)
+        return inflater.inflate(R.layout.fragment_test_list, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val dataList: java.util.ArrayList<TestPageData>? =
             arguments?.getParcelableArrayList(INTENT_KEY_TEST_PAGE_DATA)
 
         rv_test_item.apply {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = GridLayoutManager(requireContext(), 2)
             addItemDecoration(GridDividerItemDivider(10, 10, Color.TRANSPARENT))
             adapter = object : BaseQuickAdapter<TestPageData, BaseViewHolder>(
                 R.layout.item_home_test,
@@ -68,10 +72,7 @@ class TestListFragment : BaseFragment() {
                 }
             }
         }
-
-        return view
     }
-
 
     private fun jumpToActivity(view: View, item: TestPageData) {
         context?.let { ctx ->

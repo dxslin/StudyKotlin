@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.databinding.ActivityViewBindBinding
-import com.slin.study.kotlin.ui.home.INTENT_NAME
+import com.slin.study.kotlin.ui.testlist.TestListFragment.Companion.INTENT_NAME
 
 class ViewBindActivity : BaseActivity() {
 

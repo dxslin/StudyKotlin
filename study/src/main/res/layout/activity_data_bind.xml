@@ -11,7 +11,7 @@
 
         <variable
             name="testData"
-            type="com.slin.study.kotlin.ui.home.TestPageData" />
+            type="com.slin.study.kotlin.ui.testlist.TestPageData" />
 
         <variable
             name="content"

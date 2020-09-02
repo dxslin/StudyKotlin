@@ -17,7 +17,6 @@ import kotlin.math.abs
 
 class BottomSheetTestFragment : BaseFragment() {
 
-    private val TAG = BottomSheetTestFragment::class.simpleName
 
     private lateinit var binding: BottomSheetTestFragmentBinding
     private lateinit var behavior: BottomSheetBehavior<ConstraintLayout>

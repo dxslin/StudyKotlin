@@ -1,6 +1,5 @@
 object Versions {
-    const val kotlin_version = "1.3.72"
-    const val core_ktx_version = "1.3.1"
+    const val kotlin_version = "1.4.0"
 
     const val appcompat_version = "1.2.0"
 
@@ -9,6 +8,8 @@ object Versions {
     const val okhttp_version = "4.8.1"
 
     const val retrofit_version = "2.9.0"
+
+    const val timber_version = "4.7.1"
 
     const val junit_version = "4.12"
     const val junit_ext_version = "1.1.2"
@@ -33,9 +34,14 @@ object Dependencies {
 
     //okhttp
     const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp_version}"
+    const val okhttp_logging = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp_version}"
 
     //retrofit
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit_version}"
+    const val retrofit_gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit_version}"
+
+    //logger
+    const val timber = "com.jakewharton.timber:timber:${Versions.timber_version}"
 
     //test
     const val junit = "junit:junit:${Versions.junit_version}"

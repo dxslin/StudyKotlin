@@ -1,5 +1,6 @@
 package com.slin.study.kotlin.samples.`class`
 
+import com.slin.study.kotlin.samples.coroutines.log
 import java.io.Serializable
 
 /**
@@ -54,6 +55,9 @@ fun main() {
             )
         )
     )
+
+    val valueOverrideImplExt = ValueOverrideImplExt()
+    log(valueOverrideImplExt.value)
 
 }
 
@@ -286,3 +290,21 @@ fun eval(e: Expr): Int =
 //        is TextView -> print("dd")
     }
 
+interface IValueOverride {
+    val value: String
+}
+
+open class ValueOverrideImpl : IValueOverride {
+    override val value: String by lazy {
+        log("lazy ValueOverrideImpl")
+        "ValueOverrideImpl"
+    }
+}
+
+class ValueOverrideImplExt : ValueOverrideImpl() {
+
+    override val value: String by lazy {
+        log("lazy ValueOverrideImplExt")
+        super.value + " ValueOverrideImplExt"
+    }
+}

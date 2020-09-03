@@ -2,7 +2,7 @@ package com.slin.study.kotlin.samples.grammer
 
 import com.slin.study.kotlin.samples.`fun`.View
 
-fun main(args: Array<String>) {
+fun main() {
     //声明只读变量
     val hello = "hello kotlin"
     //声明可变变量，变量后面可以跟“:类型”指定变量类型，也可以省略

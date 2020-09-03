@@ -44,14 +44,17 @@ dependencies {
 
 //    okhttp
     implementation Dependencies.okhttp
+    implementation Dependencies.okhttp_logging
 
 //    retrofit
     implementation Dependencies.retrofit
+    implementation Dependencies.retrofit_gson
+
+//    timber
+    implementation Dependencies.timber
 
 //    test
     testImplementation Dependencies.junit
     androidTestImplementation Dependencies.junit_ext
     androidTestImplementation Dependencies.espresso_core
-
-
 }

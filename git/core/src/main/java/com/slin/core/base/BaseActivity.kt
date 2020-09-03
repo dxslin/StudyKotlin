@@ -13,7 +13,7 @@ import org.kodein.di.android.retainedSubDI
  * description: BaseActivity
  *
  */
-open abstract class BaseActivity : AppCompatActivity(), DIAware {
+abstract class BaseActivity : AppCompatActivity(), DIAware {
 
     override val di: DI by retainedSubDI(di(), copy = Copy.All) {}
 

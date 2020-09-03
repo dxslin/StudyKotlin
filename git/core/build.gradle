@@ -31,27 +31,28 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
+    api fileTree(dir: "libs", include: ["*.jar"])
 
-    implementation Dependencies.kotlin_stdlib
-    implementation Dependencies.core_ktx
+    api Dependencies.kotlin_stdlib
+    api Dependencies.core_ktx
 
-    implementation Dependencies.appcompat
+    api Dependencies.appcompat
 
 //    kodein 依赖注入
-    implementation Dependencies.kodein_android_core
-    implementation Dependencies.kodein_android_x
+    api Dependencies.kodein_jvm
+    api Dependencies.kodein_android_core
+    api Dependencies.kodein_android_x
 
 //    okhttp
-    implementation Dependencies.okhttp
-    implementation Dependencies.okhttp_logging
+    api Dependencies.okhttp
+    api Dependencies.okhttp_logging
 
 //    retrofit
-    implementation Dependencies.retrofit
-    implementation Dependencies.retrofit_gson
+    api Dependencies.retrofit
+    api Dependencies.retrofit_gson
 
 //    timber
-    implementation Dependencies.timber
+    api Dependencies.timber
 
 //    test
     testImplementation Dependencies.junit

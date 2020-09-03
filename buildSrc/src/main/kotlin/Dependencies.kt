@@ -27,6 +27,7 @@ object Dependencies {
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat_version}"
 
     //kodein 依赖注入
+    const val kodein_jvm = "org.kodein.di:kodein-di-jvm:${Versions.kodein_version}"
     const val kodein_android_core =
         "org.kodein.di:kodein-di-framework-android-core:${Versions.kodein_version}"
     const val kodein_android_x =

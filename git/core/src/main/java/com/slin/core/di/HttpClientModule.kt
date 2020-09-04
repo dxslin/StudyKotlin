@@ -1,11 +1,13 @@
 package com.slin.core.di
 
+import com.google.gson.Gson
+import com.slin.core.BuildConfig
 import com.slin.core.net.GitAuthInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.kodein.di.*
-import org.kodein.di.android.BuildConfig
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
@@ -23,6 +25,23 @@ const val BASE_URL = "https://api.github.com/"
 
 
 val httpClientModule = DI.Module(HTTP_CLIENT_MODULE_TAG) {
+
+    bind<Retrofit>() with singleton {
+        instance<Retrofit.Builder>()
+            .baseUrl(BASE_URL)
+            .client(instance())
+            .addConverterFactory(instance())
+            .build()
+    }
+
+    bind<OkHttpClient>() with singleton {
+        instance<OkHttpClient.Builder>()
+            .connectTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
+            .readTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
+            .addInterceptor(instance<HttpLoggingInterceptor>())
+            .addInterceptor(instance<GitAuthInterceptor>())
+            .build()
+    }
 
     bind<OkHttpClient.Builder>() with provider {
         OkHttpClient.Builder()
@@ -45,20 +64,13 @@ val httpClientModule = DI.Module(HTTP_CLIENT_MODULE_TAG) {
         GitAuthInterceptor()
     }
 
-    bind<OkHttpClient>() with singleton {
-        instance<OkHttpClient.Builder>()
-            .connectTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
-            .readTimeout(TIME_OUT_SECONDS, TimeUnit.SECONDS)
-            .addInterceptor(instance<HttpLoggingInterceptor>())
-            .addInterceptor(instance<GitAuthInterceptor>())
-            .build()
+
+    bind<Gson>() with singleton {
+        Gson()
     }
 
-    bind<Retrofit>() with singleton {
-        instance<Retrofit.Builder>()
-            .baseUrl(BASE_URL)
-            .client(instance())
-            .build()
+    bind<GsonConverterFactory>() with provider {
+        GsonConverterFactory.create(instance())
     }
 
 }

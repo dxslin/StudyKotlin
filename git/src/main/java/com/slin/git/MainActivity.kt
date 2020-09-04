@@ -9,6 +9,7 @@ import com.slin.core.base.BaseActivity
 
 class MainActivity : BaseActivity() {
 
+
     override val layoutResId: Int
         get() = R.layout.activity_main
 
@@ -25,6 +26,8 @@ class MainActivity : BaseActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
     }
 
 }

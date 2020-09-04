@@ -5,6 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import org.kodein.di.DI
+import org.kodein.di.DIAware
+import org.kodein.di.DIContext
+import org.kodein.di.android.x.closestDI
+import org.kodein.di.diContext
 
 
 /**
@@ -14,7 +19,11 @@ import androidx.fragment.app.Fragment
  *
  */
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment(), DIAware {
+
+    override val di: DI by closestDI()
+
+    override val diContext: DIContext<Fragment> = diContext { this }
 
 
     /**
@@ -32,10 +41,10 @@ abstract class BaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
+        initView(view)
     }
 
-    protected fun initView() {
+    protected open fun initView(view: View) {
 
     }
 

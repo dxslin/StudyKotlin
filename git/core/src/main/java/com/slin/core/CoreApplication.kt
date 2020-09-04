@@ -3,13 +3,13 @@ package com.slin.core
 import android.app.Application
 import com.slin.core.di.httpClientModule
 import com.slin.core.di.repositoryModule
+import com.slin.core.logger.initLogger
 import org.kodein.di.DI
 import org.kodein.di.DIAware
 import org.kodein.di.android.androidCoreModule
 import org.kodein.di.android.x.androidXModule
 import org.kodein.di.bind
 import org.kodein.di.singleton
-
 
 /**
  * author: slin
@@ -18,7 +18,7 @@ import org.kodein.di.singleton
  *
  */
 
-class CoreApplication : Application(), DIAware {
+open class CoreApplication : Application(), DIAware {
 
     /**
      * 依赖注入
@@ -39,6 +39,15 @@ class CoreApplication : Application(), DIAware {
 
     override fun onCreate() {
         super.onCreate()
+
+        init()
     }
+
+    private fun init() {
+        initLogger(BuildConfig.DEBUG)
+
+
+    }
+
 
 }

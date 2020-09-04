@@ -17,7 +17,7 @@ abstract class BaseActivity : AppCompatActivity(), DIAware {
 
     override val di: DI by retainedSubDI(di(), copy = Copy.All) {}
 
-    override val diContext: DIContext<*> = diContext { this }
+    override val diContext: DIContext<BaseActivity> = diContext { this }
 
     /**
      * 布局文件id

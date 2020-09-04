@@ -2,6 +2,11 @@ object Versions {
     const val kotlin_version = "1.4.0"
 
     const val appcompat_version = "1.2.0"
+    const val material_version = "1.2.0"
+    const val constraintlayout_version = "2.0.1"
+    const val vectordrawable_version = "1.1.0"
+    const val lifecycle_extensions_version = "2.2.0"
+    const val navigation_version = "2.2.0"
 
     const val kodein_version = "7.0.0"
 
@@ -23,8 +28,22 @@ object Dependencies {
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
     const val core_ktx = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
 
-    //android x
+    //android x ui
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat_version}"
+    const val material = "com.google.android.material:material:${Versions.material_version}"
+    const val constraintlayout =
+        "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout_version}"
+    const val vectordrawable =
+        "androidx.vectordrawable:vectordrawable:${Versions.vectordrawable_version}"
+    const val lifecycle_extensions =
+        "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle_extensions_version}"
+    const val navigation_fragment =
+        "androidx.navigation:navigation-fragment:${Versions.navigation_version}"
+    const val navigation_ui = "androidx.navigation:navigation-ui:${Versions.navigation_version}"
+    const val navigation_fragment_ktx =
+        "androidx.navigation:navigation-fragment-ktx:${Versions.navigation_version}"
+    const val navigation_ui_ktx =
+        "androidx.navigation:navigation-ui-ktx:${Versions.navigation_version}"
 
     //kodein 依赖注入
     const val kodein_jvm = "org.kodein.di:kodein-di-jvm:${Versions.kodein_version}"

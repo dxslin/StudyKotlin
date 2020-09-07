@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.slin.core.logger.log
-import com.slin.git.http.bean.LoginRequestModel
-import com.slin.git.http.service.LoginService
+import com.slin.git.stroage.bean.LoginRequestModel
+import com.slin.git.stroage.remote.LoginService
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import timber.log.Timber

@@ -1,9 +1,11 @@
-package com.slin.git.http.service
+package com.slin.git.stroage.remote
 
 import com.slin.git.entity.UserAccessToken
-import com.slin.git.http.bean.LoginRequestModel
+import com.slin.git.entity.UserInfo
+import com.slin.git.stroage.bean.LoginRequestModel
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
@@ -19,5 +21,8 @@ interface LoginService {
     @POST("authorizations")
     @Headers("Accept: application/json")
     suspend fun authorizations(@Body authRequestModel: LoginRequestModel): Response<UserAccessToken>
+
+    @GET("user")
+    suspend fun fetchUserOwner(): Response<UserInfo>
 
 }

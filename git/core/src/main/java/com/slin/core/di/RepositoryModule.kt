@@ -3,7 +3,6 @@ package com.slin.core.di
 import android.content.Context
 import android.content.SharedPreferences
 import com.slin.core.CoreApplication
-import com.slin.core.repository.GitUserInfoRepository
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.instance
@@ -25,10 +24,6 @@ val repositoryModule = DI.Module(REPOSITORY_MODULE_TAG) {
     bind<SharedPreferences>(DEFAULT_SHARE_PREFERENCES_TAG) with singleton {
         instance<CoreApplication>()
             .getSharedPreferences(DEFAULT_SHARE_PREFERENCES_TAG, Context.MODE_PRIVATE)
-    }
-
-    bind<GitUserInfoRepository>() with singleton {
-        GitUserInfoRepository.getInstance(instance(DEFAULT_SHARE_PREFERENCES_TAG))
     }
 
 }

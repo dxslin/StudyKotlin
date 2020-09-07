@@ -37,6 +37,8 @@ dependencies {
     api Dependencies.core_ktx
 
     api Dependencies.appcompat
+    api Dependencies.lifecycle_extensions
+    api Dependencies.lifecycle_runtime
 
 //    kodein 依赖注入
     api Dependencies.kodein_jvm

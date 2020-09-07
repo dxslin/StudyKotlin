@@ -25,6 +25,7 @@ abstract class BaseFragment : Fragment(), DIAware {
 
     override val diContext: DIContext<Fragment> = diContext { this }
 
+    protected lateinit var rootView: View
 
     /**
      * 布局文件id
@@ -36,7 +37,8 @@ abstract class BaseFragment : Fragment(), DIAware {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(layoutResId, container, false)
+        rootView = inflater.inflate(layoutResId, container, false)
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

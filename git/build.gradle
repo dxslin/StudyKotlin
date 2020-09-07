@@ -52,11 +52,13 @@ dependencies {
     implementation Dependencies.material
     implementation Dependencies.constraintlayout
     implementation Dependencies.vectordrawable
-    implementation Dependencies.lifecycle_extensions
     implementation Dependencies.navigation_fragment
     implementation Dependencies.navigation_ui
     implementation Dependencies.navigation_fragment_ktx
     implementation Dependencies.navigation_ui_ktx
+    implementation Dependencies.lifecycle_extensions
+    implementation Dependencies.lifecycle_runtime
+
 
 //    test
     testImplementation Dependencies.junit

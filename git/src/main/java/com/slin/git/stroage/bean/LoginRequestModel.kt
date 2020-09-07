@@ -1,4 +1,4 @@
-package com.slin.git.http.bean
+package com.slin.git.stroage.bean
 
 import com.google.gson.annotations.SerializedName
 import com.slin.git.BuildConfig

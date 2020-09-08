@@ -1,6 +1,8 @@
 package com.slin.core
 
 import android.app.Application
+import com.slin.core.config.AppConfig
+import com.slin.core.config.Config
 import com.slin.core.di.httpClientModule
 import com.slin.core.di.repositoryModule
 import com.slin.core.logger.initLogger
@@ -27,7 +29,9 @@ open class CoreApplication : Application(), DIAware {
         bind<CoreApplication>() with singleton {
             this@CoreApplication
         }
-
+        bind<AppConfig>() with singleton {
+            createAppConfig()
+        }
         import(androidCoreModule(this@CoreApplication))
         import(androidXModule(this@CoreApplication))
 
@@ -47,6 +51,13 @@ open class CoreApplication : Application(), DIAware {
         initLogger(BuildConfig.DEBUG)
 
 
+    }
+
+    protected open fun createAppConfig(): AppConfig {
+        return AppConfig(
+                baseUrl = Config.BASE_URL,
+                timeOutSeconds = Config.TIME_OUT_SECONDS
+        );
     }
 
 

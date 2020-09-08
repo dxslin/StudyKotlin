@@ -1,10 +1,10 @@
 package com.slin.git
 
 import com.slin.core.CoreApplication
-import org.kodein.di.DI
-import org.kodein.di.bind
-import org.kodein.di.singleton
-import org.kodein.di.subDI
+import com.slin.core.config.AppConfig
+import com.slin.core.net.GitAuthInterceptor
+import okhttp3.Interceptor
+import org.kodein.di.*
 
 
 /**
@@ -18,10 +18,20 @@ class SlinGitApplication : CoreApplication() {
         bind<SlinGitApplication>() with singleton {
             this@SlinGitApplication
         }
+
+        bind<Interceptor>("GitAuthInterceptor") with provider {
+            GitAuthInterceptor()
+        }
     }
 
     override fun onCreate() {
         super.onCreate()
+    }
+
+    override fun createAppConfig(): AppConfig {
+        return super.createAppConfig().copy(
+
+        )
     }
 
 }

@@ -1,5 +1,6 @@
 package com.slin.core.net
 
+import com.slin.core.logger.log
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -13,6 +14,7 @@ import okhttp3.Response
 class GitAuthInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
+        log { "GitAuthInterceptor" }
         return chain.proceed(chain.request())
     }
 

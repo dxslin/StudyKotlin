@@ -2,8 +2,6 @@ package com.slin.git.ui.login.ui.login
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.slin.core.di.DEFAULT_SHARE_PREFERENCES_TAG
-import com.slin.git.stroage.local.GitUserInfoStorage
 import com.slin.git.stroage.remote.LoginService
 import com.slin.git.ui.login.data.LoginLocalDataSource
 import com.slin.git.ui.login.data.LoginRemoteDataSource
@@ -20,9 +18,9 @@ import retrofit2.Retrofit
 const val LOGIN_MODULE_TAG = "login_module_tag"
 val loginKodeinModule = DI.Module(LOGIN_MODULE_TAG) {
 
-    bind<GitUserInfoStorage>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
-        GitUserInfoStorage(instance(DEFAULT_SHARE_PREFERENCES_TAG))
-    }
+//    bind<GitUserInfoStorage>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
+//        GitUserInfoStorage.getInstance(instance(DEFAULT_SHARE_PREFERENCES_TAG))
+//    }
 
     bind<LoginLocalDataSource>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
         LoginLocalDataSource(instance())

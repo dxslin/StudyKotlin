@@ -9,7 +9,21 @@ package com.slin.git.config
  */
 object Config {
 
-    const val TIME_OUT_SECONDS = 10L
+    /********************** 网络配置 ***************************************************************/
+    /**
+     * 域名
+     */
     const val BASE_URL = "https://api.github.com/"
+
+    /**
+     * 超时时间
+     */
+    const val TIME_OUT_SECONDS = 10L
+
+    /**
+     * http拦截器
+     */
+//    val INTERCEPTORS = listOf(GitAuthInterceptor(GitUserInfoStorage()))
+
 
 }

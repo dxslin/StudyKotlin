@@ -33,12 +33,17 @@ val httpClientModule = DI.Module(HTTP_CLIENT_MODULE_TAG) {
     }
 
     bind<OkHttpClient>() with singleton {
-        instance<OkHttpClient.Builder>()
+
+        val okHttpClientBuilder = instance<OkHttpClient.Builder>()
                 .connectTimeout(instance<AppConfig>().timeOutSeconds, TimeUnit.SECONDS)
                 .readTimeout(instance<AppConfig>().timeOutSeconds, TimeUnit.SECONDS)
                 .addInterceptor(instance<HttpLoggingInterceptor>())
-                .addInterceptor(instance<Interceptor>("GitAuthInterceptor"))
-            .build()
+        val interceptors = instance<List<Interceptor>>()
+        interceptors.forEach {
+            okHttpClientBuilder.addInterceptor(it)
+        }
+
+        okHttpClientBuilder.build()
     }
 
     bind<OkHttpClient.Builder>() with provider {
@@ -57,11 +62,6 @@ val httpClientModule = DI.Module(HTTP_CLIENT_MODULE_TAG) {
             }
         }
     }
-
-//    bind<Interceptor>("GitAuthInterceptor") with provider {
-//        GitAuthInterceptor()
-//    }
-
 
     bind<Gson>() with singleton {
         Gson()

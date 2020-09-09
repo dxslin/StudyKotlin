@@ -21,20 +21,21 @@ class LoginRepository(
     }
 
     suspend fun login(username: String, password: String): Results<UserInfo> {
+        //这里先保存一下用户名和密码，因为我们在拦截器里面使用了用户名和密码，如果登陆失败就清除掉
+        localDataSource.saveUser(username, password)
         // handle login
         val result = remoteDataSource.login()
 
         when (result) {
-            is Results.Success -> setLoggedInUser(result.data, username, password)
+            is Results.Success -> setLoggedInUser(result.data)
             is Results.Failure -> localDataSource.clearUserInfo()
         }
 
         return result
     }
 
-    private fun setLoggedInUser(userInfo: UserInfo, username: String, password: String) {
+    private fun setLoggedInUser(userInfo: UserInfo) {
         UserManager.INSTANCE = userInfo
         UserManager.isLoggedIn = true
-        localDataSource.saveUser(username, password)
     }
 }

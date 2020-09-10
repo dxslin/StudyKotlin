@@ -1,4 +1,4 @@
-package com.slin.git.ui.login.ui.login
+package com.slin.git.ui.login.view
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData

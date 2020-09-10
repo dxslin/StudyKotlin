@@ -1,4 +1,4 @@
-package com.slin.git.ui.login.ui.login
+package com.slin.git.ui.login.view
 
 /**
  * User details post authentication that is exposed to the UI

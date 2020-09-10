@@ -1,4 +1,4 @@
-package com.slin.git.ui.login.ui.login
+package com.slin.git.ui.login.view
 
 /**
  * Authentication result : success (user details) or error message.

@@ -50,6 +50,11 @@ open class CoreApplication : Application(), DIAware {
 
     }
 
+    /**
+     * 自定义的app配置项，可以设置一些第三方参数
+     * @param directDIAware kodein直接注入
+     * @note 传入directDIAware是为了能够使用依赖注入来设置参数
+     */
     protected open fun createAppConfig(directDIAware: DirectDIAware): AppConfig {
         return AppConfig()
     }

@@ -1,4 +1,4 @@
-package com.slin.core.base
+package com.slin.core.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,11 +13,11 @@ import org.kodein.di.android.retainedSubDI
  * description: BaseActivity
  *
  */
-abstract class BaseActivity : AppCompatActivity(), DIAware {
+abstract class CoreActivity : AppCompatActivity(), DIAware {
 
     override val di: DI by retainedSubDI(di(), copy = Copy.All) {}
 
-    override val diContext: DIContext<BaseActivity> = diContext { this }
+    override val diContext: DIContext<CoreActivity> = diContext { this }
 
     /**
      * 布局文件id

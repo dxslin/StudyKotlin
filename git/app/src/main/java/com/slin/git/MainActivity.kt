@@ -5,9 +5,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.slin.core.base.BaseActivity
+import com.slin.core.ui.CoreActivity
 
-class MainActivity : BaseActivity() {
+class MainActivity : CoreActivity() {
 
 
     override val layoutResId: Int

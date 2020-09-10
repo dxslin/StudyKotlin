@@ -11,14 +11,14 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
-import com.slin.core.base.BaseFragment
+import com.slin.core.ui.CoreFragment
 import com.slin.git.MainActivity
 import com.slin.git.R
 import org.kodein.di.DI
 import org.kodein.di.instance
 
 
-class LoginFragment : BaseFragment() {
+class LoginFragment : CoreFragment() {
 
     override val di: DI = DI.lazy {
         extend(super.di)

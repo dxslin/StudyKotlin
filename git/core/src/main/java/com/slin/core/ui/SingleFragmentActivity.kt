@@ -1,4 +1,4 @@
-package com.slin.core.base
+package com.slin.core.ui
 
 import com.slin.core.R
 
@@ -7,14 +7,14 @@ import com.slin.core.R
  * date: 2020-09-07
  * description:单个fragment的activity
  */
-abstract class SingleFragmentActivity : BaseActivity() {
+abstract class SingleFragmentActivity : CoreActivity() {
 
     override val layoutResId: Int = R.layout.activity_single_fragment
 
     /**
      * fragment
      */
-    abstract val contentFragment: BaseFragment
+    abstract val contentFragment: CoreFragment
 
     override fun initView() {
         super.initView()

@@ -1,4 +1,4 @@
-package com.slin.core.base
+package com.slin.core.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,7 +19,7 @@ import org.kodein.di.diContext
  *
  */
 
-abstract class BaseFragment : Fragment(), DIAware {
+abstract class CoreFragment : Fragment(), DIAware {
 
     override val di: DI by closestDI()
 

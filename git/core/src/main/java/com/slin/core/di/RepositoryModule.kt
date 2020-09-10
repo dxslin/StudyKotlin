@@ -12,7 +12,7 @@ import org.kodein.di.singleton
 /**
  * author: slin
  * date: 2020/9/3
- * description:
+ * description: 数据层注入
  *
  */
 const val REPOSITORY_MODULE_TAG = "repository_module_tag"

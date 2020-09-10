@@ -1,16 +1,13 @@
 package com.slin.core
 
 import android.app.Application
-import com.slin.core.di.defaultConfigModule
+import com.slin.core.config.AppConfig
 import com.slin.core.di.httpClientModule
 import com.slin.core.di.repositoryModule
 import com.slin.core.logger.initLogger
-import org.kodein.di.DI
-import org.kodein.di.DIAware
+import org.kodein.di.*
 import org.kodein.di.android.androidCoreModule
 import org.kodein.di.android.x.androidXModule
-import org.kodein.di.bind
-import org.kodein.di.singleton
 
 /**
  * author: slin
@@ -21,8 +18,6 @@ import org.kodein.di.singleton
 
 open class CoreApplication : Application(), DIAware {
 
-    open val configModule = defaultConfigModule
-
     /**
      * 依赖注入
      */
@@ -30,10 +25,13 @@ open class CoreApplication : Application(), DIAware {
         bind<CoreApplication>() with singleton {
             this@CoreApplication
         }
+        bind<AppConfig>() with singleton {
+            createAppConfig(this)
+        }
+
         import(androidCoreModule(this@CoreApplication))
         import(androidXModule(this@CoreApplication))
 
-        import(configModule)
         import(httpClientModule)
         import(repositoryModule)
 
@@ -50,6 +48,10 @@ open class CoreApplication : Application(), DIAware {
         initLogger(BuildConfig.DEBUG)
 
 
+    }
+
+    protected open fun createAppConfig(directDIAware: DirectDIAware): AppConfig {
+        return AppConfig()
     }
 
 }

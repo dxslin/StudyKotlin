@@ -1,9 +1,7 @@
 package com.slin.core.di
 
 import com.google.gson.Gson
-import com.slin.core.BuildConfig
 import com.slin.core.config.AppConfig
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.kodein.di.*
@@ -15,7 +13,7 @@ import java.util.concurrent.TimeUnit
 /**
  * author: slin
  * date: 2020/9/2
- * description: Http 服务注入module
+ * description: Http 网络服务注入module
  *
  */
 
@@ -35,11 +33,11 @@ val httpClientModule = DI.Module(HTTP_CLIENT_MODULE_TAG) {
     bind<OkHttpClient>() with singleton {
 
         val okHttpClientBuilder = instance<OkHttpClient.Builder>()
-                .connectTimeout(instance<AppConfig>().timeOutSeconds, TimeUnit.SECONDS)
-                .readTimeout(instance<AppConfig>().timeOutSeconds, TimeUnit.SECONDS)
-                .addInterceptor(instance<HttpLoggingInterceptor>())
-        val interceptors = instance<List<Interceptor>>()
-        interceptors.forEach {
+            .connectTimeout(instance<AppConfig>().timeOutSeconds, TimeUnit.SECONDS)
+            .readTimeout(instance<AppConfig>().timeOutSeconds, TimeUnit.SECONDS)
+            .addInterceptor(instance<HttpLoggingInterceptor>())
+        val interceptors = instance<AppConfig>().customInterceptors
+        interceptors?.forEach {
             okHttpClientBuilder.addInterceptor(it)
         }
 
@@ -56,10 +54,7 @@ val httpClientModule = DI.Module(HTTP_CLIENT_MODULE_TAG) {
 
     bind<HttpLoggingInterceptor>() with provider {
         HttpLoggingInterceptor().apply {
-            level = when (BuildConfig.DEBUG) {
-                true -> HttpLoggingInterceptor.Level.BODY
-                false -> HttpLoggingInterceptor.Level.NONE
-            }
+            level = instance<AppConfig>().httpLogLevel
         }
     }
 

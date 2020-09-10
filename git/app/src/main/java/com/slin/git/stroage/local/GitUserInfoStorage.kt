@@ -1,9 +1,9 @@
 package com.slin.git.stroage.local
 
 import android.content.SharedPreferences
+import com.slin.core.di.SingletonHolderSingleArg
 import com.slin.core.ext.boolean
 import com.slin.core.ext.string
-import com.slin.core.utils.SingletonHolderSingleArg
 
 
 /**

@@ -18,10 +18,6 @@ import retrofit2.Retrofit
 const val LOGIN_MODULE_TAG = "login_module_tag"
 val loginKodeinModule = DI.Module(LOGIN_MODULE_TAG) {
 
-//    bind<GitUserInfoStorage>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
-//        GitUserInfoStorage.getInstance(instance(DEFAULT_SHARE_PREFERENCES_TAG))
-//    }
-
     bind<LoginLocalDataSource>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
         LoginLocalDataSource(instance())
     }

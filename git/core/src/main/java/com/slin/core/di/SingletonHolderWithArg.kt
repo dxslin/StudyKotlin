@@ -1,4 +1,4 @@
-package com.slin.core.utils
+package com.slin.core.di
 
 
 /**

@@ -1,6 +1,7 @@
 package com.slin.core.ext
 
 import android.content.Context
+import android.widget.Toast
 
 
 /**
@@ -22,4 +23,5 @@ fun Context.screenWidth() = resources.displayMetrics.widthPixels
 
 fun Context.screenHeight() = resources.displayMetrics.heightPixels
 
-
+fun Context.toast(msg: String, duration: Int = Toast.LENGTH_SHORT) =
+    Toast.makeText(this, msg, duration).show()

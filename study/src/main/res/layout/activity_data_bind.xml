@@ -93,5 +93,6 @@
             app:error="@{@drawable/img_cartoon_2}"
             app:imageUrl="@{url}" />
 
+
     </LinearLayout>
 </layout>

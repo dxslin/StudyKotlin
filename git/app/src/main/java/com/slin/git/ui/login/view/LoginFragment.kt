@@ -7,11 +7,12 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.slin.core.ui.CoreFragment
+import com.slin.git.BuildConfig
 import com.slin.git.MainActivity
 import com.slin.git.R
+import com.slin.git.databinding.FragmentLoginBinding
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.kodein.di.DI
 import org.kodein.di.instance
@@ -32,8 +33,11 @@ class LoginFragment : CoreFragment() {
 
     override fun initView(view: View) {
         super.initView(view)
-        binding = DataBindingUtil.bind(view)
-        binding.viewModel = loginViewModel
+        binding = FragmentLoginBinding.bind(view).apply {
+            setLifecycleOwner { lifecycle }
+            viewModel = loginViewModel
+            loginFormState = loginViewModel.loginFormState.value
+        }
 
 //        loginViewModel.loginFormState.observe(this,
 //            Observer { loginFormState ->
@@ -102,6 +106,16 @@ class LoginFragment : CoreFragment() {
                 et_password.text.toString()
             )
         }
+
+        initData()
+    }
+
+    private fun initData() {
+        if (BuildConfig.DEBUG) {
+            et_username.setText("dxslin")
+            et_password.setText("TTdxslin11")
+        }
+
     }
 
     private fun updateUiWithUser(model: LoggedInUserView) {

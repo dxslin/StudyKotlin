@@ -28,7 +28,7 @@ inline fun logi(supplier: Supplier<String>) = Timber.i(supplier())
 
 inline fun logw(supplier: Supplier<String>) = Timber.w(supplier())
 
-inline fun loge(supplier: Supplier<String>, t: Throwable? = null) =
+inline fun loge(t: Throwable? = null, supplier: Supplier<String>) =
     if (t == null) {
         Timber.e(supplier())
     } else {

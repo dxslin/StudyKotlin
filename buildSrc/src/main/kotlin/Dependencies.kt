@@ -17,6 +17,8 @@ object Versions {
 
     const val timber_version = "4.7.1"
 
+    const val glide_version = "4.11.0"
+
     const val junit_version = "4.12"
     const val junit_ext_version = "1.1.2"
     const val espresso_core_version = "3.2.0"
@@ -27,7 +29,8 @@ object Versions {
 object Dependencies {
     //kotlin
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
-    const val core_ktx = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
+    const val kotlin_coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5"
+    const val kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin_version}"
 
     //android x ui
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat_version}"
@@ -67,6 +70,10 @@ object Dependencies {
 
     //logger
     const val timber = "com.jakewharton.timber:timber:${Versions.timber_version}"
+
+    //glide
+    const val glide = "com.github.bumptech.glide:glide:${Versions.glide_version}"
+    const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide_version}"
 
     //test
     const val junit = "junit:junit:${Versions.junit_version}"

@@ -2,6 +2,9 @@ package com.slin.core.di
 
 import com.google.gson.Gson
 import com.slin.core.config.AppConfig
+import com.slin.core.config.Constants
+import com.slin.core.logger.logd
+import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.kodein.di.*
@@ -24,7 +27,7 @@ val httpClientModule = DI.Module(HTTP_CLIENT_MODULE_TAG) {
 
     bind<Retrofit>() with singleton {
         instance<Retrofit.Builder>()
-                .baseUrl(instance<AppConfig>().baseUrl)
+            .baseUrl(instance<AppConfig>().baseUrl)
             .client(instance())
             .addConverterFactory(instance())
             .build()
@@ -35,6 +38,7 @@ val httpClientModule = DI.Module(HTTP_CLIENT_MODULE_TAG) {
         val okHttpClientBuilder = instance<OkHttpClient.Builder>()
             .connectTimeout(instance<AppConfig>().timeOutSeconds, TimeUnit.SECONDS)
             .readTimeout(instance<AppConfig>().timeOutSeconds, TimeUnit.SECONDS)
+            .dispatcher(Dispatcher(instance<AppConfig>().executorService))
             .addInterceptor(instance<HttpLoggingInterceptor>())
         val interceptors = instance<AppConfig>().customInterceptors
         interceptors?.forEach {
@@ -53,7 +57,11 @@ val httpClientModule = DI.Module(HTTP_CLIENT_MODULE_TAG) {
     }
 
     bind<HttpLoggingInterceptor>() with provider {
-        HttpLoggingInterceptor().apply {
+        HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+            override fun log(message: String) {
+                logd { "${Constants.GLOBAL_TAG}_http: $message" }
+            }
+        }).apply {
             level = instance<AppConfig>().httpLogLevel
         }
     }

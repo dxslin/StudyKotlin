@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -34,7 +35,7 @@ dependencies {
     api fileTree(dir: "libs", include: ["*.jar"])
 
     api Dependencies.kotlin_stdlib
-    api Dependencies.core_ktx
+    api Dependencies.kotlin_coroutines
 
     api Dependencies.appcompat
     api Dependencies.lifecycle_extensions
@@ -55,6 +56,10 @@ dependencies {
 
 //    timber
     api Dependencies.timber
+
+//    gilde
+    api Dependencies.glide
+    kapt Dependencies.glide_compiler
 
 //    test
     testImplementation Dependencies.junit

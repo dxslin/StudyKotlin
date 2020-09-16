@@ -7,4 +7,21 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Text" parent="TextAppearance.AppCompat">
+
+    </style>
+
+    <style name="Text.Large" parent="TextAppearance.AppCompat.Large">
+
+    </style>
+
+    <style name="Text.Medium" parent="TextAppearance.AppCompat.Medium">
+
+    </style>
+
+    <style name="Text.Small" parent="TextAppearance.AppCompat.Small">
+
+    </style>
+
+
 </resources>

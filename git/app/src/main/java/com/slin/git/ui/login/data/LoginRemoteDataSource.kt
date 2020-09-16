@@ -10,7 +10,7 @@ import com.slin.git.stroage.remote.LoginService
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
-class LoginRemoteDataSource(val loginService: LoginService) : IRemoteDataSource {
+class LoginRemoteDataSource(private val loginService: LoginService) : IRemoteDataSource {
 
     suspend fun login(): Results<UserInfo> {
         val loginRequestModel = LoginRequestModel.generate()

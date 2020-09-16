@@ -1,6 +1,7 @@
 package com.slin.core.logger
 
 import android.app.Application
+import com.slin.core.config.Constants
 import com.slin.core.functional.Supplier
 import timber.log.Timber
 
@@ -13,11 +14,18 @@ import timber.log.Timber
  */
 fun Application.initLogger(isDebug: Boolean) {
     if (isDebug) {
-        Timber.plant(Timber.DebugTree())
+        Timber.plant(CoreDebugTree())
     } else {
         Timber.plant(CrashReportTree())
     }
     log { "Initialize logger successful, isDebug: $isDebug" }
+}
+
+class CoreDebugTree : Timber.DebugTree() {
+    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+        val newTag = "${Constants.GLOBAL_TAG}_$tag"
+        super.log(priority, newTag, message, t)
+    }
 }
 
 inline fun log(supplier: Supplier<String>) = logd(supplier)

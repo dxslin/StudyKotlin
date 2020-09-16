@@ -9,6 +9,8 @@ object Versions {
 
     const val lifecycle_version = "2.2.0"
 
+    const val room_version = "2.2.5"
+
     const val kodein_version = "7.0.0"
 
     const val okhttp_version = "4.8.1"
@@ -47,11 +49,16 @@ object Dependencies {
     const val navigation_ui_ktx =
         "androidx.navigation:navigation-ui-ktx:${Versions.navigation_version}"
 
-    //life
+    //lifecycle
     const val lifecycle_extensions =
         "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle_version}"
     const val lifecycle_runtime =
         "androidx.lifecycle:lifecycle-runtime:${Versions.lifecycle_version}"
+
+    const val room = "androidx.room:room-runtime:${Versions.room_version}"
+    const val room_compiler = "androidx.room:room-compiler:${Versions.room_version}"
+    const val room_ktx = "androidx.room:room-ktx:${Versions.room_version}"
+    const val room_test = "androidx.room:room-testing:${Versions.room_version}"
 
     //kodein 依赖注入
     const val kodein_jvm = "org.kodein.di:kodein-di-jvm:${Versions.kodein_version}"

@@ -7,6 +7,8 @@ package com.slin.core.repository
  */
 interface IDataSource
 
-interface ILocalDataSource
+interface ILocalDataSource : IDataSource
 
-interface IRemoteDataSource
+interface IRemoteDataSource : IDataSource
+
+

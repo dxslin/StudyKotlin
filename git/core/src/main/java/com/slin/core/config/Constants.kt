@@ -9,6 +9,6 @@ package com.slin.core.config
  */
 object Constants {
 
-    const val GLOBAL_TAG = "SlinGit"
+    const val GLOBAL_TAG = "SlinCore"
 
 }

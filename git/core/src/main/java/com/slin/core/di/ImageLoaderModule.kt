@@ -1,7 +1,6 @@
 package com.slin.core.di
 
 import com.slin.core.config.AppConfig
-import com.slin.core.config.Constants.GLOBAL_TAG
 import com.slin.core.image.ImageLoader
 import com.slin.core.image.ImageLoaderStrategy
 import com.slin.core.image.impl.GlideImageLoaderStrategy
@@ -46,7 +45,7 @@ val imageLoaderModule = DI.Module(IMAGE_LOADER_MODULE_TAG) {
     bind<HttpLoggingInterceptor>(IMAGE_HTTP_LOGGING_INTERCEPTOR_TAG) with provider {
         HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
-                logd { "${GLOBAL_TAG}_glide: $message" }
+                logd { "glide: $message" }
             }
         }).apply {
             level = HttpLoggingInterceptor.Level.BASIC

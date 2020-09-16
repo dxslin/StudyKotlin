@@ -2,7 +2,6 @@ package com.slin.core.di
 
 import com.google.gson.Gson
 import com.slin.core.config.AppConfig
-import com.slin.core.config.Constants
 import com.slin.core.logger.logd
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
@@ -59,7 +58,7 @@ val httpClientModule = DI.Module(HTTP_CLIENT_MODULE_TAG) {
     bind<HttpLoggingInterceptor>() with provider {
         HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
-                logd { "${Constants.GLOBAL_TAG}_http: $message" }
+                logd { "http: $message" }
             }
         }).apply {
             level = instance<AppConfig>().httpLogLevel

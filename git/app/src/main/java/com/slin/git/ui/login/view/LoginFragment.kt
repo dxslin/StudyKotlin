@@ -22,7 +22,7 @@ class LoginFragment : CoreFragment() {
 
     override val di: DI = DI.lazy {
         extend(super.di)
-        import(loginKodeinModule)
+        import(loginModule)
     }
 
     override val layoutResId: Int = R.layout.fragment_login

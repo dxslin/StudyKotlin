@@ -41,6 +41,11 @@ dependencies {
     api Dependencies.lifecycle_extensions
     api Dependencies.lifecycle_runtime
 
+    //room
+    api Dependencies.room
+    api Dependencies.room_ktx
+    kapt Dependencies.room_compiler
+
 //    kodein 依赖注入
     api Dependencies.kodein_jvm
     api Dependencies.kodein_android_core

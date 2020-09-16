@@ -15,7 +15,15 @@
     9). bottom navigation
     10). bottom sheet
 
-##### 一、动画
+##### 二、jetpack
+1. hilt
+2. paging
+3. Dynamicanimation
+4. room
+5. workmanager
+
+
+##### 三、动画
 1. App bars:Bottom      https://material.io/components/app-bars-bottom
 2. App bars:Top         https://material.io/components/app-bars-top
 3. Backdrop             https://material.io/components/backdrop#behavior

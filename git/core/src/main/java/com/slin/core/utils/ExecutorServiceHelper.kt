@@ -1,6 +1,5 @@
 package com.slin.core.utils
 
-import com.slin.core.config.Constants
 import java.util.concurrent.*
 
 
@@ -12,7 +11,7 @@ import java.util.concurrent.*
  */
 object ExecutorServiceHelper {
 
-    private const val THREAD_TAG: String = Constants.GLOBAL_TAG + "_thread" //线程名
+    private const val THREAD_TAG: String = "thread" //线程名
     private val NUMBER_OF_CORES = Runtime.getRuntime().availableProcessors()
     private val MAX_NUMBER_OF_POOLS = NUMBER_OF_CORES * 2 + 1
     private const val KEEP_ALIVE_TIME: Long = 60L

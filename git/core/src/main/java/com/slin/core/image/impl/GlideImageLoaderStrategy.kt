@@ -49,7 +49,7 @@ class GlideImageLoaderStrategy : ImageLoaderStrategy<ImageConfigImpl> {
             glideRequest.transition(DrawableTransitionOptions.withCrossFade())
         if (config.imageRadius > 0) //图片圆角大小
             glideRequest.transform(RoundedCorners(config.imageRadius))
-        if (config.placeholder != 0) //设置占位符
+        if (config.placeholder != null) //设置占位符
             glideRequest.placeholder(config.placeholder)
         if (config.errorImage != 0) //设置错误的图片
             glideRequest.error(config.errorImage)

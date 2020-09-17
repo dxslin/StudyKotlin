@@ -38,4 +38,9 @@ class LoginRepository(
         UserManager.INSTANCE = userInfo
         UserManager.isLoggedIn = true
     }
+
+    fun isAutoLogin(): Boolean {
+        return localDataSource.isAutoLogin()
+    }
+
 }

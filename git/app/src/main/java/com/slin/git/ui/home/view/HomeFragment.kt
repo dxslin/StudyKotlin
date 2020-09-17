@@ -1,37 +1,65 @@
 package com.slin.git.ui.home.view
 
-import android.content.Intent
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import com.slin.core.ui.CoreFragment
-import com.slin.git.R
+import android.view.ViewGroup
+import com.slin.git.base.BaseFragment
+import com.slin.git.databinding.FragmentHomeBinding
+import com.slin.git.entity.UserInfo
 import com.slin.git.manager.UserManager
-import com.slin.git.ui.login.LoginActivity
 import org.kodein.di.DI
 import org.kodein.di.instance
 
-class HomeFragment : CoreFragment() {
+/**
+ * 首页，received_events
+ */
+class HomeFragment : BaseFragment() {
 
     override val di: DI by DI.lazy() {
         extend(super.di)
         import(homeModule)
     }
 
-    private val homeViewModel: HomeViewModel by instance()
+    private val viewModel: HomeViewModel by instance()
 
-    override val layoutResId: Int = R.layout.fragment_home
+    private lateinit var binding: FragmentHomeBinding
 
+    private lateinit var adapter: HomeAdapter
 
-    override fun initView(view: View) {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         if (!UserManager.isLoggedIn) {
-            startActivity(Intent(context, LoginActivity::class.java))
-            return
+            UserManager.INSTANCE = UserInfo.dxslin
+            UserManager.isLoggedIn = true
+
+//            startActivity(Intent(context, LoginActivity::class.java))
+//            return
+        }
+        binding.apply {
+            adapter = HomeAdapter()
+            rvEventsList.adapter = adapter
+
+            viewModel.pageListLiveData.observe(this@HomeFragment.viewLifecycleOwner, {
+                adapter.submitList(it)
+            })
         }
 
     }
 
+
     override fun onResume() {
         super.onResume()
-        homeViewModel.queryEvents(0)
+        viewModel.queryEvents(0)
     }
 
 }

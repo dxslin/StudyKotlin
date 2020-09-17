@@ -1,5 +1,6 @@
 package com.slin.core.image.impl
 
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.Target
@@ -15,14 +16,14 @@ import com.slin.core.image.ImageConfig
 data class ImageConfigImpl(
     override val url: String,
     override val imageView: ImageView,
-    override val placeholder: Int = 0,
+    override val placeholder: Drawable?,
     override val errorImage: Int = 0,
     override val width: Int = SIZE_ORIGINAL,
     override val height: Int = SIZE_ORIGINAL,
 
-    var cacheStrategy: Int = CACHE_STRATEGY_AUTOMATIC,
-    var imageRadius: Int = 0,           //图片圆角大小
-    var isCircle: Boolean = false,       //是否将图片且为圆形
+    val cacheStrategy: Int = CACHE_STRATEGY_AUTOMATIC,
+    val imageRadius: Int = 0,           //图片圆角大小
+    val isCircle: Boolean = false,       //是否将图片且为圆形
     val isCenterCrop: Boolean = false,   //是否由中心剪切图片
     val isCrossFade: Boolean = false,   //是否使用淡入淡出过渡动画
     val fallback: Int = 0,              //设置请求url为空时的图片

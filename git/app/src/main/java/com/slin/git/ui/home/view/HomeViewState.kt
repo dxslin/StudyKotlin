@@ -9,7 +9,7 @@ package com.slin.git.ui.home.view
  */
 data class HomeViewState(
     val isLoading: Boolean,
-    val throwable: Throwable?
+    val throwable: Throwable? = null
 ) {
     companion object {
         fun initial(): HomeViewState = HomeViewState(

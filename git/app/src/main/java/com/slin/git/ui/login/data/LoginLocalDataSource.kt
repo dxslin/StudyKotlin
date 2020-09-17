@@ -20,4 +20,8 @@ class LoginLocalDataSource(val gitUserInfoStorage: GitUserInfoStorage) : ILocalD
         gitUserInfoStorage.password = ""
     }
 
+    fun isAutoLogin(): Boolean {
+        return gitUserInfoStorage.isAutoLogin
+    }
+
 }

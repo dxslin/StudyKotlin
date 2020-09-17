@@ -20,7 +20,7 @@ import org.kodein.di.android.x.androidXModule
 open class CoreApplication : Application(), DIAware {
 
     companion object {
-        lateinit var instance: CoreApplication
+        lateinit var INSTANCE: CoreApplication
     }
 
     val appConfig by lazy {
@@ -50,7 +50,7 @@ open class CoreApplication : Application(), DIAware {
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
+        INSTANCE = this
         init()
     }
 

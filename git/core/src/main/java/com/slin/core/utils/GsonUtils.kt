@@ -15,7 +15,7 @@ import org.kodein.di.instance
  */
 object GsonUtils : DIAware {
 
-    override val di: DI = CoreApplication.instance.di
+    override val di: DI = CoreApplication.INSTANCE.di
 
     val INSTANCE: Gson by instance<Gson>()
 

@@ -1,9 +1,5 @@
 package com.slin.core.ui
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.kodein.di.DI
 import org.kodein.di.DIAware
@@ -19,36 +15,11 @@ import org.kodein.di.diContext
  *
  */
 
-abstract class CoreFragment : Fragment(), DIAware {
+open class CoreFragment : Fragment(), DIAware {
 
     override val di: DI by closestDI()
 
     override val diContext: DIContext<Fragment> = diContext { this }
-
-    protected lateinit var rootView: View
-
-    /**
-     * 布局文件id
-     */
-    protected abstract val layoutResId: Int
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        rootView = inflater.inflate(layoutResId, container, false)
-        return rootView
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initView(view)
-    }
-
-    protected open fun initView(view: View) {
-
-    }
 
 
 }

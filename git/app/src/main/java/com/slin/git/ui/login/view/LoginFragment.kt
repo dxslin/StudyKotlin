@@ -1,9 +1,12 @@
 package com.slin.git.ui.login.view
 
 import android.content.Intent
+import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -13,11 +16,12 @@ import com.slin.git.BuildConfig
 import com.slin.git.MainActivity
 import com.slin.git.R
 import com.slin.git.databinding.FragmentLoginBinding
-import kotlinx.android.synthetic.main.fragment_login.*
 import org.kodein.di.DI
 import org.kodein.di.instance
 
-
+/**
+ * 登录界面
+ */
 class LoginFragment : CoreFragment() {
 
     override val di: DI = DI.lazy {
@@ -25,95 +29,96 @@ class LoginFragment : CoreFragment() {
         import(loginModule)
     }
 
-    override val layoutResId: Int = R.layout.fragment_login
 
     private val loginViewModel: LoginViewModel by instance()
 
     private lateinit var binding: FragmentLoginBinding
 
-    override fun initView(view: View) {
-        super.initView(view)
-        binding = FragmentLoginBinding.bind(view).apply {
-            setLifecycleOwner { lifecycle }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.apply {
             viewModel = loginViewModel
             loginFormState = loginViewModel.loginFormState.value
-        }
 
-//        loginViewModel.loginFormState.observe(this,
-//            Observer { loginFormState ->
-//                if (loginFormState == null) {
-//                    return@Observer
-//                }
-//                btn_login.isEnabled = loginFormState.isDataValid
-//                til_username.error =
-//                    if (loginFormState.usernameError == null) {
-//                        ""
-//                    } else {
-//                        getString(loginFormState.usernameError)
-//                    }
-//                til_password.error =
-//                    if (loginFormState.passwordError == null) {
-//                        ""
-//                    } else {
-//                        getString(loginFormState.passwordError)
-//                    }
-//            })
+            loginViewModel.loginResult.observe(this@LoginFragment.viewLifecycleOwner,
+                Observer { loginResult ->
+                    loginResult ?: return@Observer
+                    pbLoading.visibility = View.GONE
+                    loginResult.error?.let {
+                        showLoginFailed(it)
+                    }
+                    loginResult.success?.let {
+                        updateUiWithUser(it)
+                    }
+                })
 
-        loginViewModel.loginResult.observe(this,
-            Observer { loginResult ->
-                loginResult ?: return@Observer
-                pb_loading.visibility = View.GONE
-                loginResult.error?.let {
-                    showLoginFailed(it)
+            val afterTextChangedListener = object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                    // ignore
                 }
-                loginResult.success?.let {
-                    updateUiWithUser(it)
+
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    // ignore
                 }
-            })
 
-        val afterTextChangedListener = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                // ignore
+                override fun afterTextChanged(s: Editable) {
+                    loginViewModel.loginDataChanged(
+                        etUsername.text.toString(),
+                        etPassword.text.toString()
+                    )
+                }
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                // ignore
+            etUsername.addTextChangedListener(afterTextChangedListener)
+            etPassword.addTextChangedListener(afterTextChangedListener)
+            etPassword.setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    loginViewModel.login(
+                        etUsername.text.toString(),
+                        etPassword.text.toString()
+                    )
+                }
+                false
             }
 
-            override fun afterTextChanged(s: Editable) {
-                loginViewModel.loginDataChanged(
-                    et_username.text.toString(),
-                    et_password.text.toString()
-                )
-            }
-        }
-        et_username.addTextChangedListener(afterTextChangedListener)
-        et_password.addTextChangedListener(afterTextChangedListener)
-        et_password.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
+            btnLogin.setOnClickListener {
+                pbLoading.visibility = View.VISIBLE
                 loginViewModel.login(
-                    et_username.text.toString(),
-                    et_password.text.toString()
+                    etUsername.text.toString(),
+                    etPassword.text.toString()
                 )
             }
-            false
-        }
 
-        btn_login.setOnClickListener {
-            pb_loading.visibility = View.VISIBLE
-            loginViewModel.login(
-                et_username.text.toString(),
-                et_password.text.toString()
-            )
+            initData()
         }
-
-        initData()
     }
+
 
     private fun initData() {
         if (BuildConfig.DEBUG) {
-            et_username.setText("dxslin")
-            et_password.setText("TTdxslin11")
+            binding.etUsername.setText("dxslin")
+            binding.etPassword.setText("TTdxslin11")
+        }
+        if (loginViewModel.isAutoLogin()) {
+            loginViewModel.login(
+                binding.etUsername.text.toString(),
+                binding.etPassword.text.toString()
+            )
         }
 
     }

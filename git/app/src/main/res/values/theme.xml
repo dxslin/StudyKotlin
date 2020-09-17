@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="textAppearanceHeadline1">@style/Text.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/Text.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/Text.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/Text.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/Text.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/Text.Headline6</item>
+        <item name="textAppearanceBody1">@style/Text.Body1</item>
+        <item name="textAppearanceBody2">@style/Text.Body2</item>
+        <item name="textAppearanceSubtitle1">@style/Text.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/Text.Subtitle2</item>
+        <item name="textAppearanceOverline">@style/Text.Overline</item>
+        <item name="textAppearanceCaption">@style/Text.Caption</item>
+        <item name="textAppearanceButton">@style/Text.Button</item>
+
+        <item name="android:statusBarColor">@color/immersive_sys_ui</item>
+        <item name="android:navigationBarColor">@color/immersive_sys_ui</item>
+
+    </style>
+
+    <style name="AppTheme" parent="BaseTheme" />
+
+    <style name="AppTheme.Yellow" parent="AppTheme">
+        <item name="colorPrimary">@color/yellow_500</item>
+        <item name="colorPrimaryVariant">@color/yellow_700</item>
+        <item name="colorSecondary">@color/blue_500</item>
+        <item name="colorSecondaryVariant">@color/blue_700</item>
+    </style>
+
+    <style name="AppTheme.Blue" parent="AppTheme">
+        <item name="colorPrimary">@color/blue_500</item>
+        <item name="colorPrimaryVariant">@color/blue_700</item>
+        <item name="colorSecondary">@color/yellow_500</item>
+        <item name="colorSecondaryVariant">@color/yellow_700</item>
+    </style>
+
+
+</resources>

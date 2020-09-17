@@ -1,5 +1,6 @@
 package com.slin.core.image
 
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 
 
@@ -12,7 +13,7 @@ import android.widget.ImageView
 interface ImageConfig {
     val url: String
     val imageView: ImageView
-    val placeholder: Int
+    val placeholder: Drawable?
     val errorImage: Int
     val width: Int
     val height: Int

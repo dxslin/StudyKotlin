@@ -1,5 +1,6 @@
 package com.slin.git.entity
 
+import androidx.recyclerview.widget.DiffUtil
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
 import com.slin.core.utils.fromJson
@@ -126,4 +127,15 @@ class ReceivedEventsPersistentConverter {
 
     @TypeConverter
     fun saveEnumToString(enumType: Type) = enumType.name
+}
+
+object receivedEventsDiff : DiffUtil.ItemCallback<ReceivedEvent>() {
+    override fun areItemsTheSame(oldItem: ReceivedEvent, newItem: ReceivedEvent): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: ReceivedEvent, newItem: ReceivedEvent): Boolean {
+        return oldItem == newItem
+    }
+
 }

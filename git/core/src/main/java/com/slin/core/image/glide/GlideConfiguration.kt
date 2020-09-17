@@ -14,10 +14,9 @@ import com.bumptech.glide.module.AppGlideModule
 import com.slin.core.CoreApplication
 import com.slin.core.config.AppConfig
 import com.slin.core.di.IMAGE_OK_HTTP_CLIENT_TAG
+import com.slin.core.ext.getAppConfig
 import com.slin.core.image.ApplyGlideOptions
 import okhttp3.OkHttpClient
-import org.kodein.di.DI
-import org.kodein.di.DIAware
 import org.kodein.di.instance
 import java.io.File
 import java.io.InputStream
@@ -28,15 +27,10 @@ import java.io.InputStream
  * description:
  */
 @GlideModule(glideName = "GlideGit")
-class GlideConfiguration : AppGlideModule(), DIAware {
-
-    override val di: DI by lazy {
-        CoreApplication.instance.di
-    }
-
+class GlideConfiguration : AppGlideModule() {
 
     override fun applyOptions(context: Context, builder: GlideBuilder) {
-        val appConfig: AppConfig by instance()
+        val appConfig: AppConfig = context.getAppConfig()
         builder.setDiskCache {
             DiskLruCacheWrapper.create(
                 File(appConfig.cacheFile, "Glide"),
@@ -66,7 +60,9 @@ class GlideConfiguration : AppGlideModule(), DIAware {
 
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         //使用OkHttp替换掉Glide原有的HttpURLConnection做网络请求
-        val okHttpClient: OkHttpClient by instance(IMAGE_OK_HTTP_CLIENT_TAG)
+        val okHttpClient: OkHttpClient by CoreApplication.INSTANCE.di.instance(
+            IMAGE_OK_HTTP_CLIENT_TAG
+        )
         registry.replace(
             GlideUrl::class.java,
             InputStream::class.java,

@@ -1,4 +1,4 @@
-package com.slin.git.stroage.remote
+package com.slin.git.api.remote
 
 import com.slin.git.entity.ReceivedEvent
 import com.slin.git.entity.Repo

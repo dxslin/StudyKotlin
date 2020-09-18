@@ -4,10 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import com.slin.core.logger.logd
 import com.slin.git.base.BaseFragment
 import com.slin.git.databinding.FragmentHomeBinding
 import com.slin.git.entity.UserInfo
 import com.slin.git.manager.UserManager
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.kodein.di.DI
 import org.kodein.di.instance
 
@@ -25,7 +29,7 @@ class HomeFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private lateinit var adapter: HomeAdapter
+    private lateinit var adapter: ReceivedEventAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,20 +50,20 @@ class HomeFragment : BaseFragment() {
 //            return
         }
         binding.apply {
-            adapter = HomeAdapter()
-            rvEventsList.adapter = adapter
+            adapter = ReceivedEventAdapter()
+            rvEventsList.adapter = adapter.withLoadStateFooter(FooterLoadStateAdapter(adapter))
 
-            viewModel.pageListLiveData.observe(this@HomeFragment.viewLifecycleOwner, {
-                adapter.submitList(it)
-            })
+            lifecycleScope.launch {
+                viewModel.receiveEventFlow.collectLatest {
+                    adapter.submitData(it)
+                }
+                adapter.addLoadStateListener { loadState ->
+                    logd { "onViewCreated: ${loadState}" }
+                }
+            }
         }
 
     }
 
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.queryEvents(0)
-    }
 
 }

@@ -1,4 +1,4 @@
-package com.slin.git.stroage.local
+package com.slin.git.api.local
 
 import android.content.SharedPreferences
 import com.slin.core.di.SingletonHolderSingleArg

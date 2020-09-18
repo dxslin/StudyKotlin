@@ -1,8 +1,8 @@
-package com.slin.git.stroage.remote
+package com.slin.git.api.remote
 
+import com.slin.git.api.bean.LoginRequestModel
 import com.slin.git.entity.UserAccessToken
 import com.slin.git.entity.UserInfo
-import com.slin.git.stroage.bean.LoginRequestModel
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

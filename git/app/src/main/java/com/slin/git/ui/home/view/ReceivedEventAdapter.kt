@@ -2,7 +2,7 @@ package com.slin.git.ui.home.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.slin.git.databinding.ItemHomeEventsBinding
 import com.slin.git.entity.ReceivedEvent
@@ -15,7 +15,8 @@ import com.slin.git.entity.receivedEventsDiff
  * description:
  *
  */
-class HomeAdapter : ListAdapter<ReceivedEvent, ReceiveEventViewHolder>(receivedEventsDiff) {
+class ReceivedEventAdapter :
+    PagingDataAdapter<ReceivedEvent, ReceiveEventViewHolder>(receivedEventsDiff) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReceiveEventViewHolder {
         return ReceiveEventViewHolder(
             ItemHomeEventsBinding.inflate(
@@ -36,7 +37,7 @@ class HomeAdapter : ListAdapter<ReceivedEvent, ReceiveEventViewHolder>(receivedE
 class ReceiveEventViewHolder(private val binding: ItemHomeEventsBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(receivedEvent: ReceivedEvent) {
+    fun bind(receivedEvent: ReceivedEvent?) {
         binding.apply {
             event = receivedEvent
             executePendingBindings()

@@ -11,6 +11,9 @@ object Versions {
 
     const val room_version = "2.2.5"
 
+    const val paging_version = "3.0.0-alpha05"  //3.0.0-alpha05
+
+
     const val kodein_version = "7.0.0"
 
     const val okhttp_version = "4.8.1"
@@ -49,7 +52,7 @@ object Dependencies {
     const val navigation_ui_ktx =
         "androidx.navigation:navigation-ui-ktx:${Versions.navigation_version}"
 
-    //lifecycle
+    //jetpack library
     const val lifecycle_extensions =
         "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle_version}"
     const val lifecycle_runtime =
@@ -58,7 +61,10 @@ object Dependencies {
     const val room = "androidx.room:room-runtime:${Versions.room_version}"
     const val room_compiler = "androidx.room:room-compiler:${Versions.room_version}"
     const val room_ktx = "androidx.room:room-ktx:${Versions.room_version}"
-    const val room_test = "androidx.room:room-testing:${Versions.room_version}"
+    const val room_test = "androidx.room:room-testing:${Versions.room_version}"     //test
+
+    const val paging_runtime = "androidx.paging:paging-runtime:${Versions.paging_version}"
+    const val paging_common = "androidx.paging:paging-common:${Versions.paging_version}"    //test
 
     //kodein 依赖注入
     const val kodein_jvm = "org.kodein.di:kodein-di-jvm:${Versions.kodein_version}"

@@ -1,7 +1,7 @@
 package com.slin.git.ui.login.data
 
 import com.slin.core.repository.ILocalDataSource
-import com.slin.git.stroage.local.GitUserInfoStorage
+import com.slin.git.api.local.GitUserInfoStorage
 
 /**
  * author: slin

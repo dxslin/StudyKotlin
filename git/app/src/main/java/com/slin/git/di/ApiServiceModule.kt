@@ -1,7 +1,7 @@
 package com.slin.git.di
 
-import com.slin.git.stroage.remote.LoginService
-import com.slin.git.stroage.remote.UserService
+import com.slin.git.api.remote.LoginService
+import com.slin.git.api.remote.UserService
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.instance

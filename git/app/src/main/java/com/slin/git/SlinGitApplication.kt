@@ -5,6 +5,7 @@ import com.slin.core.config.AppConfig
 import com.slin.git.config.Config
 import com.slin.git.config.configModule
 import com.slin.git.di.apiServiceModule
+import okhttp3.logging.HttpLoggingInterceptor
 import org.kodein.di.*
 
 
@@ -34,6 +35,7 @@ class SlinGitApplication : CoreApplication() {
         return directDIAware.run {
             super.createAppConfig(directDIAware).copy(
                 baseUrl = Config.BASE_URL,
+                httpLogLevel = HttpLoggingInterceptor.Level.BASIC,
                 customInterceptors = instance()
 
             )

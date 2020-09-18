@@ -2,10 +2,9 @@ package com.slin.git.net
 
 import android.util.Base64
 import com.slin.core.logger.log
-import com.slin.git.stroage.local.GitUserInfoStorage
+import com.slin.git.api.local.GitUserInfoStorage
 import okhttp3.Interceptor
 import okhttp3.Response
-import java.io.IOException
 
 
 /**
@@ -16,7 +15,7 @@ import java.io.IOException
  */
 class GitAuthInterceptor(private val userInfoStorage: GitUserInfoStorage) : Interceptor {
 
-    @Throws(IOException::class)
+    @Throws(Exception::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         log { "GitAuthInterceptor" }
         var request = chain.request()

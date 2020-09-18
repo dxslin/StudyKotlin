@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
@@ -33,7 +33,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
     }
     compileOptions {
@@ -61,6 +61,12 @@ dependencies {
     implementation Dependencies.navigation_ui_ktx
     implementation Dependencies.lifecycle_extensions
     implementation Dependencies.lifecycle_runtime
+    //room
+    implementation Dependencies.room
+    implementation Dependencies.room_ktx
+    kapt Dependencies.room_compiler
+    //paging
+    implementation Dependencies.paging_runtime
 
 
 //    test

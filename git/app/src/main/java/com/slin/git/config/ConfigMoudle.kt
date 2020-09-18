@@ -1,8 +1,8 @@
 package com.slin.git.config
 
 import com.slin.core.di.DEFAULT_SHARE_PREFERENCES_TAG
+import com.slin.git.api.local.GitUserInfoStorage
 import com.slin.git.net.GitAuthInterceptor
-import com.slin.git.stroage.local.GitUserInfoStorage
 import okhttp3.Interceptor
 import org.kodein.di.DI
 import org.kodein.di.bind

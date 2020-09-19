@@ -35,6 +35,8 @@ android {
     }
     buildFeatures {
         dataBinding = true
+        //如果使用dataBinding的话，只设置dataBinding的话不会自动生成对应的binding文件，需要编译才行，因此添加此设置
+        viewBinding = true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

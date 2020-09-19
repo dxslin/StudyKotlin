@@ -1,4 +1,4 @@
-package com.slin.git.ui.home.view
+package com.slin.git.ui.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -35,13 +35,13 @@ class FooterLoadStateAdapter(private val adapter: PagingDataAdapter<out Any, out
         private val binding: ItemFooterLoadStateBinding
     ) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(loadState: LoadState) {
             binding.apply {
                 this.loadState = loadState
                 tvLoadText.setOnClickListener {
                     adapter.retry()
                 }
+                executePendingBindings()
             }
         }
     }

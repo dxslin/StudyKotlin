@@ -1,6 +1,5 @@
 package com.slin.core.net
 
-import com.slin.core.repository.IRemoteDataSource
 import retrofit2.Response
 import java.io.IOException
 
@@ -9,9 +8,8 @@ import java.io.IOException
  * date: 2020-09-07
  * description: 网络接口访问，返回状态
  */
-inline fun <T> IRemoteDataSource.processApiResponse(request: () -> Response<T>): Results<T> {
+fun <T> processApiResponse(response: Response<T>): Results<T> {
     return try {
-        val response = request()
         val code = response.code()
         val msg = response.message()
         if (response.isSuccessful) {

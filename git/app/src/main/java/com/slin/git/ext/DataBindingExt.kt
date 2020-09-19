@@ -49,7 +49,7 @@ fun View.bindElevationOverlay(preElevation: Float, elevation: Float) {
 }
 
 
-@BindingAdapter("layoutFullscreen")
+@BindingAdapter("fullscreen")
 fun View.bindLayoutFullscreen(previousFullscreen: Boolean, fullscreen: Boolean) {
     if (previousFullscreen != fullscreen && fullscreen) {
         systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or

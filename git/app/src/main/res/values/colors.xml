@@ -6,8 +6,10 @@
 
     <color name="white">@android:color/white</color>
     <color name="black">@android:color/black</color>
+    <color name="transparent">@android:color/transparent</color>
 
     <color name="immersive_sys_ui">#33000000</color>
+    <color name="nav_bar">@color/transparent</color>
 
     <color name="yellow_200">#ffeb46</color>
     <color name="yellow_500">#ffde03</color>

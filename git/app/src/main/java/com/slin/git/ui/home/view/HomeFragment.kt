@@ -10,6 +10,7 @@ import com.slin.git.base.BaseFragment
 import com.slin.git.databinding.FragmentHomeBinding
 import com.slin.git.entity.UserInfo
 import com.slin.git.manager.UserManager
+import com.slin.git.ui.common.FooterLoadStateAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.kodein.di.DI
@@ -20,7 +21,7 @@ import org.kodein.di.instance
  */
 class HomeFragment : BaseFragment() {
 
-    override val di: DI by DI.lazy() {
+    override val di: DI by DI.lazy {
         extend(super.di)
         import(homeModule)
     }

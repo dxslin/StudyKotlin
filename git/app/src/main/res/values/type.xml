@@ -27,4 +27,10 @@
 
     <style name="Text.Button" parent="TextAppearance.MaterialComponents.Button" />
 
+    <style name="Widget.BottomNavigationView" parent="@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface">
+        <item name="labelVisibilityMode">selected</item>
+        <item name="itemIconTint">@color/bottom_nav_item</item>
+        <item name="itemTextColor">@color/bottom_nav_item</item>
+        <item name="itemTextAppearanceActive">@style/Text.Caption</item>
+    </style>
 </resources>

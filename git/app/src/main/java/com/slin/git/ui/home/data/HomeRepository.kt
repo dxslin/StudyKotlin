@@ -56,9 +56,11 @@ class HomeRemoteDataSource(private val userService: UserService) :
         pageIndex: Int,
         perPage: Int
     ): Results<List<ReceivedEvent>> {
-        val eventsResponse = userService.queryReceivedEvents(username, pageIndex, perPage)
-        return processApiResponse {
-            eventsResponse
+        try {
+            val eventsResponse = userService.queryReceivedEvents(username, pageIndex, perPage)
+            return processApiResponse(eventsResponse)
+        } catch (e: Exception) {
+            return Results.Failure(e)
         }
     }
 

@@ -14,14 +14,10 @@ class LoginRemoteDataSource(private val loginService: LoginService) : IRemoteDat
 
     suspend fun login(): Results<UserInfo> {
         val loginRequestModel = LoginRequestModel.generate()
-        val result = processApiResponse {
-            loginService.authorizations(loginRequestModel)
-        }
+        val result = processApiResponse(loginService.authorizations(loginRequestModel))
         return when (result) {
             is Results.Success -> {
-                processApiResponse {
-                    loginService.fetchUserOwner()
-                }
+                processApiResponse(loginService.fetchUserOwner())
             }
             is Results.Failure -> result
         }

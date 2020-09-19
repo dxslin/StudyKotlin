@@ -1,6 +1,9 @@
-package com.slin.core.ui
+package com.slin.git.base
 
-import com.slin.core.R
+import android.os.Bundle
+import com.slin.core.ui.CoreActivity
+import com.slin.core.ui.CoreFragment
+import com.slin.git.R
 
 /**
  * author: slin
@@ -9,20 +12,18 @@ import com.slin.core.R
  */
 abstract class SingleFragmentActivity : CoreActivity() {
 
-    override val layoutResId: Int = R.layout.activity_single_fragment
-
     /**
      * fragment
      */
     abstract val contentFragment: CoreFragment
 
-    override fun initView() {
-        super.initView()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_single_fragment)
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.fl_content, contentFragment)
             .commit()
-
     }
 
 

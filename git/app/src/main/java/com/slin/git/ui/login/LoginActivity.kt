@@ -1,8 +1,9 @@
 package com.slin.git.ui.login
 
+import android.os.Bundle
 import com.slin.core.ui.CoreFragment
-import com.slin.core.ui.SingleFragmentActivity
 import com.slin.git.R
+import com.slin.git.base.SingleFragmentActivity
 import com.slin.git.ui.login.view.LoginFragment
 
 class LoginActivity : SingleFragmentActivity() {
@@ -10,8 +11,8 @@ class LoginActivity : SingleFragmentActivity() {
 
     override val contentFragment: CoreFragment = LoginFragment()
 
-    override fun initView() {
-        super.initView()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         title = getString(R.string.title_login)
     }
 

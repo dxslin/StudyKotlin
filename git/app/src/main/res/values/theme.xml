@@ -17,9 +17,10 @@
         <item name="textAppearanceCaption">@style/Text.Caption</item>
         <item name="textAppearanceButton">@style/Text.Button</item>
 
+        <item name="android:navigationBarColor">@color/nav_bar</item>
         <item name="android:statusBarColor">@color/immersive_sys_ui</item>
-        <item name="android:navigationBarColor">@color/immersive_sys_ui</item>
 
+        <item name="bottomNavigationStyle">@style/Widget.BottomNavigationView</item>
     </style>
 
     <style name="AppTheme" parent="BaseTheme" />

@@ -36,8 +36,8 @@ class SlinGitApplication : CoreApplication() {
             super.createAppConfig(directDIAware).copy(
                 baseUrl = Config.BASE_URL,
                 httpLogLevel = HttpLoggingInterceptor.Level.BASIC,
-                customInterceptors = instance()
-
+                customInterceptors = instance(),
+                applyRetrofitOptions = instance()
             )
         }
     }

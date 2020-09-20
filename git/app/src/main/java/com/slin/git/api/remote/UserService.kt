@@ -1,8 +1,11 @@
 package com.slin.git.api.remote
 
+import androidx.lifecycle.LiveData
+import com.slin.core.net.Results
 import com.slin.git.entity.ReceivedEvent
 import com.slin.git.entity.Repo
 import retrofit2.Response
+import retrofit2.SkipCallbackExecutor
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -17,16 +20,16 @@ import retrofit2.http.Query
 
 interface UserService {
 
-
+    @SkipCallbackExecutor
     @GET("users/{username}/received_events?")
-    suspend fun queryReceivedEvents(
+    fun queryReceivedEvents(
         @Path("username") username: String,
         @Query("page") pageIndex: Int,
         @Query("per_page") perPage: Int
-    ): Response<List<ReceivedEvent>>
+    ): LiveData<Results<List<ReceivedEvent>>>
 
     @GET("users/{username}/repos?")
-    suspend fun queryRepos(
+    fun queryRepos(
         @Path("username") username: String,
         @Query("page") pageIndex: Int,
         @Query("per_page") perPage: Int,

@@ -12,13 +12,16 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/grid_0_5"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/grid_0_5"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/grid_0_5"
         android:foreground="?attr/selectableItemBackground"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/fragment_vertical_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        app:elevationOverlay="@{@dimen/card_elevation}"
-        android:paddingBottom="@dimen/fragment_vertical_margin">
+        android:paddingStart="@dimen/grid_2"
+        android:paddingTop="@dimen/grid_2"
+        android:paddingEnd="@dimen/grid_2"
+        android:paddingBottom="@dimen/grid_2"
+        app:elevationOverlay="@{@dimen/card_elevation}">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_action"
@@ -47,10 +50,12 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginTop="@dimen/grid_2"
-            app:placeholder="@{@drawable/ic_placeholder_24px}"
-            app:srcUrl="@{event.actor.avatarUrl}"
+            app:centerCrop="@{true}"
+            app:isCircle="@{true}"
             app:layout_constraintStart_toStartOf="@id/tv_action"
             app:layout_constraintTop_toBottomOf="@id/tv_action"
+            app:placeholder="@{@drawable/ic_placeholder_24px}"
+            app:srcUrl="@{event.actor.avatarUrl}"
             tools:srcCompat="@mipmap/ic_launcher_round" />
 
         <com.google.android.material.textview.MaterialTextView

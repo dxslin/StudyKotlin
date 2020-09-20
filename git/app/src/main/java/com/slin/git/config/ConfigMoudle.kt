@@ -1,13 +1,13 @@
 package com.slin.git.config
 
+import com.slin.core.config.ApplyRetrofitOptions
 import com.slin.core.di.DEFAULT_SHARE_PREFERENCES_TAG
 import com.slin.git.api.local.GitUserInfoStorage
 import com.slin.git.net.GitAuthInterceptor
+import com.slin.git.net.LiveDataCallAdapterFactory
 import okhttp3.Interceptor
-import org.kodein.di.DI
-import org.kodein.di.bind
-import org.kodein.di.instance
-import org.kodein.di.singleton
+import org.kodein.di.*
+import retrofit2.Retrofit
 
 
 /**
@@ -19,7 +19,7 @@ import org.kodein.di.singleton
 const val CONFIG_MODULE_TAG = "config_module_tag"
 
 val configModule = DI.Module(CONFIG_MODULE_TAG) {
-    bind<List<Interceptor>>() with singleton {
+    bind<List<Interceptor>>() with provider {
         listOf<Interceptor>(
             GitAuthInterceptor(instance())
         )
@@ -27,6 +27,19 @@ val configModule = DI.Module(CONFIG_MODULE_TAG) {
 
     bind<GitUserInfoStorage>() with singleton {
         GitUserInfoStorage.getInstance(instance(DEFAULT_SHARE_PREFERENCES_TAG))
+    }
+
+    //config retrofit return LiveData<Results>
+    bind<ApplyRetrofitOptions>() with provider {
+        object : ApplyRetrofitOptions {
+            override fun apply(builder: Retrofit.Builder) {
+                builder.addCallAdapterFactory(instance<LiveDataCallAdapterFactory>())
+            }
+        }
+    }
+
+    bind<LiveDataCallAdapterFactory>() with provider {
+        LiveDataCallAdapterFactory()
     }
 
 }

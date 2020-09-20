@@ -5,13 +5,13 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import com.slin.core.net.Results
-import com.slin.core.net.processApiResponse
 import com.slin.core.repository.CoreRepositoryRemote
 import com.slin.core.repository.IRemoteDataSource
 import com.slin.git.api.bean.PageWithArgs
 import com.slin.git.api.remote.UserService
 import com.slin.git.config.PAGING_REMOTE_PAGE_SIZE
 import com.slin.git.entity.ReceivedEvent
+import com.slin.git.ext.getOrAwaitValue
 import com.slin.git.manager.UserManager
 import kotlinx.coroutines.flow.Flow
 
@@ -56,12 +56,13 @@ class HomeRemoteDataSource(private val userService: UserService) :
         pageIndex: Int,
         perPage: Int
     ): Results<List<ReceivedEvent>> {
-        try {
-            val eventsResponse = userService.queryReceivedEvents(username, pageIndex, perPage)
-            return processApiResponse(eventsResponse)
-        } catch (e: Exception) {
-            return Results.Failure(e)
-        }
+//        try {
+//            val eventsResponse = userService.queryReceivedEvents(username, pageIndex, perPage)
+//            return processApiResponse(eventsResponse)
+//        } catch (e: Exception) {
+//            return Results.Failure(e)
+//        }
+        return userService.queryReceivedEvents(username, pageIndex, perPage).getOrAwaitValue()
     }
 
     override suspend fun load(params: LoadParams<PageWithArgs<String>>): LoadResult<PageWithArgs<String>, ReceivedEvent> {

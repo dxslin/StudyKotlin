@@ -25,24 +25,27 @@ const val HTTP_CLIENT_MODULE_TAG = "http_client_module_tag"
 val httpClientModule = DI.Module(HTTP_CLIENT_MODULE_TAG) {
 
     bind<Retrofit>() with singleton {
-        instance<Retrofit.Builder>()
+        val builder = instance<Retrofit.Builder>()
             .baseUrl(instance<AppConfig>().baseUrl)
             .client(instance())
-            .addConverterFactory(instance())
-            .build()
+            .addConverterFactory(instance<GsonConverterFactory>())
+        instance<AppConfig>().applyRetrofitOptions?.apply(builder)
+
+        builder.build()
     }
 
     bind<OkHttpClient>() with singleton {
-
+        val config = instance<AppConfig>()
         val okHttpClientBuilder = instance<OkHttpClient.Builder>()
             .connectTimeout(instance<AppConfig>().timeOutSeconds, TimeUnit.SECONDS)
             .readTimeout(instance<AppConfig>().timeOutSeconds, TimeUnit.SECONDS)
             .dispatcher(Dispatcher(instance<AppConfig>().executorService))
             .addInterceptor(instance<HttpLoggingInterceptor>())
-        val interceptors = instance<AppConfig>().customInterceptors
+        val interceptors = config.customInterceptors
         interceptors?.forEach {
             okHttpClientBuilder.addInterceptor(it)
         }
+        config.applyOkHttpOptions?.apply(okHttpClientBuilder)
 
         okHttpClientBuilder.build()
     }

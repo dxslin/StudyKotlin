@@ -18,6 +18,8 @@ sealed class Errors : Throwable() {
          * 输出数据为空
          */
         val EMPTY_RESULT_CODE = -101
+
+        val TIMEOUT_CODE = -101
     }
 
     /**

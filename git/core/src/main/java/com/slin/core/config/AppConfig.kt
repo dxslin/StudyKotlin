@@ -6,7 +6,9 @@ import com.slin.core.image.ApplyGlideOptions
 import com.slin.core.utils.ExecutorServiceHelper
 import com.slin.core.utils.FileUtils
 import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
 import java.io.File
 import java.util.concurrent.ExecutorService
 
@@ -38,6 +40,17 @@ data class AppConfig(
     val httpLogLevel: HttpLoggingInterceptor.Level = DefaultConfig.HTTP_LOG_LEVEL,
     val cacheFile: File = FileUtils.getCacheFile(coreApplication),
     val glideOptions: ApplyGlideOptions? = null,
-    val executorService: ExecutorService = ExecutorServiceHelper.newCacheExecutorService()
+    val executorService: ExecutorService = ExecutorServiceHelper.newCacheExecutorService(),
+    val applyRetrofitOptions: ApplyRetrofitOptions? = null,
+    val applyOkHttpOptions: ApplyOkHttpOptions? = null
 
 )
+
+
+interface ApplyRetrofitOptions {
+    fun apply(builder: Retrofit.Builder)
+}
+
+interface ApplyOkHttpOptions {
+    fun apply(builder: OkHttpClient.Builder)
+}

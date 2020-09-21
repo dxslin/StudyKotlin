@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.slin.core.net.Errors
 import com.slin.core.net.Results
+import com.slin.core.net.WaitTimeOutException
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.withTimeout
@@ -63,9 +64,8 @@ suspend fun <T> LiveData<Results<T>>.getOrAwaitValue(
             channel.receive()
         } catch (e: TimeoutCancellationException) {
             Results.create(
-                Errors.DataError(
-                    Errors.TIMEOUT_CODE,
-                    "LiveData value was never set in $time ${timeUnit.name} "
+                Errors.IOError(
+                    WaitTimeOutException("LiveData value was never set in $time ${timeUnit.name}")
                 )
             )
         }

@@ -1,5 +1,7 @@
 package com.slin.core.net
 
+import java.io.IOException
+
 /**
  * author: slin
  * date: 2020-09-07
@@ -19,7 +21,6 @@ sealed class Errors : Throwable() {
          */
         val EMPTY_RESULT_CODE = -101
 
-        val TIMEOUT_CODE = -101
     }
 
     /**
@@ -39,3 +40,13 @@ sealed class Errors : Throwable() {
 
 
 }
+
+/**
+ * 请求取消异常
+ */
+class CancelRequestException(msg: String) : IOException(msg)
+
+/**
+ * 等待超时异常
+ */
+class WaitTimeOutException(msg: String) : IOException(msg)

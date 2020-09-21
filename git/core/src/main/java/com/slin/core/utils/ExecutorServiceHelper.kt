@@ -1,6 +1,9 @@
 package com.slin.core.utils
 
-import java.util.concurrent.*
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import java.util.concurrent.ThreadFactory
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -17,18 +20,18 @@ object ExecutorServiceHelper {
     private const val KEEP_ALIVE_TIME: Long = 60L
     private val KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS
 
+    val IOExecutor = newCacheExecutorService()
 
     fun newFixExecutorService(): ExecutorService {
-        return ThreadPoolExecutor(
-            NUMBER_OF_CORES, MAX_NUMBER_OF_POOLS, KEEP_ALIVE_TIME, KEEP_ALIVE_TIME_UNIT,
-            LinkedBlockingDeque<Runnable>(), DefaultThreadFactory(THREAD_TAG, false)
+        return Executors.newFixedThreadPool(
+            NUMBER_OF_CORES,
+            DefaultThreadFactory(THREAD_TAG, false)
         )
     }
 
     fun newCacheExecutorService(): ExecutorService {
-        return ThreadPoolExecutor(
-            0, Int.MAX_VALUE, KEEP_ALIVE_TIME, KEEP_ALIVE_TIME_UNIT,
-            SynchronousQueue(), DefaultThreadFactory(THREAD_TAG, false)
+        return Executors.newCachedThreadPool(
+            DefaultThreadFactory(THREAD_TAG, false)
         )
     }
 

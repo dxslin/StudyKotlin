@@ -8,6 +8,20 @@ package com.slin.git.api.bean
  *
  */
 
-data class Page(var page: Int = 0)
+sealed class Page
 
-data class PageWithArgs<T>(val page: Int = 0, val args: T? = null)
+data class NoArgPage(val page: Int) : Page()
+
+data class OneArgPage<T>(val page: Int = 0, val args: T? = null) : Page() {
+
+    fun nextPage(): OneArgPage<T> {
+        return this.copy(page = page.inc())
+    }
+}
+
+data class TwoArgPage<T, R>(val page: Int, val arg1: T, val arg2: R) : Page() {
+
+    fun nextPage(): TwoArgPage<T, R> {
+        return this.copy(page = page.inc())
+    }
+}

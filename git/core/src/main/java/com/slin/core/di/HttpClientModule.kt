@@ -3,6 +3,8 @@ package com.slin.core.di
 import com.google.gson.Gson
 import com.slin.core.config.AppConfig
 import com.slin.core.logger.logd
+import com.slin.core.net.ResultsCallAdapterFactory
+import com.slin.core.net.RxResultsCallAdapterFactory
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -29,6 +31,8 @@ val httpClientModule = DI.Module(HTTP_CLIENT_MODULE_TAG) {
             .baseUrl(instance<AppConfig>().baseUrl)
             .client(instance())
             .addConverterFactory(instance<GsonConverterFactory>())
+            .addCallAdapterFactory(instance<RxResultsCallAdapterFactory>())
+            .addCallAdapterFactory(instance<ResultsCallAdapterFactory>())
         instance<AppConfig>().applyRetrofitOptions?.apply(builder)
 
         builder.build()
@@ -74,6 +78,14 @@ val httpClientModule = DI.Module(HTTP_CLIENT_MODULE_TAG) {
 
     bind<GsonConverterFactory>() with provider {
         GsonConverterFactory.create(instance())
+    }
+
+    bind<RxResultsCallAdapterFactory>() with provider {
+        RxResultsCallAdapterFactory()
+    }
+
+    bind<ResultsCallAdapterFactory>() with provider {
+        ResultsCallAdapterFactory()
     }
 
 }

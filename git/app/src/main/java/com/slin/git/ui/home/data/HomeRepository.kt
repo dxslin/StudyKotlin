@@ -7,7 +7,7 @@ import androidx.paging.PagingSource
 import com.slin.core.net.Results
 import com.slin.core.repository.CoreRepositoryRemote
 import com.slin.core.repository.IRemoteDataSource
-import com.slin.git.api.bean.PageWithArgs
+import com.slin.git.api.bean.OneArgPage
 import com.slin.git.api.remote.UserService
 import com.slin.git.config.PAGING_REMOTE_PAGE_SIZE
 import com.slin.git.entity.ReceivedEvent
@@ -29,9 +29,7 @@ class HomeRepository(remoteDataSource: HomeRemoteDataSource) :
         perPage: Int = PAGING_REMOTE_PAGE_SIZE
     ): Flow<PagingData<ReceivedEvent>> {
         val username = UserManager.INSTANCE.login
-        val pageWithArgs = PageWithArgs(0, username)
-
-        remoteDataSource.invalidate()
+        val pageWithArgs = OneArgPage(0, username)
 
         return Pager(
             PagingConfig(
@@ -49,23 +47,21 @@ class HomeRepository(remoteDataSource: HomeRemoteDataSource) :
 }
 
 class HomeRemoteDataSource(private val userService: UserService) :
-    PagingSource<PageWithArgs<String>, ReceivedEvent>(), IRemoteDataSource {
+    PagingSource<OneArgPage<String>, ReceivedEvent>(), IRemoteDataSource {
 
     private suspend fun queryReceivedEvents(
         username: String,
         pageIndex: Int,
         perPage: Int
     ): Results<List<ReceivedEvent>> {
-//        try {
-//            val eventsResponse = userService.queryReceivedEvents(username, pageIndex, perPage)
-//            return processApiResponse(eventsResponse)
-//        } catch (e: Exception) {
-//            return Results.Failure(e)
-//        }
+
+//        val results = userService.queryRepos(username, pageIndex, pageIndex, "")
+//        log{"queryReceivedEvents: ${results}"}
+
         return userService.queryReceivedEvents(username, pageIndex, perPage).getOrAwaitValue()
     }
 
-    override suspend fun load(params: LoadParams<PageWithArgs<String>>): LoadResult<PageWithArgs<String>, ReceivedEvent> {
+    override suspend fun load(params: LoadParams<OneArgPage<String>>): LoadResult<OneArgPage<String>, ReceivedEvent> {
         val results = queryReceivedEvents(
             params.key?.args.orEmpty(),
             params.key?.page ?: 0,
@@ -76,9 +72,7 @@ class HomeRemoteDataSource(private val userService: UserService) :
                 LoadResult.Page(
                     data = results.data,
                     prevKey = null,
-                    nextKey = if (results.data.isNullOrEmpty()) null else params.key?.copy(
-                        params.key?.page?.inc() ?: 0, params.key?.args
-                    )
+                    nextKey = if (results.data.isNullOrEmpty()) null else params.key?.nextPage()
                 )
             is Results.Failure -> {
                 LoadResult.Error(

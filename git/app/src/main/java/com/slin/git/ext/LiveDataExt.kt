@@ -2,7 +2,6 @@ package com.slin.git.ext
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.slin.core.net.Errors
 import com.slin.core.net.Results
 import com.slin.core.net.WaitTimeOutException
 import kotlinx.coroutines.TimeoutCancellationException
@@ -63,11 +62,7 @@ suspend fun <T> LiveData<Results<T>>.getOrAwaitValue(
         try {
             channel.receive()
         } catch (e: TimeoutCancellationException) {
-            Results.create(
-                Errors.IOError(
-                    WaitTimeOutException("LiveData value was never set in $time ${timeUnit.name}")
-                )
-            )
+            Results.create(WaitTimeOutException("LiveData value was never set in $time ${timeUnit.name}"))
         }
     }
 }

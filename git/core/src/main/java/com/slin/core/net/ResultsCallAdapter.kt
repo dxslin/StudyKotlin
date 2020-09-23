@@ -86,7 +86,7 @@ internal class ResultExecutorCall<R>(private val executor: ExecutorService, val 
                 if (delegate.isCanceled) {
                     callback.onResponse(
                         this@ResultExecutorCall,
-                        Response.success(Results.create(Errors.IOError(CancelRequestException("Request is canceled"))))
+                        Response.success(Results.create(CancelRequestException("Request is canceled")))
                     )
                 } else {
                     callback.onResponse(

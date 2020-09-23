@@ -13,7 +13,7 @@ sealed class Results<out T> {
     companion object {
 
         fun <T> create(t: Throwable): Results<T> {
-            return Failure(t)
+            return Failure(Errors.IOError(t))
         }
 
         fun <T> create(response: Response<T>): Results<T> {

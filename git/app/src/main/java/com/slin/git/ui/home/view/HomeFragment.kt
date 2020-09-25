@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import com.slin.core.logger.logd
+import com.slin.core.net.status.State
+import com.slin.core.net.status.StateViewSwitcher
 import com.slin.git.base.BaseFragment
 import com.slin.git.databinding.FragmentHomeBinding
 import com.slin.git.entity.UserInfo
@@ -32,6 +35,8 @@ class HomeFragment : BaseFragment() {
 
     private lateinit var adapter: ReceivedEventAdapter
 
+    private lateinit var stateViewSwitcher: StateViewSwitcher
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,16 +56,32 @@ class HomeFragment : BaseFragment() {
 //            return
         }
         binding.apply {
-            adapter = ReceivedEventAdapter()
-            rvEventsList.adapter = adapter.withLoadStateFooter(FooterLoadStateAdapter(adapter))
+            stateViewSwitcher = StateViewSwitcher(rvEventsList)
 
+            adapter = ReceivedEventAdapter()
+            val loadStateAdapter = FooterLoadStateAdapter(adapter)
+            rvEventsList.adapter = adapter.withLoadStateFooter(loadStateAdapter)
+            adapter.addLoadStateListener { loadState ->
+                logd { "onViewCreated: ${loadState}" }
+                when (loadState.source.refresh) {
+                    is LoadState.NotLoading ->
+                        if (adapter.itemCount == 0) {
+                            stateViewSwitcher.stateChange(State.NoData)
+                        } else {
+                            stateViewSwitcher.stateChange(State.LoadSuccess)
+                        }
+                    is LoadState.Loading ->
+                        stateViewSwitcher.stateChange(State.Loading)
+                    is LoadState.Error -> stateViewSwitcher.stateChange(
+                        State.LoadFail((loadState.source.refresh as LoadState.Error).error)
+                    )
+                }
+            }
             lifecycleScope.launch {
                 viewModel.receiveEventFlow.collectLatest {
                     adapter.submitData(it)
                 }
-                adapter.addLoadStateListener { loadState ->
-                    logd { "onViewCreated: ${loadState}" }
-                }
+
             }
         }
 

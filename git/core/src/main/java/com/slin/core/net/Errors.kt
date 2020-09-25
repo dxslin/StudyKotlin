@@ -36,7 +36,7 @@ sealed class Errors : Throwable() {
     /**
      * 没有网络连接错误
      */
-    object NoNetWorkError : Errors()
+    object NoNetworkError : Errors()
 
 
 }

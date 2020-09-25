@@ -6,6 +6,69 @@
     android:layout_height="match_parent"
     tools:context=".ui.notifications.NotificationsFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/fragment_horizontal_margin"
+        android:layout_marginBottom="@dimen/fragment_vertical_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_initial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Initial"
+            android:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Loading"
+            android:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_loadSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LoadSuccess"
+            android:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_loadFailNoData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LoadFailNoData"
+            android:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_loadFailError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LoadFailError"
+            android:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_loadFailNoNetwork"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LoadFailNoNetwork"
+            android:textAllCaps="false" />
+
+
+    </com.google.android.material.chip.ChipGroup>
+
+
     <TextView
         android:id="@+id/text_notifications"
         android:layout_width="match_parent"

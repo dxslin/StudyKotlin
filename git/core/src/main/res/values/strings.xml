@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="state_view_loading">正在加载…</string>
+    <string name="state_view_empty_data">没有请求到数据</string>
+    <string name="state_view_no_network">网络似乎出现了问题</string>
+    <string name="state_view_error">服务器开小差了</string>
+</resources>

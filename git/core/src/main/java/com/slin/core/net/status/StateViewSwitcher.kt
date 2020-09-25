@@ -51,6 +51,7 @@ class StateViewSwitcher(
         parent = contentViewParent
         contentViewParams = contentView.layoutParams
         contentViewIndex = parent.indexOfChild(contentView)
+        stateChange(State.Initial)
         curState = State.Initial
     }
 

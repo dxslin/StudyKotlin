@@ -61,6 +61,7 @@ class HomeFragment : BaseFragment() {
             adapter = ReceivedEventAdapter()
             val loadStateAdapter = FooterLoadStateAdapter(adapter)
             rvEventsList.adapter = adapter.withLoadStateFooter(loadStateAdapter)
+
             adapter.addLoadStateListener { loadState ->
                 logd { "onViewCreated: ${loadState}" }
                 when (loadState.source.refresh) {

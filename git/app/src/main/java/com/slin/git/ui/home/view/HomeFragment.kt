@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.slin.core.logger.logd
-import com.slin.core.net.status.State
-import com.slin.core.net.status.StateViewSwitcher
+import com.slin.core.net.status.SvsState
 import com.slin.git.base.BaseFragment
 import com.slin.git.databinding.FragmentHomeBinding
 import com.slin.git.entity.UserInfo
 import com.slin.git.manager.UserManager
 import com.slin.git.ui.common.FooterLoadStateAdapter
+import com.slin.sate_view_switcher.StateViewSwitcher
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.kodein.di.DI
@@ -56,7 +56,9 @@ class HomeFragment : BaseFragment() {
 //            return
         }
         binding.apply {
-            stateViewSwitcher = StateViewSwitcher(rvEventsList)
+            stateViewSwitcher = StateViewSwitcher(rvEventsList) {
+                adapter.retry()
+            }
 
             adapter = ReceivedEventAdapter()
             val loadStateAdapter = FooterLoadStateAdapter(adapter)
@@ -66,15 +68,11 @@ class HomeFragment : BaseFragment() {
                 logd { "onViewCreated: ${loadState}" }
                 when (loadState.source.refresh) {
                     is LoadState.NotLoading ->
-                        if (adapter.itemCount == 0) {
-                            stateViewSwitcher.stateChange(State.NoData)
-                        } else {
-                            stateViewSwitcher.stateChange(State.LoadSuccess)
-                        }
+                        stateViewSwitcher.stateChange(SvsState.LoadSuccess(adapter.itemCount > 0))
                     is LoadState.Loading ->
-                        stateViewSwitcher.stateChange(State.Loading)
+                        stateViewSwitcher.stateChange(SvsState.Loading(adapter.itemCount > 0))
                     is LoadState.Error -> stateViewSwitcher.stateChange(
-                        State.LoadFail((loadState.source.refresh as LoadState.Error).error)
+                        SvsState.LoadFail((loadState.source.refresh as LoadState.Error).error)
                     )
                 }
             }

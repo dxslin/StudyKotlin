@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.slin.core.net.Errors
-import com.slin.core.net.status.State
-import com.slin.core.net.status.StateViewSwitcher
+import com.slin.core.net.status.SvsState
 import com.slin.git.base.BaseFragment
 import com.slin.git.databinding.FragmentNotificationsBinding
+import com.slin.sate_view_switcher.StateViewSwitcher
 import java.io.IOException
 
 class NotificationsFragment : BaseFragment() {
@@ -38,20 +38,32 @@ class NotificationsFragment : BaseFragment() {
 
             stateViewSwitcher = StateViewSwitcher(recyclerView)
 
-            btnInitial.setOnClickListener { stateViewSwitcher.stateChange(State.Initial) }
-            btnLoading.setOnClickListener { stateViewSwitcher.stateChange(State.Loading) }
-            btnLoadSuccess.setOnClickListener { stateViewSwitcher.stateChange(State.LoadSuccess) }
-            btnLoadFailNoData.setOnClickListener { stateViewSwitcher.stateChange(State.NoData) }
+            btnInitial.setOnClickListener { stateViewSwitcher.stateChange(SvsState.Initial) }
+            btnLoading.setOnClickListener { stateViewSwitcher.stateChange(SvsState.Loading(false)) }
+            btnLoadSuccess.setOnClickListener {
+                stateViewSwitcher.stateChange(
+                    SvsState.LoadSuccess(
+                        true
+                    )
+                )
+            }
+            btnLoadFailNoData.setOnClickListener {
+                stateViewSwitcher.stateChange(
+                    SvsState.LoadSuccess(
+                        false
+                    )
+                )
+            }
             btnLoadFailNoNetwork.setOnClickListener {
                 stateViewSwitcher.stateChange(
-                    State.LoadFail(
+                    SvsState.LoadFail(
                         Errors.NoNetworkError
                     )
                 )
             }
             btnLoadFailError.setOnClickListener {
                 stateViewSwitcher.stateChange(
-                    State.LoadFail(
+                    SvsState.LoadFail(
                         Errors.IOError(IOException("IOError"))
                     )
                 )

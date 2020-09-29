@@ -1,3 +1,5 @@
+include ':LibKt:SateViewSwitcher'
+include ':LibKt'
 include ':git:app'
 rootProject.name="StudyKotlin"
 include ':git:core'

@@ -5,6 +5,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
+    resourcePrefix "core"
 
     defaultConfig {
         minSdkVersion 17
@@ -33,6 +34,7 @@ android {
 
 dependencies {
     api fileTree(dir: "libs", include: ["*.jar"])
+    api project(path: ':LibKt:SateViewSwitcher')
 
     api Dependencies.kotlin_stdlib
     api Dependencies.kotlin_coroutines

@@ -15,10 +15,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        Properties properties = new Properties()
-        properties.load(rootProject.file("local.properties").newDataInputStream())
-        buildConfigField "String", "CLIENT_ID", properties.getProperty("CLIENT_ID")
-        buildConfigField "String", "CLIENT_SECRET", properties.getProperty("CLIENT_SECRET")
+        GitProperties properties = new GitProperties(rootProject, "public.properties", "local.properties")
+        buildConfigField "String", "CLIENT_ID", properties.getValue("CLIENT_ID")
+        buildConfigField "String", "CLIENT_SECRET", properties.getValue("CLIENT_SECRET")
     }
 
     buildTypes {
@@ -77,4 +76,25 @@ dependencies {
     androidTestImplementation Dependencies.espresso_core
 
 
+}
+
+
+class GitProperties {
+    private Properties publicProperties
+    private Properties localProperties
+
+    GitProperties(Project project, String publicFile, String localFile) {
+        publicProperties = new Properties()
+        publicProperties.load(project.file(publicFile).newDataInputStream())
+        localProperties = new Properties()
+        localProperties.load(project.file(localFile).newDataInputStream())
+    }
+
+    static String or(String self, String another) {
+        return self == null || self.isEmpty() ? another : self
+    }
+
+    String getValue(String key) {
+        return or(publicProperties.getProperty(key), localProperties.getProperty(key))
+    }
 }

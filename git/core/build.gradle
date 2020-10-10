@@ -35,7 +35,7 @@ android {
 dependencies {
     api fileTree(dir: "libs", include: ["*.jar"])
     api project(path: ':LibKt:SateViewSwitcher')
-
+//    api 'com.github.dxslin.StudyKotlin:SateViewSwitcher:1.0'
     api Dependencies.kotlin_stdlib
     api Dependencies.kotlin_coroutines
 

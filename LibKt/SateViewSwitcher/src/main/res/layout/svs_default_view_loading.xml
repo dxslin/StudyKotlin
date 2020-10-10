@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ProgressBar
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
-        android:orientation="vertical">
+        android:layout_marginTop="24dp"
+        android:gravity="center" />
 
-        <ProgressBar
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="24dp" />
-
-        <TextView
-            style="?attr/titleTextColor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="24dp"
-            android:text="@string/svs_loading" />
-    </LinearLayout>
-</FrameLayout>
+    <TextView
+        style="?attr/titleTextColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/svs_loading" />
+</LinearLayout>

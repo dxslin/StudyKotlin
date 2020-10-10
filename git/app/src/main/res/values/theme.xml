@@ -21,6 +21,7 @@
         <item name="android:statusBarColor">@color/immersive_sys_ui</item>
 
         <item name="bottomNavigationStyle">@style/Widget.BottomNavigationView</item>
+        <item name="elevationOverlayEnabled">true</item>
     </style>
 
     <style name="AppTheme" parent="BaseTheme" />
@@ -28,8 +29,8 @@
     <style name="AppTheme.Yellow" parent="AppTheme">
         <item name="colorPrimary">@color/yellow_500</item>
         <item name="colorPrimaryVariant">@color/yellow_700</item>
-        <item name="colorSecondary">@color/blue_500</item>
-        <item name="colorSecondaryVariant">@color/blue_700</item>
+        <item name="colorSecondary">@color/pink_500</item>
+        <item name="colorSecondaryVariant">@color/pink_700</item>
     </style>
 
     <style name="AppTheme.Blue" parent="AppTheme">

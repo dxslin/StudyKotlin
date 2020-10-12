@@ -1,6 +1,5 @@
 package com.slin.core.image.impl
 
-import android.content.Context
 import android.graphics.drawable.Drawable
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.RequestManager
@@ -21,13 +20,17 @@ import kotlinx.coroutines.launch
  */
 class GlideImageLoaderStrategy : ImageLoaderStrategy<ImageConfigImpl> {
 
-    override fun loadImage(context: Context, config: ImageConfigImpl) {
+    override fun loadImage(config: ImageConfigImpl) {
+        checkNotNull(config.imageView) { "imageView cannot be null" }
+        val context = config.imageView.context
         val requests: RequestManager = GlideGit.with(context)
         // url
         var glideRequest: RequestBuilder<Drawable?> = requests.load(config.url)
         // size
-        glideRequest = glideRequest.override(config.width, config.height)
-        when (config.cacheStrategy) {
+        if (config.width > 0 && config.height > 0) {
+            glideRequest = glideRequest.override(config.width, config.height)
+        }
+        glideRequest = when (config.cacheStrategy) {
             ImageConfigImpl.CACHE_STRATEGY_ALL -> glideRequest.diskCacheStrategy(
                 DiskCacheStrategy.ALL
             )
@@ -42,23 +45,27 @@ class GlideImageLoaderStrategy : ImageLoaderStrategy<ImageConfigImpl> {
             else -> glideRequest.diskCacheStrategy(DiskCacheStrategy.ALL)
         }
         if (config.isCenterCrop) //是否由中心剪切图片
-            glideRequest.centerCrop()
+            glideRequest = glideRequest.centerCrop()
         if (config.isCircle) //是否将图片且为圆形
-            glideRequest.circleCrop()
+            glideRequest = glideRequest.circleCrop()
         if (config.isCrossFade) //是否使用淡入淡出过渡动画
-            glideRequest.transition(DrawableTransitionOptions.withCrossFade())
+            glideRequest = glideRequest.transition(DrawableTransitionOptions.withCrossFade())
         if (config.imageRadius > 0) //图片圆角大小
-            glideRequest.transform(RoundedCorners(config.imageRadius))
+            glideRequest = glideRequest.transform(RoundedCorners(config.imageRadius))
         if (config.placeholder != null) //设置占位符
-            glideRequest.placeholder(config.placeholder)
-        if (config.errorImage != 0) //设置错误的图片
-            glideRequest.error(config.errorImage)
+            glideRequest = glideRequest.placeholder(config.placeholder)
+        if (config.errorImage != null) //设置错误的图片
+            glideRequest = glideRequest.error(config.errorImage)
         if (config.fallback != 0) //设置请求url为空时的图片
-            glideRequest.fallback(config.fallback)
+            glideRequest = glideRequest.fallback(config.fallback)
+        config.transformations.forEach { trans ->
+            glideRequest = glideRequest.transform(trans)
+        }
         glideRequest.into(config.imageView)
     }
 
-    override fun clear(context: Context, config: ImageConfigImpl) {
+    override fun clear(config: ImageConfigImpl) {
+        val context = config.imageView.context
         GlideGit.get(context).requestManagerRetriever.get(context).clear(config.imageView)
         if (config.isClearMemory) {         //清除内存缓存
             GlobalScope.launch(Dispatchers.Main) {

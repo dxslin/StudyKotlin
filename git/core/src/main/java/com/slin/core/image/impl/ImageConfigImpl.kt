@@ -1,9 +1,13 @@
 package com.slin.core.image.impl
 
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import com.bumptech.glide.load.Transformation
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.Target
+import com.slin.core.R
 import com.slin.core.image.ImageConfig
 
 
@@ -14,10 +18,13 @@ import com.slin.core.image.ImageConfig
  *
  */
 data class ImageConfigImpl(
-    override val url: String,
     override val imageView: ImageView,
-    override val placeholder: Drawable?,
-    override val errorImage: Int = 0,
+    override val url: String,
+    override val placeholder: Drawable? = ContextCompat.getDrawable(
+        imageView.context,
+        R.drawable.ic_image_loader_placeholder
+    ),
+    override val errorImage: Drawable? = null,
     override val width: Int = SIZE_ORIGINAL,
     override val height: Int = SIZE_ORIGINAL,
 
@@ -30,7 +37,7 @@ data class ImageConfigImpl(
 
     val isClearMemory: Boolean = false,   //清理内存缓存
     val isClearDiskCache: Boolean = false,   //清理本地缓存
-
+    val transformations: List<Transformation<Bitmap>> = listOf()
 ) : ImageConfig {
 
     companion object {

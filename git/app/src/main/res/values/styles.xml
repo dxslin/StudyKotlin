@@ -1,4 +1,8 @@
 <resources>
 
+    <style name="ThemeOverlay.SGit.TransitionShapeAppearance.Small" parent="">
+        <item name="transitionShapeAppearance">@style/ShapeAppearance.SGit.SmallComponent</item>
+    </style>
+
 
 </resources>

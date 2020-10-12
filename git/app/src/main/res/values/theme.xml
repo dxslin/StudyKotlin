@@ -24,16 +24,16 @@
         <item name="elevationOverlayEnabled">true</item>
     </style>
 
-    <style name="AppTheme" parent="BaseTheme" />
+    <style name="SGit" parent="BaseTheme" />
 
-    <style name="AppTheme.Yellow" parent="AppTheme">
+    <style name="SGit.Yellow" parent="SGit">
         <item name="colorPrimary">@color/yellow_500</item>
         <item name="colorPrimaryVariant">@color/yellow_700</item>
         <item name="colorSecondary">@color/pink_500</item>
         <item name="colorSecondaryVariant">@color/pink_700</item>
     </style>
 
-    <style name="AppTheme.Blue" parent="AppTheme">
+    <style name="SGit.Blue" parent="SGit">
         <item name="colorPrimary">@color/blue_500</item>
         <item name="colorPrimaryVariant">@color/blue_700</item>
         <item name="colorSecondary">@color/yellow_500</item>

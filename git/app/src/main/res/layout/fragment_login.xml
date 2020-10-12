@@ -110,7 +110,7 @@
             android:enabled="@{viewModel.loginFormState.dataValid}"
             android:text="@string/action_sign_in"
             android:textAllCaps="false"
-            android:theme="@style/AppTheme.Blue"
+            android:theme="@style/SGit.Blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

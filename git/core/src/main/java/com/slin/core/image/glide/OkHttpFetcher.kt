@@ -58,14 +58,14 @@ class OkHttpFetcher(private val client: OkHttpClient, private val url: GlideUrl)
 
     override fun cleanup() {
         try {
-            if (stream != null) {
-                stream?.close()
+            stream?.apply {
+                close()
             }
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        if (responseBody != null) {
-            responseBody?.close()
+        responseBody?.apply {
+            close()
         }
         callback = null
     }

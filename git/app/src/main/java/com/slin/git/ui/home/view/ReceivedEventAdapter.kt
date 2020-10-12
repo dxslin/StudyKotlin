@@ -2,11 +2,17 @@ package com.slin.git.ui.home.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.slin.core.image.impl.ImageConfigImpl
+import com.slin.git.R
 import com.slin.git.databinding.ItemHomeEventsBinding
 import com.slin.git.entity.ReceivedEvent
+import com.slin.git.entity.Type
 import com.slin.git.entity.receivedEventsDiff
+import com.slin.git.utils.ImageLoaderUtils
+import com.slin.git.utils.ShapeAppearanceTransformation
 
 
 /**
@@ -33,6 +39,9 @@ class ReceivedEventAdapter :
 
 }
 
+private val shapeTransformations = listOf(
+    ShapeAppearanceTransformation(R.style.ShapeAppearance_SGit_SmallComponent)
+)
 
 class ReceiveEventViewHolder(private val binding: ItemHomeEventsBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -40,7 +49,38 @@ class ReceiveEventViewHolder(private val binding: ItemHomeEventsBinding) :
     fun bind(receivedEvent: ReceivedEvent?) {
         binding.apply {
             event = receivedEvent
+            event?.let {
+                showItem(it)
+            }
             executePendingBindings()
+        }
+    }
+
+    private fun showItem(event: ReceivedEvent) {
+        binding.apply {
+            ImageLoaderUtils.loadImage {
+                ImageConfigImpl(
+                    ivAvatar,
+                    event.actor.avatarUrl,
+                    ContextCompat.getDrawable(
+                        root.context,
+                        R.drawable.stroked_course_image_placeholder
+                    ),
+                    transformations = shapeTransformations
+                )
+            }
+//            GlideGit.with(ivAvatar)
+//                .load(event.actor.avatarUrl)
+//                .placeholder(R.drawable.stroked_course_image_placeholder)
+//                .transform(shapeTransformations[0])
+//                .into(ivAvatar)
+            tvAction.text = when (event.type) {
+                Type.WatchEvent -> "starred"
+                Type.CreateEvent -> "created"
+                Type.ForkEvent -> "forked"
+                Type.PushEvent -> "pushed"
+                else -> event.type.name
+            }
         }
     }
 

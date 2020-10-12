@@ -11,10 +11,10 @@ import android.widget.ImageView
  *
  */
 interface ImageConfig {
-    val url: String
     val imageView: ImageView
+    val url: String
     val placeholder: Drawable?
-    val errorImage: Int
+    val errorImage: Drawable?
     val width: Int
     val height: Int
 }

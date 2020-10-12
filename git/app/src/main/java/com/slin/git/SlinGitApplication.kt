@@ -2,10 +2,10 @@ package com.slin.git
 
 import com.slin.core.CoreApplication
 import com.slin.core.config.AppConfig
+import com.slin.core.config.DefaultConfig
 import com.slin.git.config.Config
 import com.slin.git.config.configModule
 import com.slin.git.di.apiServiceModule
-import okhttp3.logging.HttpLoggingInterceptor
 import org.kodein.di.*
 
 
@@ -17,6 +17,9 @@ import org.kodein.di.*
  */
 class SlinGitApplication : CoreApplication() {
 
+    companion object {
+        lateinit var INSTANCE: CoreApplication
+    }
 
     override val di: DI = subDI(super.di) {
         bind<SlinGitApplication>() with singleton {
@@ -29,13 +32,14 @@ class SlinGitApplication : CoreApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        INSTANCE = this
     }
 
     override fun createAppConfig(directDIAware: DirectDIAware): AppConfig {
         return directDIAware.run {
             super.createAppConfig(directDIAware).copy(
                 baseUrl = Config.BASE_URL,
-                httpLogLevel = HttpLoggingInterceptor.Level.BASIC,
+                httpLogLevel = DefaultConfig.HTTP_LOG_LEVEL,
                 customInterceptors = instance(),
                 applyRetrofitOptions = instance()
             )

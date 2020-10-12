@@ -1,8 +1,11 @@
 package com.slin.core.image
 
-import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import com.bumptech.glide.load.Transformation
+import com.slin.core.R
 import com.slin.core.image.impl.ImageConfigImpl
 
 
@@ -19,7 +22,7 @@ import com.slin.core.image.impl.ImageConfigImpl
  *          height = 300
  *          )
  *
- *          imageLoader.loadImage(requireContext(), imageConfig)
+ *          imageLoader.loadImage(imageConfig)
  *  </code>
  */
 class ImageLoader(private val loaderStrategy: ImageLoaderStrategy<ImageConfigImpl>) :
@@ -28,15 +31,18 @@ class ImageLoader(private val loaderStrategy: ImageLoaderStrategy<ImageConfigImp
 
 }
 
-fun ImageLoader.load(context: Context, config: () -> ImageConfigImpl) {
-    loadImage(context, config())
+inline fun ImageLoader.load(config: () -> ImageConfigImpl) {
+    loadImage(config())
 }
 
 fun ImageLoader.load(
     imageView: ImageView,
     url: String,
-    placeholder: Drawable? = null,
-    errorImage: Int = 0,
+    placeholder: Drawable? = ContextCompat.getDrawable(
+        imageView.context,
+        R.drawable.ic_image_loader_placeholder
+    ),
+    errorImage: Drawable? = null,
     width: Int = ImageConfigImpl.SIZE_ORIGINAL,
     height: Int = ImageConfigImpl.SIZE_ORIGINAL,
 
@@ -49,11 +55,12 @@ fun ImageLoader.load(
 
     isClearMemory: Boolean = false,   //清理内存缓存
     isClearDiskCache: Boolean = false,   //清理本地缓存)
+    transformations: List<Transformation<Bitmap>> = listOf()
 ) {
     loadImage(
-        imageView.context, ImageConfigImpl(
-            url,
+        ImageConfigImpl(
             imageView,
+            url,
             placeholder,
             errorImage,
             width,
@@ -65,7 +72,8 @@ fun ImageLoader.load(
             isCrossFade,
             fallback,
             isClearMemory,
-            isClearDiskCache
+            isClearDiskCache,
+            transformations
         )
     )
 }

@@ -1,7 +1,5 @@
 package com.slin.core.image
 
-import android.content.Context
-
 
 /**
  * author: slin
@@ -11,8 +9,8 @@ import android.content.Context
  */
 interface ImageLoaderStrategy<T : ImageConfig> {
 
-    fun loadImage(context: Context, config: T)
+    fun loadImage(config: T)
 
-    fun clear(context: Context, config: T)
+    fun clear(config: T)
 
 }

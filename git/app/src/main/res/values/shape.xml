@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="small_corner_size">24dp</dimen>
+
+    <style name="ShapeAppearance.SGit.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">0px</item>
+        <item name="cornerSizeTopLeft">@dimen/small_corner_size</item>
+    </style>
+
+
+</resources>

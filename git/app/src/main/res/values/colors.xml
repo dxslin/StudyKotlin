@@ -27,4 +27,6 @@
     <color name="pink_500">#e91e63</color>
     <color name="pink_700">#b0003a</color>
 
+    <color name="alpha_blue">#BF00B0FF</color>
+
 </resources>

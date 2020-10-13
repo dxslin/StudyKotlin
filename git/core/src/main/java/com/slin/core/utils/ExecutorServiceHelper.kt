@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 /**
  * author: slin
  * date: 2020/9/14
- * description:
+ * description: 线程池
  *
  */
 object ExecutorServiceHelper {
@@ -20,7 +20,7 @@ object ExecutorServiceHelper {
     private const val KEEP_ALIVE_TIME: Long = 60L
     private val KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS
 
-    val IOExecutor = newCacheExecutorService()
+    val IOExecutor = newFixExecutorService()
 
     fun newFixExecutorService(): ExecutorService {
         return Executors.newFixedThreadPool(

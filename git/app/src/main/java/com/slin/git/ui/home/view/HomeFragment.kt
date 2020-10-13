@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.slin.core.logger.logd
 import com.slin.core.net.status.SvsState
+import com.slin.git.R
 import com.slin.git.base.BaseFragment
 import com.slin.git.databinding.FragmentHomeBinding
 import com.slin.git.entity.UserInfo
@@ -86,5 +90,8 @@ class HomeFragment : BaseFragment() {
 
     }
 
+    fun startSearchFragment(view: View){
+        findNavController().navigate(R.id.action_home_to_search)
+    }
 
 }

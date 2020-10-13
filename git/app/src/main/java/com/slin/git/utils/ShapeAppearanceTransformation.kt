@@ -23,6 +23,7 @@ import android.graphics.Shader.TileMode.CLAMP
 import androidx.annotation.StyleRes
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.Transformation
 import com.bumptech.glide.load.engine.Resource
 import com.bumptech.glide.load.resource.bitmap.BitmapResource
@@ -65,7 +66,7 @@ class ShapeAppearanceTransformation(
                 }
                 drawPath(path, paint)
             }
-            return BitmapResource(bitmap, GlideGit.get(context).bitmapPool)
+            return BitmapResource(bitmap, Glide.get(context).bitmapPool)
         } else {
             return resource
         }

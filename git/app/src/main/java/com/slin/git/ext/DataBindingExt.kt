@@ -40,7 +40,7 @@ fun ImageView.bindSrcUrl(
 
 }
 
-@BindingAdapter("elevationOverlay")
+@BindingAdapter("elevationOverlay", requireAll = true)
 fun View.bindElevationOverlay(preElevation: Float, elevation: Float) {
     if (preElevation == elevation) return
     val color = ElevationOverlayProvider(context)

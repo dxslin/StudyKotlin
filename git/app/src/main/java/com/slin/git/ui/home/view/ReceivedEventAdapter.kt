@@ -69,11 +69,6 @@ class ReceiveEventViewHolder(private val binding: ItemHomeEventsBinding) :
                     transformations = shapeTransformations
                 )
             }
-//            GlideGit.with(ivAvatar)
-//                .load(event.actor.avatarUrl)
-//                .placeholder(R.drawable.stroked_course_image_placeholder)
-//                .transform(shapeTransformations[0])
-//                .into(ivAvatar)
             tvAction.text = when (event.type) {
                 Type.WatchEvent -> "starred"
                 Type.CreateEvent -> "created"

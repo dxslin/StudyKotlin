@@ -21,7 +21,10 @@
         <item name="android:statusBarColor">@color/immersive_sys_ui</item>
 
         <item name="bottomNavigationStyle">@style/Widget.BottomNavigationView</item>
+
         <item name="elevationOverlayEnabled">true</item>
+        <item name="elevationOverlayColor">?attr/colorSurface</item>
+        <item name="colorSurface">@color/alpha_blue</item>
     </style>
 
     <style name="SGit" parent="BaseTheme" />

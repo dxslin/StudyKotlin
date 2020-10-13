@@ -6,7 +6,7 @@ import androidx.paging.cachedIn
 import com.slin.git.entity.ReceivedEvent
 import com.slin.git.ui.home.data.HomeRepository
 
-class HomeViewModel(private val homeRepository: HomeRepository) : ViewModel() {
+class HomeViewModel(homeRepository: HomeRepository) : ViewModel() {
 
     private val TAG: String? = HomeViewModel::class.simpleName
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:height="@dimen/search_input_layout_height" android:width="96dp" />
+    <corners android:radius="@dimen/search_input_layout_radius" />
+    <solid android:color="?attr/colorAccent" />
+</shape>

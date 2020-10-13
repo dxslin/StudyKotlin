@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorPrimarySurface"
+        app:paddingTopSystemWindowInsets="@{true}"
+        tools:context=".ui.search.SearchFragment">
+
+        <ImageView
+            android:id="@+id/iv_search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_oval_color_accent"
+            android:layout_marginStart="@dimen/fragment_horizontal_margin"
+            android:src="@drawable/ic_baseline_search_24"
+            app:layout_constraintBottom_toBottomOf="@id/et_search_input"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/et_search_input"
+            android:transitionName="@string/search"
+            android:contentDescription="@string/search" />
+
+        <EditText
+            android:id="@+id/et_search_input"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/fragment_vertical_margin"
+            android:layout_marginStart="@dimen/grid_2"
+            android:layout_marginEnd="@dimen/fragment_horizontal_margin"
+            android:background="@null"
+            android:hint="@string/search_input_hint"
+            android:imeOptions="actionSearch"
+            android:inputType="textCapWords"
+            android:singleLine="true"
+            android:lines="1"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            android:autofillHints="@string/search_input_hint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_search_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search_history"
+            android:layout_marginTop="@dimen/grid_2"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
+            tools:listitem="@layout/item_search_history"
+            app:layout_constraintTop_toBottomOf="@id/et_search_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

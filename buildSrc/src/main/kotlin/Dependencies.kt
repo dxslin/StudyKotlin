@@ -6,6 +6,7 @@ object Versions {
     const val constraintlayout_version = "2.0.1"
     const val vectordrawable_version = "1.1.0"
     const val navigation_version = "2.2.0"
+    const val dynamicanimation_version = "1.0.0"
 
     const val lifecycle_version = "2.2.0"
 
@@ -51,6 +52,11 @@ object Dependencies {
         "androidx.navigation:navigation-fragment-ktx:${Versions.navigation_version}"
     const val navigation_ui_ktx =
         "androidx.navigation:navigation-ui-ktx:${Versions.navigation_version}"
+    const val navigation_safe_args =
+        "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation_version}"
+    const val dynamicanimation =
+        "androidx.dynamicanimation:dynamicanimation:${Versions.dynamicanimation_version}"
+
 
     //jetpack library
     const val lifecycle_extensions =

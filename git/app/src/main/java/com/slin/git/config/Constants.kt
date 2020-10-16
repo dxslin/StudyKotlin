@@ -11,4 +11,7 @@ package com.slin.git.config
 /**
  * 分页，每页数量
  */
-const val PAGING_REMOTE_PAGE_SIZE = 30
+const val PAGING_REMOTE_PAGE_SIZE = 10
+
+const val PAGING_REMOTE_INIT_SIZE = 10
+

@@ -9,6 +9,7 @@ import com.slin.core.repository.CoreRepositoryRemote
 import com.slin.core.repository.IRemoteDataSource
 import com.slin.git.api.bean.OneArgPage
 import com.slin.git.api.remote.UserService
+import com.slin.git.config.PAGING_REMOTE_INIT_SIZE
 import com.slin.git.config.PAGING_REMOTE_PAGE_SIZE
 import com.slin.git.entity.ReceivedEvent
 import com.slin.git.ext.getOrAwaitValue
@@ -34,7 +35,7 @@ class HomeRepository(remoteDataSource: HomeRemoteDataSource) :
         return Pager(
             PagingConfig(
                 pageSize = perPage,
-                initialLoadSize = 30,
+                initialLoadSize = PAGING_REMOTE_INIT_SIZE,
                 prefetchDistance = 3,
                 enablePlaceholders = false
             ),

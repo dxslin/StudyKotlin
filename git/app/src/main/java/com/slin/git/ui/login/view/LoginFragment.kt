@@ -1,6 +1,5 @@
 package com.slin.git.ui.login.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,11 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.slin.core.ui.CoreFragment
 import com.slin.git.BuildConfig
-import com.slin.git.MainActivity
 import com.slin.git.R
 import com.slin.git.databinding.FragmentLoginBinding
 import org.kodein.di.DI
@@ -106,6 +106,11 @@ class LoginFragment : CoreFragment() {
 
             initData()
         }
+
+        //拦截掉返回按钮事件
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+
+        }
     }
 
 
@@ -128,7 +133,10 @@ class LoginFragment : CoreFragment() {
 
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
-        startActivity(Intent(requireContext(), MainActivity::class.java))
+
+        findNavController().popBackStack()
+
+//        startActivity(Intent(requireContext(), MainActivity::class.java))
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {

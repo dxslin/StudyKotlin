@@ -12,7 +12,14 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_home_to_search"
-            app:destination="@id/search" />
+            app:destination="@id/search"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popUpTo="@id/navigation_home" />
+        <action
+            android:id="@+id/action_home_to_login"
+            app:destination="@id/login"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
 
     <fragment
@@ -28,9 +35,21 @@
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
+        android:id="@+id/login"
+        android:name="com.slin.git.ui.login.view.LoginFragment"
+        android:label="@string/title_login"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
         android:id="@+id/search"
         android:name="com.slin.git.ui.search.SearchFragment"
         android:label="@string/search"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/search_fragment">
+        <argument
+            android:name="keywords"
+            android:defaultValue=""
+            app:argType="string" />
+
+    </fragment>
 
 </navigation>

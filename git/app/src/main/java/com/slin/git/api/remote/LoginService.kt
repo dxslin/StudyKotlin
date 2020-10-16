@@ -1,9 +1,9 @@
 package com.slin.git.api.remote
 
+import com.slin.core.net.Results
 import com.slin.git.api.bean.LoginRequestModel
 import com.slin.git.entity.UserAccessToken
 import com.slin.git.entity.UserInfo
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -20,9 +20,9 @@ interface LoginService {
 
     @POST("authorizations")
     @Headers("Accept: application/json")
-    suspend fun authorizations(@Body authRequestModel: LoginRequestModel): Response<UserAccessToken>
+    suspend fun authorizations(@Body authRequestModel: LoginRequestModel): Results<UserAccessToken>
 
     @GET("user")
-    suspend fun fetchUserOwner(): Response<UserInfo>
+    suspend fun fetchUserOwner(): Results<UserInfo>
 
 }

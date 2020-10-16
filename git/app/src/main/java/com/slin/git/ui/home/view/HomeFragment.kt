@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation.findNavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.slin.core.logger.logd
@@ -17,6 +15,7 @@ import com.slin.git.databinding.FragmentHomeBinding
 import com.slin.git.entity.UserInfo
 import com.slin.git.manager.UserManager
 import com.slin.git.ui.common.FooterLoadStateAdapter
+import com.slin.git.weight.anim.SpringAddItemAnimator
 import com.slin.sate_view_switcher.StateViewSwitcher
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -55,18 +54,20 @@ class HomeFragment : BaseFragment() {
         if (!UserManager.isLoggedIn) {
             UserManager.INSTANCE = UserInfo.dxslin
             UserManager.isLoggedIn = true
-
-//            startActivity(Intent(context, LoginActivity::class.java))
-//            return
+//            findNavController().navigate(R.id.action_home_to_login)
+            return
         }
         binding.apply {
+            ivSearch.setOnClickListener { startSearchFragment() }
+
+            adapter = ReceivedEventAdapter()
             stateViewSwitcher = StateViewSwitcher(rvEventsList) {
                 adapter.retry()
             }
 
-            adapter = ReceivedEventAdapter()
             val loadStateAdapter = FooterLoadStateAdapter(adapter)
             rvEventsList.adapter = adapter.withLoadStateFooter(loadStateAdapter)
+            rvEventsList.itemAnimator = SpringAddItemAnimator()
 
             adapter.addLoadStateListener { loadState ->
                 logd { "onViewCreated: ${loadState}" }
@@ -90,7 +91,7 @@ class HomeFragment : BaseFragment() {
 
     }
 
-    fun startSearchFragment(view: View){
+    private fun startSearchFragment() {
         findNavController().navigate(R.id.action_home_to_search)
     }
 

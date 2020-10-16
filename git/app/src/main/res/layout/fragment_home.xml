@@ -39,7 +39,6 @@
                         android:layout_marginEnd="@dimen/fragment_horizontal_margin"
                         android:background="@drawable/ic_oval_color_accent"
                         android:contentDescription="@string/search"
-                        android:onClick="startSearchFragment"
                         android:padding="@dimen/grid_0_5"
                         android:transitionName="@string/search"
                         android:src="@drawable/ic_baseline_search_24"

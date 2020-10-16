@@ -2,10 +2,13 @@ package com.slin.git
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.slin.git.base.BaseActivity
 import com.slin.git.databinding.ActivityMainBinding
+import com.slin.git.ext.hide
+import com.slin.git.ext.show
 
 class MainActivity : BaseActivity() {
 
@@ -26,7 +29,19 @@ class MainActivity : BaseActivity() {
 //                )
 //        )
 //        setupActionBarWithNavController(navController, appBarConfiguration)
+
+
             navView.setupWithNavController(navController)
+            lifecycleScope.launchWhenResumed {
+                navController.addOnDestinationChangedListener { _, destination, _ ->
+                    when (destination.id) {
+                        R.id.navigation_home,
+                        R.id.navigation_dashboard,
+                        R.id.navigation_notifications -> navView.show()
+                        else -> navView.hide()
+                    }
+                }
+            }
 
         }
 

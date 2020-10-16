@@ -1,7 +1,6 @@
 package com.slin.git.ui.login.data
 
 import com.slin.core.net.Results
-import com.slin.core.net.processApiResponse
 import com.slin.core.repository.IRemoteDataSource
 import com.slin.git.api.bean.LoginRequestModel
 import com.slin.git.api.remote.LoginService
@@ -14,13 +13,11 @@ class LoginRemoteDataSource(private val loginService: LoginService) : IRemoteDat
 
     suspend fun login(): Results<UserInfo> {
         val loginRequestModel = LoginRequestModel.generate()
-        val result = processApiResponse(loginService.authorizations(loginRequestModel))
-        return when (result) {
-            is Results.Success -> {
-                processApiResponse(loginService.fetchUserOwner())
-            }
+        return when (val result = loginService.authorizations(loginRequestModel)) {
+            is Results.Success -> loginService.fetchUserOwner()
             is Results.Failure -> result
         }
+
     }
 
     fun logout() {

@@ -37,6 +37,10 @@ class ReceivedEventAdapter :
         holder.bind(getItem(position))
     }
 
+    override fun onViewAttachedToWindow(holder: ReceiveEventViewHolder) {
+        super.onViewAttachedToWindow(holder)
+    }
+
 }
 
 private val shapeTransformations = listOf(

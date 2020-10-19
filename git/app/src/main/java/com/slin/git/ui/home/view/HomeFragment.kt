@@ -15,7 +15,6 @@ import com.slin.git.databinding.FragmentHomeBinding
 import com.slin.git.entity.UserInfo
 import com.slin.git.manager.UserManager
 import com.slin.git.ui.common.FooterLoadStateAdapter
-import com.slin.git.weight.anim.SpringAddItemAnimator
 import com.slin.sate_view_switcher.StateViewSwitcher
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -67,7 +66,7 @@ class HomeFragment : BaseFragment() {
 
             val loadStateAdapter = FooterLoadStateAdapter(adapter)
             rvEventsList.adapter = adapter.withLoadStateFooter(loadStateAdapter)
-            rvEventsList.itemAnimator = SpringAddItemAnimator()
+//            rvEventsList.itemAnimator = SpringAddItemAnimator()
 
             adapter.addLoadStateListener { loadState ->
                 logd { "onViewCreated: ${loadState}" }

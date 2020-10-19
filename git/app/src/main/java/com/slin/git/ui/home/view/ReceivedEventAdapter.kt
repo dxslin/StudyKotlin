@@ -13,6 +13,7 @@ import com.slin.git.entity.Type
 import com.slin.git.entity.receivedEventsDiff
 import com.slin.git.utils.ImageLoaderUtils
 import com.slin.git.utils.ShapeAppearanceTransformation
+import com.slin.git.weight.anim.AdapterItemAnim
 
 
 /**
@@ -22,7 +23,7 @@ import com.slin.git.utils.ShapeAppearanceTransformation
  *
  */
 class ReceivedEventAdapter :
-    PagingDataAdapter<ReceivedEvent, ReceiveEventViewHolder>(receivedEventsDiff) {
+    PagingDataAdapter<ReceivedEvent, ReceiveEventViewHolder>(receivedEventsDiff), AdapterItemAnim {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReceiveEventViewHolder {
         return ReceiveEventViewHolder(
             ItemHomeEventsBinding.inflate(
@@ -39,6 +40,12 @@ class ReceivedEventAdapter :
 
     override fun onViewAttachedToWindow(holder: ReceiveEventViewHolder) {
         super.onViewAttachedToWindow(holder)
+        attachViewAnim(holder)
+    }
+
+    override fun onViewDetachedFromWindow(holder: ReceiveEventViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        detachViewAnim(holder)
     }
 
 }

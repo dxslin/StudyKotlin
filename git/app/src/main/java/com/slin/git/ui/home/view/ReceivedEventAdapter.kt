@@ -2,6 +2,10 @@ package com.slin.git.ui.home.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.AnimationSet
+import android.view.animation.TranslateAnimation
 import androidx.core.content.ContextCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +17,10 @@ import com.slin.git.entity.Type
 import com.slin.git.entity.receivedEventsDiff
 import com.slin.git.utils.ImageLoaderUtils
 import com.slin.git.utils.ShapeAppearanceTransformation
-import com.slin.git.weight.anim.AdapterItemAnim
+import com.slin.git.weight.anim.animator.AnimationFactory
+import com.slin.git.weight.anim.animator.IItemAnimatorAdapter
+import com.slin.git.weight.anim.animator.ItemAnimator
+import com.slin.git.weight.anim.animator.SimpleItemAnimator
 
 
 /**
@@ -23,7 +30,8 @@ import com.slin.git.weight.anim.AdapterItemAnim
  *
  */
 class ReceivedEventAdapter :
-    PagingDataAdapter<ReceivedEvent, ReceiveEventViewHolder>(receivedEventsDiff), AdapterItemAnim {
+    PagingDataAdapter<ReceivedEvent, ReceiveEventViewHolder>(receivedEventsDiff),
+    IItemAnimatorAdapter {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReceiveEventViewHolder {
         return ReceiveEventViewHolder(
             ItemHomeEventsBinding.inflate(
@@ -36,6 +44,33 @@ class ReceivedEventAdapter :
 
     override fun onBindViewHolder(holder: ReceiveEventViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    override val animatorFactory: ItemAnimator.Factory = object : ItemAnimator.Factory {
+        override fun create(): ItemAnimator =
+            SimpleItemAnimator(object : AnimationFactory {
+                override fun create(): Animation {
+                    return AnimationSet(true).apply {
+                        addAnimation(
+                            TranslateAnimation(
+                                TranslateAnimation.RELATIVE_TO_SELF,
+                                0.7f,
+                                TranslateAnimation.RELATIVE_TO_SELF,
+                                0f,
+                                TranslateAnimation.RELATIVE_TO_SELF,
+                                0f,
+                                TranslateAnimation.RELATIVE_TO_SELF,
+                                0f
+                            ).apply {
+                                duration = 300
+                            })
+                        addAnimation(AlphaAnimation(0f, 1f).apply {
+                            duration = 300
+                        })
+                    }
+                }
+            })
+
     }
 
     override fun onViewAttachedToWindow(holder: ReceiveEventViewHolder) {

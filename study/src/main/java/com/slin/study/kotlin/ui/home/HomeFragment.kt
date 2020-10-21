@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseFragment
 import com.slin.study.kotlin.databinding.FragmentHomeBinding
@@ -20,7 +20,7 @@ import com.slin.study.kotlin.ui.testlist.TestPageData
 
 class HomeFragment : BaseFragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by viewModels()
 
     private lateinit var binding: FragmentHomeBinding
 
@@ -58,9 +58,7 @@ class HomeFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        homeViewModel =
-            ViewModelProvider(this)[HomeViewModel::class.java]
-        binding = FragmentHomeBinding.inflate(inflater)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         val testListFragment = TestListFragment.newInstance(testDataList)
 

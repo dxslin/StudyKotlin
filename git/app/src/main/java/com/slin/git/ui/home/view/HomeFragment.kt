@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import com.slin.core.logger.logd
 import com.slin.core.net.status.SvsState
 import com.slin.git.R
 import com.slin.git.base.BaseFragment
@@ -17,7 +16,6 @@ import com.slin.git.manager.UserManager
 import com.slin.git.ui.common.FooterLoadStateAdapter
 import com.slin.sate_view_switcher.StateViewSwitcher
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import org.kodein.di.DI
 import org.kodein.di.instance
 
@@ -54,11 +52,9 @@ class HomeFragment : BaseFragment() {
             UserManager.INSTANCE = UserInfo.dxslin
             UserManager.isLoggedIn = true
 //            findNavController().navigate(R.id.action_home_to_login)
-            return
+//            return
         }
         binding.apply {
-            ivSearch.setOnClickListener { startSearchFragment() }
-
             adapter = ReceivedEventAdapter()
             stateViewSwitcher = StateViewSwitcher(rvEventsList) {
                 adapter.retry()
@@ -69,23 +65,35 @@ class HomeFragment : BaseFragment() {
 //            rvEventsList.itemAnimator = SpringAddItemAnimator()
 
             adapter.addLoadStateListener { loadState ->
-                logd { "onViewCreated: ${loadState}" }
                 when (loadState.source.refresh) {
-                    is LoadState.NotLoading ->
+                    is LoadState.NotLoading -> {
                         stateViewSwitcher.stateChange(SvsState.LoadSuccess(adapter.itemCount > 0))
-                    is LoadState.Loading ->
+                        srlRefresh.isRefreshing = false
+                    }
+                    is LoadState.Loading -> {
                         stateViewSwitcher.stateChange(SvsState.Loading(adapter.itemCount > 0))
-                    is LoadState.Error -> stateViewSwitcher.stateChange(
-                        SvsState.LoadFail((loadState.source.refresh as LoadState.Error).error)
-                    )
+                    }
+                    is LoadState.Error -> {
+                        stateViewSwitcher.stateChange(
+                            SvsState.LoadFail((loadState.source.refresh as LoadState.Error).error)
+                        )
+                        srlRefresh.isRefreshing = false
+                    }
                 }
             }
-            lifecycleScope.launch {
-                viewModel.receiveEventFlow.collectLatest {
-                    adapter.submitData(it)
-                }
 
+            ivSearch.setOnClickListener { startSearchFragment() }
+            srlRefresh.setOnRefreshListener {
+                adapter.refresh()
             }
+
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.receiveEventFlow.collectLatest {
+                adapter.submitData(it)
+            }
+
         }
 
     }

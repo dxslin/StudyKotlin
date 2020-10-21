@@ -1,11 +1,8 @@
 package com.slin.git.ui.home.data
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.PagingSource
+import androidx.paging.*
 import com.slin.core.net.Results
-import com.slin.core.repository.CoreRepositoryRemote
+import com.slin.core.repository.CoreRepositoryNothing
 import com.slin.core.repository.IRemoteDataSource
 import com.slin.git.api.bean.OneArgPage
 import com.slin.git.api.remote.UserService
@@ -23,8 +20,10 @@ import kotlinx.coroutines.flow.Flow
  * description: 首页仓库
  *
  */
-class HomeRepository(remoteDataSource: HomeRemoteDataSource) :
-    CoreRepositoryRemote<HomeRemoteDataSource>(remoteDataSource) {
+class HomeRepository(private val userService: UserService) :
+    CoreRepositoryNothing() {
+
+    private var homeRemoteDataSource: HomeRemoteDataSource? = null
 
     fun queryReceivedEvents(
         perPage: Int = PAGING_REMOTE_PAGE_SIZE
@@ -41,7 +40,13 @@ class HomeRepository(remoteDataSource: HomeRemoteDataSource) :
             ),
             pageWithArgs
         ) {
-            remoteDataSource
+            if (homeRemoteDataSource == null || pageWithArgs.page == 0) {
+                HomeRemoteDataSource(userService).apply {
+                    homeRemoteDataSource = this
+                }
+            } else {
+                homeRemoteDataSource!!
+            }
         }.flow
     }
 
@@ -81,6 +86,11 @@ class HomeRemoteDataSource(private val userService: UserService) :
                 )
             }
         }
+    }
+
+    @ExperimentalPagingApi
+    override fun getRefreshKey(state: PagingState<OneArgPage<String>, ReceivedEvent>): OneArgPage<String>? {
+        return state.closestPageToPosition(0)?.nextKey?.resetPage()
     }
 
 }

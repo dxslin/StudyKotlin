@@ -15,13 +15,12 @@ import android.os.Parcelable
 
 data class TestPageData(val name: String, val icon: Int, var activityClass: Class<out Activity>?) :
     Parcelable {
-    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
+        parcel.readString() ?: "",
         parcel.readInt(),
         null
     ) {
-        val className = parcel.readString()
+        val className = parcel.readString() ?: ""
         try {
             @Suppress("UNCHECKED_CAST")
             activityClass = Class.forName(className) as Class<out Activity>?

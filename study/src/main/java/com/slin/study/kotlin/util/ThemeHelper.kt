@@ -35,33 +35,29 @@ object ThemeHelper {
     fun init(application: Application) {
         application.registerActivityLifecycleCallbacks(object :
             Application.ActivityLifecycleCallbacks {
-            override fun onActivityPaused(activity: Activity?) {
+
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+                activityList.add(activity)
             }
 
-            override fun onActivityResumed(activity: Activity?) {
+            override fun onActivityStarted(activity: Activity) {
             }
 
-            override fun onActivityStarted(activity: Activity?) {
+            override fun onActivityResumed(activity: Activity) {
             }
 
-            override fun onActivityDestroyed(activity: Activity?) {
-                activity?.let {
-                    activityList.remove(it)
-                }
+            override fun onActivityPaused(activity: Activity) {
             }
 
-            override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {
+            override fun onActivityStopped(activity: Activity) {
             }
 
-            override fun onActivityStopped(activity: Activity?) {
+            override fun onActivityDestroyed(activity: Activity) {
+                activityList.remove(activity)
             }
 
-            override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
-                activity?.let {
-                    activityList.add(it)
-                }
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
             }
-
         })
     }
 

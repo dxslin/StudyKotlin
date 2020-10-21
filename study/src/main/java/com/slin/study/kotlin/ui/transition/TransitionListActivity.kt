@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.animation.SlideInRightAnimation
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
@@ -50,6 +51,7 @@ class TransitionListActivity : BaseActivity() {
         }
 
         val adapter = TransitionAdapter()
+        adapter.adapterAnimation = SlideInRightAnimation()
         rv_list.layoutManager = LinearLayoutManager(this)
         rv_list.adapter = adapter
         rv_list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))

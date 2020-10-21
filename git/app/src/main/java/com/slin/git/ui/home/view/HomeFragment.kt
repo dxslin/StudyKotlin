@@ -7,13 +7,15 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import com.slin.core.net.status.SvsState
+import com.slin.core.logger.logd
 import com.slin.git.R
 import com.slin.git.base.BaseFragment
 import com.slin.git.databinding.FragmentHomeBinding
 import com.slin.git.entity.UserInfo
 import com.slin.git.manager.UserManager
 import com.slin.git.ui.common.FooterLoadStateAdapter
+import com.slin.git.ui.common.RefreshLoadStateAdapter
+import com.slin.git.ui.common.withLoadStateRefreshAndFooter
 import com.slin.sate_view_switcher.StateViewSwitcher
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
@@ -59,18 +61,25 @@ class HomeFragment : BaseFragment() {
         }
         binding.apply {
             adapter = ReceivedEventAdapter()
-            stateViewSwitcher = StateViewSwitcher(rvEventsList) {
-                adapter.retry()
-            }
+//            stateViewSwitcher = StateViewSwitcher(rvEventsList) {
+//                adapter.retry()
+//            }
 
-            val loadStateAdapter = FooterLoadStateAdapter(adapter)
-            rvEventsList.adapter = adapter.withLoadStateFooter(loadStateAdapter)
+            rvEventsList.adapter = adapter
+                .withLoadStateRefreshAndFooter(
+                    refresh = RefreshLoadStateAdapter(adapter),
+                    footer = FooterLoadStateAdapter(adapter)
+                )
 //            rvEventsList.itemAnimator = SpringAddItemAnimator()
 
             ivSearch.setOnClickListener { startSearchFragment() }
+            srlRefresh.setOnRefreshListener {
+                adapter.refresh()
+            }
 
             lifecycleScope.launchWhenCreated {
                 adapter.loadStateFlow.collectLatest { loadState ->
+                    logd { "onViewCreated: $loadState" }
                     srlRefresh.isRefreshing = loadState.refresh is LoadState.Loading
                 }
             }
@@ -80,24 +89,24 @@ class HomeFragment : BaseFragment() {
                     .filter { it.refresh is LoadState.Loading }
                     .collect { rvEventsList.scrollToPosition(0) }
             }
-            lifecycleScope.launchWhenCreated {
-                adapter.loadStateFlow.collectLatest { loadState ->
-                    when (loadState.source.refresh) {
-                        is LoadState.NotLoading -> {
-                            stateViewSwitcher.stateChange(SvsState.LoadSuccess(adapter.itemCount > 0))
-                        }
-                        is LoadState.Loading -> {
-                            stateViewSwitcher.stateChange(SvsState.Loading(adapter.itemCount > 0))
-                        }
-                        is LoadState.Error -> {
-                            stateViewSwitcher.stateChange(
-                                SvsState.LoadFail((loadState.source.refresh as LoadState.Error).error)
-                            )
-                        }
-                    }
-
-                }
-            }
+//            lifecycleScope.launchWhenCreated {
+//                adapter.loadStateFlow.collectLatest { loadState ->
+//                    when (loadState.source.refresh) {
+//                        is LoadState.NotLoading -> {
+//                            stateViewSwitcher.stateChange(SvsState.LoadSuccess(adapter.itemCount > 0))
+//                        }
+//                        is LoadState.Loading -> {
+//                            stateViewSwitcher.stateChange(SvsState.Loading(adapter.itemCount > 0))
+//                        }
+//                        is LoadState.Error -> {
+//                            stateViewSwitcher.stateChange(
+//                                SvsState.LoadFail((loadState.source.refresh as LoadState.Error).error)
+//                            )
+//                        }
+//                    }
+//
+//                }
+//            }
             lifecycleScope.launchWhenCreated {
                 viewModel.receiveEventFlow.collectLatest {
                     adapter.submitData(it)

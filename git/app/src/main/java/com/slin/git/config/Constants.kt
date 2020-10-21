@@ -9,6 +9,11 @@ package com.slin.git.config
  */
 
 /**
+ * 第一页，有些可能是0开头，有些可能是1开始
+ */
+const val PAGING_REMOTE_FIRST_PAGE = 1
+
+/**
  * 分页，每页数量
  */
 const val PAGING_REMOTE_PAGE_SIZE = 10

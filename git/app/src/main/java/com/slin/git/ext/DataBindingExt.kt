@@ -1,5 +1,6 @@
 package com.slin.git.ext
 
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.view.WindowInsets
 import android.widget.ImageView
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.elevation.ElevationOverlayProvider
 import com.slin.core.CoreApplication
 import com.slin.core.image.ImageLoader
@@ -46,6 +48,12 @@ fun View.bindElevationOverlay(preElevation: Float, elevation: Float) {
     val color = ElevationOverlayProvider(context)
         .compositeOverlayWithThemeSurfaceColorIfNeeded(elevation)
     setBackgroundColor(color)
+}
+
+@BindingAdapter("refreshColor", requireAll = true)
+fun SwipeRefreshLayout.bindColor(previousColor: ColorDrawable, color: ColorDrawable) {
+    if (previousColor == color) return
+    setColorSchemeColors(color.color)
 }
 
 

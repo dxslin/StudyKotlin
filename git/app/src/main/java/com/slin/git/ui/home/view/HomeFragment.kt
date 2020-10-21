@@ -15,7 +15,10 @@ import com.slin.git.entity.UserInfo
 import com.slin.git.manager.UserManager
 import com.slin.git.ui.common.FooterLoadStateAdapter
 import com.slin.sate_view_switcher.StateViewSwitcher
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
 import org.kodein.di.DI
 import org.kodein.di.instance
 
@@ -64,39 +67,46 @@ class HomeFragment : BaseFragment() {
             rvEventsList.adapter = adapter.withLoadStateFooter(loadStateAdapter)
 //            rvEventsList.itemAnimator = SpringAddItemAnimator()
 
-            adapter.addLoadStateListener { loadState ->
-                when (loadState.source.refresh) {
-                    is LoadState.NotLoading -> {
-                        stateViewSwitcher.stateChange(SvsState.LoadSuccess(adapter.itemCount > 0))
-                        srlRefresh.isRefreshing = false
-                    }
-                    is LoadState.Loading -> {
-                        stateViewSwitcher.stateChange(SvsState.Loading(adapter.itemCount > 0))
-                    }
-                    is LoadState.Error -> {
-                        stateViewSwitcher.stateChange(
-                            SvsState.LoadFail((loadState.source.refresh as LoadState.Error).error)
-                        )
-                        srlRefresh.isRefreshing = false
-                    }
+            ivSearch.setOnClickListener { startSearchFragment() }
+
+            lifecycleScope.launchWhenCreated {
+                adapter.loadStateFlow.collectLatest { loadState ->
+                    srlRefresh.isRefreshing = loadState.refresh is LoadState.Loading
                 }
             }
-
-            ivSearch.setOnClickListener { startSearchFragment() }
-            srlRefresh.setOnRefreshListener {
-                adapter.refresh()
+            lifecycleScope.launchWhenCreated {
+                adapter.loadStateFlow
+                    .distinctUntilChangedBy { it.refresh }
+                    .filter { it.refresh is LoadState.Loading }
+                    .collect { rvEventsList.scrollToPosition(0) }
             }
+            lifecycleScope.launchWhenCreated {
+                adapter.loadStateFlow.collectLatest { loadState ->
+                    when (loadState.source.refresh) {
+                        is LoadState.NotLoading -> {
+                            stateViewSwitcher.stateChange(SvsState.LoadSuccess(adapter.itemCount > 0))
+                        }
+                        is LoadState.Loading -> {
+                            stateViewSwitcher.stateChange(SvsState.Loading(adapter.itemCount > 0))
+                        }
+                        is LoadState.Error -> {
+                            stateViewSwitcher.stateChange(
+                                SvsState.LoadFail((loadState.source.refresh as LoadState.Error).error)
+                            )
+                        }
+                    }
 
-        }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.receiveEventFlow.collectLatest {
-                adapter.submitData(it)
+                }
             }
-
+            lifecycleScope.launchWhenCreated {
+                viewModel.receiveEventFlow.collectLatest {
+                    adapter.submitData(it)
+                }
+            }
         }
 
     }
+
 
     private fun startSearchFragment() {
         findNavController().navigate(R.id.action_home_to_search)

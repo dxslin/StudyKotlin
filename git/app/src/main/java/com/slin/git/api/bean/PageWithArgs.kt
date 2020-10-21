@@ -1,5 +1,8 @@
 package com.slin.git.api.bean
 
+import com.slin.git.config.PAGING_REMOTE_FIRST_PAGE
+import com.slin.git.config.PAGING_REMOTE_PAGE_SIZE
+
 
 /**
  * author: slin
@@ -8,24 +11,44 @@ package com.slin.git.api.bean
  *
  */
 
-sealed class Page
+/**
+ * 起始页码
+ */
+const val START_PAGE_NUM = PAGING_REMOTE_FIRST_PAGE
 
-data class NoArgPage(val page: Int) : Page()
+/**
+ * 每页数量
+ */
+const val PER_PAGE_NUM = PAGING_REMOTE_PAGE_SIZE
 
-data class OneArgPage<T>(val page: Int = 0, val args: T? = null) : Page() {
+open class Page(val page: Int = START_PAGE_NUM) {
 
-    fun nextPage(): OneArgPage<T> {
-        return this.copy(page = page.inc())
+    open fun next(): Page = Page(page + 1)
+
+    open fun reset(): Page = Page(START_PAGE_NUM)
+
+}
+
+class NoArgPage(page: Int) : Page(page)
+
+class OneArgPage<T>(page: Int = START_PAGE_NUM, val arg: T? = null) : Page(page) {
+
+    override fun next(): OneArgPage<T> {
+        return OneArgPage(page + 1, arg)
     }
 
-    fun resetPage(): OneArgPage<T> {
-        return this.copy(page = 0)
+    override fun reset(): OneArgPage<T> {
+        return OneArgPage(START_PAGE_NUM, arg)
     }
 }
 
-data class TwoArgPage<T, R>(val page: Int, val arg1: T, val arg2: R) : Page() {
+class TwoArgPage<T, R>(page: Int = START_PAGE_NUM, val arg1: T, val arg2: R) : Page(page) {
 
-    fun nextPage(): TwoArgPage<T, R> {
-        return this.copy(page = page.inc())
+    override fun next(): TwoArgPage<T, R> {
+        return TwoArgPage(page + 1, arg1, arg2)
+    }
+
+    override fun reset(): TwoArgPage<T, R> {
+        return TwoArgPage(START_PAGE_NUM, arg1, arg2)
     }
 }

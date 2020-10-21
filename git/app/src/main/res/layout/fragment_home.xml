@@ -55,6 +55,7 @@
             android:id="@+id/srl_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:refreshColor="@{@color/colorAccent}"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

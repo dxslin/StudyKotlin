@@ -1,10 +1,14 @@
 package com.slin.git.ui.home.data
 
-import androidx.paging.*
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.PagingSource
 import com.slin.core.net.Results
 import com.slin.core.repository.CoreRepositoryNothing
 import com.slin.core.repository.IRemoteDataSource
 import com.slin.git.api.bean.OneArgPage
+import com.slin.git.api.bean.START_PAGE_NUM
 import com.slin.git.api.remote.UserService
 import com.slin.git.config.PAGING_REMOTE_INIT_SIZE
 import com.slin.git.config.PAGING_REMOTE_PAGE_SIZE
@@ -20,14 +24,12 @@ import kotlinx.coroutines.flow.Flow
  * description: 首页仓库
  *
  */
-class HomeRepository(private val userService: UserService) :
-    CoreRepositoryNothing() {
-
-    private var homeRemoteDataSource: HomeRemoteDataSource? = null
+class HomeRepository(private val userService: UserService) : CoreRepositoryNothing() {
 
     fun queryReceivedEvents(
         perPage: Int = PAGING_REMOTE_PAGE_SIZE
     ): Flow<PagingData<ReceivedEvent>> {
+
         val username = UserManager.INSTANCE.login
         val pageWithArgs = OneArgPage(0, username)
 
@@ -40,13 +42,7 @@ class HomeRepository(private val userService: UserService) :
             ),
             pageWithArgs
         ) {
-            if (homeRemoteDataSource == null || pageWithArgs.page == 0) {
-                HomeRemoteDataSource(userService).apply {
-                    homeRemoteDataSource = this
-                }
-            } else {
-                homeRemoteDataSource!!
-            }
+            HomeRemoteDataSource(userService)
         }.flow
     }
 
@@ -69,8 +65,8 @@ class HomeRemoteDataSource(private val userService: UserService) :
 
     override suspend fun load(params: LoadParams<OneArgPage<String>>): LoadResult<OneArgPage<String>, ReceivedEvent> {
         val results = queryReceivedEvents(
-            params.key?.args.orEmpty(),
-            params.key?.page ?: 0,
+            params.key?.arg.orEmpty(),
+            params.key?.page ?: START_PAGE_NUM,
             params.loadSize
         )
         return when (results) {
@@ -78,7 +74,7 @@ class HomeRemoteDataSource(private val userService: UserService) :
                 LoadResult.Page(
                     data = results.data,
                     prevKey = null,
-                    nextKey = if (results.data.isNullOrEmpty()) null else params.key?.nextPage()
+                    nextKey = if (results.data.isNullOrEmpty()) null else params.key?.next()
                 )
             is Results.Failure -> {
                 LoadResult.Error(
@@ -88,10 +84,6 @@ class HomeRemoteDataSource(private val userService: UserService) :
         }
     }
 
-    @ExperimentalPagingApi
-    override fun getRefreshKey(state: PagingState<OneArgPage<String>, ReceivedEvent>): OneArgPage<String>? {
-        return state.closestPageToPosition(0)?.nextKey?.resetPage()
-    }
 
 }
 

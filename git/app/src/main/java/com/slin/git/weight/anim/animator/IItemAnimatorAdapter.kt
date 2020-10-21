@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
  *
  * 使用：
  *
- * Adapter继承此接口，在[RecyclerView.Adapter.onViewAttachedToWindow]方法中调用[attachViewAnim]，
- * 在[RecyclerView.Adapter.onViewDetachedFromWindow]方法中调用[detachViewAnim]
+ * Adapter继承此接口，并重写[animateOperator](如果需要自定义动画的话)，
+ * 在[RecyclerView.Adapter.onViewAttachedToWindow]方法中调用[ItemAnimateOperator.attachViewAnim]，
+ * 在[RecyclerView.Adapter.onViewDetachedFromWindow]方法中调用[ItemAnimateOperator.detachViewAnim]
  *
  * ```kotlin
  * class ReceivedEventAdapter :
@@ -22,12 +23,12 @@ import androidx.recyclerview.widget.RecyclerView
  *
  *     override fun onViewAttachedToWindow(holder: ReceiveEventViewHolder) {
  *          super.onViewAttachedToWindow(holder)
- *          attachViewAnim(holder)
+ *          animateOperator.attachViewAnim(holder)
  *     }
-
+ *
  *     override fun onViewDetachedFromWindow(holder: ReceiveEventViewHolder) {
  *          super.onViewDetachedFromWindow(holder)
- *          detachViewAnim(holder)
+ *          animateOperator.detachViewAnim(holder)
  *     }
  *
  * }
@@ -37,37 +38,9 @@ import androidx.recyclerview.widget.RecyclerView
  */
 interface IItemAnimatorAdapter {
 
-    private val itemAnimators: MutableList<ItemAnimator>
-        get() = mutableListOf()
+    val animateOperator: ItemAnimateOperator
+        get() = ItemAnimateOperator()
 
-    private val listener: ItemAnimator.Listener
-        get() = object : ItemAnimator.Listener {
-            override fun onAnimatorStart(animator: ItemAnimator) {
-                itemAnimators.add(animator)
-            }
-
-            override fun onAnimatorEnd(animator: ItemAnimator) {
-                itemAnimators.remove(animator)
-            }
-
-        }
-
-    val animatorFactory: ItemAnimator.Factory
-        get() = SimpleItemAnimator.Factory()
-
-
-    fun attachViewAnim(holder: RecyclerView.ViewHolder) {
-        val view = holder.itemView
-        val itemAnimator = animatorFactory.create()
-        itemAnimator.addAnimatorListener(listener)
-        itemAnimator.animate(view)
-    }
-
-    fun detachViewAnim(holder: RecyclerView.ViewHolder) {
-        itemAnimators.forEach {
-            it.cancel()
-        }
-    }
 
 }
 

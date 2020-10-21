@@ -3,10 +3,11 @@ object Versions {
 
     const val appcompat_version = "1.2.0"
     const val material_version = "1.2.0"
-    const val constraintlayout_version = "2.0.1"
-    const val vectordrawable_version = "1.1.0"
+    const val constraint_layout_version = "2.0.1"
+    const val vector_drawable_version = "1.1.0"
     const val navigation_version = "2.2.0"
-    const val dynamicanimation_version = "1.0.0"
+    const val dynamic_animation_version = "1.0.0"
+    const val swipe_refresh_layout_version = "1.2.0-alpha01"
 
     const val lifecycle_version = "2.2.0"
 
@@ -42,9 +43,9 @@ object Dependencies {
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat_version}"
     const val material = "com.google.android.material:material:${Versions.material_version}"
     const val constraintlayout =
-        "androidx.constraintlayout:constraintlayout:${Versions.constraintlayout_version}"
-    const val vectordrawable =
-        "androidx.vectordrawable:vectordrawable:${Versions.vectordrawable_version}"
+        "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout_version}"
+    const val vector_drawable =
+        "androidx.vectordrawable:vectordrawable:${Versions.vector_drawable_version}"
     const val navigation_fragment =
         "androidx.navigation:navigation-fragment:${Versions.navigation_version}"
     const val navigation_ui = "androidx.navigation:navigation-ui:${Versions.navigation_version}"
@@ -54,8 +55,10 @@ object Dependencies {
         "androidx.navigation:navigation-ui-ktx:${Versions.navigation_version}"
     const val navigation_safe_args =
         "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation_version}"
-    const val dynamicanimation =
-        "androidx.dynamicanimation:dynamicanimation:${Versions.dynamicanimation_version}"
+    const val dynamic_animation =
+        "androidx.dynamicanimation:dynamicanimation:${Versions.dynamic_animation_version}"
+    const val swipe_refresh_layout =
+        "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipe_refresh_layout_version}"
 
 
     //jetpack library

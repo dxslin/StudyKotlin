@@ -4,7 +4,6 @@ import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
-import com.slin.core.logger.logd
 
 
 /**
@@ -29,7 +28,7 @@ open class SimpleItemAnimator @JvmOverloads constructor(
     }
 ) : ItemAnimator {
 
-    class Factory : ItemAnimator.Factory {
+    class DefaultSimpleFactory : ItemAnimator.Factory {
         override fun create(): ItemAnimator {
             return SimpleItemAnimator()
         }
@@ -49,8 +48,6 @@ open class SimpleItemAnimator @JvmOverloads constructor(
             }
 
             override fun onAnimationEnd(animation: Animation) {
-
-                logd { "onAnimationEnd: $isEnded ${this@SimpleItemAnimator}" }
                 dispatchEnd()
             }
 
@@ -69,7 +66,6 @@ open class SimpleItemAnimator @JvmOverloads constructor(
         if (!anim.hasEnded()) {
             anim.cancel()
         }
-        logd { "cancel: $isEnded $this" }
         dispatchEnd()
     }
 
@@ -82,7 +78,6 @@ open class SimpleItemAnimator @JvmOverloads constructor(
     }
 
     private fun dispatchEnd() {
-        logd { "dispatchEnd: $isEnded $this" }
         if (!isStarted || isEnded) {
             return
         }

@@ -11,7 +11,7 @@ import android.util.Log
  */
 object Logger {
 
-    inline fun log(tag: String, log: String) {
+    fun log(tag: String, log: String) {
         Log.d(Thread.currentThread().name + tag, log)
     }
 

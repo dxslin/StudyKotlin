@@ -2,7 +2,6 @@ package com.slin.git.ui.home.view
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.slin.git.ui.home.data.HomeRemoteDataSource
 import com.slin.git.ui.home.data.HomeRepository
 import org.kodein.di.*
 import org.kodein.di.android.x.AndroidLifecycleScope
@@ -27,8 +26,8 @@ val homeModule = DI.Module(HOME_FRAGMENT_MODULE_TAG) {
         HomeRepository(instance())
     }
 
-    bind<HomeRemoteDataSource>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
-        HomeRemoteDataSource(instance())
-    }
+//    bind<HomeRemoteDataSource>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
+//        HomeRemoteDataSource(instance())
+//    }
 
 }

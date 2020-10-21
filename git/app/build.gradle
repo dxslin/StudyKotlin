@@ -54,15 +54,16 @@ dependencies {
 
     implementation Dependencies.kotlin_stdlib
     implementation Dependencies.appcompat
+    implementation Dependencies.swipe_refresh_layout
 
     implementation Dependencies.material
     implementation Dependencies.constraintlayout
-    implementation Dependencies.vectordrawable
+    implementation Dependencies.vector_drawable
     implementation Dependencies.navigation_fragment
     implementation Dependencies.navigation_ui
     implementation Dependencies.navigation_fragment_ktx
     implementation Dependencies.navigation_ui_ktx
-    implementation Dependencies.dynamicanimation
+    implementation Dependencies.dynamic_animation
     implementation Dependencies.lifecycle_extensions
     implementation Dependencies.lifecycle_runtime
     //room

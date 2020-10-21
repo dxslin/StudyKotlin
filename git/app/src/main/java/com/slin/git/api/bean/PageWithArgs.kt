@@ -17,6 +17,10 @@ data class OneArgPage<T>(val page: Int = 0, val args: T? = null) : Page() {
     fun nextPage(): OneArgPage<T> {
         return this.copy(page = page.inc())
     }
+
+    fun resetPage(): OneArgPage<T> {
+        return this.copy(page = 0)
+    }
 }
 
 data class TwoArgPage<T, R>(val page: Int, val arg1: T, val arg2: R) : Page() {

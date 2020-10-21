@@ -24,22 +24,23 @@ class FooterLoadStateAdapter(private val adapter: PagingDataAdapter<out Any, out
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): FooterLoadViewHolder {
         return FooterLoadViewHolder(
-            adapter,
             ItemFooterLoadStateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        )
+        ) {
+            adapter.retry()
+        }
     }
 
 
     class FooterLoadViewHolder(
-        private val adapter: PagingDataAdapter<out Any, out RecyclerView.ViewHolder>,
-        private val binding: ItemFooterLoadStateBinding
+        private val binding: ItemFooterLoadStateBinding,
+        private val retry: () -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(loadState: LoadState) {
             binding.apply {
                 this.loadState = loadState
                 tvLoadText.setOnClickListener {
-                    adapter.retry()
+                    retry()
                 }
                 executePendingBindings()
             }

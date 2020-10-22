@@ -13,10 +13,8 @@ import com.slin.git.base.BaseFragment
 import com.slin.git.databinding.FragmentHomeBinding
 import com.slin.git.entity.UserInfo
 import com.slin.git.manager.UserManager
-import com.slin.git.ui.common.FooterLoadStateAdapter
-import com.slin.git.ui.common.RefreshLoadStateAdapter
-import com.slin.git.ui.common.withLoadStateRefreshAndFooter
-import com.slin.sate_view_switcher.StateViewSwitcher
+import com.slin.git.ui.common.ContentLoadStateAdapter
+import com.slin.git.ui.common.withLoadStateRefresh
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -40,8 +38,6 @@ class HomeFragment : BaseFragment() {
 
     private lateinit var adapter: ReceivedEventAdapter
 
-    private lateinit var stateViewSwitcher: StateViewSwitcher
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -61,14 +57,10 @@ class HomeFragment : BaseFragment() {
         }
         binding.apply {
             adapter = ReceivedEventAdapter()
-//            stateViewSwitcher = StateViewSwitcher(rvEventsList) {
-//                adapter.retry()
-//            }
 
             rvEventsList.adapter = adapter
-                .withLoadStateRefreshAndFooter(
-                    refresh = RefreshLoadStateAdapter(adapter),
-                    footer = FooterLoadStateAdapter(adapter)
+                .withLoadStateRefresh(
+                    content = ContentLoadStateAdapter(adapter)
                 )
 //            rvEventsList.itemAnimator = SpringAddItemAnimator()
 
@@ -89,24 +81,6 @@ class HomeFragment : BaseFragment() {
                     .filter { it.refresh is LoadState.Loading }
                     .collect { rvEventsList.scrollToPosition(0) }
             }
-//            lifecycleScope.launchWhenCreated {
-//                adapter.loadStateFlow.collectLatest { loadState ->
-//                    when (loadState.source.refresh) {
-//                        is LoadState.NotLoading -> {
-//                            stateViewSwitcher.stateChange(SvsState.LoadSuccess(adapter.itemCount > 0))
-//                        }
-//                        is LoadState.Loading -> {
-//                            stateViewSwitcher.stateChange(SvsState.Loading(adapter.itemCount > 0))
-//                        }
-//                        is LoadState.Error -> {
-//                            stateViewSwitcher.stateChange(
-//                                SvsState.LoadFail((loadState.source.refresh as LoadState.Error).error)
-//                            )
-//                        }
-//                    }
-//
-//                }
-//            }
             lifecycleScope.launchWhenCreated {
                 viewModel.receiveEventFlow.collectLatest {
                     adapter.submitData(it)

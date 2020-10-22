@@ -7,12 +7,12 @@ import androidx.paging.PagingSource
 import com.slin.core.net.Results
 import com.slin.core.repository.CoreRepositoryNothing
 import com.slin.core.repository.IRemoteDataSource
-import com.slin.git.api.bean.OneArgPage
-import com.slin.git.api.bean.START_PAGE_NUM
+import com.slin.git.api.arguments.OneArgPage
+import com.slin.git.api.arguments.START_PAGE_NUM
+import com.slin.git.api.entity.ReceivedEvent
 import com.slin.git.api.remote.UserService
 import com.slin.git.config.PAGING_REMOTE_INIT_SIZE
 import com.slin.git.config.PAGING_REMOTE_PAGE_SIZE
-import com.slin.git.entity.ReceivedEvent
 import com.slin.git.ext.getOrAwaitValue
 import com.slin.git.manager.UserManager
 import kotlinx.coroutines.flow.Flow

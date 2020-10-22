@@ -1,4 +1,4 @@
-package com.slin.git.api.bean
+package com.slin.git.api.arguments
 
 import com.google.gson.annotations.SerializedName
 import com.slin.git.BuildConfig

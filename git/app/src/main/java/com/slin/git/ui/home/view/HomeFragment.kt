@@ -4,17 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.slin.core.logger.logd
 import com.slin.git.R
+import com.slin.git.api.entity.UserInfo
 import com.slin.git.base.BaseFragment
 import com.slin.git.databinding.FragmentHomeBinding
-import com.slin.git.entity.UserInfo
 import com.slin.git.manager.UserManager
 import com.slin.git.ui.common.ContentLoadStateAdapter
-import com.slin.git.ui.common.withLoadStateRefresh
+import com.slin.git.ui.common.FooterLoadStateAdapter
+import com.slin.git.ui.common.withLoadStateRefreshAndFooter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -59,8 +62,9 @@ class HomeFragment : BaseFragment() {
             adapter = ReceivedEventAdapter()
 
             rvEventsList.adapter = adapter
-                .withLoadStateRefresh(
-                    content = ContentLoadStateAdapter(adapter)
+                .withLoadStateRefreshAndFooter(
+                    content = ContentLoadStateAdapter(adapter),
+                    footer = FooterLoadStateAdapter(adapter)
                 )
 //            rvEventsList.itemAnimator = SpringAddItemAnimator()
 
@@ -92,7 +96,10 @@ class HomeFragment : BaseFragment() {
 
 
     private fun startSearchFragment() {
-        findNavController().navigate(R.id.action_home_to_search)
+        val extras = FragmentNavigatorExtras(
+            Pair(binding.ivSearch, ViewCompat.getTransitionName(binding.ivSearch) ?: "")
+        )
+        findNavController().navigate(R.id.action_home_to_search, null, null, extras)
     }
 
 }

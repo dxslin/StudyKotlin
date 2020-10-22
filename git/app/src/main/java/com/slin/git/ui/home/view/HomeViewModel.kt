@@ -3,7 +3,7 @@ package com.slin.git.ui.home.view
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.slin.git.entity.ReceivedEvent
+import com.slin.git.api.entity.ReceivedEvent
 import com.slin.git.ui.home.data.HomeRepository
 
 class HomeViewModel(homeRepository: HomeRepository) : ViewModel() {

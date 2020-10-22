@@ -2,9 +2,9 @@ package com.slin.git.ui.login.data
 
 import com.slin.core.net.Results
 import com.slin.core.repository.IRemoteDataSource
-import com.slin.git.api.bean.LoginRequestModel
+import com.slin.git.api.arguments.LoginRequestModel
+import com.slin.git.api.entity.UserInfo
 import com.slin.git.api.remote.LoginService
-import com.slin.git.entity.UserInfo
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.

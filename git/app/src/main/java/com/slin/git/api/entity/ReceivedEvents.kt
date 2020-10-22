@@ -1,4 +1,4 @@
-package com.slin.git.entity
+package com.slin.git.api.entity
 
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.*

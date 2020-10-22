@@ -1,4 +1,4 @@
-package com.slin.git.api.bean
+package com.slin.git.api.arguments
 
 import com.slin.git.config.PAGING_REMOTE_FIRST_PAGE
 import com.slin.git.config.PAGING_REMOTE_PAGE_SIZE

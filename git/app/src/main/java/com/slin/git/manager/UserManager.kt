@@ -1,6 +1,6 @@
 package com.slin.git.manager
 
-import com.slin.git.entity.UserInfo
+import com.slin.git.api.entity.UserInfo
 
 /**
  * author: slin

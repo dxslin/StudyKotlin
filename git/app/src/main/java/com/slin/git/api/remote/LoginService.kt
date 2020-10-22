@@ -1,9 +1,9 @@
 package com.slin.git.api.remote
 
 import com.slin.core.net.Results
-import com.slin.git.api.bean.LoginRequestModel
-import com.slin.git.entity.UserAccessToken
-import com.slin.git.entity.UserInfo
+import com.slin.git.api.arguments.LoginRequestModel
+import com.slin.git.api.entity.UserAccessToken
+import com.slin.git.api.entity.UserInfo
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers

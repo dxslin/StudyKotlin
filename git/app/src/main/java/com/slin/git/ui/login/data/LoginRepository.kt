@@ -2,7 +2,7 @@ package com.slin.git.ui.login.data
 
 import com.slin.core.net.Results
 import com.slin.core.repository.IRepository
-import com.slin.git.entity.UserInfo
+import com.slin.git.api.entity.UserInfo
 import com.slin.git.manager.UserManager
 
 /**

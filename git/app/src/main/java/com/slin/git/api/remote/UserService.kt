@@ -2,8 +2,8 @@ package com.slin.git.api.remote
 
 import androidx.lifecycle.LiveData
 import com.slin.core.net.Results
-import com.slin.git.entity.ReceivedEvent
-import com.slin.git.entity.Repo
+import com.slin.git.api.entity.ReceivedEvent
+import com.slin.git.api.entity.Repo
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

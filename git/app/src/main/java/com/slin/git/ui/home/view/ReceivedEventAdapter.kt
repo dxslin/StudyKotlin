@@ -12,10 +12,10 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.slin.core.image.impl.ImageConfigImpl
 import com.slin.git.R
+import com.slin.git.api.entity.ReceivedEvent
+import com.slin.git.api.entity.Type
+import com.slin.git.api.entity.receivedEventsDiff
 import com.slin.git.databinding.ItemHomeEventsBinding
-import com.slin.git.entity.ReceivedEvent
-import com.slin.git.entity.Type
-import com.slin.git.entity.receivedEventsDiff
 import com.slin.git.utils.ImageLoaderUtils
 import com.slin.git.utils.ShapeAppearanceTransformation
 import com.slin.git.weight.anim.animator.*

@@ -16,7 +16,7 @@ class LoginRepository(
 ) : IRepository {
 
     fun logout() {
-        UserManager.isLoggedIn = false
+        UserManager.userInfo.postValue(null)
         remoteDataSource.logout()
     }
 
@@ -35,8 +35,7 @@ class LoginRepository(
     }
 
     private fun setLoggedInUser(userInfo: UserInfo) {
-        UserManager.INSTANCE = userInfo
-        UserManager.isLoggedIn = true
+        UserManager.userInfo.postValue(userInfo)
     }
 
     fun isAutoLogin(): Boolean {

@@ -129,7 +129,7 @@ class ReceivedEventsPersistentConverter {
     fun saveEnumToString(enumType: Type) = enumType.name
 }
 
-object receivedEventsDiff : DiffUtil.ItemCallback<ReceivedEvent>() {
+object ReceivedEventsDiff : DiffUtil.ItemCallback<ReceivedEvent>() {
     override fun areItemsTheSame(oldItem: ReceivedEvent, newItem: ReceivedEvent): Boolean {
         return oldItem.id == newItem.id
     }

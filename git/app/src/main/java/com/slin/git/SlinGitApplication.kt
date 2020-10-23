@@ -4,8 +4,9 @@ import com.slin.core.CoreApplication
 import com.slin.core.config.AppConfig
 import com.slin.core.config.DefaultConfig
 import com.slin.git.config.Config
-import com.slin.git.config.configModule
 import com.slin.git.di.apiServiceModule
+import com.slin.git.di.configModule
+import com.slin.git.di.daoModule
 import org.kodein.di.*
 
 
@@ -28,6 +29,7 @@ class SlinGitApplication : CoreApplication() {
 
         import(configModule)
         import(apiServiceModule)
+        import(daoModule)
     }
 
     override fun onCreate() {

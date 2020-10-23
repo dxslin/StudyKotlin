@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import com.slin.core.net.Results
-import com.slin.core.repository.CoreRepositoryNothing
+import com.slin.core.repository.CoreRepository
 import com.slin.core.repository.IRemoteDataSource
 import com.slin.git.api.arguments.OneArgPage
 import com.slin.git.api.arguments.START_PAGE_NUM
@@ -24,13 +24,13 @@ import kotlinx.coroutines.flow.Flow
  * description: 首页仓库
  *
  */
-class HomeRepository(private val userService: UserService) : CoreRepositoryNothing() {
+class HomeRepository(private val userService: UserService) : CoreRepository() {
 
     fun queryReceivedEvents(
         perPage: Int = PAGING_REMOTE_PAGE_SIZE
     ): Flow<PagingData<ReceivedEvent>> {
 
-        val username = UserManager.INSTANCE.login
+        val username = UserManager.userInfo.value?.login ?: ""
         val pageWithArgs = OneArgPage(0, username)
 
         return Pager(

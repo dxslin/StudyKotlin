@@ -1,4 +1,4 @@
-package com.slin.git.config
+package com.slin.git.di
 
 import com.slin.core.config.ApplyRetrofitOptions
 import com.slin.core.di.DEFAULT_SHARE_PREFERENCES_TAG

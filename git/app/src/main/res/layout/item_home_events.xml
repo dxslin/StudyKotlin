@@ -9,7 +9,7 @@
 
         <variable
             name="event"
-            type="com.slin.git.entity.ReceivedEvent" />
+            type="com.slin.git.api.entity.ReceivedEvent" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

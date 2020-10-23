@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.slin.core.image.impl.ImageConfigImpl
 import com.slin.git.R
 import com.slin.git.api.entity.ReceivedEvent
+import com.slin.git.api.entity.ReceivedEventsDiff
 import com.slin.git.api.entity.Type
-import com.slin.git.api.entity.receivedEventsDiff
 import com.slin.git.databinding.ItemHomeEventsBinding
 import com.slin.git.utils.ImageLoaderUtils
 import com.slin.git.utils.ShapeAppearanceTransformation
@@ -28,7 +28,7 @@ import com.slin.git.weight.anim.animator.*
  *
  */
 class ReceivedEventAdapter :
-    PagingDataAdapter<ReceivedEvent, ReceiveEventViewHolder>(receivedEventsDiff),
+    PagingDataAdapter<ReceivedEvent, ReceiveEventViewHolder>(ReceivedEventsDiff),
     IItemAnimatorAdapter {
 
     init {

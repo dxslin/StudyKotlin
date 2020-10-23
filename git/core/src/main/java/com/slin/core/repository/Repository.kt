@@ -7,7 +7,7 @@ package com.slin.core.repository
  */
 interface IRepository
 
-open class CoreRepositoryNothing() : IRepository
+open class CoreRepository() : IRepository
 
 open class CoreRepositoryLocal<T : ILocalDataSource>(val localDataSource: T) : IRepository {
 

@@ -1,6 +1,7 @@
 package com.slin.git.di
 
 import androidx.room.Room
+import com.slin.git.SlinGitApplication
 import com.slin.git.api.local.AppDatabase
 import com.slin.git.api.local.SearchHistoryDao
 import org.kodein.di.DI
@@ -20,7 +21,8 @@ const val DAO_MODULE_TAG = "dao_module_tag"
 val daoModule = DI.Module(DAO_MODULE_TAG) {
 
     bind<AppDatabase>() with singleton {
-        Room.databaseBuilder(instance(), AppDatabase::class.java, "git_db").build()
+        Room.databaseBuilder(instance<SlinGitApplication>(), AppDatabase::class.java, "git_db")
+            .build()
     }
 
     bind<SearchHistoryDao>() with singleton {

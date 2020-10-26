@@ -1,10 +1,12 @@
-package com.slin.git
+package com.slin.git.ui.main
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.slin.git.R
 import com.slin.git.base.BaseActivity
 import com.slin.git.databinding.ActivityMainBinding
 import com.slin.git.ext.hide
@@ -12,10 +14,24 @@ import com.slin.git.ext.show
 
 class MainActivity : BaseActivity() {
 
+    companion object {
+        var INSTANCE: MainActivity? = null
+
+        fun showLogin() {
+            INSTANCE?.apply {
+                findNavController(R.id.nav_host_fragment).navigate(R.id.action_home_to_login)
+            }
+        }
+
+    }
+
+    private val viewModel: MainActivity by viewModels()
+
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        INSTANCE = this
         binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         binding.apply {
 //            val navView: BottomNavigationView = findViewById(R.id.nav_view)
@@ -46,6 +62,11 @@ class MainActivity : BaseActivity() {
         }
 
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        INSTANCE = null
     }
 
 }

@@ -16,6 +16,7 @@ import com.slin.git.config.PAGING_REMOTE_PAGE_SIZE
 import com.slin.git.ext.getOrAwaitValue
 import com.slin.git.manager.UserManager
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 
 /**
@@ -30,7 +31,10 @@ class HomeRepository(private val userService: UserService) : CoreRepository() {
         perPage: Int = PAGING_REMOTE_PAGE_SIZE
     ): Flow<PagingData<ReceivedEvent>> {
 
-        val username = UserManager.userInfo.value?.login ?: ""
+        val username = UserManager.requireUserName()
+        if (username.isBlank()) {
+            return flow { }
+        }
         val pageWithArgs = OneArgPage(0, username)
 
         return Pager(

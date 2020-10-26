@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.ThreadFactory
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicInteger
 
 
 /**
@@ -38,17 +39,16 @@ object ExecutorServiceHelper {
     /**
      * 默认的线程工厂
      */
-    private class DefaultThreadFactory internal constructor(
+    private class DefaultThreadFactory(
         private val name: String,
         private val daemon: Boolean
     ) :
         ThreadFactory {
-        private var threadNum = 0
+        private var threadNum: AtomicInteger = AtomicInteger(0)
         override fun newThread(r: Runnable): Thread {
-            val thread = Thread(r, name + "_" + threadNum)
+            val thread = Thread(r, name + "_" + threadNum.getAndIncrement())
             thread.priority = Thread.NORM_PRIORITY
             thread.isDaemon = daemon
-            threadNum++
             return thread
         }
     }

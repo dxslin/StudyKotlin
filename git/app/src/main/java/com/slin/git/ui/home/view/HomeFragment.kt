@@ -53,8 +53,7 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (!UserManager.isLoggedIn) {
-            UserManager.userInfo.postValue(UserInfo.dxslin)
-            requireContext()
+            UserManager.userInfo.value = UserInfo.dxslin
 //            findNavController().navigate(R.id.action_home_to_login)
 //            return
         }

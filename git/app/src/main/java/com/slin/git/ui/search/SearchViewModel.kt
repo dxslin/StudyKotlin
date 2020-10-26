@@ -9,8 +9,8 @@ import kotlinx.coroutines.launch
 
 class SearchViewModel(private val repository: SearchRepository) : ViewModel() {
 
-    private val _historyData: MutableLiveData<List<SearchHistory>> = MutableLiveData()
-    val historyData: LiveData<List<SearchHistory>> = _historyData
+    private val _historyData: MutableLiveData<MutableList<SearchHistory>> = MutableLiveData()
+    val historyData: LiveData<MutableList<SearchHistory>> = _historyData
 
 
     fun search(keywords: String) {
@@ -23,14 +23,17 @@ class SearchViewModel(private val repository: SearchRepository) : ViewModel() {
 
     fun query() {
         viewModelScope.launch {
-            _historyData.postValue(
-                repository.querySearchHistory().toList()
-            )
+            //查询历史
+            val data = repository.querySearchHistory().toMutableList()
+            //列表倒叙
+            data.reverse()
+            _historyData.postValue(data)
         }
     }
 
     private suspend fun addSearchHistory(value: String) {
         repository.insertSearchHistory(SearchHistory.SearchType.REPOS, value)
+        query()
     }
 
 }

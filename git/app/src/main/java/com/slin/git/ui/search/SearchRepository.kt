@@ -16,14 +16,14 @@ import com.slin.git.api.local.SearchHistoryDao
 /**
  * 保留的搜索历史数量
  */
-const val RETAIN_SEARCH_HISTORY_COUNT = 20
+const val RETAIN_SEARCH_HISTORY_COUNT = 10
 
 class SearchRepository(private val localDataSource: SearchLocalDataSource) : IRepository {
 
     suspend fun insertSearchHistory(type: SearchHistory.SearchType, keyword: String): Long {
         val searchHistory = SearchHistory(type = type, keyword = keyword)
         val result = localDataSource.insertSearchHistory(searchHistory)
-        if (result > RETAIN_SEARCH_HISTORY_COUNT) {
+        if (result >= RETAIN_SEARCH_HISTORY_COUNT) {
             deleteByMaxKey(result - RETAIN_SEARCH_HISTORY_COUNT)
         }
         return result

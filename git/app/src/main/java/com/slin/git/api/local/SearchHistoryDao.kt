@@ -10,7 +10,7 @@ import com.slin.git.api.entity.SearchHistory
 /**
  * author: slin
  * date: 2020/10/23
- * description:
+ * description: 搜索历史dao
  *
  */
 @Dao

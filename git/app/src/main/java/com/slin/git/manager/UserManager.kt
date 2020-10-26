@@ -3,6 +3,7 @@ package com.slin.git.manager
 import androidx.lifecycle.MutableLiveData
 import com.slin.core.ext.forceNotNull
 import com.slin.git.api.entity.UserInfo
+import com.slin.git.ui.main.MainActivity
 
 /**
  * author: slin
@@ -15,7 +16,7 @@ object UserManager {
     var isLoggedIn: Boolean = false
         private set
 
-    val userInfo: MutableLiveData<UserInfo?> = MutableLiveData<UserInfo?>(null).apply {
+    val userInfo: MutableLiveData<UserInfo?> = MutableLiveData<UserInfo?>().apply {
         observeForever { value ->
             isLoggedIn = (value != null)
         }
@@ -23,7 +24,7 @@ object UserManager {
 
     fun requireUserName(): String {
         return userInfo.value?.name.forceNotNull {
-            //todo async go to login
+            MainActivity.showLogin()
             ""
         }
     }

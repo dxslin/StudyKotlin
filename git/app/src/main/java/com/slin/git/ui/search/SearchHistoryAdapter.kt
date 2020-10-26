@@ -10,7 +10,7 @@ import com.slin.git.databinding.ItemSearchHistoryBinding
 
 
 /**
- * author: slin
+ * @author: slin
  * date: 2020/10/23
  * description:
  *

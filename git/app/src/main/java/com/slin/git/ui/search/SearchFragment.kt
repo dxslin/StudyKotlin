@@ -3,7 +3,6 @@ package com.slin.git.ui.search
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.EditorInfo
-import androidx.lifecycle.Observer
 import androidx.paging.PagingData
 import androidx.transition.Slide
 import com.slin.git.base.BaseFragment
@@ -62,13 +61,14 @@ class SearchFragment : BaseFragment() {
 
             val adapter = SearchHistoryAdapter()
             rvSearchHistory.adapter = adapter
-            viewModel.historyData.observe(this@SearchFragment.viewLifecycleOwner, Observer {
-                adapter.submitData(this@SearchFragment.lifecycle, PagingData.from(it))
+
+            viewModel.historyData.observe(this@SearchFragment.viewLifecycleOwner, { data ->
+                adapter.submitData(this@SearchFragment.lifecycle, PagingData.from(data))
             })
 
         }
 
-
+        viewModel.query()
     }
 
 }

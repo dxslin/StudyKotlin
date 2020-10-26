@@ -1,9 +1,6 @@
 package com.slin.git.api.local
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.slin.git.api.entity.SearchHistory
 
 
@@ -11,6 +8,8 @@ import com.slin.git.api.entity.SearchHistory
  * author: slin
  * date: 2020/10/23
  * description: 搜索历史dao
+ * support annotation, @Query/@Update/@Insert/@Delete
+ * `@Query`可以使用  `:arg1`方式引用参数
  *
  */
 @Dao
@@ -27,5 +26,8 @@ interface SearchHistoryDao {
 
     @Query("DELETE from search_history where `key` < :maxKey ")
     suspend fun deleteByMaxKey(maxKey: Long)
+
+    @Update
+    suspend fun update(value: SearchHistory)
 
 }

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option java_package = "com.slin.study.kotlin.proto";
+
+message ProtoDataTest {
+  int32 age = 1;
+  string name = 2;
+
+}

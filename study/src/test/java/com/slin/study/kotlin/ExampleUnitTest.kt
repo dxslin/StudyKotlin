@@ -15,22 +15,24 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
 //        assertEquals(4, 2 + 2)
 
-//        println(test())
+        println(test())
+        println(number)
 
-        val thread = Thread(Runnable {
-            while (!isOver) {
-                println(System.nanoTime())
-            };
-        })
-        thread.start()
-        try {
-            Thread.sleep(500)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
-        println("main ${System.nanoTime()}")
-        isOver = true
-        println("main ${System.nanoTime()}")
+
+//        val thread = Thread(Runnable {
+//            while (!isOver) {
+//                println(System.nanoTime())
+//            };
+//        })
+//        thread.start()
+//        try {
+//            Thread.sleep(500)
+//        } catch (e: InterruptedException) {
+//            e.printStackTrace()
+//        }
+//        println("main ${System.nanoTime()}")
+//        isOver = true
+//        println("main ${System.nanoTime()}")
     }
 
     @Volatile
@@ -69,5 +71,24 @@ class ExampleUnitTest {
         }
     }
 
+    data class Person(var name: String) : Cloneable {
+        public override fun clone(): Any {
+            return super.clone()
+        }
+    }
+
+    @Test
+    fun cloneTest() {
+        val person = Person("slin")
+        println(person)
+        val clonePerson = person.clone() as Person
+        println(clonePerson)
+
+        clonePerson.name = "tom"
+        println(clonePerson)
+        println(person)
+
+
+    }
 
 }

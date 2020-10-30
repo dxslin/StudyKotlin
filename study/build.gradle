@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'com.google.protobuf'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -32,6 +34,14 @@ android {
     buildFeatures {
         dataBinding = true
         viewBinding = true
+    }
+    sourceSets{
+        main{
+            proto{
+                srcDir 'src/main/proto'
+                include '**/*.proto'
+            }
+        }
     }
 }
 
@@ -67,4 +77,30 @@ dependencies {
     implementation 'org.kodein.di:kodein-di-framework-android-core:6.0.1'
     implementation 'org.kodein.di:kodein-di-framework-android-x:6.0.1'
 
+    // Preferences DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha02"
+    // Proto DataStore
+    implementation "androidx.datastore:datastore-core:1.0.0-alpha02"
+    // You need to depend on the lite runtime library, not protobuf-java
+    implementation "com.google.protobuf:protobuf-javalite:3.10.0"
+
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.10.0"
+    }
+
+    // Generates the java Protobuf-lite code for the Protobufs in this project. See
+    // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
+    // for more information.
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
 }

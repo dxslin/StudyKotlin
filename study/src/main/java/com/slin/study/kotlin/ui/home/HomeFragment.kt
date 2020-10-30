@@ -10,6 +10,7 @@ import com.slin.study.kotlin.base.BaseFragment
 import com.slin.study.kotlin.databinding.FragmentHomeBinding
 import com.slin.study.kotlin.ui.bottomsheet.BottomSheetTestActivity
 import com.slin.study.kotlin.ui.jetpack.DataBindActivity
+import com.slin.study.kotlin.ui.jetpack.DataStoreActivity
 import com.slin.study.kotlin.ui.jetpack.ViewBindActivity
 import com.slin.study.kotlin.ui.librarycase.LibraryCaseActivity
 import com.slin.study.kotlin.ui.material.MaterialDesignActivity
@@ -48,6 +49,11 @@ class HomeFragment : BaseFragment() {
                 "LibraryCase",
                 R.drawable.img_cartoon_pig2,
                 LibraryCaseActivity::class.java
+            ),
+            TestPageData(
+                "DataStore",
+                R.drawable.img_cartoon_car,
+                DataStoreActivity::class.java
             )
 
         )

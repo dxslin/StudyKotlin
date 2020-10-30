@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data></data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/activity_horizontal_margin"
+        android:paddingVertical="@dimen/activity_vertical_margin"
+        tools:context=".ui.jetpack.DataStoreActivity">
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minLines="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Preference"
+            android:textAppearance="@style/TextTitle"
+            app:layout_constraintBottom_toTopOf="@id/btn_preference_save"
+            app:layout_constraintStart_toStartOf="@id/btn_preference_save" />
+
+        <Button
+            android:id="@+id/btn_preference_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="save"
+            app:layout_constraintBottom_toTopOf="@id/tv_title_proto"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_preference_read"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="read"
+            app:layout_constraintStart_toEndOf="@id/btn_preference_save"
+            app:layout_constraintTop_toTopOf="@id/btn_preference_save" />
+
+        <TextView
+            android:id="@+id/tv_title_proto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="proto"
+            android:textAppearance="@style/TextTitle"
+            app:layout_constraintBottom_toTopOf="@id/btn_proto_save"
+            app:layout_constraintStart_toStartOf="@id/btn_proto_save" />
+
+        <Button
+            android:id="@+id/btn_proto_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_proto_read"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="read"
+            app:layout_constraintStart_toEndOf="@id/btn_proto_save"
+            app:layout_constraintTop_toTopOf="@id/btn_proto_save" />
+
+        <TextView
+            android:id="@+id/tv_clear_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="X"
+            app:layout_constraintBottom_toBottomOf="@id/et_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/et_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

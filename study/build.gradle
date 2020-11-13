@@ -84,6 +84,12 @@ dependencies {
     // You need to depend on the lite runtime library, not protobuf-java
     implementation "com.google.protobuf:protobuf-javalite:3.10.0"
 
+    //WorkManager
+    // Kotlin + coroutines
+    implementation "androidx.work:work-runtime-ktx:2.4.0"
+    // optional - GCMNetworkManager support
+    implementation "androidx.work:work-gcm:2.4.0"
+
 }
 
 protobuf {

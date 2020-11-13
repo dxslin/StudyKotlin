@@ -12,6 +12,7 @@ import com.slin.study.kotlin.ui.bottomsheet.BottomSheetTestActivity
 import com.slin.study.kotlin.ui.jetpack.DataBindActivity
 import com.slin.study.kotlin.ui.jetpack.DataStoreActivity
 import com.slin.study.kotlin.ui.jetpack.ViewBindActivity
+import com.slin.study.kotlin.ui.jetpack.WorkManagerTestActivity
 import com.slin.study.kotlin.ui.librarycase.LibraryCaseActivity
 import com.slin.study.kotlin.ui.material.MaterialDesignActivity
 import com.slin.study.kotlin.ui.motion.MotionLayoutTestActivity
@@ -54,6 +55,11 @@ class HomeFragment : BaseFragment() {
                 "DataStore",
                 R.drawable.img_cartoon_car,
                 DataStoreActivity::class.java
+            ),
+            TestPageData(
+                "WorkManager",
+                R.drawable.img_cartoon_1,
+                WorkManagerTestActivity::class.java
             )
 
         )

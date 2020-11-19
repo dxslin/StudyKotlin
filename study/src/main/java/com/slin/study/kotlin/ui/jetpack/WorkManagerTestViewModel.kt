@@ -96,6 +96,9 @@ class WorkManagerTestViewModel(val context: Context, private val owner: Lifecycl
         workManager.getWorkInfoByIdLiveData(downloadRequest.id)
             .observe(owner, Observer {
                 Log.d(TAG, "downloadWorkTest: $it")
+                it.progress.apply {
+                    _workResult.postValue("progress: ${getInt(DownloadWorker.PROGRESS, 0)}")
+                }
             })
     }
 
@@ -154,7 +157,7 @@ class DownloadWorker(context: Context, parameters: WorkerParameters) :
             Log.d(TAG, "download: $downloadUrl $outputFile $it")
             setProgress(
                 workDataOf(
-                    "progress" to it
+                    PROGRESS to it
                 )
             )
             setForeground(createForegroundInfo("$it%"))
@@ -201,6 +204,7 @@ class DownloadWorker(context: Context, parameters: WorkerParameters) :
         val INPUT_URL = "input_url"
         val OUTPUT_FILE = "output_file"
         private val CHANNEL_ID = "work manager test id"
+        val PROGRESS = "progress"
     }
 
 }

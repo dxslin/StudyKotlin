@@ -9,6 +9,7 @@ import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseFragment
 import com.slin.study.kotlin.databinding.FragmentHomeBinding
 import com.slin.study.kotlin.ui.bottomsheet.BottomSheetTestActivity
+import com.slin.study.kotlin.ui.floatwin.FloatWindowActivity
 import com.slin.study.kotlin.ui.jetpack.DataBindActivity
 import com.slin.study.kotlin.ui.jetpack.DataStoreActivity
 import com.slin.study.kotlin.ui.jetpack.ViewBindActivity
@@ -60,6 +61,11 @@ class HomeFragment : BaseFragment() {
                 "WorkManager",
                 R.drawable.img_cartoon_1,
                 WorkManagerTestActivity::class.java
+            ),
+            TestPageData(
+                "WorkManager",
+                R.drawable.img_cartoon_2,
+                FloatWindowActivity::class.java
             )
 
         )

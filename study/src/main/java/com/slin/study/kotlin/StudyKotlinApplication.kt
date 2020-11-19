@@ -1,6 +1,8 @@
 package com.slin.study.kotlin
 
 import android.app.Application
+import android.util.Log
+import androidx.work.Configuration
 import com.slin.study.kotlin.ui.librarycase.kodein.moduleUser
 import com.slin.study.kotlin.util.ThemeHelper
 import org.kodein.di.Kodein
@@ -18,7 +20,7 @@ import org.kodein.di.generic.singleton
  *
  */
 
-class StudyKotlinApplication : Application(), KodeinAware {
+class StudyKotlinApplication : Application(), KodeinAware, Configuration.Provider {
 
     override val kodein: Kodein
         get() = Kodein.lazy {
@@ -39,6 +41,12 @@ class StudyKotlinApplication : Application(), KodeinAware {
         INSTANCE = this
         ThemeHelper.init(this)
 
+    }
+
+    override fun getWorkManagerConfiguration(): Configuration {
+        return Configuration.Builder()
+            .setMinimumLoggingLevel(Log.DEBUG)
+            .build()
     }
 
 }

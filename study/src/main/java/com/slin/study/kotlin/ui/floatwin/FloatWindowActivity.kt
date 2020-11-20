@@ -62,7 +62,7 @@ class FloatWindowActivity : BaseActivity() {
         } else {
             params.type = WindowManager.LayoutParams.TYPE_APPLICATION_ATTACHED_DIALOG
         }
-        params.flags = WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM
+        params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
         params.dimAmount = 0.0f
         params.width = 160
         params.height = 160
@@ -98,6 +98,7 @@ class FloatWindowActivity : BaseActivity() {
         })
 
         manager.addView(view, params)
+
 
     }
 

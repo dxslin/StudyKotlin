@@ -50,7 +50,7 @@ class WorkManagerTestViewModel(val context: Context, private val owner: Lifecycl
             .setRequiredNetworkType(NetworkType.CONNECTED)  //需要处于的网络连接状态
             .setRequiresBatteryNotLow(true)  //低电量不允许
             .setRequiresCharging(false)     //设置是否在充电
-            .setRequiresDeviceIdle(true)    //设备是否空闲
+            .setRequiresDeviceIdle(false)    //设备是否空闲
             .build()
 
         val onceLogRequest = OneTimeWorkRequestBuilder<LogTestWorker>()
@@ -77,6 +77,10 @@ class WorkManagerTestViewModel(val context: Context, private val owner: Lifecycl
             .setInputData(inputWorkData)
             .build()
         workManager.enqueue(periodRequest)
+        val workInfoLiveData = workManager.getWorkInfoByIdLiveData(periodRequest.id)
+        workInfoLiveData.observe(owner) {
+            Log.d(TAG, "periodRequestTest: observeForever: ${it.state} ${it.outputData}")
+        }
     }
 
     /**

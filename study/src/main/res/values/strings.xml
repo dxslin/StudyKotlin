@@ -20,6 +20,8 @@
     <string name="key_transition_abstract">key_transition_abstract</string>
     <string name="key_transition_detail">key_transition_detail</string>
     <string name="close_char">×</string>
+    <string name="module_inject">module inject</string>
+    <string name="analytics_service">Analytics Service</string>
 
 
 </resources>

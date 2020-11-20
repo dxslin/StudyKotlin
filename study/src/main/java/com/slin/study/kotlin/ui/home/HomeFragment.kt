@@ -10,10 +10,7 @@ import com.slin.study.kotlin.base.BaseFragment
 import com.slin.study.kotlin.databinding.FragmentHomeBinding
 import com.slin.study.kotlin.ui.bottomsheet.BottomSheetTestActivity
 import com.slin.study.kotlin.ui.floatwin.FloatWindowActivity
-import com.slin.study.kotlin.ui.jetpack.DataBindActivity
-import com.slin.study.kotlin.ui.jetpack.DataStoreActivity
-import com.slin.study.kotlin.ui.jetpack.ViewBindActivity
-import com.slin.study.kotlin.ui.jetpack.WorkManagerTestActivity
+import com.slin.study.kotlin.ui.jetpack.JetPackActivity
 import com.slin.study.kotlin.ui.librarycase.LibraryCaseActivity
 import com.slin.study.kotlin.ui.material.MaterialDesignActivity
 import com.slin.study.kotlin.ui.motion.MotionLayoutTestActivity
@@ -30,8 +27,7 @@ class HomeFragment : BaseFragment() {
 
     private val testDataList =
         arrayListOf(
-            TestPageData("ViewBind", R.drawable.img_cartoon_1, ViewBindActivity::class.java),
-            TestPageData("DataBind", R.drawable.img_cartoon_2, DataBindActivity::class.java),
+            TestPageData("JetPack", R.drawable.img_cartoon_1, JetPackActivity::class.java),
             TestPageData(
                 "BottomSheet",
                 R.drawable.img_cartoon_3,
@@ -53,17 +49,7 @@ class HomeFragment : BaseFragment() {
                 LibraryCaseActivity::class.java
             ),
             TestPageData(
-                "DataStore",
-                R.drawable.img_cartoon_car,
-                DataStoreActivity::class.java
-            ),
-            TestPageData(
-                "WorkManager",
-                R.drawable.img_cartoon_1,
-                WorkManagerTestActivity::class.java
-            ),
-            TestPageData(
-                "WorkManager",
+                "FloatWindow",
                 R.drawable.img_cartoon_2,
                 FloatWindowActivity::class.java
             )

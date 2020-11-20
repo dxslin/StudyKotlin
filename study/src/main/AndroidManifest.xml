@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.floatwin.FloatWindowActivity"></activity>
+        <activity android:name=".ui.jetpack.HiltInjectActivity"></activity>
+        <activity android:name=".ui.jetpack.JetPackActivity" />
+        <activity android:name=".ui.floatwin.FloatWindowActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

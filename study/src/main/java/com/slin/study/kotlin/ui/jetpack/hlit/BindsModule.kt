@@ -3,7 +3,7 @@ package com.slin.study.kotlin.ui.jetpack.hlit
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.ActivityRetainedComponent
 import javax.inject.Qualifier
 
 
@@ -29,7 +29,7 @@ import javax.inject.Qualifier
  *
  */
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(ActivityRetainedComponent::class)
 abstract class BindsModule {
 
     @Binds

@@ -7,6 +7,7 @@ import com.bumptech.glide.RequestManager
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.databinding.ActivityHiltInjectBinding
+import com.slin.study.kotlin.ui.testlist.TestListFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -15,9 +16,11 @@ import javax.inject.Inject
  * date: 2020/11/20
  * description: Hilt 使用测试
  * 1. Application -> add @HiltAndroidApp annotation  activity -> add @AndroidEntryPoint
- * 2. create module -> add @Module & @InstallIn(XXComponent) -> create function -> add @Binds/@Provides
+ * 2. Create module -> add @Module & @InstallIn(XXComponent) -> create function -> add @Binds/@Provides
  * 3. inject to variable which cannot be private
- * 4. You need add `androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02` if use hilt in ViewModel
+ * 4. You need add `implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02"`
+ *      and `kapt "androidx.hilt:hilt-compiler:1.0.0-alpha02"` if use hilt in ViewModel
+ * 5. Use `@ActivityContext` or `@ApplicationContext` inject context if you want
  *
  * 参考文档：https://developer.android.google.cn/training/dependency-injection/hilt-android
  */
@@ -25,10 +28,9 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HiltInjectActivity : BaseActivity() {
 
+
     private val viewModel by viewModels<HiltInjectViewModel>()
 
-//    @Inject
-//    lateinit var viewModel:HiltInjectViewModel
 
     private lateinit var binding: ActivityHiltInjectBinding
 
@@ -37,7 +39,11 @@ class HiltInjectActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hilt_inject)
+        //设置标题
+        intent?.extras?.getString(TestListFragment.INTENT_NAME)?.let {
+            title = it
+        }
+        setShowBackButton(true)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_hilt_inject)
 
         initView()
@@ -55,6 +61,7 @@ class HiltInjectActivity : BaseActivity() {
 
             btnAnalyticsService.setOnClickListener { viewModel.analyticsServiceResult() }
             btnAnalyticsServiceOther.setOnClickListener { viewModel.analyticsServiceOtherResult() }
+            btnRequestInfo.setOnClickListener { viewModel.requestUserInfo() }
 
 
         }

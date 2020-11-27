@@ -5,6 +5,8 @@ import retrofit2.*
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.util.concurrent.CompletableFuture
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
 /**
@@ -16,11 +18,12 @@ import java.util.concurrent.CompletableFuture
  *
  */
 @SuppressLint("NewApi")
-class RxResultsCallAdapterFactory : CallAdapter.Factory() {
+@Singleton
+class RxResultsCallAdapterFactory @Inject constructor() : CallAdapter.Factory() {
     override fun get(
         returnType: Type,
         annotations: Array<Annotation>,
-        retrofit: Retrofit
+        retrofit: Retrofit,
     ): CallAdapter<*, *>? {
         if (getRawType(returnType) != CompletableFuture::class.java) {
             return null

@@ -6,6 +6,7 @@ import retrofit2.*
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.util.concurrent.atomic.AtomicBoolean
+import javax.inject.Inject
 
 /**
  * author: slin
@@ -16,11 +17,11 @@ import java.util.concurrent.atomic.AtomicBoolean
 /**
  * the LiveDataCallAdapter factory
  */
-class LiveDataCallAdapterFactory : CallAdapter.Factory() {
+class LiveDataCallAdapterFactory @Inject constructor() : CallAdapter.Factory() {
     override fun get(
         returnType: Type,
         annotations: Array<out Annotation>,
-        retrofit: Retrofit
+        retrofit: Retrofit,
     ): CallAdapter<*, *>? {
         //如果api接口函数使用了kotlin的挂起函数suspend，那么这里类型应该是Call<LiveData<*>>，不会与之匹配，请不要使用
         if (getRawType(returnType) != LiveData::class.java) {

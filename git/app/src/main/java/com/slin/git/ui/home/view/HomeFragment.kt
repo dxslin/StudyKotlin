@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -18,24 +19,20 @@ import com.slin.git.manager.UserManager
 import com.slin.git.ui.common.ContentLoadStateAdapter
 import com.slin.git.ui.common.FooterLoadStateAdapter
 import com.slin.git.ui.common.withLoadStateRefreshAndFooter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
-import org.kodein.di.DI
-import org.kodein.di.instance
 
 /**
  * 首页，received_events
  */
+@AndroidEntryPoint
 class HomeFragment : BaseFragment() {
 
-    override val di: DI by DI.lazy {
-        extend(super.di)
-        import(homeModule)
-    }
 
-    private val viewModel: HomeViewModel by instance()
+    private val viewModel: HomeViewModel by viewModels()
 
     private lateinit var binding: FragmentHomeBinding
 

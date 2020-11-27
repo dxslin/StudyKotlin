@@ -1,10 +1,6 @@
 package com.slin.git.utils
 
-import com.slin.core.image.ImageLoader
 import com.slin.core.image.impl.ImageConfigImpl
-import com.slin.core.image.load
-import com.slin.git.SlinGitApplication
-import org.kodein.di.instance
 
 
 /**
@@ -15,7 +11,7 @@ import org.kodein.di.instance
  */
 object ImageLoaderUtils {
     inline fun loadImage(config: () -> ImageConfigImpl) {
-        val imageLoader by SlinGitApplication.INSTANCE.di.instance<ImageLoader>()
-        imageLoader.load(config)
+//        val imageLoader by SlinGitApplication.INSTANCE.di.instance<ImageLoader>()
+//        imageLoader.load(config)
     }
 }

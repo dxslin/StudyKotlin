@@ -1,14 +1,15 @@
 package com.slin.git.di
 
+import android.app.Application
 import androidx.room.Room
-import com.slin.git.SlinGitApplication
 import com.slin.git.api.local.AppDatabase
 import com.slin.git.api.local.SearchHistoryDao
-import org.kodein.di.DI
-import org.kodein.di.bind
-import org.kodein.di.instance
-import org.kodein.di.singleton
-
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Singleton
 
 /**
  * author: slin
@@ -16,17 +17,24 @@ import org.kodein.di.singleton
  * description:
  *
  */
-const val DAO_MODULE_TAG = "dao_module_tag"
 
-val daoModule = DI.Module(DAO_MODULE_TAG) {
+@Module
+@InstallIn(ApplicationComponent::class)
+object DaoModule {
 
-    bind<AppDatabase>() with singleton {
-        Room.databaseBuilder(instance<SlinGitApplication>(), AppDatabase::class.java, "git_db")
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext application: Application): AppDatabase {
+        return Room
+            .databaseBuilder(application, AppDatabase::class.java, "git_db")
             .build()
     }
 
-    bind<SearchHistoryDao>() with singleton {
-        instance<AppDatabase>().searchHistoryDao()
+
+    @Provides
+    @Singleton
+    fun provideSearchHistoryDao(database: AppDatabase): SearchHistoryDao {
+        return database.searchHistoryDao()
     }
 
 }

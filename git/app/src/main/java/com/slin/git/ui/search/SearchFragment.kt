@@ -3,26 +3,21 @@ package com.slin.git.ui.search
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.EditorInfo
+import androidx.fragment.app.viewModels
 import androidx.paging.PagingData
 import androidx.transition.Slide
 import com.slin.git.base.BaseFragment
 import com.slin.git.databinding.SearchFragmentBinding
-import org.kodein.di.DI
-import org.kodein.di.instance
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = SearchFragment()
     }
 
-    override val di: DI by DI.lazy {
-        extend(super.di)
-        import(searchModule)
-
-    }
-
-    private val viewModel: SearchViewModel by instance()
+    private val viewModel: SearchViewModel by viewModels()
 
     private lateinit var binding: SearchFragmentBinding
 

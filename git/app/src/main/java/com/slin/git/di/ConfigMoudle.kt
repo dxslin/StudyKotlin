@@ -1,13 +1,23 @@
 package com.slin.git.di
 
+import android.app.Application
+import android.content.SharedPreferences
+import com.slin.core.config.AppConfig
+import com.slin.core.config.ApplyOkHttpOptions
 import com.slin.core.config.ApplyRetrofitOptions
-import com.slin.core.di.DEFAULT_SHARE_PREFERENCES_TAG
+import com.slin.core.config.DefaultConfig
+import com.slin.core.di.CoreSharePreferencesQualifier
 import com.slin.git.api.local.GitUserInfoStorage
+import com.slin.git.config.Config
 import com.slin.git.net.GitAuthInterceptor
 import com.slin.git.net.LiveDataCallAdapterFactory
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.Interceptor
-import org.kodein.di.*
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
 
 /**
@@ -16,30 +26,50 @@ import retrofit2.Retrofit
  * description: app动态配置项，需要依赖注入的配置在这里
  *
  */
-const val CONFIG_MODULE_TAG = "config_module_tag"
 
-val configModule = DI.Module(CONFIG_MODULE_TAG) {
-    bind<List<Interceptor>>() with provider {
-        listOf<Interceptor>(
-            GitAuthInterceptor(instance())
+@Module
+@InstallIn(ApplicationComponent::class)
+object ConfigModule {
+
+    @Provides
+    fun provideAppConfig(
+        application: Application,
+        interceptors: List<Interceptor>,
+        applyOkHttpOptions: ApplyOkHttpOptions,
+    ): AppConfig {
+        return AppConfig(
+            application = application,
+            baseUrl = Config.BASE_URL,
+            httpLogLevel = DefaultConfig.HTTP_LOG_LEVEL,
+            customInterceptors = interceptors,
+            applyOkHttpOptions = applyOkHttpOptions,
         )
     }
 
-    bind<GitUserInfoStorage>() with singleton {
-        GitUserInfoStorage.getInstance(instance(DEFAULT_SHARE_PREFERENCES_TAG))
+    @Provides
+    @Singleton
+    fun provideInterceptorList(gitUserInfoStorage: GitUserInfoStorage): List<Interceptor> {
+        return listOf<Interceptor>(
+            GitAuthInterceptor(gitUserInfoStorage)
+        )
     }
 
-    //config retrofit return LiveData<Results>
-    bind<ApplyRetrofitOptions>() with provider {
-        object : ApplyRetrofitOptions {
+    @Provides
+    @Singleton
+    fun provideGitUserInfoStorage(
+        @CoreSharePreferencesQualifier
+        sharedPreferences: SharedPreferences,
+    ): GitUserInfoStorage {
+        return GitUserInfoStorage.getInstance(sharedPreferences)
+    }
+
+    @Provides
+    fun provideApplyRetrofitOptions(liveDataCallAdapterFactory: LiveDataCallAdapterFactory): ApplyRetrofitOptions {
+        return object : ApplyRetrofitOptions {
             override fun apply(builder: Retrofit.Builder) {
-                builder.addCallAdapterFactory(instance<LiveDataCallAdapterFactory>())
+                builder.addCallAdapterFactory(liveDataCallAdapterFactory)
             }
         }
-    }
-
-    bind<LiveDataCallAdapterFactory>() with provider {
-        LiveDataCallAdapterFactory()
     }
 
 }

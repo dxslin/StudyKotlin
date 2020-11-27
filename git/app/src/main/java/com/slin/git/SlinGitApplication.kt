@@ -1,13 +1,12 @@
 package com.slin.git
 
+import android.app.Application
+import android.os.Handler
+import android.os.Looper
+import com.google.gson.Gson
 import com.slin.core.CoreApplication
-import com.slin.core.config.AppConfig
-import com.slin.core.config.DefaultConfig
-import com.slin.git.config.Config
-import com.slin.git.di.apiServiceModule
-import com.slin.git.di.configModule
-import com.slin.git.di.daoModule
-import org.kodein.di.*
+import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 
 
 /**
@@ -16,35 +15,34 @@ import org.kodein.di.*
  * description:
  *
  */
-class SlinGitApplication : CoreApplication() {
+@HiltAndroidApp
+class SlinGitApplication : Application() {
 
     companion object {
-        lateinit var INSTANCE: CoreApplication
+        lateinit var INSTANCE: SlinGitApplication
     }
 
-    override val di: DI = subDI(super.di) {
-        bind<SlinGitApplication>() with singleton {
-            this@SlinGitApplication
-        }
-
-        import(configModule)
-        import(apiServiceModule)
-        import(daoModule)
-    }
+    @Inject
+    lateinit var gson: Gson
 
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
+
+        Handler(Looper.getMainLooper())
+            .post {
+
+                CoreApplication.init(this)
+            }
     }
 
-    override fun createAppConfig(directDIAware: DirectDIAware): AppConfig {
-        return directDIAware.run {
-            super.createAppConfig(directDIAware).copy(
-                baseUrl = Config.BASE_URL,
-                httpLogLevel = DefaultConfig.HTTP_LOG_LEVEL,
-                customInterceptors = instance(),
-                applyRetrofitOptions = instance()
-            )
-        }
-    }
+//    override fun createAppConfig(): AppConfig {
+//        return super.createAppConfig().copy(
+//                baseUrl = Config.BASE_URL,
+//                httpLogLevel = DefaultConfig.HTTP_LOG_LEVEL,
+//                customInterceptors = instance(),
+//                applyRetrofitOptions = instance()
+//            )
+
+//    }
 }

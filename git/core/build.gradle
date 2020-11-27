@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 29
@@ -44,9 +45,15 @@ dependencies {
     api Dependencies.lifecycle_runtime
 
 //    kodein 依赖注入
-    api Dependencies.kodein_jvm
-    api Dependencies.kodein_android_core
-    api Dependencies.kodein_android_x
+//    api Dependencies.kodein_jvm
+//    api Dependencies.kodein_android_core
+//    api Dependencies.kodein_android_x
+
+    //hilt
+    api Dependencies.hilt
+    kapt Dependencies.hilt_compiler
+    api Dependencies.hilt_viewmodel
+    kapt Dependencies.hilt_viewmodel_compiler
 
 //    okhttp
     api Dependencies.okhttp

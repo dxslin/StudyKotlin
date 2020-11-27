@@ -1,10 +1,6 @@
 package com.slin.core.utils
 
 import com.google.gson.Gson
-import com.slin.core.CoreApplication
-import org.kodein.di.DI
-import org.kodein.di.DIAware
-import org.kodein.di.instance
 
 
 /**
@@ -13,11 +9,10 @@ import org.kodein.di.instance
  * description: json 转换
  *
  */
-object GsonUtils : DIAware {
+object GsonUtils {
 
-    override val di: DI = CoreApplication.INSTANCE.di
-
-    val INSTANCE: Gson by instance<Gson>()
+    //    val INSTANCE: Gson  = CoreApplication.INSTANCE.coreComponent.gson()
+    val INSTANCE: Gson = Gson()
 
 }
 

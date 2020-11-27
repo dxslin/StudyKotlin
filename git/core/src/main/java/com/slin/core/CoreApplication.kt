@@ -2,13 +2,11 @@ package com.slin.core
 
 import android.app.Application
 import com.slin.core.config.AppConfig
-import com.slin.core.di.httpClientModule
-import com.slin.core.di.imageLoaderModule
-import com.slin.core.di.repositoryModule
+import com.slin.core.di.CoreComponent
+import com.slin.core.di.CoreComponentDependencies
+import com.slin.core.di.DaggerCoreComponent
 import com.slin.core.logger.initLogger
-import org.kodein.di.*
-import org.kodein.di.android.androidCoreModule
-import org.kodein.di.android.x.androidXModule
+import dagger.hilt.android.EntryPointAccessors
 
 /**
  * author: slin
@@ -16,57 +14,40 @@ import org.kodein.di.android.x.androidXModule
  * description:
  *
  */
+object CoreApplication {
 
-open class CoreApplication : Application(), DIAware {
+//    companion object {
+//        lateinit var INSTANCE: CoreApplication
+//    }
 
-    companion object {
-        lateinit var INSTANCE: CoreApplication
-    }
+    lateinit var appConfig: AppConfig
 
-    val appConfig by lazy {
-        createAppConfig(di.direct)
-    }
+    lateinit var coreComponent: CoreComponent
 
-    /**
-     * 依赖注入
-     */
-    override val di: DI by DI.lazy {
-        bind<CoreApplication>() with singleton {
-            this@CoreApplication
-        }
-        bind<AppConfig>() with singleton {
-            appConfig
-        }
+//    override fun onCreate() {
+//        super.onCreate()
+//        INSTANCE = this
+//        init()
+//    }
 
-        import(androidCoreModule(this@CoreApplication))
-        import(androidXModule(this@CoreApplication))
+    fun init(application: Application) {
+        initDi(application)
 
-        import(httpClientModule)
-        import(imageLoaderModule)
-        import(repositoryModule)
-
-    }
-
-
-    override fun onCreate() {
-        super.onCreate()
-        INSTANCE = this
-        init()
-    }
-
-    private fun init() {
         initLogger(BuildConfig.DEBUG)
 
 
     }
 
-    /**
-     * 自定义的app配置项，可以设置一些第三方参数
-     * @param directDIAware kodein直接注入
-     * @note 传入directDIAware是为了能够使用依赖注入来设置参数
-     */
-    protected open fun createAppConfig(directDIAware: DirectDIAware): AppConfig {
-        return AppConfig(this)
+    private fun initDi(application: Application) {
+        val dependencies = EntryPointAccessors.fromApplication(
+            application,
+            CoreComponentDependencies::class.java)
+        appConfig = dependencies.getAppConfig()
+        coreComponent = DaggerCoreComponent.builder()
+            .coreDependencies(dependencies)
+            .build()
+        coreComponent.inject(this)
+
     }
 
 

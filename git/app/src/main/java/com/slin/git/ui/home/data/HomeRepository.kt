@@ -15,8 +15,10 @@ import com.slin.git.config.PAGING_REMOTE_INIT_SIZE
 import com.slin.git.config.PAGING_REMOTE_PAGE_SIZE
 import com.slin.git.ext.getOrAwaitValue
 import com.slin.git.manager.UserManager
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
 
 /**
@@ -25,10 +27,11 @@ import kotlinx.coroutines.flow.flow
  * description: 首页仓库
  *
  */
-class HomeRepository(private val userService: UserService) : CoreRepository() {
+@ActivityRetainedScoped
+class HomeRepository @Inject constructor(private val userService: UserService) : CoreRepository() {
 
     fun queryReceivedEvents(
-        perPage: Int = PAGING_REMOTE_PAGE_SIZE
+        perPage: Int = PAGING_REMOTE_PAGE_SIZE,
     ): Flow<PagingData<ReceivedEvent>> {
 
         val username = UserManager.requireUserName()

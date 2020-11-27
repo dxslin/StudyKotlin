@@ -1,15 +1,19 @@
 package com.slin.core.di
 
-import com.slin.core.config.AppConfig
 import com.slin.core.image.ImageLoader
 import com.slin.core.image.ImageLoaderStrategy
 import com.slin.core.image.impl.GlideImageLoaderStrategy
 import com.slin.core.image.impl.ImageConfigImpl
 import com.slin.core.logger.logd
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.kodein.di.*
+import javax.inject.Qualifier
+import javax.inject.Singleton
 
 
 /**
@@ -19,31 +23,43 @@ import org.kodein.di.*
  *
  */
 
-const val IMAGE_LOADER_MODULE_TAG = "image_loader_module_tag"
 
-const val IMAGE_OK_HTTP_CLIENT_TAG = "image_ok_http_client_tag"
-const val IMAGE_HTTP_LOGGING_INTERCEPTOR_TAG = "image_http_logging_interceptor_tag"
+@Module
+@InstallIn(ApplicationComponent::class)
+object ImageLoaderModule {
 
-val imageLoaderModule = DI.Module(IMAGE_LOADER_MODULE_TAG) {
-
-    bind<ImageLoader>() with singleton {
-        ImageLoader(instance())
+    @Provides
+    @Singleton
+    fun provideImageLoader(strategy: ImageLoaderStrategy<ImageConfigImpl>): ImageLoader {
+        return ImageLoader(strategy)
     }
 
-    bind<ImageLoaderStrategy<ImageConfigImpl>>() with singleton {
-        GlideImageLoaderStrategy()
+    @Provides
+    @Singleton
+    fun provideImageLoaderStrategy(): ImageLoaderStrategy<ImageConfigImpl> {
+        return GlideImageLoaderStrategy()
     }
 
-
-    bind<OkHttpClient>(IMAGE_OK_HTTP_CLIENT_TAG) with singleton {
-        instance<OkHttpClient.Builder>()
-            .dispatcher(Dispatcher(instance<AppConfig>().executorService))
-            .addInterceptor(instance<HttpLoggingInterceptor>(IMAGE_HTTP_LOGGING_INTERCEPTOR_TAG))
+    @Provides
+    @Singleton
+    @ImageOkHttpClientQualifier
+    fun provideOkHttpClient(
+        builder: OkHttpClient.Builder,
+        @ImageHttpLoggingInterceptorQualifier
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        dispatcher: Dispatcher,
+    ): OkHttpClient {
+        return builder.dispatcher(dispatcher)
+            .addInterceptor(httpLoggingInterceptor)
             .build()
+
     }
 
-    bind<HttpLoggingInterceptor>(IMAGE_HTTP_LOGGING_INTERCEPTOR_TAG) with provider {
-        HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+    @Singleton
+    @Provides
+    @ImageHttpLoggingInterceptorQualifier
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
                 logd { "glide: $message" }
             }
@@ -53,3 +69,12 @@ val imageLoaderModule = DI.Module(IMAGE_LOADER_MODULE_TAG) {
     }
 
 }
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class ImageOkHttpClientQualifier
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class ImageHttpLoggingInterceptorQualifier
+

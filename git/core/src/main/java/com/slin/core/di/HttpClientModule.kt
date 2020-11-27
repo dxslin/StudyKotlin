@@ -5,13 +5,17 @@ import com.slin.core.config.AppConfig
 import com.slin.core.logger.logd
 import com.slin.core.net.ResultsCallAdapterFactory
 import com.slin.core.net.RxResultsCallAdapterFactory
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.kodein.di.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 
 /**
@@ -21,72 +25,90 @@ import java.util.concurrent.TimeUnit
  *
  */
 
-const val HTTP_CLIENT_MODULE_TAG = "http_client_module_tag"
+@Module
+@InstallIn(ApplicationComponent::class)
+object HttpClientModule {
 
-
-val httpClientModule = DI.Module(HTTP_CLIENT_MODULE_TAG) {
-
-    bind<Retrofit>() with singleton {
-        val builder = instance<Retrofit.Builder>()
-            .baseUrl(instance<AppConfig>().baseUrl)
-            .client(instance())
-            .addConverterFactory(instance<GsonConverterFactory>())
-            .addCallAdapterFactory(instance<RxResultsCallAdapterFactory>())
-            .addCallAdapterFactory(instance<ResultsCallAdapterFactory>())
-        instance<AppConfig>().applyRetrofitOptions?.apply(builder)
-
-        builder.build()
+    @Provides
+    @Singleton
+    fun provideRetrofit(
+        builder: Retrofit.Builder,
+        client: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory,
+        rxResultsCallAdapterFactory: RxResultsCallAdapterFactory,
+        resultsCallAdapterFactory: ResultsCallAdapterFactory,
+        config: AppConfig,
+    ): Retrofit {
+        builder
+            .baseUrl(config.baseUrl)
+            .client(client)
+            .addConverterFactory(gsonConverterFactory)
+            .addCallAdapterFactory(rxResultsCallAdapterFactory)
+            .addCallAdapterFactory(resultsCallAdapterFactory)
+        config.applyRetrofitOptions?.apply(builder)
+        return builder.build()
     }
 
-    bind<OkHttpClient>() with singleton {
-        val config = instance<AppConfig>()
-        val okHttpClientBuilder = instance<OkHttpClient.Builder>()
-            .connectTimeout(instance<AppConfig>().timeOutSeconds, TimeUnit.SECONDS)
-            .readTimeout(instance<AppConfig>().timeOutSeconds, TimeUnit.SECONDS)
-            .dispatcher(Dispatcher(instance<AppConfig>().executorService))
-            .addInterceptor(instance<HttpLoggingInterceptor>())
+    @Singleton
+    @Provides
+    fun provideOkHttpClient(
+        okHttpClientBuilder: OkHttpClient.Builder,
+        loggingInterceptor: HttpLoggingInterceptor,
+        dispatcher: Dispatcher,
+        config: AppConfig,
+    ): OkHttpClient {
+        okHttpClientBuilder
+            .connectTimeout(config.timeOutSeconds, TimeUnit.SECONDS)
+            .readTimeout(config.timeOutSeconds, TimeUnit.SECONDS)
+            .dispatcher(dispatcher)
+            .addInterceptor(loggingInterceptor)
         val interceptors = config.customInterceptors
         interceptors?.forEach {
             okHttpClientBuilder.addInterceptor(it)
         }
         config.applyOkHttpOptions?.apply(okHttpClientBuilder)
 
-        okHttpClientBuilder.build()
+        return okHttpClientBuilder.build()
     }
 
-    bind<OkHttpClient.Builder>() with provider {
-        OkHttpClient.Builder()
+    @Singleton
+    @Provides
+    fun provideDispatcher(config: AppConfig): Dispatcher {
+        return Dispatcher(config.executorService)
     }
 
-    bind<Retrofit.Builder>() with provider {
-        Retrofit.Builder()
+    @Provides
+    fun provideOkHttpClientBuilder(): OkHttpClient.Builder {
+        return OkHttpClient.Builder()
     }
 
-    bind<HttpLoggingInterceptor>() with provider {
-        HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+    @Provides
+    fun provideRetrofitBuilder(): Retrofit.Builder {
+        return Retrofit.Builder()
+    }
+
+    @Provides
+    fun provideHttpLoggingInterceptor(appConfig: AppConfig): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
                 logd { "http: $message" }
             }
         }).apply {
-            level = instance<AppConfig>().httpLogLevel
+            level = appConfig.httpLogLevel
         }
     }
 
-    bind<Gson>() with singleton {
-        Gson()
+    @Provides
+    fun provideGsonConverterFactory(gson: Gson): GsonConverterFactory {
+        return GsonConverterFactory.create(gson)
     }
 
-    bind<GsonConverterFactory>() with provider {
-        GsonConverterFactory.create(instance())
+    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        return Gson()
     }
 
-    bind<RxResultsCallAdapterFactory>() with provider {
-        RxResultsCallAdapterFactory()
-    }
-
-    bind<ResultsCallAdapterFactory>() with provider {
-        ResultsCallAdapterFactory()
-    }
 
 }
 

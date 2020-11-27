@@ -10,27 +10,23 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.annotation.StringRes
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.slin.core.ui.CoreFragment
 import com.slin.git.BuildConfig
 import com.slin.git.R
 import com.slin.git.databinding.FragmentLoginBinding
-import org.kodein.di.DI
-import org.kodein.di.instance
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * 登录界面
  */
+@AndroidEntryPoint
 class LoginFragment : CoreFragment() {
 
-    override val di: DI = DI.lazy {
-        extend(super.di)
-        import(loginModule)
-    }
 
-
-    private val loginViewModel: LoginViewModel by instance()
+    private val loginViewModel: LoginViewModel by viewModels()
 
     private lateinit var binding: FragmentLoginBinding
 

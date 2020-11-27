@@ -4,6 +4,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 29
@@ -73,6 +74,10 @@ dependencies {
     //paging
     implementation Dependencies.paging_runtime
 
+    implementation Dependencies.hilt
+    kapt Dependencies.hilt_compiler
+    implementation Dependencies.hilt_viewmodel
+    kapt Dependencies.hilt_viewmodel_compiler
 
 //    test
     testImplementation Dependencies.junit

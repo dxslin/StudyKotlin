@@ -4,6 +4,7 @@ import com.slin.core.repository.ILocalDataSource
 import com.slin.core.repository.IRepository
 import com.slin.git.api.entity.SearchHistory
 import com.slin.git.api.local.SearchHistoryDao
+import javax.inject.Inject
 
 
 /**
@@ -18,7 +19,8 @@ import com.slin.git.api.local.SearchHistoryDao
  */
 const val RETAIN_SEARCH_HISTORY_COUNT = 10
 
-class SearchRepository(private val localDataSource: SearchLocalDataSource) : IRepository {
+class SearchRepository @Inject constructor(private val localDataSource: SearchLocalDataSource) :
+    IRepository {
 
     suspend fun insertSearchHistory(type: SearchHistory.SearchType, keyword: String): Long {
         val searchHistory = SearchHistory(type = type, keyword = keyword)
@@ -44,7 +46,8 @@ class SearchRepository(private val localDataSource: SearchLocalDataSource) : IRe
 }
 
 
-class SearchLocalDataSource(private val searchHistoryDao: SearchHistoryDao) : ILocalDataSource {
+class SearchLocalDataSource @Inject constructor(private val searchHistoryDao: SearchHistoryDao) :
+    ILocalDataSource {
 
     suspend fun insertSearchHistory(value: SearchHistory): Long {
         return searchHistoryDao.insert(value)

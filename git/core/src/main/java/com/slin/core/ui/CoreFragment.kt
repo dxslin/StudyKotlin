@@ -1,11 +1,6 @@
 package com.slin.core.ui
 
 import androidx.fragment.app.Fragment
-import org.kodein.di.DI
-import org.kodein.di.DIAware
-import org.kodein.di.DIContext
-import org.kodein.di.android.x.closestDI
-import org.kodein.di.diContext
 
 
 /**
@@ -15,11 +10,7 @@ import org.kodein.di.diContext
  *
  */
 
-open class CoreFragment : Fragment(), DIAware {
-
-    override val di: DI by closestDI()
-
-    override val diContext: DIContext<Fragment> = diContext { this }
+open class CoreFragment : Fragment() {
 
 
 }

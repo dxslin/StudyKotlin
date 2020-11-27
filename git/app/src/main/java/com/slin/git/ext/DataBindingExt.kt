@@ -10,10 +10,6 @@ import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.elevation.ElevationOverlayProvider
-import com.slin.core.CoreApplication
-import com.slin.core.image.ImageLoader
-import com.slin.core.image.load
-import org.kodein.di.instance
 
 
 /**
@@ -31,14 +27,14 @@ fun ImageView.bindSrcUrl(
     centerCrop: Boolean = true,
     isCircle: Boolean = false
 ) {
-    val imageLoader: ImageLoader by CoreApplication.INSTANCE.di.instance()
-    imageLoader.load(
-        this,
-        placeholder = placeholder,
-        url = srcUrl,
-        isCenterCrop = centerCrop,
-        isCircle = isCircle
-    )
+//    val imageLoader: ImageLoader by CoreApplication.INSTANCE.di.instance()
+//    imageLoader.load(
+//        this,
+//        placeholder = placeholder,
+//        url = srcUrl,
+//        isCenterCrop = centerCrop,
+//        isCircle = isCircle
+//    )
 
 }
 

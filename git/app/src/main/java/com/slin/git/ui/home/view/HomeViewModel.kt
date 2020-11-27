@@ -1,12 +1,20 @@
 package com.slin.git.ui.home.view
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.slin.git.api.entity.ReceivedEvent
 import com.slin.git.ui.home.data.HomeRepository
 
-class HomeViewModel(homeRepository: HomeRepository) : ViewModel() {
+/**
+ * author: slin
+ * date: 2020/9/16
+ * description: 首页ViewModel
+ *
+ */
+class HomeViewModel @ViewModelInject constructor(private val homeRepository: HomeRepository) :
+    ViewModel() {
 
     private val TAG: String? = HomeViewModel::class.simpleName
 

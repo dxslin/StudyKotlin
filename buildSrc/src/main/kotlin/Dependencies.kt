@@ -26,6 +26,10 @@ object Versions {
 
     const val glide_version = "4.11.0"
 
+    const val hilt_version = "2.28-alpha"
+    const val hilt_viewmodel_version = "1.0.0-alpha02"
+
+
     const val junit_version = "4.12"
     const val junit_ext_version = "1.1.2"
     const val espresso_core_version = "3.2.0"
@@ -74,6 +78,13 @@ object Dependencies {
 
     const val paging_runtime = "androidx.paging:paging-runtime:${Versions.paging_version}"
     const val paging_common = "androidx.paging:paging-common:${Versions.paging_version}"    //test
+
+    const val hilt = "com.google.dagger:hilt-android:${Versions.hilt_version}"
+    const val hilt_compiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt_version}"
+    const val hilt_viewmodel =
+        "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hilt_viewmodel_version}"
+    const val hilt_viewmodel_compiler =
+        "androidx.hilt:hilt-compiler:${Versions.hilt_viewmodel_version}"
 
     //kodein 依赖注入
     const val kodein_jvm = "org.kodein.di:kodein-di-jvm:${Versions.kodein_version}"

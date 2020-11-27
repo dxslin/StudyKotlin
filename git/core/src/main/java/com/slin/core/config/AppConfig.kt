@@ -1,7 +1,7 @@
 package com.slin.core.config
 
+import android.app.Application
 import com.slin.core.BuildConfig
-import com.slin.core.CoreApplication
 import com.slin.core.image.ApplyGlideOptions
 import com.slin.core.net.CoreStateViewFactory
 import com.slin.core.utils.ExecutorServiceHelper
@@ -36,17 +36,17 @@ object DefaultConfig {
 
 
 data class AppConfig(
-    val coreApplication: CoreApplication,
+    val application: Application,
     val baseUrl: String = DefaultConfig.BASE_URL,
     val timeOutSeconds: Long = DefaultConfig.TIME_OUT_SECONDS,
     val customInterceptors: List<Interceptor>? = null,
     val httpLogLevel: HttpLoggingInterceptor.Level = DefaultConfig.HTTP_LOG_LEVEL,
-    val cacheFile: File = FileUtils.getCacheFile(coreApplication),
+    val cacheFile: File = FileUtils.getCacheFile(application),
     val glideOptions: ApplyGlideOptions? = null,
     val executorService: ExecutorService = ExecutorServiceHelper.IOExecutor,
     val applyRetrofitOptions: ApplyRetrofitOptions? = null,
     val applyOkHttpOptions: ApplyOkHttpOptions? = null,
-    val stateViewFactory: StateView.Factory = CoreStateViewFactory()
+    val stateViewFactory: StateView.Factory = CoreStateViewFactory(),
 ) {
     init {
         StateViewSwitcher.config(stateViewFactory)

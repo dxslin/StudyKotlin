@@ -1,12 +1,15 @@
 package com.slin.core.di
 
+import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.slin.core.CoreApplication
-import org.kodein.di.DI
-import org.kodein.di.bind
-import org.kodein.di.instance
-import org.kodein.di.singleton
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Qualifier
+import javax.inject.Singleton
 
 
 /**
@@ -15,16 +18,23 @@ import org.kodein.di.singleton
  * description: 数据层注入
  *
  */
-const val REPOSITORY_MODULE_TAG = "repository_module_tag"
 
 const val DEFAULT_SHARE_PREFERENCES_TAG = "core_share_preferences"
 
-val repositoryModule = DI.Module(REPOSITORY_MODULE_TAG) {
+@Module
+@InstallIn(ApplicationComponent::class)
+object RepositoryModule {
 
-    bind<SharedPreferences>(DEFAULT_SHARE_PREFERENCES_TAG) with singleton {
-        instance<CoreApplication>()
-            .getSharedPreferences(DEFAULT_SHARE_PREFERENCES_TAG, Context.MODE_PRIVATE)
+    @Provides
+    @Singleton
+    @CoreSharePreferencesQualifier
+    fun provideSharedPreferences(@ApplicationContext application: Application): SharedPreferences {
+        return application.getSharedPreferences(DEFAULT_SHARE_PREFERENCES_TAG, Context.MODE_PRIVATE)
     }
 
 }
 
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class CoreSharePreferencesQualifier

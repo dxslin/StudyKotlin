@@ -4,15 +4,18 @@ import com.slin.core.net.Results
 import com.slin.core.repository.IRepository
 import com.slin.git.api.entity.UserInfo
 import com.slin.git.manager.UserManager
+import dagger.hilt.android.scopes.ActivityRetainedScoped
+import javax.inject.Inject
 
 /**
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
  */
 
-class LoginRepository(
-        private val remoteDataSource: LoginRemoteDataSource,
-        private val localDataSource: LoginLocalDataSource
+@ActivityRetainedScoped
+class LoginRepository @Inject constructor(
+    private val remoteDataSource: LoginRemoteDataSource,
+    private val localDataSource: LoginLocalDataSource,
 ) : IRepository {
 
     fun logout() {

@@ -25,12 +25,6 @@ android {
         buildConfigField "String", "DEFAULT_ACCOUNT", properties.getValue("DEFAULT_ACCOUNT")
         buildConfigField "String", "DEFAULT_PASSWORD", properties.getValue("DEFAULT_PASSWORD")
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += ["room.schemaLocation":
-                                     "$projectDir/schemas".toString()]
-            }
-        }
     }
 
     buildTypes {
@@ -62,6 +56,7 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(path: ':git:core')
+    implementation project(path: ':git:proto')
 
     implementation Dependencies.kotlin_stdlib
     implementation Dependencies.appcompat
@@ -95,6 +90,12 @@ dependencies {
     androidTestImplementation Dependencies.espresso_core
 
 
+}
+
+kapt {
+    arguments {
+        arg("room.schemaLocation", "$projectDir/schemas".toString())
+    }
 }
 
 

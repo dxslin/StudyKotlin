@@ -1,3 +1,4 @@
+include ':git:proto'
 include ':LibKt:SateViewSwitcher'
 include ':LibKt'
 include ':git:app'

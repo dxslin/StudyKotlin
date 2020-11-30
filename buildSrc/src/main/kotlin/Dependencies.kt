@@ -29,6 +29,10 @@ object Versions {
     const val hilt_version = "2.28-alpha"
     const val hilt_viewmodel_version = "1.0.0-alpha02"
 
+    const val data_store_version = "1.0.0-alpha02"
+    const val protobuf_plugin_version = "0.8.13"
+    const val protobuf_version = "3.10.0"
+
 
     const val junit_version = "4.12"
     const val junit_ext_version = "1.1.2"
@@ -85,6 +89,14 @@ object Dependencies {
         "androidx.hilt:hilt-lifecycle-viewmodel:${Versions.hilt_viewmodel_version}"
     const val hilt_viewmodel_compiler =
         "androidx.hilt:hilt-compiler:${Versions.hilt_viewmodel_version}"
+    const val hilt_plugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt_version}"
+
+    const val data_store_core = "androidx.datastore:datastore-core:${Versions.data_store_version}"
+    const val data_store_preferences =
+        "androidx.datastore:datastore-preferences:${Versions.data_store_version}"
+    const val protobuf_plugin =
+        "com.google.protobuf:protobuf-gradle-plugin:${Versions.protobuf_plugin_version}"
+    const val protobuf_lite = "com.google.protobuf:protobuf-javalite:${Versions.protobuf_version}"
 
     //kodein 依赖注入
     const val kodein_jvm = "org.kodein.di:kodein-di-jvm:${Versions.kodein_version}"
@@ -107,6 +119,7 @@ object Dependencies {
     //glide
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide_version}"
     const val glide_compiler = "com.github.bumptech.glide:compiler:${Versions.glide_version}"
+
 
     //test
     const val junit = "junit:junit:${Versions.junit_version}"

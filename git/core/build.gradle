@@ -3,7 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
-
 android {
     compileSdkVersion 29
     resourcePrefix "core"
@@ -44,16 +43,16 @@ dependencies {
     api Dependencies.lifecycle_extensions
     api Dependencies.lifecycle_runtime
 
-//    kodein 依赖注入
-//    api Dependencies.kodein_jvm
-//    api Dependencies.kodein_android_core
-//    api Dependencies.kodein_android_x
-
     //hilt
     api Dependencies.hilt
     kapt Dependencies.hilt_compiler
     api Dependencies.hilt_viewmodel
     kapt Dependencies.hilt_viewmodel_compiler
+
+    //DataStore & protobuf
+    api Dependencies.data_store_core
+    api Dependencies.data_store_preferences
+    api Dependencies.protobuf_lite
 
 //    okhttp
     api Dependencies.okhttp

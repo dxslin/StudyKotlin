@@ -7,7 +7,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -28,7 +27,7 @@ object RepositoryModule {
     @Provides
     @Singleton
     @CoreSharePreferencesQualifier
-    fun provideSharedPreferences(@ApplicationContext application: Application): SharedPreferences {
+    fun provideSharedPreferences(@SlinCoreApplicationQualifier application: Application): SharedPreferences {
         return application.getSharedPreferences(DEFAULT_SHARE_PREFERENCES_TAG, Context.MODE_PRIVATE)
     }
 

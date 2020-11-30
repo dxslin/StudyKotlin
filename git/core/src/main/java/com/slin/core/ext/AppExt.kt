@@ -1,9 +1,5 @@
 package com.slin.core.ext
 
-import android.content.Context
-import com.slin.core.CoreApplication
-import com.slin.core.config.AppConfig
-
 
 /**
  * author: slin
@@ -11,6 +7,6 @@ import com.slin.core.config.AppConfig
  * description:
  *
  */
-fun Context.getAppConfig(): AppConfig {
-    return (applicationContext as CoreApplication).appConfig
-}
+//fun Context.getAppConfig(): CoreConfig {
+//    return (applicationContext as SlinCore).coreConfig
+//}

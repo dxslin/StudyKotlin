@@ -1,7 +1,7 @@
 package com.slin.core.di
 
 import com.google.gson.Gson
-import com.slin.core.config.AppConfig
+import com.slin.core.config.CoreConfig
 import com.slin.core.logger.logd
 import com.slin.core.net.ResultsCallAdapterFactory
 import com.slin.core.net.RxResultsCallAdapterFactory
@@ -15,6 +15,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 
@@ -33,11 +34,12 @@ object HttpClientModule {
     @Singleton
     fun provideRetrofit(
         builder: Retrofit.Builder,
+        @OkHttpClientQualifier
         client: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory,
         rxResultsCallAdapterFactory: RxResultsCallAdapterFactory,
         resultsCallAdapterFactory: ResultsCallAdapterFactory,
-        config: AppConfig,
+        config: CoreConfig,
     ): Retrofit {
         builder
             .baseUrl(config.baseUrl)
@@ -51,11 +53,12 @@ object HttpClientModule {
 
     @Singleton
     @Provides
+    @OkHttpClientQualifier
     fun provideOkHttpClient(
         okHttpClientBuilder: OkHttpClient.Builder,
         loggingInterceptor: HttpLoggingInterceptor,
         dispatcher: Dispatcher,
-        config: AppConfig,
+        config: CoreConfig,
     ): OkHttpClient {
         okHttpClientBuilder
             .connectTimeout(config.timeOutSeconds, TimeUnit.SECONDS)
@@ -73,7 +76,7 @@ object HttpClientModule {
 
     @Singleton
     @Provides
-    fun provideDispatcher(config: AppConfig): Dispatcher {
+    fun provideDispatcher(config: CoreConfig): Dispatcher {
         return Dispatcher(config.executorService)
     }
 
@@ -88,13 +91,13 @@ object HttpClientModule {
     }
 
     @Provides
-    fun provideHttpLoggingInterceptor(appConfig: AppConfig): HttpLoggingInterceptor {
+    fun provideHttpLoggingInterceptor(coreConfig: CoreConfig): HttpLoggingInterceptor {
         return HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
                 logd { "http: $message" }
             }
         }).apply {
-            level = appConfig.httpLogLevel
+            level = coreConfig.httpLogLevel
         }
     }
 
@@ -112,4 +115,7 @@ object HttpClientModule {
 
 }
 
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class OkHttpClientQualifier
 

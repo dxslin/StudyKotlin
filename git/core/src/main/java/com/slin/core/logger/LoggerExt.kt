@@ -1,6 +1,6 @@
 package com.slin.core.logger
 
-import com.slin.core.CoreApplication
+import com.slin.core.SlinCore
 import com.slin.core.config.Constants
 import com.slin.core.functional.Supplier
 import timber.log.Timber
@@ -12,7 +12,7 @@ import timber.log.Timber
  * description: 日志类，使用Timber打印日志
  *
  */
-fun CoreApplication.initLogger(isDebug: Boolean) {
+fun SlinCore.initLogger(isDebug: Boolean) {
     if (isDebug) {
         Timber.plant(CoreDebugTree())
     } else {

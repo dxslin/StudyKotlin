@@ -1,5 +1,6 @@
 package com.slin.git.ui.main
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 
 
@@ -9,7 +10,7 @@ import androidx.lifecycle.ViewModel
  * description:
  *
  */
-class MainViewModel : ViewModel() {
+class MainViewModel @ViewModelInject constructor() : ViewModel() {
 
 
 }

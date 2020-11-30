@@ -11,10 +11,9 @@ import com.bumptech.glide.load.engine.cache.LruResourceCache
 import com.bumptech.glide.load.engine.cache.MemorySizeCalculator
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.module.AppGlideModule
-import com.slin.core.SlinCore
+import com.slin.core.SCore
 import com.slin.core.config.CoreConfig
 import com.slin.core.image.ApplyGlideOptions
-import okhttp3.OkHttpClient
 import java.io.File
 import java.io.InputStream
 
@@ -26,11 +25,10 @@ import java.io.InputStream
 @GlideModule(glideName = "GlideGit")
 class GlideConfiguration : AppGlideModule() {
 
-    //    private val okHttpClient = CoreApplication.INSTANCE.coreComponent.imageOkHttpClient()
-    private val okHttpClient = OkHttpClient.Builder().build()
+    private val okHttpClient = SCore.coreComponent.imageOkHttpClient()
 
     override fun applyOptions(context: Context, builder: GlideBuilder) {
-        val coreConfig: CoreConfig = SlinCore.coreConfig
+        val coreConfig: CoreConfig = SCore.coreComponent.coreConfig()
         builder.setDiskCache {
             DiskLruCacheWrapper.create(
                 File(coreConfig.cacheFile, "Glide"),
@@ -60,9 +58,6 @@ class GlideConfiguration : AppGlideModule() {
 
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         //使用OkHttp替换掉Glide原有的HttpURLConnection做网络请求
-//        val okHttpClient: OkHttpClient by CoreApplication.INSTANCE.di.instance(
-//            IMAGE_OK_HTTP_CLIENT_TAG
-//        )
         registry.replace(
             GlideUrl::class.java,
             InputStream::class.java,

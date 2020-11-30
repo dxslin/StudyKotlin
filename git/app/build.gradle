@@ -21,6 +21,8 @@ android {
         GitProperties properties = new GitProperties(rootProject, "public.properties", "local.properties")
         buildConfigField "String", "CLIENT_ID", properties.getValue("CLIENT_ID")
         buildConfigField "String", "CLIENT_SECRET", properties.getValue("CLIENT_SECRET")
+        buildConfigField "String", "DEFAULT_ACCOUNT", properties.getValue("DEFAULT_ACCOUNT")
+        buildConfigField "String", "DEFAULT_PASSWORD", properties.getValue("DEFAULT_PASSWORD")
 
         javaCompileOptions {
             annotationProcessorOptions {

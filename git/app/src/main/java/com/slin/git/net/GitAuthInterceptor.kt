@@ -1,6 +1,7 @@
 package com.slin.git.net
 
 import android.util.Base64
+import com.slin.git.BuildConfig
 import com.slin.git.api.local.GitUserInfoStorage
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -32,7 +33,7 @@ class GitAuthInterceptor(private val userInfoStorage: GitUserInfoStorage) : Inte
     }
 
     private fun getAuthorization(): String {
-        val accessToken = userInfoStorage.token
+        val accessToken = BuildConfig.USER_ACCESS_TOKEN
         val username = userInfoStorage.username
         val password = userInfoStorage.password
 

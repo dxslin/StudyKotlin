@@ -1,10 +1,10 @@
 package com.slin.git.di
 
 import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
-import com.slin.core.config.AppConfig
-import com.slin.core.config.ApplyOkHttpOptions
 import com.slin.core.config.ApplyRetrofitOptions
+import com.slin.core.config.CoreConfig
 import com.slin.core.config.DefaultConfig
 import com.slin.core.di.CoreSharePreferencesQualifier
 import com.slin.git.api.local.GitUserInfoStorage
@@ -15,6 +15,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Interceptor
 import retrofit2.Retrofit
 import javax.inject.Singleton
@@ -33,24 +34,18 @@ object ConfigModule {
 
     @Provides
     fun provideAppConfig(
-        application: Application,
-        interceptors: List<Interceptor>,
-        applyOkHttpOptions: ApplyOkHttpOptions,
-    ): AppConfig {
-        return AppConfig(
-            application = application,
+        @ApplicationContext context: Context,
+        gitUserInfoStorage: GitUserInfoStorage,
+        applyRetrofitOptions: ApplyRetrofitOptions,
+    ): CoreConfig {
+        return CoreConfig(
+            application = context as Application,
             baseUrl = Config.BASE_URL,
             httpLogLevel = DefaultConfig.HTTP_LOG_LEVEL,
-            customInterceptors = interceptors,
-            applyOkHttpOptions = applyOkHttpOptions,
-        )
-    }
-
-    @Provides
-    @Singleton
-    fun provideInterceptorList(gitUserInfoStorage: GitUserInfoStorage): List<Interceptor> {
-        return listOf<Interceptor>(
-            GitAuthInterceptor(gitUserInfoStorage)
+            customInterceptors = listOf<Interceptor>(
+                GitAuthInterceptor(gitUserInfoStorage)
+            ),
+            applyRetrofitOptions = applyRetrofitOptions,
         )
     }
 

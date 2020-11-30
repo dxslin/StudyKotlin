@@ -1,7 +1,6 @@
 package com.slin.git.ui.main
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -11,7 +10,9 @@ import com.slin.git.base.BaseActivity
 import com.slin.git.databinding.ActivityMainBinding
 import com.slin.git.ext.hide
 import com.slin.git.ext.show
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
     companion object {
@@ -25,7 +26,7 @@ class MainActivity : BaseActivity() {
 
     }
 
-    private val viewModel: MainActivity by viewModels()
+//    private val viewModel: MainViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
 

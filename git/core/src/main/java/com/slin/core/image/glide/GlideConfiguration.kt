@@ -11,8 +11,8 @@ import com.bumptech.glide.load.engine.cache.LruResourceCache
 import com.bumptech.glide.load.engine.cache.MemorySizeCalculator
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.module.AppGlideModule
-import com.slin.core.config.AppConfig
-import com.slin.core.ext.getAppConfig
+import com.slin.core.SlinCore
+import com.slin.core.config.CoreConfig
 import com.slin.core.image.ApplyGlideOptions
 import okhttp3.OkHttpClient
 import java.io.File
@@ -30,10 +30,10 @@ class GlideConfiguration : AppGlideModule() {
     private val okHttpClient = OkHttpClient.Builder().build()
 
     override fun applyOptions(context: Context, builder: GlideBuilder) {
-        val appConfig: AppConfig = context.getAppConfig()
+        val coreConfig: CoreConfig = SlinCore.coreConfig
         builder.setDiskCache {
             DiskLruCacheWrapper.create(
-                File(appConfig.cacheFile, "Glide"),
+                File(coreConfig.cacheFile, "Glide"),
                 IMAGE_DISK_CACHE_MAX_SIZE.toLong()
             )
         }
@@ -54,7 +54,7 @@ class GlideConfiguration : AppGlideModule() {
         )
 
         //自定义Glide的配置
-        val applyGlideOptions: ApplyGlideOptions? = appConfig.glideOptions
+        val applyGlideOptions: ApplyGlideOptions? = coreConfig.glideOptions
         applyGlideOptions?.applyGlideOptions(context, builder)
     }
 

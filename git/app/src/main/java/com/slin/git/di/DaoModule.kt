@@ -1,6 +1,6 @@
 package com.slin.git.di
 
-import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.slin.git.api.local.AppDatabase
 import com.slin.git.api.local.SearchHistoryDao
@@ -24,9 +24,9 @@ object DaoModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext application: Application): AppDatabase {
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
         return Room
-            .databaseBuilder(application, AppDatabase::class.java, "git_db")
+            .databaseBuilder(context, AppDatabase::class.java, "git_db")
             .build()
     }
 

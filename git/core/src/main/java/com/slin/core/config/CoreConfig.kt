@@ -35,7 +35,7 @@ object DefaultConfig {
 }
 
 
-data class AppConfig(
+data class CoreConfig(
     val application: Application,
     val baseUrl: String = DefaultConfig.BASE_URL,
     val timeOutSeconds: Long = DefaultConfig.TIME_OUT_SECONDS,

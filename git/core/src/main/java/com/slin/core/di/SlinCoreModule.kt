@@ -1,7 +1,7 @@
 package com.slin.core.di
 
 import android.app.Application
-import com.slin.core.SlinCore
+import com.slin.core.SCore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,20 +20,15 @@ import javax.inject.Qualifier
 object SlinCoreModule {
 
     @Provides
-    fun provideSlinCore(): SlinCore {
-        return SlinCore
+    fun provideSCore(): SCore {
+        return SCore
     }
 
     @Provides
     @SlinCoreApplicationQualifier
-    fun provideApplication(slinCore: SlinCore): Application {
+    fun provideApplication(slinCore: SCore): Application {
         return slinCore.application
     }
-
-//    @Provides
-//    fun provideAppConfig(slinCore:SlinCore): AppConfig {
-//        return slinCore.appConfig
-//    }
 
 }
 

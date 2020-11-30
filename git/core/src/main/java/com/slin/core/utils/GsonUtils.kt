@@ -11,9 +11,8 @@ import com.google.gson.Gson
  */
 object GsonUtils {
 
-    //    val INSTANCE: Gson  = CoreApplication.INSTANCE.coreComponent.gson()
+    //    val INSTANCE: Gson = SCore.coreComponent.gson()
     val INSTANCE: Gson = Gson()
-
 }
 
 fun <T> T.toJson(): String {

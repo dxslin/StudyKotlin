@@ -9,6 +9,10 @@ import androidx.lifecycle.viewModelScope
 import com.slin.core.net.Results
 import com.slin.git.R
 import com.slin.git.ui.login.data.LoginRepository
+import com.slin.proto.GitUserPbOuterClass
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 /**
@@ -23,6 +27,16 @@ class LoginViewModel @ViewModelInject constructor(private val loginRepository: L
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
+    fun autoLogin(username: String, password: String) {
+        viewModelScope.launch {
+            loginRepository.obtainGitUser()
+                .filter { it.isAutoLogin }
+                .collect {
+                    login(username, password)
+                }
+        }
+    }
+
     fun login(username: String, password: String) {
 
         viewModelScope.launch {
@@ -30,7 +44,7 @@ class LoginViewModel @ViewModelInject constructor(private val loginRepository: L
 
             if (result is Results.Success) {
                 _loginResult.value =
-                        LoginResult(success = LoggedInUserView(displayName = result.data.name))
+                    LoginResult(success = LoggedInUserView(displayName = result.data.name))
             } else {
                 _loginResult.value = LoginResult(error = R.string.login_failed)
             }
@@ -62,7 +76,9 @@ class LoginViewModel @ViewModelInject constructor(private val loginRepository: L
         return password.length > 5
     }
 
-    fun isAutoLogin(): Boolean {
-        return loginRepository.isAutoLogin()
+    fun obtainGitUser(): Flow<GitUserPbOuterClass.GitUserPb> {
+        return loginRepository.obtainGitUser()
     }
+
+
 }

@@ -1,6 +1,7 @@
 package com.slin.core.di
 
 import android.app.Application
+import android.content.Context
 import com.slin.core.SCore
 import dagger.Module
 import dagger.Provides
@@ -25,9 +26,15 @@ object SlinCoreModule {
     }
 
     @Provides
-    @SlinCoreApplicationQualifier
+    @SCoreApplicationQualifier
     fun provideApplication(slinCore: SCore): Application {
         return slinCore.application
+    }
+
+    @Provides
+    @SCoreContextQualifier
+    fun provideCoreContext(@SCoreApplicationQualifier application: Application): Context {
+        return application.applicationContext
     }
 
 }
@@ -35,4 +42,8 @@ object SlinCoreModule {
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class SlinCoreApplicationQualifier
+annotation class SCoreApplicationQualifier
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class SCoreContextQualifier

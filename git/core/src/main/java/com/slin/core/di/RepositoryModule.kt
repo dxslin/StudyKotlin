@@ -18,7 +18,7 @@ import javax.inject.Singleton
  *
  */
 
-const val DEFAULT_SHARE_PREFERENCES_TAG = "core_share_preferences"
+const val DEFAULT_SHARE_PREFERENCES_TAG = "score_share_preferences"
 
 @Module
 @InstallIn(ApplicationComponent::class)
@@ -26,14 +26,15 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    @CoreSharePreferencesQualifier
-    fun provideSharedPreferences(@SlinCoreApplicationQualifier application: Application): SharedPreferences {
+    @SCoreSharePreferencesQualifier
+    fun provideSharedPreferences(@SCoreApplicationQualifier application: Application): SharedPreferences {
         return application.getSharedPreferences(DEFAULT_SHARE_PREFERENCES_TAG, Context.MODE_PRIVATE)
     }
+
 
 }
 
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
-annotation class CoreSharePreferencesQualifier
+annotation class SCoreSharePreferencesQualifier

@@ -1,9 +1,11 @@
 package com.slin.git.api.local
 
-import android.content.SharedPreferences
+import androidx.datastore.DataStore
 import com.slin.core.di.SingletonHolderSingleArg
-import com.slin.core.ext.boolean
-import com.slin.core.ext.string
+import com.slin.proto.GitUserPbOuterClass
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import java.io.IOException
 
 
 /**
@@ -12,18 +14,46 @@ import com.slin.core.ext.string
  * description: 缓存的github账户信息
  *
  */
-class GitUserInfoStorage(prefs: SharedPreferences) {
+class GitUserInfoStorage(private val ds: DataStore<GitUserPbOuterClass.GitUserPb>) {
 
-    var username by prefs.string("username", "")
+    fun obtainGitUser(): Flow<GitUserPbOuterClass.GitUserPb> {
+        return ds.data.catch { e ->
+            if (e is IOException) {
+                e.printStackTrace()
+                emit(GitUserPbOuterClass.GitUserPb.getDefaultInstance())
+            } else {
+                throw e
+            }
+        }
+    }
 
-    var password by prefs.string("password", "")
+    suspend fun saveUserInfo(username: String, password: String) {
+        ds.updateData {
+            it.toBuilder()
+                .setUsername(username)
+                .setPassword(password)
+                .build()
+        }
+    }
 
-    var token by prefs.string("token", "")
+    suspend fun saveToken(token: String) {
+        ds.updateData {
+            it.toBuilder()
+                .setToken(token)
+                .build()
+        }
+    }
 
-    var isAutoLogin by prefs.boolean("isAutoLogin", true)
+    suspend fun saveIsAutoLogin(isAutoLogin: Boolean) {
+        ds.updateData {
+            it.toBuilder()
+                .setIsAutoLogin(isAutoLogin)
+                .build()
+        }
+    }
 
     companion object :
-            SingletonHolderSingleArg<GitUserInfoStorage, SharedPreferences>(::GitUserInfoStorage)
+        SingletonHolderSingleArg<GitUserInfoStorage, DataStore<GitUserPbOuterClass.GitUserPb>>(::GitUserInfoStorage)
 
 }
 

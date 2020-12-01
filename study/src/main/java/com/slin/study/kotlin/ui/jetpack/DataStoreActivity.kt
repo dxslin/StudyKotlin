@@ -2,6 +2,7 @@ package com.slin.study.kotlin.ui.jetpack
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.datastore.DataStore
 import androidx.datastore.Serializer
 import androidx.datastore.createDataStore
 import androidx.datastore.preferences.createDataStore
@@ -31,7 +32,7 @@ class DataStoreActivity : BaseActivity() {
 
     private lateinit var binding: ActivityDataStoreBinding
     private val preferenceStore = createDataStore("preference_store_test")
-    private val protoStore =
+    private val protoStore: DataStore<ProtoDataTest> =
         createDataStore("proto.pb", serializer = object : Serializer<ProtoDataTest> {
             override fun readFrom(input: InputStream): ProtoDataTest {
                 return ProtoDataTest.parseFrom(input)

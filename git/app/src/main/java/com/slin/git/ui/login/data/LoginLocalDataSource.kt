@@ -2,7 +2,9 @@ package com.slin.git.ui.login.data
 
 import com.slin.core.repository.ILocalDataSource
 import com.slin.git.api.local.GitUserInfoStorage
+import com.slin.proto.GitUserPbOuterClass
 import dagger.hilt.android.scopes.ActivityRetainedScoped
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**
@@ -14,18 +16,16 @@ import javax.inject.Inject
 class LoginLocalDataSource @Inject constructor(private val gitUserInfoStorage: GitUserInfoStorage) :
     ILocalDataSource {
 
-    fun saveUser(username: String, password: String) {
-        gitUserInfoStorage.username = username
-        gitUserInfoStorage.password = password
+    suspend fun saveUser(username: String, password: String) {
+        gitUserInfoStorage.saveUserInfo(username, password)
     }
 
-    fun clearUserInfo() {
-        gitUserInfoStorage.username = ""
-        gitUserInfoStorage.password = ""
+    suspend fun clearUserInfo() {
+        gitUserInfoStorage.saveUserInfo("", "")
     }
 
-    fun isAutoLogin(): Boolean {
-        return gitUserInfoStorage.isAutoLogin
+    fun obtainGitUser(): Flow<GitUserPbOuterClass.GitUserPb> {
+        return gitUserInfoStorage.obtainGitUser()
     }
 
 }

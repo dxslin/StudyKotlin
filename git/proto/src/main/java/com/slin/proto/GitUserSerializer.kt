@@ -9,12 +9,12 @@ import java.io.OutputStream
  * date: 2020-11-30
  * description: 序列化
  */
-object GitUserSerializer : Serializer<GitUserPrefOuterClass.GitUserPref> {
-    override fun readFrom(input: InputStream): GitUserPrefOuterClass.GitUserPref {
-        return GitUserPrefOuterClass.GitUserPref.parseFrom(input)
+object GitUserSerializer : Serializer<GitUserPbOuterClass.GitUserPb> {
+    override fun readFrom(input: InputStream): GitUserPbOuterClass.GitUserPb {
+        return GitUserPbOuterClass.GitUserPb.parseFrom(input)
     }
 
-    override fun writeTo(t: GitUserPrefOuterClass.GitUserPref, output: OutputStream) {
+    override fun writeTo(t: GitUserPbOuterClass.GitUserPb, output: OutputStream) {
         t.writeTo(output)
     }
 }

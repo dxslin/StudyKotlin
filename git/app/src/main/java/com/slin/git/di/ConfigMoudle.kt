@@ -2,15 +2,15 @@ package com.slin.git.di
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
+import androidx.datastore.DataStore
 import com.slin.core.config.ApplyRetrofitOptions
 import com.slin.core.config.CoreConfig
 import com.slin.core.config.DefaultConfig
-import com.slin.core.di.CoreSharePreferencesQualifier
 import com.slin.git.api.local.GitUserInfoStorage
 import com.slin.git.config.Config
 import com.slin.git.net.GitAuthInterceptor
 import com.slin.git.net.LiveDataCallAdapterFactory
+import com.slin.proto.GitUserPbOuterClass
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -52,10 +52,9 @@ object ConfigModule {
     @Provides
     @Singleton
     fun provideGitUserInfoStorage(
-        @CoreSharePreferencesQualifier
-        sharedPreferences: SharedPreferences,
+        dataStore: DataStore<GitUserPbOuterClass.GitUserPb>,
     ): GitUserInfoStorage {
-        return GitUserInfoStorage.getInstance(sharedPreferences)
+        return GitUserInfoStorage.getInstance(dataStore)
     }
 
     @Provides

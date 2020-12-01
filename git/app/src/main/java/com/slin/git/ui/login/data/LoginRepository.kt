@@ -4,7 +4,9 @@ import com.slin.core.net.Results
 import com.slin.core.repository.IRepository
 import com.slin.git.api.entity.UserInfo
 import com.slin.git.manager.UserManager
+import com.slin.proto.GitUserPbOuterClass
 import dagger.hilt.android.scopes.ActivityRetainedScoped
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**
@@ -41,8 +43,8 @@ class LoginRepository @Inject constructor(
         UserManager.userInfo.postValue(userInfo)
     }
 
-    fun isAutoLogin(): Boolean {
-        return localDataSource.isAutoLogin()
+    fun obtainGitUser(): Flow<GitUserPbOuterClass.GitUserPb> {
+        return localDataSource.obtainGitUser()
     }
 
 }

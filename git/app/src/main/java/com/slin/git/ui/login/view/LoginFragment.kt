@@ -115,12 +115,11 @@ class LoginFragment : CoreFragment() {
             binding.etUsername.setText(BuildConfig.DEFAULT_ACCOUNT)
             binding.etPassword.setText(BuildConfig.DEFAULT_PASSWORD)
         }
-        if (loginViewModel.isAutoLogin()) {
-            loginViewModel.login(
-                binding.etUsername.text.toString(),
-                binding.etPassword.text.toString()
-            )
-        }
+
+        loginViewModel.autoLogin(
+            binding.etUsername.text.toString(),
+            binding.etPassword.text.toString()
+        )
 
     }
 

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option java_package = "com.slin.proto";
 
-message GitUserPref {
+message GitUserPb {
   string username = 1;
   string password = 2;
   bool isAutoLogin = 3;

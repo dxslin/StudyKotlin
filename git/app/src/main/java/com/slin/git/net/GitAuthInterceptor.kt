@@ -3,6 +3,8 @@ package com.slin.git.net
 import android.util.Base64
 import com.slin.git.BuildConfig
 import com.slin.git.api.local.GitUserInfoStorage
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
@@ -33,9 +35,12 @@ class GitAuthInterceptor(private val userInfoStorage: GitUserInfoStorage) : Inte
     }
 
     private fun getAuthorization(): String {
+        val userInfo = runBlocking {
+            userInfoStorage.obtainGitUser().first()
+        }
         val accessToken = BuildConfig.USER_ACCESS_TOKEN
-        val username = userInfoStorage.username
-        val password = userInfoStorage.password
+        val username = userInfo.username
+        val password = userInfo.password
 
         if (accessToken.isBlank()) {
             val basicIsEmpty = username.isBlank() || password.isBlank()

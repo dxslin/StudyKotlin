@@ -6,9 +6,9 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.slin.core.config.CoreConfig
 import com.slin.core.di.CoreComponentDependencies
-import com.slin.core.di.CoreSharePreferencesQualifier
 import com.slin.core.di.ImageOkHttpClientQualifier
 import com.slin.core.di.OkHttpClientQualifier
+import com.slin.core.di.SCoreSharePreferencesQualifier
 import com.slin.core.image.ImageLoader
 import dagger.BindsInstance
 import dagger.Component
@@ -44,7 +44,7 @@ interface SCoreComponent {
 
     fun imageLoader(): ImageLoader
 
-    @CoreSharePreferencesQualifier
+    @SCoreSharePreferencesQualifier
     fun coreSharedPreferences(): SharedPreferences
 
     fun gson(): Gson

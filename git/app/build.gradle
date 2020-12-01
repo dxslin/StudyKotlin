@@ -1,10 +1,13 @@
 import java.util.regex.Pattern
+import com.slin.version.plugin.*
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'com.slin.version.plugin'
+
 
 android {
     compileSdkVersion 29

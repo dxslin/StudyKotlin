@@ -1,7 +1,7 @@
 package com.slin.version.plugin
 
 object Versions {
-    const val kotlin_version = "1.4.0"
+    const val kotlin_version = "1.3.72"
 
     const val appcompat_version = "1.2.0"
     const val material_version = "1.2.0"
@@ -48,6 +48,7 @@ object Dependencies {
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
     const val kotlin_coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5"
     const val kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin_version}"
+    const val kotlin_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin_version}"
 
     //android x ui
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat_version}"

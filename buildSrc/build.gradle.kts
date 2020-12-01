@@ -12,13 +12,13 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.20")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72")
     }
 }
 
 gradlePlugin {
     plugins {
-        create("com.slin.version.plugin") {
+        create("VersionPlugin") {
             id = "com.slin.version.plugin"
             implementationClass = "com.slin.version.plugin.VersionPlugin"
         }

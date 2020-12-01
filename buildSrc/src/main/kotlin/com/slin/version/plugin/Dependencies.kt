@@ -1,3 +1,5 @@
+package com.slin.version.plugin
+
 object Versions {
     const val kotlin_version = "1.4.0"
 

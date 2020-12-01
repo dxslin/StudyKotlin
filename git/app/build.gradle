@@ -58,6 +58,8 @@ dependencies {
     implementation project(path: ':git:core')
     implementation project(path: ':git:proto')
 
+//    implementation 'com.github.dxslin.StudyKotlin:core:2.0.0'
+
     implementation Dependencies.kotlin_stdlib
     implementation Dependencies.appcompat
     implementation Dependencies.swipe_refresh_layout

@@ -1,7 +1,7 @@
 package com.slin.version.plugin
 
 object Versions {
-    const val kotlin_version = "1.3.72"
+    const val kotlin_version = "1.4.20"
 
     const val appcompat_version = "1.2.0"
     const val material_version = "1.2.0"

@@ -131,6 +131,7 @@ class GitProperties {
 
     static String getStringValue(Properties properties, String key) {
         String value = properties.getProperty(key)
+        if(value == null) value = "\"\""
         def matcher = STRING_PATTERN.matcher(value)
         if (!matcher.matches()) {
             throw IllegalFormatException("请输入字符串，比如：\"a123\"")

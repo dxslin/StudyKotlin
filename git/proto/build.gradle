@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-android'
     //添加Protobuf插件，使用kapt自动生成proto类文件，除了需要导入DataStore，还要导入protobuf插件
     id 'com.google.protobuf'
+    id 'com.slin.version.plugin'
 }
 
 android {

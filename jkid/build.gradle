@@ -1,7 +1,9 @@
-import com.slin.version.plugin.Dependencies
-
-apply plugin: 'java-library'
-apply plugin: 'kotlin'
+plugins {
+    id 'com.slin.version.plugin'
+    id 'kotlin'
+    id 'java-library'
+}
+import com.slin.version.plugin.*
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

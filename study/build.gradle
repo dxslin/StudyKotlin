@@ -1,16 +1,14 @@
-import com.slin.version.plugin.Dependencies
+import com.slin.version.plugin.*
+plugins {
+    id 'com.slin.version.plugin'
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'com.google.protobuf'
+    id 'dagger.hilt.android.plugin'
+}
 
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
-
-apply plugin: 'kotlin-kapt'
-
-apply plugin: 'com.google.protobuf'
-
-apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 28

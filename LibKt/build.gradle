@@ -1,8 +1,11 @@
-import com.slin.version.plugin.Dependencies
+plugins {
+    id 'com.slin.version.plugin'
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+}
 
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+import com.slin.version.plugin.*
 
 android {
     compileSdkVersion 30

@@ -1,8 +1,10 @@
+
+rootProject.name="StudyKotlin"
+includeBuild 'versionPlugin'
 include ':git:proto'
 include ':LibKt:SateViewSwitcher'
 include ':LibKt'
 include ':git:app'
-rootProject.name="StudyKotlin"
 include ':git:core'
 //include ':git'
 include ':study'

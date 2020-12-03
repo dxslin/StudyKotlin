@@ -13,4 +13,7 @@ class VersionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
 //        target.task()
     }
+
+    companion object
+
 }

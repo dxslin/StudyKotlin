@@ -1,5 +1,6 @@
 package com.slin.core.ui
 
+import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 
 
@@ -10,7 +11,10 @@ import androidx.fragment.app.Fragment
  *
  */
 
-open class CoreFragment : Fragment() {
+open class CoreFragment : Fragment {
 
+    constructor() : super()
+
+    constructor(@LayoutRes layoutId: Int) : super(layoutId)
 
 }

@@ -1,5 +1,6 @@
 package com.slin.core.ui
 
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -9,7 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
  * description: BaseActivity
  *
  */
-open class CoreActivity : AppCompatActivity() {
+open class CoreActivity : AppCompatActivity {
+
+    constructor() : super()
+
+    constructor(@LayoutRes layoutId: Int) : super(layoutId)
 
 
 }

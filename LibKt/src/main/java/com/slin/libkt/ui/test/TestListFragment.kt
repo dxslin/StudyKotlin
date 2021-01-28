@@ -3,17 +3,15 @@ package com.slin.libkt.ui.test
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.slin.libkt.R
+import com.slin.libkt.databinding.FragmentTestListBinding
 import com.slin.libkt.databinding.ItemHomeTestBinding
 import com.slin.libkt.view.GridDividerItemDivider
-import kotlinx.android.synthetic.main.fragment_test_list.*
+import com.slin.saber.wallpaper.base.BaseFragment
 
 
 /**
@@ -22,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_test_list.*
  * description:
  *
  */
-class TestListFragment : Fragment() {
+class TestListFragment : BaseFragment<FragmentTestListBinding>(R.layout.fragment_test_list) {
 
     companion object {
 
@@ -38,22 +36,15 @@ class TestListFragment : Fragment() {
         }
     }
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_test_list, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val dataList: java.util.ArrayList<TestPageData>? =
             arguments?.getParcelableArrayList(INTENT_KEY_TEST_PAGE_DATA)
 
-        rv_test_item.apply {
+
+
+        binding.rvTestItem.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             addItemDecoration(GridDividerItemDivider(10, 10, Color.TRANSPARENT))
             adapter = object : BaseQuickAdapter<TestPageData, BaseViewHolder>(

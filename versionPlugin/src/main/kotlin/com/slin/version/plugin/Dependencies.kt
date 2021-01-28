@@ -10,6 +10,7 @@ object Versions {
     const val navigation_version = "2.2.0"
     const val dynamic_animation_version = "1.0.0"
     const val swipe_refresh_layout_version = "1.2.0-alpha01"
+    const val recycler_view_version = "1.1.0"
 
     const val lifecycle_version = "2.2.0"
 
@@ -70,6 +71,8 @@ object Dependencies {
         "androidx.dynamicanimation:dynamicanimation:${Versions.dynamic_animation_version}"
     const val swipe_refresh_layout =
         "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipe_refresh_layout_version}"
+    const val recycler_view =
+        "androidx.recyclerview:recyclerview:${Versions.recycler_view_version}"
 
 
     //jetpack library

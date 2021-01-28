@@ -19,7 +19,7 @@ class HomeFragment : Fragment() {
     }
 
     private val pageDataList = arrayListOf(
-        TestPageData("StateViewSwitcher", R.drawable.img_fate_arthur2, SvsTestActivity::class.java)
+        TestPageData("StateViewSwitcher", R.drawable.img_cartoon_1, SvsTestActivity::class.java)
     )
 
     override fun onCreateView(

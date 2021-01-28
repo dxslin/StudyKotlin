@@ -3,20 +3,18 @@ package com.slin.libkt.ui.svs
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.slin.core.net.status.SvsState
 import com.slin.libkt.R
 import com.slin.libkt.databinding.FragmentSvsTestBinding
+import com.slin.saber.wallpaper.base.BaseFragment
 import com.slin.sate_view_switcher.DefaultStateView
 import com.slin.sate_view_switcher.StateView
 import com.slin.sate_view_switcher.StateViewSwitcher
 import java.io.IOException
 
-class SvsTestFragment : Fragment() {
+class SvsTestFragment : BaseFragment<FragmentSvsTestBinding>(R.layout.fragment_svs_test) {
 
     init {
         StateViewSwitcher.config(object : StateView.Factory {
@@ -28,16 +26,11 @@ class SvsTestFragment : Fragment() {
 
     private lateinit var stateViewSwitcher: StateViewSwitcher
 
-    private lateinit var binding: FragmentSvsTestBinding
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return FragmentSvsTestBinding.inflate(inflater, container, false).apply {
-            binding = this
-            initView()
-        }.root
+        binding.initView()
+
     }
 
     private fun FragmentSvsTestBinding.initView() {

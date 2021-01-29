@@ -1,6 +1,9 @@
 package com.slin.version.plugin
 
 object Versions {
+
+    const val slin_library_version = "1.0.0"
+
     const val kotlin_version = "1.4.20"
 
     const val appcompat_version = "1.2.0"
@@ -45,6 +48,14 @@ object Versions {
 
 
 object Dependencies {
+    const val score = "com.github.dxslin.SlinLibrary:Score:${Versions.slin_library_version}"
+    const val view_binding_ext =
+        "com.github.dxslin.SlinLibrary:ViewBindingExt:${Versions.slin_library_version}"
+    const val slin_dialog =
+        "com.github.dxslin.SlinLibrary:SlinDialog:${Versions.slin_library_version}"
+    const val view_pager_indicator =
+        "com.github.dxslin.SlinLibrary:ViewPagerIndicator:${Versions.slin_library_version}"
+
     //kotlin
     const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin_version}"
     const val kotlin_coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5"

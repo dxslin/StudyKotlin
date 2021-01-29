@@ -59,10 +59,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation project(path: ':git:core')
     implementation project(path: ':git:proto')
 
-//    implementation 'com.github.dxslin.StudyKotlin:core:2.0.0'
+    implementation Dependencies.score
+    implementation Dependencies.view_binding_ext
 
     implementation Dependencies.kotlin_stdlib
     implementation Dependencies.appcompat

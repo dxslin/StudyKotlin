@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit
  * 5. 周期任务最小执行间隔时间为15分钟
  */
 
-private val TAG: String? = "WorkManagerTest"
+private val TAG: String = "WorkManagerTest"
 
 
 class WorkManagerTestViewModel(val context: Context, private val owner: LifecycleOwner) :
@@ -56,6 +56,8 @@ class WorkManagerTestViewModel(val context: Context, private val owner: Lifecycl
         val onceLogRequest = OneTimeWorkRequestBuilder<LogTestWorker>()
             .setInputData(inputWorkData)
             .setConstraints(constraints)
+            .setInitialDelay(10, TimeUnit.SECONDS)
+            .setScheduleRequestedAt(System.currentTimeMillis() + 1500_000, TimeUnit.MILLISECONDS)
             .build()
         workManager.enqueue(onceLogRequest)
 
@@ -70,11 +72,18 @@ class WorkManagerTestViewModel(val context: Context, private val owner: Lifecycl
      * 测试周期调用的work
      */
     fun periodRequestTest() {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)  //需要处于的网络连接状态
+            .setRequiresBatteryNotLow(true)  //低电量不允许
+            .setRequiresCharging(false)     //设置是否在充电
+            .setRequiresDeviceIdle(false)    //设备是否空闲
+            .build()
         val periodRequest = PeriodicWorkRequestBuilder<LogTestWorker>(
             PeriodicWorkRequest.MIN_PERIODIC_INTERVAL_MILLIS, TimeUnit.MILLISECONDS,
             PeriodicWorkRequest.MIN_PERIODIC_FLEX_MILLIS, TimeUnit.MILLISECONDS
         )
             .setInputData(inputWorkData)
+            .setConstraints(constraints)
             .build()
         workManager.enqueue(periodRequest)
         val workInfoLiveData = workManager.getWorkInfoByIdLiveData(periodRequest.id)
@@ -94,7 +103,6 @@ class WorkManagerTestViewModel(val context: Context, private val owner: Lifecycl
                     DownloadWorker.OUTPUT_FILE to "baidu.text"
                 )
             )
-            .setInitialDelay(10, TimeUnit.SECONDS)
             .build()
         workManager.enqueueUniqueWork("download task", ExistingWorkPolicy.APPEND, downloadRequest)
         workManager.getWorkInfoByIdLiveData(downloadRequest.id)
@@ -107,37 +115,39 @@ class WorkManagerTestViewModel(val context: Context, private val owner: Lifecycl
     }
 
 
-    inner class LogTestWorker(val context: Context, workerParameters: WorkerParameters) :
+    class LogTestWorker(val context: Context, workerParameters: WorkerParameters) :
         Worker(context, workerParameters) {
 
 
         override fun doWork(): Result {
+            Log.d(TAG, "doWork: ")
             val data = work(inputData)
             return Result.success(workDataOf("result" to data))
         }
-    }
 
-    private fun work(inputData: Data): String {
-        val name = inputData.getString("name")
-        val msg = inputData.getString("msg")
+        private fun work(inputData: Data): String {
+            val name = inputData.getString("name")
+            val msg = inputData.getString("msg")
 
-        _workResult.postValue("start work")
+//            _workResult.postValue("start work")
 
-        //模拟耗时处理
-        try {
-            Thread.sleep(10000)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
+            //模拟耗时处理
+//            try {
+//                Thread.sleep(10000)
+//            } catch (e: InterruptedException) {
+//                e.printStackTrace()
+//            }
+
+            val data = "${System.currentTimeMillis()} -- doWork: hello $name, $msg"
+            Log.d(TAG, "work: data = $data")
+
+//            _workResult.postValue(data)
+
+            return data
+
         }
-
-        val data = "${System.currentTimeMillis()} -- doWork: hello $name, $msg"
-        Log.d(TAG, "work: data = $data")
-
-        _workResult.postValue(data)
-
-        return data
-
     }
+
 }
 
 

@@ -15,7 +15,8 @@ import com.slin.study.kotlin.ui.testlist.TestPageData
 class JetPackActivity : BaseActivity() {
 
     private val testPageDataList: ArrayList<TestPageData> = arrayListOf(
-        TestPageData("ViewBind", R.drawable.img_cartoon_1, ViewBindActivity::class.java),
+        TestPageData("VMLiveData", R.drawable.img_cartoon_bear, VMLiveDataActivity::class.java),
+        TestPageData("ViewBind", R.drawable.img_cartoon_pig2, ViewBindActivity::class.java),
         TestPageData("DataBind", R.drawable.img_cartoon_2, DataBindActivity::class.java),
         TestPageData("DataStore", R.drawable.img_cartoon_car, DataStoreActivity::class.java),
         TestPageData("WorkManager",

@@ -1,5 +1,4 @@
 plugins {
-    id 'com.slin.version.plugin'
     id 'kotlin'
     id 'java-library'
 }

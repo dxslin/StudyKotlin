@@ -1,5 +1,4 @@
 rootProject.name="StudyKotlin"
-includeBuild 'versionPlugin'
 include ':git:proto'
 include ':git:app'
 //include ':git'

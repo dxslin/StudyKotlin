@@ -1,6 +1,5 @@
 import com.slin.version.plugin.*
 plugins {
-    id 'com.slin.version.plugin'
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'

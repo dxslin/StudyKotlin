@@ -16,8 +16,43 @@ import com.slin.study.kotlin.ui.material.MaterialDesignActivity
 import com.slin.study.kotlin.ui.motion.MotionLayoutTestActivity
 import com.slin.study.kotlin.ui.testlist.TestListFragment
 import com.slin.study.kotlin.ui.testlist.TestPageData
+import com.slin.study.kotlin.ui.theory.TheoryTestActivity
 
+val testDataList =
+    arrayListOf(
+        TestPageData("JetPack", R.drawable.img_cartoon_1, JetPackActivity::class.java),
+        TestPageData(
+            "BottomSheet",
+            R.drawable.img_cartoon_3,
+            BottomSheetTestActivity::class.java
+        ),
+        TestPageData(
+            "MaterialDesign",
+            R.drawable.img_cartoon_cat,
+            MaterialDesignActivity::class.java
+        ),
+        TestPageData(
+            "MotionLayout",
+            R.drawable.img_cartoon_pig1,
+            MotionLayoutTestActivity::class.java
+        ),
+        TestPageData(
+            "LibraryCase",
+            R.drawable.img_cartoon_pig2,
+            LibraryCaseActivity::class.java
+        ),
+        TestPageData(
+            "FloatWindow",
+            R.drawable.img_cartoon_2,
+            FloatWindowActivity::class.java
+        ),
+        TestPageData(
+            "TheoryTest",
+            R.drawable.img_cartoon_bear,
+            TheoryTestActivity::class.java
+        ),
 
+        )
 class HomeFragment : BaseFragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
@@ -25,36 +60,7 @@ class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
 
 
-    private val testDataList =
-        arrayListOf(
-            TestPageData("JetPack", R.drawable.img_cartoon_1, JetPackActivity::class.java),
-            TestPageData(
-                "BottomSheet",
-                R.drawable.img_cartoon_3,
-                BottomSheetTestActivity::class.java
-            ),
-            TestPageData(
-                "MaterialDesign",
-                R.drawable.img_cartoon_cat,
-                MaterialDesignActivity::class.java
-            ),
-            TestPageData(
-                "MotionLayout",
-                R.drawable.img_cartoon_pig1,
-                MotionLayoutTestActivity::class.java
-            ),
-            TestPageData(
-                "LibraryCase",
-                R.drawable.img_cartoon_pig2,
-                LibraryCaseActivity::class.java
-            ),
-            TestPageData(
-                "FloatWindow",
-                R.drawable.img_cartoon_2,
-                FloatWindowActivity::class.java
-            )
 
-        )
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -2,10 +2,7 @@ package com.slin.study.kotlin.executor
 
 import org.junit.Test
 import java.util.*
-import java.util.concurrent.SynchronousQueue
-import java.util.concurrent.ThreadFactory
-import java.util.concurrent.ThreadPoolExecutor
-import java.util.concurrent.TimeUnit
+import java.util.concurrent.*
 
 /**
  * author: slin
@@ -25,14 +22,14 @@ class ExecutorTest {
             println("${Date()} slin : create ${th.name}")
             th
         }
-
+        val blockingQueue: BlockingQueue<Runnable> = SynchronousQueue()
 //            val executor = Executors.newFixedThreadPool(2, factory)
 //            val executor = Executors.newCachedThreadPool(factory)
 //            val executor = ThreadPoolExecutor(2, 10, 10,
 //                    TimeUnit.SECONDS, LinkedBlockingQueue(), factory, ThreadPoolExecutor.DiscardPolicy())
         val executor = ThreadPoolExecutor(
             2, 10, 10,
-            TimeUnit.SECONDS, SynchronousQueue(), factory, ThreadPoolExecutor.DiscardPolicy()
+            TimeUnit.SECONDS, blockingQueue, factory, ThreadPoolExecutor.DiscardPolicy()
         )
 
 

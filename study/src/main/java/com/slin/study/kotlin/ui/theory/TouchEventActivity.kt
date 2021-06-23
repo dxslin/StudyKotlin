@@ -29,7 +29,8 @@ class TouchEventActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTouchEventBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setShowBackButton(true)
+        title = "TouceEvent"
         initView()
     }
 

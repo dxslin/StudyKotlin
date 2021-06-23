@@ -46,6 +46,7 @@
         <activity android:name=".ui.jetpack.VMLiveDataActivity" />
         <activity android:name=".ui.theory.TheoryTestActivity" />
         <activity android:name=".ui.theory.TouchEventActivity" />
+        <activity android:name=".ui.theory.HandlerTestActivity" />
 
         <service
             android:name="androidx.work.impl.foreground.SystemForegroundService"

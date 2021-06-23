@@ -15,7 +15,8 @@ import com.slin.study.kotlin.ui.testlist.TestPageData
 class TheoryTestActivity : BaseActivity() {
 
     private val testPageDataList: ArrayList<TestPageData> = arrayListOf(
-        TestPageData("TouchEvent", R.drawable.img_cartoon_bear, TouchEventActivity::class.java),
+        TestPageData("TouchEvent", R.drawable.img_cartoon_cat, TouchEventActivity::class.java),
+        TestPageData("HandlerTest", R.drawable.img_cartoon_bear, HandlerTestActivity::class.java),
     )
 
 

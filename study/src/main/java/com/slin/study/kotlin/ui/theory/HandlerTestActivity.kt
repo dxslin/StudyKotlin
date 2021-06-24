@@ -34,6 +34,9 @@ class HandlerTestActivity : BaseActivity() {
         handlerThread = HandlerThread("slin_test_idle")
         handlerThread.start()
         handler = Handler(handlerThread.looper)
+        handlerThread.looper.setMessageLogging {
+            Logger.log(TAG, "logging $it")
+        }
 
         binding.apply {
             btnPostMessage.setOnClickListener {
@@ -46,7 +49,7 @@ class HandlerTestActivity : BaseActivity() {
                 Logger.log(TAG, "post delay message ")
                 handler.postDelayed({
                     Logger.log(TAG, "post delay message execute")
-                }, 200)
+                }, 3000)
             }
             btnAddIdleHandler.setOnClickListener {
                 addIdleHandler()

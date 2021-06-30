@@ -35,4 +35,13 @@
         app:layout_constraintStart_toStartOf="@id/btnPostMessage"
         app:layout_constraintTop_toBottomOf="@id/btnPostDelayMessage" />
 
+    <Button
+        android:id="@+id/btnGetTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Time"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="@id/btnPostMessage"
+        app:layout_constraintTop_toBottomOf="@id/btnAddIdleHandler" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,10 @@
 package com.slin.study.kotlin.ui.theory
 
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -25,7 +29,14 @@ class TouchEventActivity : BaseActivity() {
 
     private lateinit var binding: ActivityTouchEventBinding
 
+    private val list = mutableListOf<TestPageData>().apply {
+        for (i in 0..1000) {
+            addAll(testDataList)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        Logger.log(TAG, "onCreate")
         super.onCreate(savedInstanceState)
         binding = ActivityTouchEventBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -59,11 +70,18 @@ class TouchEventActivity : BaseActivity() {
             btnButton2.setOnClickListener {
                 Logger.log(TAG, "click button2")
             }
+            btnButton3.setOnClickListener {
+
+                throw RuntimeException("bbb")
+
+//                    list.addAll(list)
+//                rvRecyclerView.adapter?.notifyDataSetChanged()
+            }
 
             rvRecyclerView.layoutManager = LinearLayoutManager(this@TouchEventActivity)
             rvRecyclerView.adapter = object : BaseQuickAdapter<TestPageData, BaseViewHolder>(
                 R.layout.item_image_text,
-                testDataList
+                list
             ) {
                 override fun convert(holder: BaseViewHolder, item: TestPageData) {
                     holder.getView<ImageView>(R.id.iv_icon).setImageResource(item.icon)
@@ -82,5 +100,41 @@ class TouchEventActivity : BaseActivity() {
         }
     }
 
+    override fun onStart() {
+        Logger.log(TAG, "onStart")
+        super.onStart()
+        registerReceiver(object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+
+            }
+
+        }, IntentFilter("xx"))
+
+    }
+
+    override fun onRestart() {
+        Logger.log(TAG, "onRestart")
+        super.onRestart()
+    }
+
+    override fun onResume() {
+        Logger.log(TAG, "onResume")
+        super.onResume()
+    }
+
+    override fun onPause() {
+        Logger.log(TAG, "onPause")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        Logger.log(TAG, "onStop")
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        Logger.log(TAG, "onDestroy")
+        super.onDestroy()
+    }
 
 }

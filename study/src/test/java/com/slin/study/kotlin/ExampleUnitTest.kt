@@ -1,6 +1,7 @@
 package com.slin.study.kotlin
 
 import org.junit.Test
+import kotlin.concurrent.thread
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -88,6 +89,28 @@ class ExampleUnitTest {
         println(clonePerson)
         println(person)
 
+
+    }
+
+    @Test
+    fun listCopyTest() {
+        val list = MutableList(10000) {
+            it
+        }
+        val threadList: MutableList<Thread> = mutableListOf()
+        for (i in 0..10) {
+            val thread = thread(name = "thread_list_$i") {
+                val copyList: List<Int> = ArrayList(list)
+//                for (k in 0..20000){}
+                println("${Thread.currentThread().name}: ${copyList.size}")
+                list.clear()
+            }
+            threadList.add(thread)
+        }
+
+        threadList.forEach { it.join() }
+
+        println(this::class.java.canonicalName)
 
     }
 

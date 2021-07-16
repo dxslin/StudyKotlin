@@ -12,7 +12,7 @@ import android.util.Log
 object Logger {
 
     fun log(tag: String, log: String) {
-        Log.d(Thread.currentThread().name + tag, log)
+        Log.d(Thread.currentThread().name + "-" + tag, log)
     }
 
 

@@ -29,6 +29,10 @@ class MaterialThemeActivity : BaseActivity() {
         setContentView(R.layout.activity_material_theme)
         title = "Theme"
         setShowBackButton(true)
+
+        btn_change_theme.text = "Theme: ${THEME_ARRAY[ThemeHelper.getThemeIndex()]}"
+        btn_change_night_mode.text =
+            "NightMode: ${THEME_NIGHT_MODE[ThemeHelper.getNightModeIndex()]}"
     }
 
     override fun applyThemeResource() {

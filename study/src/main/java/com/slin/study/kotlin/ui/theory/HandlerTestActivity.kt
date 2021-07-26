@@ -1,9 +1,6 @@
 package com.slin.study.kotlin.ui.theory
 
-import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
-import android.os.SystemClock
+import android.os.*
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.databinding.ActivityHandlerTestBinding
 import com.slin.study.kotlin.util.Logger
@@ -14,6 +11,9 @@ import com.slin.study.kotlin.util.Logger
  * description:
  *
  */
+
+const val MSG_WHAT_HELLO = 1
+
 class HandlerTestActivity : BaseActivity() {
 
     private lateinit var binding: ActivityHandlerTestBinding
@@ -34,7 +34,15 @@ class HandlerTestActivity : BaseActivity() {
     private fun initView() {
         handlerThread = HandlerThread("slin_test_idle")
         handlerThread.start()
-        handler = Handler(handlerThread.looper)
+        handler = object : Handler(handlerThread.looper) {
+            override fun handleMessage(msg: Message) {
+                when (msg.what) {
+                    MSG_WHAT_HELLO -> Logger.log(TAG, "handleMessage: $msg")
+                }
+
+            }
+
+        }
         handlerThread.looper.setMessageLogging {
             Logger.log(TAG, "logging $it")
         }
@@ -72,6 +80,14 @@ class HandlerTestActivity : BaseActivity() {
                 )
 
             }
+
+            btnOtherHandler.setOnClickListener {
+                // 不同的Handler使用同一个Looper，发送消息，其他Handler是收不到消息的，但是消息执行完毕之后IdleHandler会被执行
+                Logger.log(TAG, "New Handler sendEmptyMessage")
+                Handler(handlerThread.looper).sendEmptyMessage(MSG_WHAT_HELLO)
+
+            }
+
         }
 
     }

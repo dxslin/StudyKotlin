@@ -2,6 +2,7 @@ package com.slin.study.kotlin.ui.jetpack
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 
 /**
  * author: slin
@@ -12,7 +13,7 @@ import androidx.lifecycle.ViewModel
 class VMLiveDataViewModel : ViewModel() {
 
 
-    val count: MutableLiveData<Int> = MutableLiveData(0)
+    val count: MutableStateFlow<Int> = MutableStateFlow(0)
 
     val name: MutableLiveData<String> = MutableLiveData("slin")
 

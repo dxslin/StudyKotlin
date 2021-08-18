@@ -24,7 +24,7 @@
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@color/color_surface"
             android:minHeight="160dp"
-            android:text='@{vm + "\n" + vm.name + ": " + vm.count}'
+            android:text='@{vm.getClass().simpleName + ": " + vm.name + " - " + vm.count.value}'
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -10,6 +10,7 @@ import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.databinding.ActivityVmLiveDataBinding
 import com.slin.study.kotlin.util.Logger
+import kotlinx.coroutines.flow.collectLatest
 
 /**
  * author: slin
@@ -27,9 +28,10 @@ class VMLiveDataActivity : BaseActivity() {
 
     private lateinit var vmLiveDataBinding: ActivityVmLiveDataBinding
 
-    //    private val viewModel by viewModels<VMLiveDataViewModel>()
-    private val viewModel =
-        ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get<VMLiveDataViewModel>()
+    //        private val viewModel by viewModels<VMLiveDataViewModel>()
+    private val viewModel by lazy {
+        ViewModelProvider(this, defaultViewModelProviderFactory).get<VMLiveDataViewModel>()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,10 +57,16 @@ class VMLiveDataActivity : BaseActivity() {
 
         lifecycleScope.launchWhenCreated {
             viewModel.name.observe(this@VMLiveDataActivity, Observer {
-                viewModel.count.value = viewModel.count.value?.plus(1)
+                viewModel.count.value = viewModel.count.value.plus(1)
                 vmLiveDataBinding.vm = viewModel
-                Logger.log(TAG, "$viewModel, name change: $it, count: ${viewModel.count.value} ")
+                Logger.log(
+                    TAG,
+                    "${viewModel.javaClass.simpleName}, name change: $it, count: ${viewModel.count.value} "
+                )
             })
+            viewModel.count.collectLatest {
+                Logger.log(TAG, "count: $it")
+            }
         }
 
     }

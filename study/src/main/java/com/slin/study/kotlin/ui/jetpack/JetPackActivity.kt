@@ -19,10 +19,13 @@ class JetPackActivity : BaseActivity() {
         TestPageData("ViewBind", R.drawable.img_cartoon_pig2, ViewBindActivity::class.java),
         TestPageData("DataBind", R.drawable.img_cartoon_2, DataBindActivity::class.java),
         TestPageData("DataStore", R.drawable.img_cartoon_car, DataStoreActivity::class.java),
-        TestPageData("WorkManager",
+        TestPageData(
+            "WorkManager",
             R.drawable.img_cartoon_cat,
-            WorkManagerTestActivity::class.java),
+            WorkManagerTestActivity::class.java
+        ),
         TestPageData("HiltInject", R.drawable.img_cartoon_3, HiltInjectActivity::class.java),
+        TestPageData("ViewPager2", R.drawable.img_cartoon_1, ViewPager2Activity::class.java),
     )
 
 

@@ -47,6 +47,7 @@
         <activity android:name=".ui.theory.TheoryTestActivity" />
         <activity android:name=".ui.theory.TouchEventActivity" />
         <activity android:name=".ui.theory.HandlerTestActivity" />
+        <activity android:name=".ui.jetpack.ViewPager2Activity" />
 
         <service
             android:name="androidx.work.impl.foreground.SystemForegroundService"

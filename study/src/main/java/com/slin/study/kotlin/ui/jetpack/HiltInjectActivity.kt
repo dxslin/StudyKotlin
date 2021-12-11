@@ -1,8 +1,10 @@
 package com.slin.study.kotlin.ui.jetpack
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.bumptech.glide.RequestManager
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
@@ -63,6 +65,11 @@ class HiltInjectActivity : BaseActivity() {
             btnAnalyticsServiceOther.setOnClickListener { viewModel.analyticsServiceOtherResult() }
             btnRequestInfo.setOnClickListener { viewModel.requestUserInfo() }
 
+            viewModel.test(object : Observer<Unit> {
+                override fun onChanged(t: Unit?) {
+                    Log.d(TAG, "onChanged: $this")
+                }
+            })
 
         }
 

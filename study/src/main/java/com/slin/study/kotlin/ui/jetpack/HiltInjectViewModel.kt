@@ -1,8 +1,10 @@
 package com.slin.study.kotlin.ui.jetpack
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.slin.study.kotlin.ui.jetpack.hlit.HiltInjectRepository
 
@@ -32,6 +34,13 @@ class HiltInjectViewModel @ViewModelInject constructor(
 
     fun analyticsServiceOtherResult() {
         _result.postValue(repository.analyticsServiceOtherResult())
+    }
+
+    fun test(observer: Observer<Unit>) {
+        observer.onChanged(Unit)
+        val field = observer.javaClass.getDeclaredField("this$0")
+        field.get(observer)
+        Log.d("Test", "$observer this$0: ${field.get(observer)}")
     }
 
 }

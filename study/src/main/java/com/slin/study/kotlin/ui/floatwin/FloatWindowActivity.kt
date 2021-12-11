@@ -11,13 +11,17 @@ import android.provider.Settings
 import android.util.Log
 import android.view.*
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.slin.study.kotlin.R
+import com.slin.study.kotlin.StudyKotlinApplication
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.databinding.ActivityFloatWindowBinding
+import com.slin.study.kotlin.ui.jetpack.HiltInjectActivity
 import com.slin.study.kotlin.ui.testlist.TestListFragment
+import com.zj.easyfloat.EasyFloat
 
 class FloatWindowActivity : BaseActivity() {
 
@@ -43,6 +47,10 @@ class FloatWindowActivity : BaseActivity() {
         binding.apply {
             btnFloatWin.setOnClickListener { createFloatWin() }
             btnCheckPermission.setOnClickListener { checkPermission() }
+
+            btnFloatWinNoPermission.setOnClickListener { easyFloat() }
+
+            btnCustomToast.setOnClickListener { showCustomToast() }
         }
     }
 
@@ -140,6 +148,49 @@ class FloatWindowActivity : BaseActivity() {
         manager.addView(view, params)
 
 
+    }
+
+    private fun easyFloat() {
+        EasyFloat
+            .layout(R.layout.layout_float_view)
+            .blackList(mutableListOf(HiltInjectActivity::class.java))
+            .layoutParams(initLayoutParams())
+            .setAutoMoveToEdge(false)
+            .dragEnable(false)
+            .listener {
+                it.findViewById<TextView>(R.id.tv_title).setOnClickListener {
+                    EasyFloat.dismiss(this);
+                }
+                it.findViewById<TextView>(R.id.tv_content).setOnClickListener {
+                    Toast.makeText(this, "Easy Float Window Content", Toast.LENGTH_SHORT).show()
+                    Log.d("Slin", "Easy Float Window content click")
+                }
+            }
+            .show(this)
+    }
+
+    private fun initLayoutParams(): FrameLayout.LayoutParams {
+        val params = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.gravity = Gravity.TOP
+        return params
+    }
+
+    private fun showCustomToast() {
+        val toast = Toast(StudyKotlinApplication.INSTANCE);
+        val view = layoutInflater.inflate(R.layout.layout_float_view, null)
+        view.findViewById<TextView>(R.id.tv_title).setOnClickListener { toast.cancel() }
+        view.findViewById<TextView>(R.id.tv_content).setOnClickListener {
+            Toast.makeText(this, "content", Toast.LENGTH_SHORT).show()
+            Log.d("Slin", "Toast content click")
+        }
+
+        toast.view = view;
+        toast.duration = Toast.LENGTH_LONG;
+        toast.setGravity(Gravity.TOP, 0, 20)
+        toast.show()
     }
 
 

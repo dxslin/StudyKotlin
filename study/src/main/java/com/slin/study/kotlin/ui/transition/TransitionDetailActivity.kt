@@ -16,10 +16,10 @@ import androidx.core.app.ActivityOptionsCompat
 import com.google.android.material.appbar.AppBarLayout
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
+import com.slin.study.kotlin.databinding.ActivityTransitionDetailBinding
 import com.slin.study.kotlin.util.BitmapUtil
 import com.slin.study.kotlin.util.FastBlurUtil
 import com.slin.study.kotlin.util.Logger
-import kotlinx.android.synthetic.main.activity_transition_detail.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
@@ -41,15 +41,18 @@ class TransitionDetailActivity : BaseActivity() {
         const val INTENT_TRANSITION_DATA = "intent_transition_data"
     }
 
+    private lateinit var binding: ActivityTransitionDetailBinding
+
     @OptIn(ObsoleteCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_transition_detail)
+        binding = ActivityTransitionDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //沉浸式
         setStatusBarColor(Color.TRANSPARENT)
         //Toolbar
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         setShowBackButton(true)
 
         //共享元素的动画
@@ -69,23 +72,23 @@ class TransitionDetailActivity : BaseActivity() {
         val transitionData: TransitionData? = intent?.extras?.getParcelable(INTENT_TRANSITION_DATA)
         transitionData?.let {
             title = transitionData.title
-            iv_pageIcon.setImageResource(transitionData.imgRes)
-            tv_pageSubName.text = transitionData.abstract
-            tv_pageDetail.text = transitionData.detail
+            binding.ivPageIcon.setImageResource(transitionData.imgRes)
+            binding.tvPageSubName.text = transitionData.abstract
+            binding.tvPageDetail.text = transitionData.detail
         }
 
-        appbarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+        binding.appbarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val percent = (verticalOffset.toFloat() / appBarLayout.totalScrollRange).absoluteValue
 
         })
 
-        iv_pageIcon.setOnClickListener {
+        binding.ivPageIcon.setOnClickListener {
             val intent = Intent(this, ViewLargeImageActivity::class.java)
             intent.putExtra(ViewLargeImageActivity.INTENT_LARGE_IMAGE_ID, transitionData?.imgRes)
             intent.putExtra(ViewLargeImageActivity.INTENT_LARGE_IMAGE_TITLE, "King Arthur")
             val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this,
-                iv_pageIcon,
+                binding.ivPageIcon,
                 getString(R.string.key_transition_image_photo)
             )
 //            val  optionsCompat = ActivityOptionsCompat.makeClipRevealAnimation(
@@ -97,26 +100,26 @@ class TransitionDetailActivity : BaseActivity() {
 //            )
             Log.d(
                 TAG,
-                "onCreate: ${(iv_pageIcon.left + iv_pageIcon.right) / 2}  ${(iv_pageIcon.top + iv_pageIcon.bottom) / 2}"
+                "onCreate: ${(binding.ivPageIcon.left + binding.ivPageIcon.right) / 2}  ${(binding.ivPageIcon.top + binding.ivPageIcon.bottom) / 2}"
             )
 
             startActivity(intent, optionsCompat.toBundle())
         }
 
-        sb_gaussianBlurRadius.post {
+        binding.sbGaussianBlurRadius.post {
             transitionData?.let {
                 var backgroundBitmap = BitmapUtil.decodeBitmap(
                     resources,
                     transitionData.imgRes,
-                    appbarLayout.measuredWidth,
-                    appbarLayout.measuredHeight
+                    binding.appbarLayout.measuredWidth,
+                    binding.appbarLayout.measuredHeight
                 )
 
                 val scaleRatio = 1
                 backgroundBitmap = BitmapUtil.cropBitmap(
                     backgroundBitmap,
-                    appbarLayout.measuredWidth / scaleRatio,
-                    appbarLayout.measuredHeight / scaleRatio
+                    binding.appbarLayout.measuredWidth / scaleRatio,
+                    binding.appbarLayout.measuredHeight / scaleRatio
                 )
 
                 Logger.log(
@@ -133,7 +136,7 @@ class TransitionDetailActivity : BaseActivity() {
                             //这里直接使用协程来
                             val bitmap = FastBlurUtil.doBlur(backgroundBitmap, progress, false)
                             withContext(Dispatchers.Main) {
-                                appbarLayout.background = BitmapDrawable(resources, bitmap)
+                                binding.appbarLayout.background = BitmapDrawable(resources, bitmap)
                             }
 
                             //使用线程处理
@@ -150,10 +153,10 @@ class TransitionDetailActivity : BaseActivity() {
 //                            }
                         }
 
-                    channel.offer(sb_gaussianBlurRadius.progress)
-                    Logger.log(TAG, "channel offer: ${sb_gaussianBlurRadius.progress}")
+                    channel.offer(binding.sbGaussianBlurRadius.progress)
+                    Logger.log(TAG, "channel offer: ${binding.sbGaussianBlurRadius.progress}")
                 }
-                sb_gaussianBlurRadius.setOnSeekBarChangeListener(object :
+                binding.sbGaussianBlurRadius.setOnSeekBarChangeListener(object :
                     SeekBar.OnSeekBarChangeListener {
                     override fun onProgressChanged(
                         seekBar: SeekBar?,
@@ -171,8 +174,8 @@ class TransitionDetailActivity : BaseActivity() {
                     }
 
                 })
-                sb_gaussianBlurRadius.post {
-                    sb_gaussianBlurRadius.progress = 40
+                binding.sbGaussianBlurRadius.post {
+                    binding.sbGaussianBlurRadius.progress = 40
                 }
             }
         }
@@ -186,15 +189,18 @@ class TransitionDetailActivity : BaseActivity() {
             .addTransition(Fade())
             .addTransition(Slide())
 
-        TransitionManager.beginDelayedTransition(tv_text_change.parent as ViewGroup, transitionSet)
-        if (tv_text_change.tag == 1) {
-            tv_text_change.tag = 0
-            tv_text_change.textSize = 14f
-            tv_text_change.typeface = Typeface.DEFAULT
+        TransitionManager.beginDelayedTransition(
+            binding.tvTextChange.parent as ViewGroup,
+            transitionSet
+        )
+        if (binding.tvTextChange.tag == 1) {
+            binding.tvTextChange.tag = 0
+            binding.tvTextChange.textSize = 14f
+            binding.tvTextChange.typeface = Typeface.DEFAULT
         } else {
-            tv_text_change.tag = 1
-            tv_text_change.textSize = 32f
-            tv_text_change.typeface = Typeface.DEFAULT_BOLD
+            binding.tvTextChange.tag = 1
+            binding.tvTextChange.textSize = 32f
+            binding.tvTextChange.typeface = Typeface.DEFAULT_BOLD
         }
     }
 

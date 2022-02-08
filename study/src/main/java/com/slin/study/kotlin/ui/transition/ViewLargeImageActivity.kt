@@ -3,11 +3,10 @@ package com.slin.study.kotlin.ui.transition
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
-import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
+import com.slin.study.kotlin.databinding.ActivityViewLargeImageBinding
 import com.slin.study.kotlin.util.BitmapUtil
 import com.slin.study.kotlin.util.FastBlurUtil
-import kotlinx.android.synthetic.main.activity_view_large_image.*
 
 /**
  * author: slin
@@ -24,26 +23,30 @@ class ViewLargeImageActivity : BaseActivity() {
     }
 
 
+    private lateinit var binding: ActivityViewLargeImageBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_large_image)
+        binding = ActivityViewLargeImageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setShowBackButton(true)
 
 
         val imageResId = intent?.extras?.getInt(INTENT_LARGE_IMAGE_ID)
         imageResId?.let {
-            fl_content.post {
-                iv_center.setImageResource(it)
+            binding.flContent.post {
+                binding.ivCenter.setImageResource(it)
                 val scale = 10
                 val bitmap = BitmapUtil.decodeBitmap(
                     resources,
                     imageResId,
-                    fl_content.measuredWidth / scale,
-                    fl_content.measuredHeight / scale
+                    binding.flContent.measuredWidth / scale,
+                    binding.flContent.measuredHeight / scale
                 )
                 FastBlurUtil.doBlurAsync(bitmap, 80, false) { result ->
-                    fl_content.background = BitmapDrawable(resources, result)
+                    binding.flContent.background = BitmapDrawable(resources, result)
                     Log.d(TAG, "onCreate: width = ${result.width} height = ${result.height}")
                 }
 
@@ -57,7 +60,7 @@ class ViewLargeImageActivity : BaseActivity() {
             "Large Image"
         }
 
-        fl_content.setOnClickListener {
+        binding.flContent.setOnClickListener {
             finishAfterTransition()
         }
     }

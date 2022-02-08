@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.slin.study.kotlin.R
-import kotlinx.android.synthetic.main.text_fragment.*
+import com.slin.study.kotlin.databinding.TextFragmentBinding
 
 const val REQUEST_TEXT = "request_text"
 
@@ -25,19 +24,21 @@ class TextFragment : Fragment() {
     }
 
     private lateinit var viewModel: TextViewModel
+    private lateinit var binding: TextFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.text_fragment, container, false)
+    ): View {
+        binding = TextFragmentBinding.inflate(inflater)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[TextViewModel::class.java]
 
-        tv_text.text = arguments?.getString(REQUEST_TEXT)
+        binding.tvText.text = arguments?.getString(REQUEST_TEXT)
 
     }
 

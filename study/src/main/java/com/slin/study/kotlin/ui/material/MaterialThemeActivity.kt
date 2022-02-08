@@ -6,10 +6,10 @@ import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
+import com.slin.study.kotlin.databinding.ActivityMaterialThemeBinding
 import com.slin.study.kotlin.util.THEME_ARRAY
 import com.slin.study.kotlin.util.THEME_NIGHT_MODE
 import com.slin.study.kotlin.util.ThemeHelper
-import kotlinx.android.synthetic.main.layout_material_theming_theme.*
 
 
 /**
@@ -23,15 +23,17 @@ val themeList = mutableListOf<Int>()
 
 class MaterialThemeActivity : BaseActivity() {
 
+    private lateinit var viewBinding: ActivityMaterialThemeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_material_theme)
+        viewBinding = ActivityMaterialThemeBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
         title = "Theme"
         setShowBackButton(true)
 
-        btn_change_theme.text = "Theme: ${THEME_ARRAY[ThemeHelper.getThemeIndex()]}"
-        btn_change_night_mode.text =
+        viewBinding.btnChangeTheme.text = "Theme: ${THEME_ARRAY[ThemeHelper.getThemeIndex()]}"
+        viewBinding.btnChangeNightMode.text =
             "NightMode: ${THEME_NIGHT_MODE[ThemeHelper.getNightModeIndex()]}"
     }
 
@@ -72,7 +74,7 @@ class MaterialThemeActivity : BaseActivity() {
             .setTitle("夜间模式")
             .setSingleChoiceItems(THEME_NIGHT_MODE, nightMode) { dialog, which ->
                 Toast.makeText(this, "选择了${THEME_NIGHT_MODE[which]}", Toast.LENGTH_SHORT).show()
-                btn_change_night_mode.text = "NightMode: ${THEME_NIGHT_MODE[which]}"
+                viewBinding.btnChangeNightMode.text = "NightMode: ${THEME_NIGHT_MODE[which]}"
                 dialog.dismiss()
                 if (nightMode != which) {
                     ThemeHelper.saveNightModeIndex(which)
@@ -91,7 +93,7 @@ class MaterialThemeActivity : BaseActivity() {
             .setTitle("选择主题")
             .setSingleChoiceItems(THEME_ARRAY, theme) { dialog, which ->
                 Toast.makeText(this, "选择了${THEME_ARRAY[which]}", Toast.LENGTH_SHORT).show()
-                btn_change_theme.text = "Theme: ${THEME_ARRAY[which]}"
+                viewBinding.btnChangeTheme.text = "Theme: ${THEME_ARRAY[which]}"
                 dialog.dismiss()
                 if (theme != which) {
                     ThemeHelper.saveThemeIndex(which)

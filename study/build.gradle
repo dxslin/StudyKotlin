@@ -2,7 +2,6 @@ import com.slin.version.plugin.*
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'com.google.protobuf'
     id 'dagger.hilt.android.plugin'

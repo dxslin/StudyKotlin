@@ -17,7 +17,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.constant.ConstantResource
-import kotlinx.android.synthetic.main.activity_transition_list.*
+import com.slin.study.kotlin.databinding.ActivityTransitionListBinding
 import kotlin.random.Random
 
 
@@ -30,9 +30,12 @@ import kotlin.random.Random
 class TransitionListActivity : BaseActivity() {
 
 
+    private lateinit var binding: ActivityTransitionListBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_transition_list)
+        binding = ActivityTransitionListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setShowBackButton(true)
 
         val data = mutableListOf<TransitionData>()
@@ -52,9 +55,14 @@ class TransitionListActivity : BaseActivity() {
 
         val adapter = TransitionAdapter()
         adapter.adapterAnimation = SlideInRightAnimation()
-        rv_list.layoutManager = LinearLayoutManager(this)
-        rv_list.adapter = adapter
-        rv_list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
+        binding.rvList.layoutManager = LinearLayoutManager(this)
+        binding.rvList.adapter = adapter
+        binding.rvList.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                DividerItemDecoration.HORIZONTAL
+            )
+        )
 
         adapter.setList(data)
     }

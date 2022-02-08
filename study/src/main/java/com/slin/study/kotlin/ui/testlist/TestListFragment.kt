@@ -11,9 +11,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseFragment
+import com.slin.study.kotlin.databinding.FragmentTestListBinding
 import com.slin.study.kotlin.databinding.ItemHomeTestBinding
 import com.slin.study.kotlin.view.GridDividerItemDivider
-import kotlinx.android.synthetic.main.fragment_test_list.*
 
 
 /**
@@ -38,13 +38,15 @@ class TestListFragment : BaseFragment() {
         }
     }
 
+    private lateinit var binding: FragmentTestListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_test_list, container, false)
+    ): View {
+        binding = FragmentTestListBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,7 +55,7 @@ class TestListFragment : BaseFragment() {
         val dataList: java.util.ArrayList<TestPageData>? =
             arguments?.getParcelableArrayList(INTENT_KEY_TEST_PAGE_DATA)
 
-        rv_test_item.apply {
+        binding.rvTestItem.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             addItemDecoration(GridDividerItemDivider(10, 10, Color.TRANSPARENT))
             adapter = object : BaseQuickAdapter<TestPageData, BaseViewHolder>(

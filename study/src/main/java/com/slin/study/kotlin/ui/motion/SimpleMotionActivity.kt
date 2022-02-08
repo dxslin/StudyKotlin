@@ -3,7 +3,6 @@ package com.slin.study.kotlin.ui.motion
 import android.os.Bundle
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_simple_motion.*
 
 class SimpleMotionActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +12,7 @@ class SimpleMotionActivity : BaseActivity() {
 
         title = "Simple Motion"
 
-        val transition = motionLayout.getTransition(R.id.transition_transform)
+//        val transition = motionLayout.getTransition(R.id.transition_transform)
 
     }
 }

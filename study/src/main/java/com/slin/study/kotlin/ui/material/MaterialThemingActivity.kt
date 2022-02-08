@@ -20,20 +20,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
+import com.slin.study.kotlin.databinding.*
 import com.slin.study.kotlin.ui.bottomsheet.BottomSheetTestActivity
 import com.slin.study.kotlin.ui.text.TextFragment
 import com.slin.study.kotlin.util.THEME_ARRAY
 import com.slin.study.kotlin.util.THEME_NIGHT_MODE
 import com.slin.study.kotlin.util.ThemeHelper
 import com.slin.study.kotlin.util.toast
-import kotlinx.android.synthetic.main.activity_material_theming.*
-import kotlinx.android.synthetic.main.layout_material_theming_bottom_app_bar.*
-import kotlinx.android.synthetic.main.layout_material_theming_bottom_navigation.*
-import kotlinx.android.synthetic.main.layout_material_theming_clip.*
-import kotlinx.android.synthetic.main.layout_material_theming_selection.*
-import kotlinx.android.synthetic.main.layout_material_theming_tab.*
-import kotlinx.android.synthetic.main.layout_material_theming_text_field.*
-import kotlinx.android.synthetic.main.layout_material_theming_theme.*
 import kotlin.math.hypot
 import kotlin.math.pow
 
@@ -49,6 +42,7 @@ const val BUNDLE_KEY_RECREATE = "bundle_key_recreate"
 
 class MaterialThemingActivity : BaseActivity() {
 
+    private lateinit var viewBinding: ActivityMaterialThemingBinding
     private val dialogItemFruits = arrayOf("苹果", "梨子", "西瓜", "桃子")
     private var badgingEnable = false
 
@@ -60,13 +54,14 @@ class MaterialThemingActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_material_theming)
+        viewBinding = ActivityMaterialThemingBinding.inflate(layoutInflater)
+        setContentView(viewBinding.root)
         setShowBackButton(true)
         title = "MaterialTheming"
 
         recreate = savedInstanceState?.getBoolean(BUNDLE_KEY_RECREATE) ?: false
         if (recreate) {
-            nsv_content.post {
+            viewBinding.nsvContent.post {
 //                val cx = btn_change_theme.width / 2 + btn_change_theme.left
 //                val cy = btn_change_theme.height / 2 + btn_change_theme.top
                 val cx = resources.displayMetrics.widthPixels / 2
@@ -77,7 +72,7 @@ class MaterialThemingActivity : BaseActivity() {
                 )
                 val anim =
                     ViewAnimationUtils.createCircularReveal(
-                        nsv_content,
+                        viewBinding.nsvContent,
                         cx,
                         cy,
                         0f,
@@ -89,8 +84,10 @@ class MaterialThemingActivity : BaseActivity() {
             recreate = false
         }
 
-        btn_change_theme.text = "Theme: ${THEME_ARRAY[ThemeHelper.getThemeIndex()]}"
-        btn_change_night_mode.text =
+        val binding: LayoutMaterialThemingThemeBinding =
+            LayoutMaterialThemingThemeBinding.bind(viewBinding.root)
+        binding.btnChangeTheme.text = "Theme: ${THEME_ARRAY[ThemeHelper.getThemeIndex()]}"
+        binding.btnChangeNightMode.text =
             "NightMode: ${THEME_NIGHT_MODE[ThemeHelper.getNightModeIndex()]}"
         chip()
         selection()
@@ -123,12 +120,15 @@ class MaterialThemingActivity : BaseActivity() {
      * 监听Chip的一些事件
      */
     private fun chip() {
-        chip_entry.setOnCloseIconClickListener {
+
+        val binding: LayoutMaterialThemingClipBinding =
+            LayoutMaterialThemingClipBinding.bind(viewBinding.root)
+        binding.chipEntry.setOnCloseIconClickListener {
             toast("Close icon click")
         }
-        chip_action.setOnClickListener(this::buttonClick)
-        chip_choice.setOnCheckedChangeListener(this::chipCheckedChanged)
-        cg_single_select.setOnCheckedChangeListener { group, checkedId ->
+        binding.chipAction.setOnClickListener(this::buttonClick)
+        binding.chipChoice.setOnCheckedChangeListener(this::chipCheckedChanged)
+        binding.cgSingleSelect.setOnCheckedChangeListener { group, checkedId ->
             toast(
                 "single ${
                     if (checkedId == View.NO_ID) "uncheck"
@@ -137,10 +137,10 @@ class MaterialThemingActivity : BaseActivity() {
             )
             //这里可以处理总是让选中一个
             if (group.checkedChipId == View.NO_ID) {
-                chip_single_1.isChecked = true
+                binding.chipSingle1.isChecked = true
             }
         }
-        cg_single_line_select.setOnCheckedChangeListener { group, checkedId ->
+        binding.cgSingleLineSelect.setOnCheckedChangeListener { group, checkedId ->
             toast(
                 "single line ${
                     if (checkedId == View.NO_ID) "uncheck"
@@ -155,16 +155,19 @@ class MaterialThemingActivity : BaseActivity() {
      * 监听CheckBox，RadioButton，Switch的事件
      */
     private fun selection() {
-        mcb_check_box.setOnCheckedChangeListener { buttonView, isChecked ->
-            toast("${if (isChecked) "Check" else "Uncheck"}: ${mcb_check_box.text}")
+
+        val binding: LayoutMaterialThemingSelectionBinding =
+            LayoutMaterialThemingSelectionBinding.bind(viewBinding.root)
+        binding.mcbCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+            toast("${if (isChecked) "Check" else "Uncheck"}: ${binding.mcbCheckBox.text}")
         }
 
-        mrb_radio_button.setOnCheckedChangeListener { buttonView, isChecked ->
-            toast("${if (isChecked) "Check" else "Uncheck"}: ${mrb_radio_button.text}")
+        binding.mrbRadioButton.setOnCheckedChangeListener { buttonView, isChecked ->
+            toast("${if (isChecked) "Check" else "Uncheck"}: ${binding.mrbRadioButton.text}")
         }
 
-        sm_switch.setOnCheckedChangeListener { buttonView, isChecked ->
-            toast("${if (isChecked) "Check" else "Uncheck"}: ${sm_switch.text}")
+        binding.smSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            toast("${if (isChecked) "Check" else "Uncheck"}: ${binding.smSwitch.text}")
 
         }
 
@@ -174,18 +177,26 @@ class MaterialThemingActivity : BaseActivity() {
      * TextInputLayout
      */
     private fun textInputField() {
-        tiet_custom_dense_input.addTextChangedListener(onTextChanged = { text, start, before, count ->
-            if ((tiet_custom_dense_input.text?.length ?: 0) > til_custom_input.counterMaxLength) {
-                til_custom_input.error = "字数不能超过${til_custom_input.counterMaxLength}"
-                til_custom_input.isErrorEnabled = true
+
+        val binding: LayoutMaterialThemingTextFieldBinding =
+            LayoutMaterialThemingTextFieldBinding.bind(viewBinding.root)
+        binding.tietCustomDenseInput.addTextChangedListener(onTextChanged = { text, start, before, count ->
+            if ((binding.tietCustomDenseInput.text?.length
+                    ?: 0) > binding.tilCustomInput.counterMaxLength
+            ) {
+                binding.tilCustomInput.error = "字数不能超过${binding.tilCustomInput.counterMaxLength}"
+                binding.tilCustomInput.isErrorEnabled = true
             } else {
-                til_custom_input.isErrorEnabled = false;
+                binding.tilCustomInput.isErrorEnabled = false;
             }
         })
     }
 
     private fun tab() {
-        viewpager2.adapter = object : FragmentStateAdapter(this) {
+
+        val binding: LayoutMaterialThemingTabBinding =
+            LayoutMaterialThemingTabBinding.bind(viewBinding.root)
+        binding.viewpager2.adapter = object : FragmentStateAdapter(this) {
             override fun getItemCount(): Int {
                 return 3
             }
@@ -195,7 +206,7 @@ class MaterialThemingActivity : BaseActivity() {
             }
 
         }
-        TabLayoutMediator(tl_tab_layout, viewpager2) { tab, position ->
+        TabLayoutMediator(binding.tlTabLayout, binding.viewpager2) { tab, position ->
             tab.text = "tab text $position"
         }.attach()
     }
@@ -214,7 +225,9 @@ class MaterialThemingActivity : BaseActivity() {
             .setTitle("选择主题")
             .setSingleChoiceItems(THEME_ARRAY, theme) { dialog, which ->
                 Toast.makeText(this, "选择了${THEME_ARRAY[which]}", Toast.LENGTH_SHORT).show()
-                btn_change_theme.text = "Theme: ${THEME_ARRAY[which]}"
+                if (v is TextView) {
+                    v.text = "Theme: ${THEME_ARRAY[which]}"
+                }
                 dialog.dismiss()
                 if (theme != which) {
                     ThemeHelper.saveThemeIndex(which)
@@ -233,7 +246,9 @@ class MaterialThemingActivity : BaseActivity() {
             .setTitle("夜间模式")
             .setSingleChoiceItems(THEME_NIGHT_MODE, nightMode) { dialog, which ->
                 Toast.makeText(this, "选择了${THEME_NIGHT_MODE[which]}", Toast.LENGTH_SHORT).show()
-                btn_change_night_mode.text = "NightMode: ${THEME_NIGHT_MODE[which]}"
+                if (v is TextView) {
+                    v.text = "NightMode: ${THEME_NIGHT_MODE[which]}"
+                }
                 dialog.dismiss()
                 if (nightMode != which) {
                     ThemeHelper.saveNightModeIndex(which)
@@ -320,62 +335,73 @@ class MaterialThemingActivity : BaseActivity() {
     }
 
     fun changeLabelVisibilityMode(v: View) {
-        when (bnv_bottom_navigation_view.labelVisibilityMode) {
+
+        val binding: LayoutMaterialThemingBottomNavigationBinding =
+            LayoutMaterialThemingBottomNavigationBinding.bind(viewBinding.root)
+
+        when (binding.bnvBottomNavigationView.labelVisibilityMode) {
             LabelVisibilityMode.LABEL_VISIBILITY_AUTO -> {
-                bnv_bottom_navigation_view.labelVisibilityMode =
+                binding.bnvBottomNavigationView.labelVisibilityMode =
                     LabelVisibilityMode.LABEL_VISIBILITY_SELECTED
-                btn_label_visibility_mode.text = "LabelVisibilityMode:Selected"
+                binding.btnLabelVisibilityMode.text = "LabelVisibilityMode:Selected"
             }
             LabelVisibilityMode.LABEL_VISIBILITY_SELECTED -> {
-                bnv_bottom_navigation_view.labelVisibilityMode =
+                binding.bnvBottomNavigationView.labelVisibilityMode =
                     LabelVisibilityMode.LABEL_VISIBILITY_LABELED
-                btn_label_visibility_mode.text = "LabelVisibilityMode:Labeled"
+                binding.btnLabelVisibilityMode.text = "LabelVisibilityMode:Labeled"
             }
             LabelVisibilityMode.LABEL_VISIBILITY_LABELED -> {
-                bnv_bottom_navigation_view.labelVisibilityMode =
+                binding.bnvBottomNavigationView.labelVisibilityMode =
                     LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED
-                btn_label_visibility_mode.text = "LabelVisibilityMode:UnLebeled"
+                binding.btnLabelVisibilityMode.text = "LabelVisibilityMode:UnLebeled"
             }
             LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED -> {
-                bnv_bottom_navigation_view.labelVisibilityMode =
+                binding.bnvBottomNavigationView.labelVisibilityMode =
                     LabelVisibilityMode.LABEL_VISIBILITY_AUTO
-                btn_label_visibility_mode.text = "LabelVisibilityMode:AUTO"
+                binding.btnLabelVisibilityMode.text = "LabelVisibilityMode:AUTO"
             }
 
         }
     }
 
     fun changeHorizontalTranslationEnable(v: View) {
-        bnv_bottom_navigation_view.isItemHorizontalTranslationEnabled =
-            !bnv_bottom_navigation_view.isItemHorizontalTranslationEnabled
-        btn_horizontal_translation_enable.text =
-            "HorizontalTranslationEnable:${bnv_bottom_navigation_view.isItemHorizontalTranslationEnabled}"
+
+        val binding: LayoutMaterialThemingBottomNavigationBinding =
+            LayoutMaterialThemingBottomNavigationBinding.bind(viewBinding.root)
+        binding.bnvBottomNavigationView.isItemHorizontalTranslationEnabled =
+            !binding.bnvBottomNavigationView.isItemHorizontalTranslationEnabled
+        binding.btnHorizontalTranslationEnable.text =
+            "HorizontalTranslationEnable:${binding.bnvBottomNavigationView.isItemHorizontalTranslationEnabled}"
     }
 
 
     fun changeBadgingEnable(v: View) {
-        bnv_bottom_navigation_view.menu.forEachIndexed { index, item ->
+        val binding: LayoutMaterialThemingBottomNavigationBinding =
+            LayoutMaterialThemingBottomNavigationBinding.bind(viewBinding.root)
+        binding.bnvBottomNavigationView.menu.forEachIndexed { index, item ->
             if (!badgingEnable) {
-                val badgeDrawable = bnv_bottom_navigation_view.getOrCreateBadge(item.itemId)
+                val badgeDrawable = binding.bnvBottomNavigationView.getOrCreateBadge(item.itemId)
                 badgeDrawable.number = 10f.pow(index + 1).toInt()
-                if (index == bnv_bottom_navigation_view.menu.size() - 1) {
+                if (index == binding.bnvBottomNavigationView.menu.size() - 1) {
                     badgingEnable = true
-                    btn_badging_enable.text = "badgingEnable:true"
+                    binding.btnBadgingEnable.text = "badgingEnable:true"
                 }
             } else {
-                bnv_bottom_navigation_view.removeBadge(item.itemId)
-                if (index == bnv_bottom_navigation_view.menu.size() - 1) {
+                binding.bnvBottomNavigationView.removeBadge(item.itemId)
+                if (index == binding.bnvBottomNavigationView.menu.size() - 1) {
                     badgingEnable = false
-                    btn_badging_enable.text = "badgingEnable:false"
+                    binding.btnBadgingEnable.text = "badgingEnable:false"
                 }
             }
         }
     }
 
     fun changeBadgingGravity(v: View) {
+        val binding: LayoutMaterialThemingBottomNavigationBinding =
+            LayoutMaterialThemingBottomNavigationBinding.bind(viewBinding.root)
         var btnText = ""
         val badgeGravity =
-            when (bnv_bottom_navigation_view.getBadge(R.id.navigation_home)?.badgeGravity) {
+            when (binding.bnvBottomNavigationView.getBadge(R.id.navigation_home)?.badgeGravity) {
                 BadgeDrawable.TOP_END -> {
                     btnText = "TOP_START"
                     BadgeDrawable.TOP_START
@@ -397,9 +423,9 @@ class MaterialThemingActivity : BaseActivity() {
                     BadgeDrawable.TOP_END
                 }
             }
-        btn_badging_gravity.text = "BadgingGravity: $btnText"
-        bnv_bottom_navigation_view.menu.forEach { item ->
-            bnv_bottom_navigation_view.getBadge(item.itemId)?.badgeGravity = badgeGravity
+        binding.btnBadgingGravity.text = "BadgingGravity: $btnText"
+        binding.bnvBottomNavigationView.menu.forEach { item ->
+            binding.bnvBottomNavigationView.getBadge(item.itemId)?.badgeGravity = badgeGravity
         }
     }
 
@@ -408,11 +434,14 @@ class MaterialThemingActivity : BaseActivity() {
     }
 
     private fun bottomAppBar() {
-        bab_bottom_app_bar.replaceMenu(R.menu.bottom_nav_menu)
-        bab_bottom_app_bar.setNavigationOnClickListener {
+
+        val binding: LayoutMaterialThemingBottomAppBarBinding =
+            LayoutMaterialThemingBottomAppBarBinding.bind(viewBinding.root)
+        binding.babBottomAppBar.replaceMenu(R.menu.bottom_nav_menu)
+        binding.babBottomAppBar.setNavigationOnClickListener {
             onBackPressed()
         }
-        bab_bottom_app_bar.setOnMenuItemClickListener {
+        binding.babBottomAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.navigation_home -> {
                     Toast.makeText(this, "menu home", Toast.LENGTH_SHORT).show()
@@ -429,91 +458,91 @@ class MaterialThemingActivity : BaseActivity() {
                 else -> false
             }
         }
-        btn_change_fab_alignment_mode.setOnClickListener {
-            val mode = when (bab_bottom_app_bar.fabAlignmentMode) {
+        binding.btnChangeFabAlignmentMode.setOnClickListener {
+            val mode = when (binding.babBottomAppBar.fabAlignmentMode) {
                 BottomAppBar.FAB_ALIGNMENT_MODE_CENTER -> {
-                    btn_change_fab_alignment_mode.text = "Fab alignment mode: END"
+                    binding.btnChangeFabAlignmentMode.text = "Fab alignment mode: END"
                     BottomAppBar.FAB_ALIGNMENT_MODE_END
                 }
                 BottomAppBar.FAB_ALIGNMENT_MODE_END -> {
-                    btn_change_fab_alignment_mode.text = "Fab alignment mode: CENTER"
+                    binding.btnChangeFabAlignmentMode.text = "Fab alignment mode: CENTER"
                     BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
                 }
                 else -> {
-                    btn_change_fab_alignment_mode.text = "Fab alignment mode: CENTER"
+                    binding.btnChangeFabAlignmentMode.text = "Fab alignment mode: CENTER"
                     BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
                 }
             }
-            bab_bottom_app_bar.fabAlignmentMode = mode
+            binding.babBottomAppBar.fabAlignmentMode = mode
         }
 
-        btn_change_fab_animation_mode.setOnClickListener {
-            val mode = when (bab_bottom_app_bar.fabAnimationMode) {
+        binding.btnChangeFabAnimationMode.setOnClickListener {
+            val mode = when (binding.babBottomAppBar.fabAnimationMode) {
                 BottomAppBar.FAB_ANIMATION_MODE_SCALE -> {
-                    btn_change_fab_animation_mode.text = "Fab animation mode: SLIDE"
+                    binding.btnChangeFabAnimationMode.text = "Fab animation mode: SLIDE"
                     BottomAppBar.FAB_ANIMATION_MODE_SLIDE
                 }
                 BottomAppBar.FAB_ANIMATION_MODE_SLIDE -> {
-                    btn_change_fab_animation_mode.text = "Fab animation mode: SCALE"
+                    binding.btnChangeFabAnimationMode.text = "Fab animation mode: SCALE"
                     BottomAppBar.FAB_ANIMATION_MODE_SCALE
                 }
                 else -> {
-                    btn_change_fab_animation_mode.text = "Fab animation mode: SLIDE"
+                    binding.btnChangeFabAnimationMode.text = "Fab animation mode: SLIDE"
                     BottomAppBar.FAB_ANIMATION_MODE_SLIDE
                 }
             }
-            bab_bottom_app_bar.fabAnimationMode = mode
+            binding.babBottomAppBar.fabAnimationMode = mode
         }
 
-        btn_decrease_fab_cradle_margin.setOnClickListener {
-            if (bab_bottom_app_bar.fabCradleMargin > 0) {
-                bab_bottom_app_bar.fabCradleMargin--
+        binding.btnDecreaseFabCradleMargin.setOnClickListener {
+            if (binding.babBottomAppBar.fabCradleMargin > 0) {
+                binding.babBottomAppBar.fabCradleMargin--
             }
-            btn_fab_cradle_margin_text.text = bab_bottom_app_bar.fabCradleMargin.toString()
+            binding.btnFabCradleMarginText.text = binding.babBottomAppBar.fabCradleMargin.toString()
         }
 
-        btn_increase_fab_cradle_margin.setOnClickListener {
-            bab_bottom_app_bar.fabCradleMargin++
-            btn_fab_cradle_margin_text.text = bab_bottom_app_bar.fabCradleMargin.toString()
+        binding.btnIncreaseFabCradleMargin.setOnClickListener {
+            binding.babBottomAppBar.fabCradleMargin++
+            binding.btnFabCradleMarginText.text = binding.babBottomAppBar.fabCradleMargin.toString()
         }
 
 
-        btn_decrease_fab_cradle_corner_radius.setOnClickListener {
-            if (bab_bottom_app_bar.fabCradleRoundedCornerRadius > 0) {
-                bab_bottom_app_bar.fabCradleRoundedCornerRadius--
+        binding.btnDecreaseFabCradleCornerRadius.setOnClickListener {
+            if (binding.babBottomAppBar.fabCradleRoundedCornerRadius > 0) {
+                binding.babBottomAppBar.fabCradleRoundedCornerRadius--
             }
-            btn_fab_cradle_corner_radius_text.text =
-                bab_bottom_app_bar.fabCradleRoundedCornerRadius.toString()
+            binding.btnFabCradleCornerRadiusText.text =
+                binding.babBottomAppBar.fabCradleRoundedCornerRadius.toString()
         }
 
-        btn_increase_fab_cradle_corner_radius.setOnClickListener {
-            bab_bottom_app_bar.fabCradleRoundedCornerRadius++
-            btn_fab_cradle_corner_radius_text.text =
-                bab_bottom_app_bar.fabCradleRoundedCornerRadius.toString()
+        binding.btnIncreaseFabCradleCornerRadius.setOnClickListener {
+            binding.babBottomAppBar.fabCradleRoundedCornerRadius++
+            binding.btnFabCradleCornerRadiusText.text =
+                binding.babBottomAppBar.fabCradleRoundedCornerRadius.toString()
         }
 
 
-        btn_decrease_cradle_vertical_offset.setOnClickListener {
-            if (bab_bottom_app_bar.cradleVerticalOffset > 0) {
-                bab_bottom_app_bar.cradleVerticalOffset--
-                btn_fab_cradle_vertical_offset_text.text =
-                    bab_bottom_app_bar.cradleVerticalOffset.toString()
+        binding.btnDecreaseCradleVerticalOffset.setOnClickListener {
+            if (binding.babBottomAppBar.cradleVerticalOffset > 0) {
+                binding.babBottomAppBar.cradleVerticalOffset--
+                binding.btnFabCradleVerticalOffsetText.text =
+                    binding.babBottomAppBar.cradleVerticalOffset.toString()
             }
         }
 
-        btn_increase_cradle_vertical_offset.setOnClickListener {
-            bab_bottom_app_bar.cradleVerticalOffset++
-            btn_fab_cradle_vertical_offset_text.text =
-                bab_bottom_app_bar.cradleVerticalOffset.toString()
+        binding.btnIncreaseCradleVerticalOffset.setOnClickListener {
+            binding.babBottomAppBar.cradleVerticalOffset++
+            binding.btnFabCradleVerticalOffsetText.text =
+                binding.babBottomAppBar.cradleVerticalOffset.toString()
         }
 
-        btn_change_fab_alignment_mode.text = "Fab alignment mode: CENTER"
-        btn_change_fab_animation_mode.text = "Fab animation mode: SCALE"
-        btn_fab_cradle_margin_text.text = bab_bottom_app_bar.fabCradleMargin.toString()
-        btn_fab_cradle_corner_radius_text.text =
-            bab_bottom_app_bar.fabCradleRoundedCornerRadius.toString()
-        btn_fab_cradle_vertical_offset_text.text =
-            bab_bottom_app_bar.cradleVerticalOffset.toString()
+        binding.btnChangeFabAlignmentMode.text = "Fab alignment mode: CENTER"
+        binding.btnChangeFabAnimationMode.text = "Fab animation mode: SCALE"
+        binding.btnFabCradleMarginText.text = binding.babBottomAppBar.fabCradleMargin.toString()
+        binding.btnFabCradleCornerRadiusText.text =
+            binding.babBottomAppBar.fabCradleRoundedCornerRadius.toString()
+        binding.btnFabCradleVerticalOffsetText.text =
+            binding.babBottomAppBar.cradleVerticalOffset.toString()
     }
 }
 

@@ -8,17 +8,19 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_layout_transition.*
+import com.slin.study.kotlin.databinding.ActivityLayoutTransitionBinding
 import kotlin.random.Random
 
 class LayoutTransitionActivity : BaseActivity() {
 
     var transitionEnable = true
 
+    private lateinit var binding: ActivityLayoutTransitionBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_layout_transition)
-
+        binding = ActivityLayoutTransitionBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         title = "Layout Transition"
         setShowBackButton(true)
 
@@ -41,14 +43,14 @@ class LayoutTransitionActivity : BaseActivity() {
                 }
             }
         }
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 3)
 //        recyclerView.addItemDecoration(GridDividerItemDivider(10, 10, Color.TRANSPARENT))
 
 
-        btn_addItem.setOnClickListener {
+        binding.btnAddItem.setOnClickListener {
             if (transitionEnable) {
-                TransitionManager.beginDelayedTransition(recyclerView)
+                TransitionManager.beginDelayedTransition(binding.recyclerView)
             }
             val index = Random.nextInt(0, list.size)
             list.add(index, "Add $index")

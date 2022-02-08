@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_kodein_case.*
+import com.slin.study.kotlin.databinding.ActivityKodeinCaseBinding
 import org.kodein.di.Copy
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -28,6 +28,8 @@ import org.kodein.di.generic.kcontext
  */
 class KodeinCaseActivity : BaseActivity(), KodeinAware {
 
+    private lateinit var viewBinding: ActivityKodeinCaseBinding
+
     private val parentKodein by closestKodein()
 
     override val kodeinContext: KodeinContext<*>
@@ -46,11 +48,11 @@ class KodeinCaseActivity : BaseActivity(), KodeinAware {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val view = inflater.inflate(R.layout.activity_kodein_case, null)
-        setContentView(view)
+        viewBinding = ActivityKodeinCaseBinding.inflate(inflater)
+        setContentView(viewBinding.root)
 //        setContentView(R.layout.activity_kodein_case)
 
-        tv_user.text = "${userManager.getName()}: ${user.name}"
+        viewBinding.tvUser.text = "${userManager.getName()}: ${user.name}"
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.fl_content, kodeinCaseFragment)

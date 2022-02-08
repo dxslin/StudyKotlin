@@ -61,8 +61,8 @@ object Dependencies {
         private const val room_version = "2.2.5"
         private const val paging_version = "3.0.0-alpha05"  //3.0.0-alpha05
 
-        private const val hilt_version = "2.28-alpha"
-        private const val hilt_viewmodel_version = "1.0.0-alpha02"
+        private const val hilt_version = "2.38.1"
+        private const val hilt_viewmodel_version = "1.0.0-alpha03"
 
         private const val data_store_version = "1.0.0-alpha02"
         private const val protobuf_plugin_version = "0.8.13"

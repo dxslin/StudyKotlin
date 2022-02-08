@@ -8,7 +8,6 @@ import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.util.BitmapUtil
 import com.slin.study.kotlin.util.FastBlurUtil
 import kotlinx.android.synthetic.main.activity_view_large_image.*
-import kotlinx.coroutines.ObsoleteCoroutinesApi
 
 /**
  * author: slin
@@ -25,7 +24,6 @@ class ViewLargeImageActivity : BaseActivity() {
     }
 
 
-    @ObsoleteCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_large_image)

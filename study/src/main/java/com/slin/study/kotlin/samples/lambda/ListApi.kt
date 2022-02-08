@@ -6,7 +6,6 @@ import com.slin.study.kotlin.samples.`class`.Person
 import com.slin.study.kotlin.support.TestSupport.postponeComputation
 import java.io.File
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * author: slin
@@ -42,8 +41,8 @@ fun main() {
 
     //组合使用 这里每次都会重新调用maxBy计算最大值，后面为优化写法
     //记住lambda提供了简便写法，但是请牢记你的代码在干什么
-    println("工资最高的员工姓名：" + employees.filter { it.salary == employees.maxBy(Person::salary)?.salary ?: 0 })
-    val maxSalary = employees.maxBy(Person::salary)?.salary
+    println("工资最高的员工姓名：" + employees.filter { it.salary == employees.maxByOrNull(Person::salary)?.salary ?: 0 })
+    val maxSalary = employees.maxByOrNull(Person::salary)?.salary
     println("工资最高的员工姓名：${employees.filter { it.salary == maxSalary }}")
 
     //mapValues

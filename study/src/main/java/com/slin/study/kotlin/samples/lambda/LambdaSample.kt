@@ -18,9 +18,9 @@ fun main() {
      * 使用lambda表达式寻早工资最高的人
      * it代指列表的里面的元素
      */
-    println("max salary: ${employees.maxBy { it.salary }}")
+    println("max salary: ${employees.maxByOrNull { it.salary }}")
     //成员引用，使用双冒号可以直接引用属性或者方法
-    println("max salary: ${employees.maxBy(Person::salary)}")
+    println("max salary: ${employees.maxByOrNull(Person::salary)}")
     //成员引用 引用构造函数，相当于C的函数指针
     val createPerson = ::Person
     val person = createPerson("slin", 10000)

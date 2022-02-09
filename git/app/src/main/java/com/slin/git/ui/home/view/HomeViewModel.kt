@@ -1,11 +1,12 @@
 package com.slin.git.ui.home.view
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.slin.git.api.entity.ReceivedEvent
 import com.slin.git.ui.home.data.HomeRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 /**
  * author: slin
@@ -13,7 +14,8 @@ import com.slin.git.ui.home.data.HomeRepository
  * description: 首页ViewModel
  *
  */
-class HomeViewModel @ViewModelInject constructor(private val homeRepository: HomeRepository) :
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val homeRepository: HomeRepository) :
     ViewModel() {
 
     private val TAG: String? = HomeViewModel::class.simpleName

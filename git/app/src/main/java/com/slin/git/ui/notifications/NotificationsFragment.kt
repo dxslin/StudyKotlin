@@ -9,7 +9,7 @@ import com.slin.core.net.Errors
 import com.slin.core.net.status.SvsState
 import com.slin.git.base.BaseFragment
 import com.slin.git.databinding.FragmentNotificationsBinding
-import com.slin.sate_view_switcher.StateViewSwitcher
+import com.slin.svs.StateViewSwitcher
 import java.io.IOException
 
 class NotificationsFragment : BaseFragment() {

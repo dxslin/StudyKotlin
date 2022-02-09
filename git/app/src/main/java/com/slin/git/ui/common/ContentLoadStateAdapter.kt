@@ -8,7 +8,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.slin.core.net.status.SvsState
-import com.slin.sate_view_switcher.StateViewSwitcher
+import com.slin.svs.StateViewSwitcher
 
 
 /**

@@ -2,15 +2,17 @@ package com.slin.version.plugin
 
 object Dependencies {
     object Slin {
-        private const val slin_library_version = "1.0.0"
+        private const val slin_library_version = "1.1.3"
 
-        const val score = "com.github.dxslin.SlinLibrary:Score:${slin_library_version}"
+        const val score = "io.github.dxslin:Score:${slin_library_version}"
         const val view_binding_ext =
-            "com.github.dxslin.SlinLibrary:ViewBindingExt:${slin_library_version}"
+            "io.github.dxslin:ViewBindingExt:${slin_library_version}"
         const val slin_dialog =
-            "com.github.dxslin.SlinLibrary:SlinDialog:${slin_library_version}"
+            "io.github.dxslin:SlinDialog:${slin_library_version}"
         const val view_pager_indicator =
-            "com.github.dxslin.SlinLibrary:ViewPagerIndicator:${slin_library_version}"
+            "io.github.dxslin:ViewPagerIndicator:${slin_library_version}"
+        const val state_view_switcher =
+            "io.github.dxslin:StateViewSwitcher:${slin_library_version}"
     }
 
     object Kotlin {

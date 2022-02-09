@@ -1,7 +1,6 @@
 package com.slin.git.ui.login.view
 
 import android.util.Patterns
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,15 +9,18 @@ import com.slin.core.net.Results
 import com.slin.git.R
 import com.slin.git.ui.login.data.LoginRepository
 import com.slin.proto.GitUserPbOuterClass
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * 登录 viewmodel
  */
-class LoginViewModel @ViewModelInject constructor(private val loginRepository: LoginRepository) :
+@HiltViewModel
+class LoginViewModel @Inject constructor(private val loginRepository: LoginRepository) :
     ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()

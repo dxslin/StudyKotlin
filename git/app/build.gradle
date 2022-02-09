@@ -9,12 +9,12 @@ plugins {
 
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "com.slin.git"
-        minSdkVersion 23
-        targetSdkVersion 29
+        minSdkVersion 24
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -61,6 +61,7 @@ dependencies {
 
     implementation Dependencies.Slin.score
     implementation Dependencies.Slin.view_binding_ext
+    implementation Dependencies.Slin.state_view_switcher
 
     implementation Dependencies.Kotlin.kotlin_stdlib
     implementation Dependencies.AndroidX.appcompat

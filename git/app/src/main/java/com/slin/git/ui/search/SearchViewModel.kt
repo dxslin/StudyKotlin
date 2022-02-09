@@ -1,14 +1,16 @@
 package com.slin.git.ui.search
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.slin.git.api.entity.SearchHistory
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel @ViewModelInject constructor(private val repository: SearchRepository) :
+@HiltViewModel
+class SearchViewModel @Inject constructor(private val repository: SearchRepository) :
     ViewModel() {
 
     private val _historyData: MutableLiveData<MutableList<SearchHistory>> = MutableLiveData()

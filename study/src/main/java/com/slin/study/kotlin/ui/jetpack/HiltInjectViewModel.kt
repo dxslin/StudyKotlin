@@ -1,12 +1,13 @@
 package com.slin.study.kotlin.ui.jetpack
 
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.slin.study.kotlin.ui.jetpack.hlit.HiltInjectRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 
 /**
@@ -16,7 +17,8 @@ import com.slin.study.kotlin.ui.jetpack.hlit.HiltInjectRepository
  *
  *
  */
-class HiltInjectViewModel @ViewModelInject constructor(
+@HiltViewModel
+class HiltInjectViewModel @Inject constructor(
     private val repository: HiltInjectRepository,
 ) : ViewModel() {
 

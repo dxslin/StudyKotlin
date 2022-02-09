@@ -5,7 +5,6 @@ import android.content.Context
 import androidx.datastore.DataStore
 import com.slin.core.config.ApplyRetrofitOptions
 import com.slin.core.config.CoreConfig
-import com.slin.core.config.DefaultConfig
 import com.slin.git.api.local.GitUserInfoStorage
 import com.slin.git.config.Config
 import com.slin.git.net.GitAuthInterceptor
@@ -17,6 +16,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
@@ -41,7 +41,7 @@ object ConfigModule {
         return CoreConfig(
             application = context as Application,
             baseUrl = Config.BASE_URL,
-            httpLogLevel = DefaultConfig.HTTP_LOG_LEVEL,
+            httpLogLevel = HttpLoggingInterceptor.Level.BODY,
             customInterceptors = listOf<Interceptor>(
                 GitAuthInterceptor(gitUserInfoStorage)
             ),

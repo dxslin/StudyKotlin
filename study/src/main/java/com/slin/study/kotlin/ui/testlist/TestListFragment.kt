@@ -57,17 +57,19 @@ class TestListFragment : BaseFragment() {
 
         binding.rvTestItem.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
-            addItemDecoration(GridDividerItemDivider(10, 10, Color.TRANSPARENT))
+            val divider = GridDividerItemDivider(16, 16, Color.TRANSPARENT)
+            divider.setEdgeMargin(true)
+            addItemDecoration(divider)
             adapter = object : BaseQuickAdapter<TestPageData, BaseViewHolder>(
                 R.layout.item_home_test,
                 dataList
             ) {
                 override fun convert(holder: BaseViewHolder, item: TestPageData) {
                     val testBinding = ItemHomeTestBinding.bind(holder.itemView)
-                    testBinding.tvTestName.apply {
-                        text = item.name
-                        setCompoundDrawablesRelativeWithIntrinsicBounds(0, item.icon, 0, 0)
-                        setOnClickListener { view ->
+                    testBinding.apply {
+                        tvTestName.text = item.name
+                        ivIcon.setImageResource(item.icon)
+                        root.setOnClickListener { view ->
                             jumpToActivity(view, item)
                         }
                     }

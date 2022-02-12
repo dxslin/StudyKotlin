@@ -1,5 +1,8 @@
 package com.slin.version.plugin
 
+import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.kotlin.dsl.implementation
+
 object Dependencies {
     object Slin {
         private const val slin_library_version = "1.1.3"
@@ -16,7 +19,7 @@ object Dependencies {
     }
 
     object Kotlin {
-        private const val kotlin_version = "1.6.0"
+        private const val kotlin_version = "1.6.10"
         const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
         const val kotlin_coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5"
         const val kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${kotlin_version}"
@@ -151,5 +154,62 @@ object Dependencies {
             "androidx.test.espresso:espresso-core:${espresso_core_version}"
 
     }
+
+    object Matrix {
+        const val matrix_version = "2.0.5"
+
+        @JvmStatic
+        private fun fullName(name: String): String {
+            return "com.tencent.matrix:$name:$matrix_version"
+        }
+
+        const val matrix_gradle_plugin = "com.tencent.matrix:matrix-gradle-plugin:${matrix_version}"
+
+        val matrix_android_lib = fullName("matrix-android-lib")
+        val matrix_android_commons = fullName("matrix-android-commons")
+        val matrix_trace_canary = fullName("matrix-trace-canary")
+        val matrix_resource_canary_android = fullName("matrix-resource-canary-android")
+        val matrix_resource_canary_common = fullName("matrix-resource-canary-common")
+        val matrix_io_canary = fullName("matrix-io-canary")
+        val matrix_sqlite_lint_android_sdk = fullName("matrix-sqlite-lint-android-sdk")
+        val matrix_battery_canary = fullName("matrix-battery-canary")
+        val matrix_hooks = fullName("matrix-hooks")
+
+//        implementation Dependencies.Matrix.matrix_android_lib
+//        implementation Dependencies.Matrix.matrix_android_commons
+//        implementation Dependencies.Matrix.matrix_trace_canary
+//        implementation Dependencies.Matrix.matrix_resource_canary_android
+//        implementation Dependencies.Matrix.matrix_resource_canary_common
+//        implementation Dependencies.Matrix.matrix_io_canary
+//        implementation Dependencies.Matrix.matrix_sqlite_lint_android_sdk
+//        implementation Dependencies.Matrix.matrix_battery_canary
+//        implementation Dependencies.Matrix.matrix_hooks
+
+        @JvmStatic
+        fun implementationMatrix(dependencyHandler: DependencyHandler) {
+            val matrixModules = arrayOf(
+                "matrix-commons",
+                "matrix-battery-canary",
+                "matrix-android-lib",
+                "matrix-android-commons",
+                "matrix-trace-canary",
+                "matrix-resource-canary-android",
+                "matrix-resource-canary-common",
+                "matrix-io-canary",
+                "matrix-sqlite-lint-android-sdk"
+            )
+            matrixModules.forEach { name ->
+                dependencyHandler.implementation(
+                    group = "com.tencent.matrix",
+                    name = name,
+                    version = matrix_version
+                ) {
+                    isChanging = true
+                }
+            }
+        }
+
+    }
+
 
 }

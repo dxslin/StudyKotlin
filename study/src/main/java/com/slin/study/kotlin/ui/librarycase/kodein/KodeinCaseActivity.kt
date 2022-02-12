@@ -50,7 +50,9 @@ class KodeinCaseActivity : BaseActivity(), KodeinAware {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityKodeinCaseBinding.inflate(inflater)
         setContentView(viewBinding.root)
-//        setContentView(R.layout.activity_kodein_case)
+
+        setShowBackButton(true)
+        title = "Kodein Case"
 
         viewBinding.tvUser.text = "${userManager.getName()}: ${user.name}"
 

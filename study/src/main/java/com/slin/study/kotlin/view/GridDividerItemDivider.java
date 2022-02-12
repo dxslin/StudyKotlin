@@ -31,6 +31,8 @@ public class GridDividerItemDivider extends RecyclerView.ItemDecoration {
     private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
 
     private Drawable mDivider;
+    // 是否给边缘留出边距，CardView没有边距，无法显示阴影
+    private boolean isEdgeMargin = false;
 
     public GridDividerItemDivider(Context context) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
@@ -82,10 +84,11 @@ public class GridDividerItemDivider extends RecyclerView.ItemDecoration {
         //item处于哪一列
         int whichColumn = itemPosition % spanCount;
         int halfWidth = Math.round(mDivider.getIntrinsicWidth() / 2.0f);
+        int edgeMargin = isEdgeMargin ? halfWidth : 0;
         //第一列左边距为0，其他左边都为宽度的一半
-        int left = whichColumn > 0 ? halfWidth : 0;
+        int left = whichColumn > 0 ? halfWidth : edgeMargin;
         //最后一列右边距为0，其余右边距为宽度的一半
-        int right = (whichColumn + 1) != spanCount ? halfWidth : 0;
+        int right = (whichColumn + 1) != spanCount ? halfWidth : edgeMargin;
         int bottom = 0;
         //除了最后一行，底部边距都为图片高度
         if (!isLastRow(parent, itemPosition, spanCount, childCount)) {
@@ -219,4 +222,7 @@ public class GridDividerItemDivider extends RecyclerView.ItemDecoration {
 
     }
 
+    public void setEdgeMargin(boolean edgeMargin) {
+        isEdgeMargin = edgeMargin;
+    }
 }

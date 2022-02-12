@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.work.Configuration
 import com.slin.study.kotlin.ui.librarycase.kodein.moduleUser
+import com.slin.study.kotlin.ui.librarycase.matrix.MatrixUtil
 import com.slin.study.kotlin.util.CrashHandler
 import com.slin.study.kotlin.util.Logger
 import com.slin.study.kotlin.util.ThemeHelper
@@ -45,6 +46,8 @@ class StudyKotlinApplication : Application(), KodeinAware, Configuration.Provide
         INSTANCE = this
         ThemeHelper.init(this)
         CrashHandler.instance.init(this)
+
+        MatrixUtil.init(this)
     }
 
     override fun getWorkManagerConfiguration(): Configuration {

@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".StudyKotlinApplication"
@@ -15,18 +17,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.jetpack.HiltInjectActivity"></activity>
-        <activity android:name=".ui.jetpack.JetPackActivity" />
-        <activity android:name=".ui.floatwin.FloatWindowActivity" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.jetpack.HiltInjectActivity" />
+        <activity android:name=".ui.jetpack.JetPackActivity" />
+        <activity android:name=".ui.floatwin.FloatWindowActivity" />
         <activity android:name=".ui.jetpack.ViewBindActivity" />
         <activity android:name=".ui.jetpack.DataBindActivity" />
         <activity android:name=".ui.material.MaterialDesignActivity" />
@@ -48,6 +53,7 @@
         <activity android:name=".ui.theory.TouchEventActivity" />
         <activity android:name=".ui.theory.HandlerTestActivity" />
         <activity android:name=".ui.jetpack.ViewPager2Activity" />
+        <activity android:name=".ui.librarycase.matrix.MatrixTestActivity" />
 
         <service
             android:name="androidx.work.impl.foreground.SystemForegroundService"

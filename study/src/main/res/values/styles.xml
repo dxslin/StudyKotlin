@@ -21,6 +21,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.Splash" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 
     <!--    TextAppearance-->
     <style name="TextTitle" parent="TextAppearance.AppCompat.Title">

@@ -117,7 +117,6 @@ class FloatWindowActivity : BaseActivity() {
         params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
 
-        params.gravity = Gravity.START.and(Gravity.TOP)
 
         params.dimAmount = 0.0f
         params.width = 160
@@ -125,8 +124,9 @@ class FloatWindowActivity : BaseActivity() {
         //需要透明背景的话要设置这个format
         params.format = PixelFormat.TRANSPARENT
 
+        params.gravity = Gravity.CENTER
         /**
-         * 这里发现x=0；y=0竟然是屏幕中心，但是FrameDecorator里面却是左上角，有点奇怪
+         * 这里x和y会受到gravity的影响，如果设置为居中，(0,0)坐标为中心；如果设置为局边上，那么(0,0)为左上角
          */
         params.x = displayMetrics.widthPixels / 2
         params.y = 0

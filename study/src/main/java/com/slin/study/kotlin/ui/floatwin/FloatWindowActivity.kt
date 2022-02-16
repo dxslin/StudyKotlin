@@ -1,5 +1,7 @@
 package com.slin.study.kotlin.ui.floatwin
 
+import android.animation.PropertyValuesHolder
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -8,13 +10,16 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
+import android.view.animation.AccelerateInterpolator
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.slin.core.logger.logd
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.StudyKotlinApplication
 import com.slin.study.kotlin.base.BaseActivity
@@ -26,7 +31,7 @@ import com.zj.easyfloat.EasyFloat
 class FloatWindowActivity : BaseActivity() {
 
     private lateinit var binding: ActivityFloatWindowBinding
-
+    private val displayMetrics: DisplayMetrics = DisplayMetrics()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +49,11 @@ class FloatWindowActivity : BaseActivity() {
     }
 
     private fun initView() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            display?.getRealMetrics(displayMetrics)
+        } else {
+            window?.windowManager?.defaultDisplay?.getRealMetrics(displayMetrics)
+        }
         binding.apply {
             btnFloatWin.setOnClickListener { createFloatWin() }
             btnCheckPermission.setOnClickListener { checkPermission() }
@@ -57,8 +67,12 @@ class FloatWindowActivity : BaseActivity() {
     private fun checkPermission() {
         if (!Settings.canDrawOverlays(this)) {
             Toast.makeText(this, "请打开悬浮窗权限", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:$packageName")))
+            startActivity(
+                Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:$packageName")
+                )
+            )
         } else {
             Toast.makeText(this, "已打开悬浮窗权限", Toast.LENGTH_SHORT).show()
         }
@@ -77,11 +91,7 @@ class FloatWindowActivity : BaseActivity() {
             manager.removeView(view)
         }
 
-        val params = WindowManager.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-//        params.gravity = Gravity.END or Gravity.CENTER_VERTICAL
+        val params = WindowManager.LayoutParams()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             params.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             //刘海屏延伸到刘海里面
@@ -107,12 +117,19 @@ class FloatWindowActivity : BaseActivity() {
         params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
 
+        params.gravity = Gravity.START.and(Gravity.TOP)
 
         params.dimAmount = 0.0f
         params.width = 160
         params.height = 160
         //需要透明背景的话要设置这个format
         params.format = PixelFormat.TRANSPARENT
+
+        /**
+         * 这里发现x=0；y=0竟然是屏幕中心，但是FrameDecorator里面却是左上角，有点奇怪
+         */
+        params.x = displayMetrics.widthPixels / 2
+        params.y = 0
 
         //实现view跟随手指滑动
         btnFloat.setOnTouchListener(object : View.OnTouchListener {
@@ -121,8 +138,7 @@ class FloatWindowActivity : BaseActivity() {
             override fun onTouch(v: View, event: MotionEvent): Boolean {
                 val x = event.rawX.toInt()
                 val y = event.rawY.toInt()
-//                Log.d(TAG,
-//                    "createFloatWin: ${event.action} $x $y ${params.x} ${params.width} ${params.y} ${params.height}")
+                logd { "onTouch: ${event.action} $x $y $lastX $lastY ${event.x} ${event.y} ${params.x} ${params.y}" }
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
                         lastX = x
@@ -136,7 +152,19 @@ class FloatWindowActivity : BaseActivity() {
                         lastY = y
                     }
                     MotionEvent.ACTION_UP -> {
-
+                        val holder = PropertyValuesHolder.ofInt(
+                            "trans",
+                            params.x,
+                            if (params.x > 0) displayMetrics.widthPixels / 2 else -displayMetrics.widthPixels / 2
+                        )
+                        val valueAnimator = ValueAnimator.ofPropertyValuesHolder(holder)
+                        valueAnimator.addUpdateListener {
+                            params.x = it.getAnimatedValue("trans") as Int
+                            manager.updateViewLayout(view, params)
+                        }
+                        valueAnimator.interpolator = AccelerateInterpolator()
+                        valueAnimator.duration = 180
+                        valueAnimator.start()
                     }
                 }
                 return true

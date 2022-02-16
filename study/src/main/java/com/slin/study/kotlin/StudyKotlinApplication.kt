@@ -3,6 +3,7 @@ package com.slin.study.kotlin
 import android.app.Application
 import android.util.Log
 import androidx.work.Configuration
+import com.slin.core.logger.LoggerExt
 import com.slin.study.kotlin.ui.librarycase.kodein.moduleUser
 import com.slin.study.kotlin.ui.librarycase.matrix.MatrixUtil
 import com.slin.study.kotlin.util.CrashHandler
@@ -44,6 +45,8 @@ class StudyKotlinApplication : Application(), KodeinAware, Configuration.Provide
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
+        LoggerExt.initLogger(BuildConfig.DEBUG)
+
         ThemeHelper.init(this)
         CrashHandler.instance.init(this)
 

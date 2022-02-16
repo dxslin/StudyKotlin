@@ -9,13 +9,15 @@ import timber.log.Timber
  * description: 日志类，使用Timber打印日志
  *
  */
-fun initLogger(isDebug: Boolean) {
-    if (isDebug) {
-        Timber.plant(CoreDebugTree())
-    } else {
-        Timber.plant(CrashReportTree())
+object LoggerExt {
+    fun initLogger(isDebug: Boolean) {
+        if (isDebug) {
+            Timber.plant(CoreDebugTree())
+        } else {
+            Timber.plant(CrashReportTree())
+        }
+        log { "Initialize logger successful, isDebug: $isDebug" }
     }
-    log { "Initialize logger successful, isDebug: $isDebug" }
 }
 
 class CoreDebugTree : Timber.DebugTree() {

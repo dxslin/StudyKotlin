@@ -19,26 +19,26 @@ class TestPluginListener(private val context: Context) : DefaultPluginListener(c
 
     override fun onInit(plugin: Plugin?) {
         super.onInit(plugin)
-        logd { "onInit: " }
+        logd { "onInit() called with: plugin = [$plugin]" }
     }
 
     override fun onStart(plugin: Plugin?) {
         super.onStart(plugin)
-        logd { "onStart: " }
+        logd { "onStart() called with: plugin = [$plugin]" }
     }
 
     override fun onStop(plugin: Plugin?) {
         super.onStop(plugin)
-        logd { "onStop: " }
+        logd { "onStop() called with: plugin = [$plugin]" }
     }
 
     override fun onDestroy(plugin: Plugin?) {
         super.onDestroy(plugin)
-        logd { "onDestroy: " }
+        logd { "onDestroy() called with: plugin = [$plugin]" }
     }
 
     override fun onReportIssue(issue: Issue?) {
         super.onReportIssue(issue)
-        logd { "onReportIssue: " }
+        logd { "onReportIssue() called with: issue = [$issue]" }
     }
 }

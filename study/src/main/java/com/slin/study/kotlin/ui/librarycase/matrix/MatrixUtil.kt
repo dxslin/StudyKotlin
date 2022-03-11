@@ -8,6 +8,8 @@ import com.tencent.matrix.batterycanary.monitor.BatteryMonitorConfig
 import com.tencent.matrix.batterycanary.monitor.feature.JiffiesMonitorFeature
 import com.tencent.matrix.iocanary.IOCanaryPlugin
 import com.tencent.matrix.iocanary.config.IOConfig
+import com.tencent.matrix.resource.ResourcePlugin
+import com.tencent.matrix.resource.config.ResourceConfig
 import com.tencent.matrix.trace.TracePlugin
 import com.tencent.matrix.trace.config.TraceConfig
 
@@ -34,6 +36,7 @@ object MatrixUtil {
                 .build()
         )
 
+        // 性能检测
         val tracePlugin = TracePlugin(
             TraceConfig.Builder()
                 .dynamicConfig(dynamicConfigImplDemo)
@@ -46,10 +49,20 @@ object MatrixUtil {
                 .build()
         )
 
+        // 内存泄漏排查
+        val resourcePlugin = ResourcePlugin(
+            ResourceConfig.Builder()
+                .dynamicConfig(dynamicConfigImplDemo)
+                .setAutoDumpHprofMode(ResourceConfig.DumpMode.MANUAL_DUMP)
+                .setDetectDebuger(true)
+                .build()
+        )
+
         val builder = Matrix.Builder(application)
             .plugin(ioCanaryPlugin)
             .plugin(batteryMonitorPlugin)
             .plugin(tracePlugin)
+            .plugin(resourcePlugin)
             .pluginListener(TestPluginListener(application))
 
         Matrix.init(builder.build())

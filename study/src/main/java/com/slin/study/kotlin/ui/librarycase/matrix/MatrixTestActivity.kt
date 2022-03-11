@@ -20,6 +20,10 @@ import com.tencent.matrix.trace.view.FrameDecorator
  */
 class MatrixTestActivity : BaseActivity() {
 
+    companion object {
+        var instance: MatrixTestActivity? = null
+    }
+
     private lateinit var binding: ActivityMatrixTestBinding
 
     private lateinit var decorator: FrameDecorator
@@ -40,6 +44,8 @@ class MatrixTestActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        instance = this
 
         setShowBackButton(true)
         title = "Matrix Test"

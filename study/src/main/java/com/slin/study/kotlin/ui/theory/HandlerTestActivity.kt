@@ -1,6 +1,7 @@
 package com.slin.study.kotlin.ui.theory
 
 import android.os.*
+import android.view.Choreographer
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.databinding.ActivityHandlerTestBinding
 import com.slin.study.kotlin.util.Logger
@@ -58,7 +59,7 @@ class HandlerTestActivity : BaseActivity() {
                 Logger.log(TAG, "post delay message ")
                 handler.postDelayed({
                     Logger.log(TAG, "post delay message execute")
-                }, 60_000)
+                }, 20_000)
             }
             btnAddIdleHandler.setOnClickListener {
                 addIdleHandler()
@@ -88,6 +89,13 @@ class HandlerTestActivity : BaseActivity() {
 
             }
 
+            btnChoreographer.setOnClickListener {
+                Choreographer.getInstance().postFrameCallback {
+                    Logger.log(TAG, "Choreographer execute")
+                }
+
+
+            }
         }
 
     }

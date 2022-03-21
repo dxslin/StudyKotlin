@@ -101,6 +101,11 @@ object Dependencies {
         const val protobuf_plugin =
             "com.google.protobuf:protobuf-gradle-plugin:${protobuf_plugin_version}"
         const val protobuf_lite = "com.google.protobuf:protobuf-javalite:${protobuf_version}"
+
+        private const val startup_version = "1.1.0"
+        const val startup = "androidx.startup:startup-runtime:${startup_version}"
+
+
     }
 
     //kodein 依赖注入
@@ -208,6 +213,19 @@ object Dependencies {
                 }
             }
         }
+
+    }
+
+    object Other {
+
+        // 一些Kotlin可以使用的工具方法
+        private const val longan_version = "1.0.3"
+        const val longan = "com.github.DylanCaiCoding.Longan:longan:${longan_version}"
+        const val longan_design = "com.github.DylanCaiCoding.Longan:longan-design:${longan_version}"
+
+        // 悬浮窗
+        const val easyfloat = "io.github.shenzhen2017:easyfloat:1.0.2"
+
 
     }
 

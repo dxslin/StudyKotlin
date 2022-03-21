@@ -3,6 +3,10 @@ package com.slin.study.kotlin.ui.jetpack
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.AsyncTaskLoader
+import androidx.loader.content.Loader
+import com.slin.core.logger.logd
 import com.slin.study.kotlin.R
 import com.slin.study.kotlin.base.BaseActivity
 import com.slin.study.kotlin.databinding.ActivityWorkManagerTestBinding
@@ -46,6 +50,46 @@ class WorkManagerTestActivity : BaseActivity() {
             btnPeriodRequest.setOnClickListener { viewModel.periodRequestTest() }
             btnDownloadRequest.setOnClickListener { viewModel.downloadWorkTest() }
         }
+
+        //测试Loader，这个与WorkManager无关
+        LoaderManager.getInstance(this)
+            .initLoader(1, Bundle.EMPTY, object : LoaderManager.LoaderCallbacks<String> {
+                override fun onCreateLoader(id: Int, args: Bundle?): Loader<String> {
+                    logd { "onCreateLoader: $id" }
+                    return object : AsyncTaskLoader<String>(this@WorkManagerTestActivity) {
+                        override fun onStartLoading() {
+                            super.onStartLoading()
+                            logd { "onStartLoading: " }
+                        }
+
+                        override fun onStopLoading() {
+                            super.onStopLoading()
+                            logd { "onStopLoading: " }
+                        }
+
+                        override fun onCancelLoad(): Boolean {
+                            return super.onCancelLoad()
+                            logd { "onCancelLoad: " }
+                        }
+
+                        override fun loadInBackground(): String? {
+                            logd { "loadInBackground: " }
+                            Thread.sleep(1000)
+                            return "This is result: 111"
+                        }
+                    }
+                }
+
+                override fun onLoadFinished(loader: Loader<String>, data: String?) {
+                    logd { "onLoadFinished: $loader $data" }
+                }
+
+                override fun onLoaderReset(loader: Loader<String>) {
+                    logd { "onLoaderReset: $loader" }
+                }
+
+            })
+            .startLoading()
     }
 
 

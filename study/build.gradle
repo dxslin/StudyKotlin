@@ -99,8 +99,14 @@ dependencies {
     implementation Dependencies.Jetpack.hilt_viewmodel
     kapt Dependencies.Jetpack.hilt_viewmodel_compiler
 
-    implementation 'io.github.shenzhen2017:easyfloat:1.0.2'
+    implementation Dependencies.Jetpack.startup
+
     implementation Dependencies.Logger.timber
+
+    implementation Dependencies.Other.easyfloat
+    implementation Dependencies.Other.longan
+    implementation Dependencies.Other.longan_design
+
 
     // 导入Matrix
     Dependencies.Matrix.implementationMatrix(it)

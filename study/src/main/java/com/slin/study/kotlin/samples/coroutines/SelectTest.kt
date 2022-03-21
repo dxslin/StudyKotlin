@@ -2,7 +2,10 @@ package com.slin.study.kotlin.samples.coroutines
 
 import com.slin.study.kotlin.samples.coroutines.SelectTest.testSelectOther
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.*
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.selects.select
 import kotlin.random.Random
 
@@ -62,7 +65,8 @@ private object SelectTest {
 
     /**
      * onReceive 在已经关闭的通道执行会失败，并抛出异常[kotlinx.coroutines.channels.ClosedReceiveChannelException]
-     * onReceiveOrNull 在通道关闭时会收到 null ，且第一个优先收到，如果第一个通道关闭，其他通道发送数据，那么仅第一个会收到null
+     * onReceiveOrNull 在通道关闭时会收到 null ，且第一个优先收到，如果第一个通道关闭，其他通道发送数据，那么仅第一个会收到null，已废弃
+     * onReceiveCatching 会返回通道执行结果和失败原因，且第一个优先收到，如果第一个关闭，其他通道发送数据，那么仅第一个会收到结果
      */
     fun testSelectOnReceiveNull() = runBlocking {
         val fizz = produce {
@@ -77,21 +81,21 @@ private object SelectTest {
         }
         repeat(10) { times ->
             select {
-                val fizzSelectClause1 = fizz.onReceiveOrNull()
+                val fizzSelectClause1 = fizz.onReceiveCatching
                 fizzSelectClause1 { value ->
-                    if (value == null) {
-                        log("$times: Channel fizz is closed")
-                    } else {
+                    if (value.isSuccess) {
                         log("$times: fizz value = $value")
+                    } else {
+                        log("$times: Channel fizz: close: ${value.isClosed}  fail: ${value.isFailure}  ${value.exceptionOrNull()}")
                     }
                 }
 
-                val buzzSelectClause1 = buzz.onReceiveOrNull()
+                val buzzSelectClause1 = buzz.onReceiveCatching
                 buzzSelectClause1 { value ->
-                    if (value == null) {
-                        log("$times: Channel buzz is closed")
-                    } else {
+                    if (value.isSuccess) {
                         log("$times: buzz value = $value")
+                    } else {
+                        log("$times: Channel buzz: close: ${value.isClosed}  fail: ${value.isFailure}  ${value.exceptionOrNull()}")
                     }
                 }
 
@@ -170,14 +174,15 @@ private object SelectTest {
             while (isActive) { // loop while not cancelled/closed
                 val next =
                     select<Deferred<String>?> { // return next deferred value from this select or null
-                        input.onReceiveOrNull() { update ->
+                        input.onReceive { update ->
                             log("onReceiveOrNull update '$update'")
                             update // replaces next value to wait
                         }
                         current.onAwait { value ->
                             send(value) // send value that current deferred has produced
                             log("onAwait send '$value'")
-                            input.receiveOrNull() // and use the next deferred from the input channel
+                            input.receiveCatching()
+                                .getOrNull() // and use the next deferred from the input channel
                         }
                     }
                 if (next == null) {

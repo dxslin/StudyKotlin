@@ -13,6 +13,41 @@ import kotlin.concurrent.thread
  */
 class ThreadPrintNumTest {
 
+    val lock = Any()
+
+    @Test
+    fun threadTest() {
+        println("sync out start")
+        val thread = thread {
+            synchronized(lock) {
+                println("test start")
+                Thread.sleep(1000)
+                destroy()
+                Thread.sleep(3000)
+                println("test end")
+            }
+            println("sync out end")
+        }
+        thread.join()
+    }
+
+    private fun destroy() {
+//       val thread = thread {
+        println("destroy sync out start")
+        synchronized(lock) {
+            println("destroy start")
+            Thread.sleep(1000)
+            println("destroy end")
+        }
+        println("destroy sync out end")
+//        }
+//        thread.join()
+    }
+
+    fun println(msg: String) {
+        System.out.println("${System.currentTimeMillis()}: $msg")
+    }
+
     @Test
     fun printNumTest() {
         val lock = ReentrantLock()

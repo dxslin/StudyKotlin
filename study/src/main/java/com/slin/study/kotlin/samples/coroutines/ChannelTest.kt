@@ -2,7 +2,6 @@ package com.slin.study.kotlin.samples.coroutines
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.debounce
 import java.util.concurrent.LinkedBlockingQueue
@@ -290,7 +289,7 @@ fun tickerChannelTest() = runBlocking {
 /**
  * actor：启动一个协程接收通道发送的数据
  * send 会等待发送完毕再发送下一个
- * offer 发送消息是发现通道接收数据未结束便会抛弃数据，可以用来做防止快速点击
+ * offer/trySend 发送消息是发现通道接收数据未结束便会抛弃数据，可以用来做防止快速点击
  * 这个api会逐渐被抛弃，不建议使用
  */
 fun actorTest() = runBlocking {
@@ -308,7 +307,7 @@ fun actorTest() = runBlocking {
     delay(3000)
 
     repeat(10) {
-        c.offer("offer $it")
+        c.trySend("offer $it")
         log("offer $it")
     }
 
@@ -326,7 +325,7 @@ fun channelAsFlow() = runBlocking {
             val random = Random.nextLong(1000)
 //            val random = 300L
             delay(random)
-            channel.offer(it)
+            channel.trySend(it)
             log("channel send: $it  delay time: $random")
         }
     }

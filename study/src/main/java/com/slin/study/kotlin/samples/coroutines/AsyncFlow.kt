@@ -289,13 +289,13 @@ fun bufferOperatorTest() = runBlocking {
         log("Collecting $a")
     }
     var time = measureTimeMillis {
-        internalFoo().collect(collectAction)
+        internalFoo().collectLatest(collectAction)
     }
     println("normal: Collected in $time ms\n")
 
     time = measureTimeMillis {
         internalFoo().buffer()
-            .collect(collectAction)
+            .collectLatest(collectAction)
     }
     println("buffer: Collected in $time ms\n")
 

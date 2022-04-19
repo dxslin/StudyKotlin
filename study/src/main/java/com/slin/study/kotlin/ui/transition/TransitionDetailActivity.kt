@@ -22,7 +22,6 @@ import com.slin.study.kotlin.util.FastBlurUtil
 import com.slin.study.kotlin.util.Logger
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.debounce
 import kotlin.math.absoluteValue
@@ -153,7 +152,7 @@ class TransitionDetailActivity : BaseActivity() {
 //                            }
                         }
 
-                    channel.offer(binding.sbGaussianBlurRadius.progress)
+                    channel.trySend(binding.sbGaussianBlurRadius.progress)
                     Logger.log(TAG, "channel offer: ${binding.sbGaussianBlurRadius.progress}")
                 }
                 binding.sbGaussianBlurRadius.setOnSeekBarChangeListener(object :
@@ -164,7 +163,7 @@ class TransitionDetailActivity : BaseActivity() {
                         fromUser: Boolean
                     ) {
                         Logger.log(TAG, "onProgressChanged: progress = $progress")
-                        channel.offer(progress)
+                        channel.trySend(progress)
                     }
 
                     override fun onStartTrackingTouch(seekBar: SeekBar?) {

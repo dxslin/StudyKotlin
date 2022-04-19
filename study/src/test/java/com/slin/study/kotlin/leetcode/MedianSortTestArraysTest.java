@@ -62,7 +62,7 @@ import org.junit.Test;
  * date: 2021/1/26
  * description: 寻找两个正序数组的中位数
  */
-public class MedianSortArraysTest {
+public class MedianSortTestArraysTest {
 
     public static double findMedianSortedArrays2(int[] A, int[] B) {
         int m = A.length;

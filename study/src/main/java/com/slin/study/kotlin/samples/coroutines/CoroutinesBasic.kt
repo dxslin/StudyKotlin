@@ -28,7 +28,7 @@ import kotlin.system.measureTimeMillis
  */
 
 fun main() {
-//    launchTest()
+    launchTest()
 //    runBlockingTest()
 //    joinTest()
 //    coroutineScopeTest()
@@ -46,7 +46,7 @@ fun main() {
 //    cancelJobTest2()
 //    cancelFinallyTest()
 //    timeOutTest()
-    asyncTest()
+//    asyncTest()
 //    asyncExceptionTest()
 
 }
@@ -61,12 +61,15 @@ fun log(msg: String) =
  */
 fun launchTest() {
     GlobalScope.launch {
+        log("Coroutines1")
         delay(1000)
-        log("Hello Coroutines")
+        log("Coroutines2")
+        delay(2000)
+        log("Coroutines3")
     }
     log("Hello launchTest")
     //延时等待协程打印完毕
-    Thread.sleep(2000)
+    Thread.sleep(400000)
     log("launchTest end\r\n")
 }
 

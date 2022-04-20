@@ -196,37 +196,56 @@ class SortTest {
         }
     }
 
+    /**
+     * 堆排序
+     *
+     * 堆的特点是堆顶的元素是一个最值，大顶堆的堆顶是最大值，小顶堆的堆顶是最小值
+     *
+     * 堆排序就是将堆顶和最后一个元素交换，这样破坏了堆的特性，然后再将堆中剩余的元素构成一个大顶堆，再把堆顶与倒数第二个
+     * 元素交换，如此往复操作，直到剩余的堆只剩下一个元素，这时数组就是有序的了
+     *
+     * 时间复杂度：O(nlogn)  空间复杂度：O(1)  非稳定排序  原地排序
+     *
+     * 堆排序较之快速排序和归并排序的好处是最坏情况也是O(nlogn)
+     */
     @Test
     fun headSort() {
         val size = data.size
         for (i in (size - 2) / 2 downTo 0) {
-            downJust(data, i, size - 1)
+            downAdjust(data, i, size - 1)
         }
         for (i in size - 1 downTo 1) {
             val tmp = data[i]
             data[i] = data[0]
             data[0] = tmp
-            downJust(data, 0, i - 1)
+            downAdjust(data, 0, i - 1)
         }
         println(data.joinToString(", "))
     }
 
-    private fun downJust(data: Array<Int>, parent: Int, size: Int) {
-        var p = parent
-        val tmp = data[p]
-        var child = 2 * p + 1
-        while (child <= size) {
-            if (child + 1 <= size && data[child] < data[child + 1]) {
+    private fun downAdjust(arr: Array<Int>, head: Int, last: Int) {
+        // 父节点位置
+        var parent = head
+        // 左侧子节点位置
+        var child = 2 * head + 1
+        // 暂存父节点值，后面将其下沉
+        val tmp = arr[parent]
+        while (child <= last) {
+            // 比较左右节点，取较大的一个
+            if (child + 1 <= last && arr[child] < arr[child + 1]) {
                 child++
             }
-            if (data[child] <= tmp) {
+            // 如果父节点大于等于子节点，则不需要下沉
+            if (arr[child] <= tmp)
                 break
+            else {
+                // 下沉
+                arr[parent] = arr[child]
+                parent = child
+                child = 2 * parent + 1
             }
-            data[p] = data[child]
-            p = child
-            child = 2 * p + 1
         }
-        data[p] = tmp
+        arr[parent] = tmp
     }
 
 

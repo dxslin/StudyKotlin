@@ -19,7 +19,7 @@ object Dependencies {
     }
 
     object Kotlin {
-        private const val kotlin_version = "1.6.20"
+        private const val kotlin_version = "1.6.21"
         const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
         const val kotlin_coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
         const val kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${kotlin_version}"

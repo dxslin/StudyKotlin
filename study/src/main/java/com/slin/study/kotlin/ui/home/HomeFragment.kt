@@ -14,6 +14,7 @@ import com.slin.study.kotlin.ui.jetpack.JetPackActivity
 import com.slin.study.kotlin.ui.librarycase.LibraryCaseActivity
 import com.slin.study.kotlin.ui.material.MaterialDesignActivity
 import com.slin.study.kotlin.ui.motion.MotionLayoutTestActivity
+import com.slin.study.kotlin.ui.responsive.ResponsiveActivity
 import com.slin.study.kotlin.ui.testlist.TestListFragment
 import com.slin.study.kotlin.ui.testlist.TestPageData
 import com.slin.study.kotlin.ui.theory.TheoryTestActivity
@@ -50,6 +51,11 @@ val testDataList =
             "TheoryTest",
             R.drawable.img_cartoon_bear,
             TheoryTestActivity::class.java
+        ),
+        TestPageData(
+            "Responsive",
+            R.drawable.avatar_1,
+            ResponsiveActivity::class.java
         ),
 
         )

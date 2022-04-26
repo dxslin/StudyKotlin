@@ -13,7 +13,33 @@ import kotlin.concurrent.thread
  */
 class ThreadPrintNumTest {
 
-    val lock = Any()
+    private val lock = Any()
+
+    @Test
+    fun mapThreadTest(){
+        val map = hashMapOf<Int, String>()
+        val threads = mutableListOf<Thread>()
+        (0..10).forEach { i ->
+            threads += thread(name = "thread$i") {
+                 (0..1000000).forEach { j ->
+                     map[1] = "${Thread.currentThread().name} - $i - $j"
+//                     Thread.sleep(2)
+                 }
+             }
+        }
+
+       threads += thread {
+            repeat(10){ i ->
+                repeat(1000){j ->
+                    map[1] = "todo"
+                    println(map[1])
+                }
+            }
+        }
+
+        threads.forEach { it.join() }
+//        map.forEach { (k, v) -> println("$k: $v") }
+    }
 
     @Test
     fun threadTest() {

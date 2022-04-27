@@ -1,6 +1,6 @@
 package com.slin.git.api.local
 
-import androidx.datastore.DataStore
+import androidx.datastore.core.DataStore
 import com.slin.core.di.SingletonHolderSingleArg
 import com.slin.proto.GitUserPbOuterClass
 import kotlinx.coroutines.flow.Flow

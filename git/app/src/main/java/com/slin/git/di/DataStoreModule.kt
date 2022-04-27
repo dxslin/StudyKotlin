@@ -1,14 +1,10 @@
 package com.slin.git.di
 
-import android.content.Context
-import androidx.datastore.DataStore
-import androidx.datastore.createDataStore
+import androidx.datastore.core.DataStore
 import com.slin.proto.GitUserPbOuterClass
-import com.slin.proto.GitUserSerializer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -25,8 +21,8 @@ object DataStoreModule {
 
     @Provides
     @Singleton
-    fun provideGitUserDataStore(@ApplicationContext context: Context): DataStore<GitUserPbOuterClass.GitUserPb> {
-        return context.createDataStore(fileName = "git_user.pb", serializer = GitUserSerializer)
+    fun provideGitUserDataStore(contextCache: ContextCache): DataStore<GitUserPbOuterClass.GitUserPb> {
+        return contextCache.gitUserPb
     }
 
 }

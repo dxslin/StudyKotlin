@@ -2,7 +2,7 @@ package com.slin.git.di
 
 import android.app.Application
 import android.content.Context
-import androidx.datastore.DataStore
+import androidx.datastore.core.DataStore
 import com.slin.core.config.ApplyRetrofitOptions
 import com.slin.core.config.CoreConfig
 import com.slin.git.api.local.GitUserInfoStorage

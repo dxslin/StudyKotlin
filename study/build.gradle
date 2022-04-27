@@ -51,9 +51,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Dependencies.Kotlin.kotlin_stdlib
-    implementation Dependencies.Kotlin.kotlin_coroutines
-    implementation Dependencies.Kotlin.kotlin_reflect
+    implementation Dependencies.Kotlin.stdlib
+    implementation Dependencies.Kotlin.Coroutines.core
+    implementation Dependencies.Kotlin.reflect
 
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -97,9 +97,9 @@ dependencies {
     implementation "androidx.work:work-gcm:2.5.0"
 
     implementation Dependencies.Jetpack.hilt
-    kapt Dependencies.Jetpack.hilt_compiler
-    implementation Dependencies.Jetpack.hilt_viewmodel
-    kapt Dependencies.Jetpack.hilt_viewmodel_compiler
+    kapt Dependencies.Jetpack.hiltCompiler
+    implementation Dependencies.Jetpack.hiltViewModel
+    kapt Dependencies.Jetpack.hiltViewModelCompiler
 
     implementation Dependencies.Jetpack.startup
 

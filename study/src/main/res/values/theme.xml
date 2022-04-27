@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme.Color" parent="Theme.MaterialComponents.Light">
+    <style name="AppTheme.Color" parent="Theme.Material3.Light">
         <!-- Global color attributes -->
         <!-- 您的应用的主要品牌颜色，主要用于主题 actionBar默认使用该颜色,Toolbar导航栏的底色-->
         <item name="colorPrimary">@color/color_primary</item>
@@ -36,13 +36,13 @@
 
         <item name="android:textColorPrimaryInverse">@color/white</item>
 
-        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Primary</item>
+        <item name="toolbarStyle">@style/Widget.Material3.Toolbar</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_baseline_arrow_back_white_24</item>
     </style>
 
 
     <!-- Base application theme. -->
-    <style name="AppTheme.Orange" parent="Theme.MaterialComponents.Light">
+    <style name="AppTheme.Orange" parent="Theme.Material3.Light">
         <!-- Global color attributes -->
         <!-- 您的应用的主要品牌颜色，主要用于主题 actionBar默认使用该颜色,Toolbar导航栏的底色-->
         <item name="colorPrimary">@color/primaryColor</item>

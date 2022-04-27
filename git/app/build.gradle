@@ -60,35 +60,35 @@ dependencies {
     implementation project(path: ':git:proto')
 
     implementation Dependencies.Slin.score
-    implementation Dependencies.Slin.view_binding_ext
-    implementation Dependencies.Slin.state_view_switcher
+    implementation Dependencies.Slin.viewBindingExt
+    implementation Dependencies.Slin.stateViewSwitcher
 
-    implementation Dependencies.Kotlin.kotlin_stdlib
+    implementation Dependencies.Kotlin.stdlib
     implementation Dependencies.AndroidX.appcompat
-    implementation Dependencies.AndroidX.swipe_refresh_layout
+    implementation Dependencies.AndroidX.swipeRefreshLayout
 
     implementation Dependencies.AndroidX.material
-    implementation Dependencies.AndroidX.constraintlayout
-    implementation Dependencies.AndroidX.vector_drawable
-    implementation Dependencies.AndroidX.navigation_fragment
-    implementation Dependencies.AndroidX.navigation_ui
-    implementation Dependencies.AndroidX.navigation_fragment_ktx
-    implementation Dependencies.AndroidX.navigation_ui_ktx
-    implementation Dependencies.AndroidX.dynamic_animation
+    implementation Dependencies.AndroidX.constraintLayout
+    implementation Dependencies.AndroidX.vectorDrawable
+    implementation Dependencies.AndroidX.navigationFragment
+    implementation Dependencies.AndroidX.navigationUi
+    implementation Dependencies.AndroidX.navigationFragmentKtx
+    implementation Dependencies.AndroidX.navigationUiKtx
+    implementation Dependencies.AndroidX.dynamicAnimation
 
-    implementation Dependencies.Jetpack.lifecycle_extensions
-    implementation Dependencies.Jetpack.lifecycle_runtime
+    implementation Dependencies.Jetpack.lifecycleExtensions
+    implementation Dependencies.Jetpack.lifecycleRuntime
     //room
     implementation Dependencies.Jetpack.room
-    implementation Dependencies.Jetpack.room_ktx
-    kapt Dependencies.Jetpack.room_compiler
+    implementation Dependencies.Jetpack.roomKtx
+    kapt Dependencies.Jetpack.roomCompiler
     //paging
-    implementation Dependencies.Jetpack.paging_runtime
+    implementation Dependencies.Jetpack.pagingRuntime
 
     implementation Dependencies.Jetpack.hilt
-    kapt Dependencies.Jetpack.hilt_compiler
-    implementation Dependencies.Jetpack.hilt_viewmodel
-    kapt Dependencies.Jetpack.hilt_viewmodel_compiler
+    kapt Dependencies.Jetpack.hiltCompiler
+    implementation Dependencies.Jetpack.hiltViewModel
+    kapt Dependencies.Jetpack.hiltViewModelCompiler
 
 //    test
     testImplementation Dependencies.Test.junit

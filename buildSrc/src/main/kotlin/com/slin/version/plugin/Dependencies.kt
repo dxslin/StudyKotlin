@@ -8,107 +8,179 @@ object Dependencies {
         private const val slin_library_version = "1.1.3"
 
         const val score = "io.github.dxslin:Score:${slin_library_version}"
-        const val view_binding_ext =
+        const val viewBindingExt =
             "io.github.dxslin:ViewBindingExt:${slin_library_version}"
-        const val slin_dialog =
+        const val dialog =
             "io.github.dxslin:SlinDialog:${slin_library_version}"
         const val view_pager_indicator =
             "io.github.dxslin:ViewPagerIndicator:${slin_library_version}"
-        const val state_view_switcher =
+        const val stateViewSwitcher =
             "io.github.dxslin:StateViewSwitcher:${slin_library_version}"
     }
 
     object Kotlin {
         private const val kotlin_version = "1.6.21"
-        const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
-        const val kotlin_coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
-        const val kotlin_reflect = "org.jetbrains.kotlin:kotlin-reflect:${kotlin_version}"
-        const val kotlin_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
+        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${kotlin_version}"
+        const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"
+
+        object Coroutines {
+            private const val version = "1.6.1"
+            const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
+            const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
+            const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
+        }
     }
 
-    //android x ui
+    /**
+     * androidx ui
+     * https://developer.android.google.cn/jetpack/androidx/explorer
+     */
     object AndroidX {
-        private const val appcompat_version = "1.2.0"
-        private const val material_version = "1.2.0"
-        private const val constraint_layout_version = "2.0.1"
-        private const val vector_drawable_version = "1.1.0"
-        private const val navigation_version = "2.2.0"
-        private const val dynamic_animation_version = "1.0.0"
-        private const val swipe_refresh_layout_version = "1.2.0-alpha01"
-        private const val recycler_view_version = "1.1.0"
 
-        const val appcompat = "androidx.appcompat:appcompat:${appcompat_version}"
-        const val material = "com.google.android.material:material:${material_version}"
-        const val constraintlayout =
-            "androidx.constraintlayout:constraintlayout:${constraint_layout_version}"
-        const val vector_drawable =
-            "androidx.vectordrawable:vectordrawable:${vector_drawable_version}"
-        const val navigation_fragment =
-            "androidx.navigation:navigation-fragment:${navigation_version}"
-        const val navigation_ui = "androidx.navigation:navigation-ui:${navigation_version}"
-        const val navigation_fragment_ktx =
-            "androidx.navigation:navigation-fragment-ktx:${navigation_version}"
-        const val navigation_ui_ktx =
-            "androidx.navigation:navigation-ui-ktx:${navigation_version}"
-        const val navigation_safe_args =
-            "androidx.navigation:navigation-safe-args-gradle-plugin:${navigation_version}"
-        const val dynamic_animation =
-            "androidx.dynamicanimation:dynamicanimation:${dynamic_animation_version}"
-        const val swipe_refresh_layout =
-            "androidx.swiperefreshlayout:swiperefreshlayout:${swipe_refresh_layout_version}"
-        const val recycler_view =
-            "androidx.recyclerview:recyclerview:${recycler_view_version}"
+        /**
+         * https://developer.android.google.cn/jetpack/androidx/releases/appcompat
+         */
+        private const val appcompatVersion = "1.4.1"
+
+        /**
+         * https://github.com/material-components/material-components-android/releases
+         */
+        private const val materialVersion = "1.5.0"
+
+        /**
+         * https://developer.android.google.cn/jetpack/androidx/releases/constraintlayout
+         */
+        private const val constraintLayoutVersion = "2.1.3"
+
+        /**
+         * https://developer.android.google.cn/jetpack/androidx/releases/vectordrawable
+         */
+        private const val vectorDrawableVersion = "1.1.0"
+
+        /**
+         * https://developer.android.google.cn/jetpack/androidx/releases/navigation
+         */
+        private const val navigationVersion = "2.4.2"
+
+        /**
+         * https://developer.android.google.cn/jetpack/androidx/releases/dynamicanimation
+         */
+        private const val dynamicAnimationVersion = "1.0.0"
+
+        /**
+         * https://developer.android.google.cn/jetpack/androidx/releases/swiperefreshlayout
+         */
+        private const val swipeRefreshLayoutVersion = "1.2.0-alpha01"
+
+        /**
+         * https://developer.android.google.cn/jetpack/androidx/releases/recyclerview
+         */
+        private const val recyclerViewVersion = "1.2.1"
+
+        const val appcompat = "androidx.appcompat:appcompat:${appcompatVersion}"
+        const val material = "com.google.android.material:material:${materialVersion}"
+        const val constraintLayout =
+            "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}"
+        const val vectorDrawable =
+            "androidx.vectordrawable:vectordrawable:${vectorDrawableVersion}"
+        const val navigationFragment =
+            "androidx.navigation:navigation-fragment:${navigationVersion}"
+        const val navigationUi = "androidx.navigation:navigation-ui:${navigationVersion}"
+        const val navigationFragmentKtx =
+            "androidx.navigation:navigation-fragment-ktx:${navigationVersion}"
+        const val navigationUiKtx =
+            "androidx.navigation:navigation-ui-ktx:${navigationVersion}"
+        const val navigationSafeArgs =
+            "androidx.navigation:navigation-safe-args-gradle-plugin:${navigationVersion}"
+        const val dynamicAnimation =
+            "androidx.dynamicanimation:dynamicanimation:${dynamicAnimationVersion}"
+        const val swipeRefreshLayout =
+            "androidx.swiperefreshlayout:swiperefreshlayout:${swipeRefreshLayoutVersion}"
+        const val recyclerView =
+            "androidx.recyclerview:recyclerview:${recyclerViewVersion}"
     }
 
-    //jetpack library
+    /**
+     * Jetpack library
+     * https://developer.android.google.cn/jetpack/androidx/explorer
+     */
     object Jetpack {
-        private const val lifecycle_version = "2.2.0"
-        private const val room_version = "2.2.5"
-        private const val paging_version = "3.0.0-alpha05"  //3.0.0-alpha05
+        /**
+         * https://developer.android.google.cn/jetpack/androidx/releases/lifecycle
+         */
+        private const val lifecycleVersion = "2.2.0"
 
-        private const val hilt_version = "2.38.1"
-        private const val hilt_viewmodel_version = "1.0.0-alpha03"
+        /**
+         * https://developer.android.google.cn/jetpack/androidx/releases/room
+         */
+        private const val roomVersion = "2.2.5"
 
-        private const val data_store_version = "1.0.0-alpha02"
-        private const val protobuf_plugin_version = "0.8.13"
-        private const val protobuf_version = "3.10.0"
+        /**
+         * https://developer.android.google.cn/jetpack/androidx/releases/paging
+         */
+        private const val pagingVersion = "3.0.0-alpha05"  //3.0.0-alpha05
 
+        /**
+         * https://dagger.dev/hilt/gradle-setup
+         * https://developer.android.google.cn/jetpack/androidx/releases/hilt
+         */
+        private const val hiltVersion = "2.38.1"
+        private const val hiltViewModelVersion = "1.0.0-alpha03"
 
-        const val lifecycle_extensions =
-            "androidx.lifecycle:lifecycle-extensions:${lifecycle_version}"
-        const val lifecycle_runtime =
-            "androidx.lifecycle:lifecycle-runtime:${lifecycle_version}"
+        /**
+         * https://developer.android.google.cn/jetpack/androidx/releases/datastore
+         */
+        private const val dataStoreVersion = "1.0.0"
 
-        const val room = "androidx.room:room-runtime:${room_version}"
-        const val room_compiler = "androidx.room:room-compiler:${room_version}"
-        const val room_ktx = "androidx.room:room-ktx:${room_version}"
-        const val room_test = "androidx.room:room-testing:${room_version}"     //test
+        /**
+         * https://github.com/google/protobuf-gradle-plugin/
+         */
+        private const val protobufPluginVersion = "0.8.18"
+        private const val protobufVersion = "3.10.0"
 
-        const val paging_runtime = "androidx.paging:paging-runtime:${paging_version}"
-        const val paging_common = "androidx.paging:paging-common:${paging_version}"    //test
+        /**
+         * https://developer.android.google.cn/jetpack/androidx/releases/startup
+         */
+        private const val startup_version = "1.1.1"
 
-        const val hilt = "com.google.dagger:hilt-android:${hilt_version}"
-        const val hilt_compiler = "com.google.dagger:hilt-android-compiler:${hilt_version}"
-        const val hilt_viewmodel =
-            "androidx.hilt:hilt-lifecycle-viewmodel:${hilt_viewmodel_version}"
-        const val hilt_viewmodel_compiler =
-            "androidx.hilt:hilt-compiler:${hilt_viewmodel_version}"
-        const val hilt_plugin = "com.google.dagger:hilt-android-gradle-plugin:${hilt_version}"
+        const val lifecycleExtensions =
+            "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}"
+        const val lifecycleRuntime =
+            "androidx.lifecycle:lifecycle-runtime:${lifecycleVersion}"
 
-        const val data_store_core = "androidx.datastore:datastore-core:${data_store_version}"
-        const val data_store_preferences =
-            "androidx.datastore:datastore-preferences:${data_store_version}"
-        const val protobuf_plugin =
-            "com.google.protobuf:protobuf-gradle-plugin:${protobuf_plugin_version}"
-        const val protobuf_lite = "com.google.protobuf:protobuf-javalite:${protobuf_version}"
+        const val room = "androidx.room:room-runtime:${roomVersion}"
+        const val roomCompiler = "androidx.room:room-compiler:${roomVersion}"
+        const val roomKtx = "androidx.room:room-ktx:${roomVersion}"
+        const val roomTest = "androidx.room:room-testing:${roomVersion}"     //test
 
-        private const val startup_version = "1.1.0"
+        const val pagingRuntime = "androidx.paging:paging-runtime:${pagingVersion}"
+        const val pagingCommon = "androidx.paging:paging-common:${pagingVersion}"    //test
+
+        const val hilt = "com.google.dagger:hilt-android:${hiltVersion}"
+        const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${hiltVersion}"
+        const val hiltViewModel =
+            "androidx.hilt:hilt-lifecycle-viewmodel:${hiltViewModelVersion}"
+        const val hiltViewModelCompiler =
+            "androidx.hilt:hilt-compiler:${hiltViewModelVersion}"
+        const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:${hiltVersion}"
+
+        const val dataStoreCore = "androidx.datastore:datastore-core:${dataStoreVersion}"
+        const val dataStorePreferences =
+            "androidx.datastore:datastore-preferences:${dataStoreVersion}"
+        const val protobufPlugin =
+            "com.google.protobuf:protobuf-gradle-plugin:${protobufPluginVersion}"
+        const val protobufLite = "com.google.protobuf:protobuf-javalite:${protobufVersion}"
+
         const val startup = "androidx.startup:startup-runtime:${startup_version}"
 
 
     }
 
-    //kodein 依赖注入
+    /**
+     * kodein 依赖注入
+     * https://docs.kodein.org/kodein-di/7.10/framework/android.html
+     */
     object Kodein {
         private const val kodein_version = "7.0.0"
 
@@ -119,14 +191,19 @@ object Dependencies {
             "org.kodein.di:kodein-di-framework-android-x:${kodein_version}"
     }
 
+    /**
+     * https://github.com/square/okhttp
+     */
     object OkHttp {
-        private const val okhttp_version = "4.8.1"
+        private const val okhttp_version = "4.9.3"
 
         const val okhttp = "com.squareup.okhttp3:okhttp:${okhttp_version}"
         const val okhttp_logging = "com.squareup.okhttp3:logging-interceptor:${okhttp_version}"
     }
 
-    //retrofit
+    /**
+     * https://github.com/square/retrofit
+     */
     object Retrofit {
         private const val retrofit_version = "2.9.0"
 
@@ -134,15 +211,19 @@ object Dependencies {
         const val retrofit_gson = "com.squareup.retrofit2:converter-gson:${retrofit_version}"
     }
 
-    //logger
     object Logger {
-        private const val timber_version = "4.7.1"
+        /**
+         * https://github.com/JakeWharton/timber
+         */
+        private const val timber_version = "5.0.1"
         const val timber = "com.jakewharton.timber:timber:${timber_version}"
     }
 
-    //glide
+    /**
+     * https://github.com/bumptech/glide
+     */
     object Glide {
-        private const val glide_version = "4.11.0"
+        private const val glide_version = "4.13.1"
         const val glide = "com.github.bumptech.glide:glide:${glide_version}"
         const val glide_compiler = "com.github.bumptech.glide:compiler:${glide_version}"
     }
@@ -160,8 +241,11 @@ object Dependencies {
 
     }
 
+    /**
+     * https://github.com/Tencent/matrix
+     */
     object Matrix {
-        const val matrix_version = "2.0.5"
+        private const val matrix_version = "2.0.5"
 
         @JvmStatic
         private fun fullName(name: String): String {
@@ -218,12 +302,18 @@ object Dependencies {
 
     object Other {
 
-        // 一些Kotlin可以使用的工具方法
+        /**
+         * 一些Kotlin可以使用的工具方法
+         * https://github.com/DylanCaiCoding/Longan
+         */
         private const val longan_version = "1.0.3"
         const val longan = "com.github.DylanCaiCoding.Longan:longan:${longan_version}"
         const val longan_design = "com.github.DylanCaiCoding.Longan:longan-design:${longan_version}"
 
-        // 悬浮窗
+        /**
+         * 悬浮窗
+         * https://github.com/shenzhen2017/EasyFloat
+         */
         const val easyfloat = "io.github.shenzhen2017:easyfloat:1.0.2"
 
 

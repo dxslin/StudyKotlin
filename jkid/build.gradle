@@ -6,8 +6,8 @@ import com.slin.version.plugin.*
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Dependencies.Kotlin.stdlib
-    implementation Dependencies.Kotlin.reflect
+    implementation Libs.Kotlin.stdlib
+    implementation Libs.Kotlin.reflect
 }
 
 sourceCompatibility = "7"

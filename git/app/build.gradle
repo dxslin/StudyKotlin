@@ -59,41 +59,41 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(path: ':git:proto')
 
-    implementation Dependencies.Slin.score
-    implementation Dependencies.Slin.viewBindingExt
-    implementation Dependencies.Slin.stateViewSwitcher
+    implementation Libs.Slin.score
+    implementation Libs.Slin.viewBindingExt
+    implementation Libs.Slin.stateViewSwitcher
 
-    implementation Dependencies.Kotlin.stdlib
-    implementation Dependencies.AndroidX.appcompat
-    implementation Dependencies.AndroidX.swipeRefreshLayout
+    implementation Libs.Kotlin.stdlib
+    implementation Libs.AndroidX.appcompat
+    implementation Libs.AndroidX.swipeRefreshLayout
 
-    implementation Dependencies.AndroidX.material
-    implementation Dependencies.AndroidX.constraintLayout
-    implementation Dependencies.AndroidX.vectorDrawable
-    implementation Dependencies.AndroidX.navigationFragment
-    implementation Dependencies.AndroidX.navigationUi
-    implementation Dependencies.AndroidX.navigationFragmentKtx
-    implementation Dependencies.AndroidX.navigationUiKtx
-    implementation Dependencies.AndroidX.dynamicAnimation
+    implementation Libs.AndroidX.material
+    implementation Libs.AndroidX.constraintLayout
+    implementation Libs.AndroidX.vectorDrawable
+    implementation Libs.AndroidX.navigationFragment
+    implementation Libs.AndroidX.navigationUi
+    implementation Libs.AndroidX.navigationFragmentKtx
+    implementation Libs.AndroidX.navigationUiKtx
+    implementation Libs.AndroidX.dynamicAnimation
 
-    implementation Dependencies.Jetpack.lifecycleExtensions
-    implementation Dependencies.Jetpack.lifecycleRuntime
+    implementation Libs.Jetpack.lifecycleExtensions
+    implementation Libs.Jetpack.lifecycleRuntime
     //room
-    implementation Dependencies.Jetpack.room
-    implementation Dependencies.Jetpack.roomKtx
-    kapt Dependencies.Jetpack.roomCompiler
+    implementation Libs.Jetpack.room
+    implementation Libs.Jetpack.roomKtx
+    kapt Libs.Jetpack.roomCompiler
     //paging
-    implementation Dependencies.Jetpack.pagingRuntime
+    implementation Libs.Jetpack.pagingRuntime
 
-    implementation Dependencies.Jetpack.hilt
-    kapt Dependencies.Jetpack.hiltCompiler
-    implementation Dependencies.Jetpack.hiltViewModel
-    kapt Dependencies.Jetpack.hiltViewModelCompiler
+    implementation Libs.Jetpack.hilt
+    kapt Libs.Jetpack.hiltCompiler
+    implementation Libs.Jetpack.hiltViewModel
+    kapt Libs.Jetpack.hiltViewModelCompiler
 
 //    test
-    testImplementation Dependencies.Test.junit
-    androidTestImplementation Dependencies.Test.junit_ext
-    androidTestImplementation Dependencies.Test.espresso_core
+    testImplementation Libs.Test.junit
+    androidTestImplementation Libs.Test.junitExt
+    androidTestImplementation Libs.Test.espressoCore
 
 
 }

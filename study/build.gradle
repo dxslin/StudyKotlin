@@ -51,9 +51,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Dependencies.Kotlin.stdlib
-    implementation Dependencies.Kotlin.Coroutines.core
-    implementation Dependencies.Kotlin.reflect
+    implementation Libs.Kotlin.stdlib
+    implementation Libs.Kotlin.Coroutines.core
+    implementation Libs.Kotlin.reflect
 
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -96,22 +96,22 @@ dependencies {
     // optional - GCMNetworkManager support
     implementation "androidx.work:work-gcm:2.5.0"
 
-    implementation Dependencies.Jetpack.hilt
-    kapt Dependencies.Jetpack.hiltCompiler
-    implementation Dependencies.Jetpack.hiltViewModel
-    kapt Dependencies.Jetpack.hiltViewModelCompiler
+    implementation Libs.Jetpack.hilt
+    kapt Libs.Jetpack.hiltCompiler
+    implementation Libs.Jetpack.hiltViewModel
+    kapt Libs.Jetpack.hiltViewModelCompiler
 
-    implementation Dependencies.Jetpack.startup
+    implementation Libs.Jetpack.startup
 
-    implementation Dependencies.Logger.timber
+    implementation Libs.Logger.timber
 
-    implementation Dependencies.Other.easyfloat
-    implementation Dependencies.Other.longan
-    implementation Dependencies.Other.longan_design
+    implementation Libs.Other.easyfloat
+    implementation Libs.Other.longan
+    implementation Libs.Other.longanDesign
 
 
     // 导入Matrix
-    Dependencies.Matrix.implementationMatrix(it)
+    Libs.Matrix.implementationMatrix(it)
 
 
 }

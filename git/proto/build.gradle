@@ -47,9 +47,9 @@ android {
 dependencies {
 
     //DataStore & protobuf
-    api Dependencies.Jetpack.dataStoreCore
-    api Dependencies.Jetpack.dataStorePreferences
-    api Dependencies.Jetpack.protobufLite
+    api Libs.Jetpack.dataStoreCore
+    api Libs.Jetpack.dataStorePreferences
+    api Libs.Jetpack.protobufLite
 
 }
 

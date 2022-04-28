@@ -1,21 +1,39 @@
 package com.slin.version.plugin
 
+import org.gradle.api.JavaVersion
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.implementation
 
-object Dependencies {
-    object Slin {
-        private const val slin_library_version = "1.1.3"
+object Versions {
 
-        const val score = "io.github.dxslin:Score:${slin_library_version}"
+
+    const val androidSdk = 31
+    const val androidBuildTools = "30.0.3"
+    const val androidMinSdk = 24
+
+    val javaVersion = JavaVersion.VERSION_1_8
+
+    const val ktlint = "0.40.0"
+
+}
+
+object Libs {
+    private const val agpVersion = "7.1.1"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:$agpVersion"
+
+    object Slin {
+        private const val slinLibraryVersion = "1.1.3"
+
+        const val score = "io.github.dxslin:Score:${slinLibraryVersion}"
+        const val scoreMvi = "io.github.dxslin:Score-mvi:${slinLibraryVersion}"
         const val viewBindingExt =
-            "io.github.dxslin:ViewBindingExt:${slin_library_version}"
+            "io.github.dxslin:ViewBindingExt:${slinLibraryVersion}"
         const val dialog =
-            "io.github.dxslin:SlinDialog:${slin_library_version}"
-        const val view_pager_indicator =
-            "io.github.dxslin:ViewPagerIndicator:${slin_library_version}"
+            "io.github.dxslin:SlinDialog:${slinLibraryVersion}"
+        const val viewPagerIndicator =
+            "io.github.dxslin:ViewPagerIndicator:${slinLibraryVersion}"
         const val stateViewSwitcher =
-            "io.github.dxslin:StateViewSwitcher:${slin_library_version}"
+            "io.github.dxslin:StateViewSwitcher:${slinLibraryVersion}"
     }
 
     object Kotlin {
@@ -38,46 +56,18 @@ object Dependencies {
      */
     object AndroidX {
 
-        /**
-         * https://developer.android.google.cn/jetpack/androidx/releases/appcompat
-         */
+        private const val coreVersion = "1.7.0"
         private const val appcompatVersion = "1.4.1"
-
-        /**
-         * https://github.com/material-components/material-components-android/releases
-         */
         private const val materialVersion = "1.5.0"
-
-        /**
-         * https://developer.android.google.cn/jetpack/androidx/releases/constraintlayout
-         */
         private const val constraintLayoutVersion = "2.1.3"
-
-        /**
-         * https://developer.android.google.cn/jetpack/androidx/releases/vectordrawable
-         */
         private const val vectorDrawableVersion = "1.1.0"
-
-        /**
-         * https://developer.android.google.cn/jetpack/androidx/releases/navigation
-         */
         private const val navigationVersion = "2.4.2"
-
-        /**
-         * https://developer.android.google.cn/jetpack/androidx/releases/dynamicanimation
-         */
         private const val dynamicAnimationVersion = "1.0.0"
-
-        /**
-         * https://developer.android.google.cn/jetpack/androidx/releases/swiperefreshlayout
-         */
         private const val swipeRefreshLayoutVersion = "1.2.0-alpha01"
-
-        /**
-         * https://developer.android.google.cn/jetpack/androidx/releases/recyclerview
-         */
         private const val recyclerViewVersion = "1.2.1"
+        private const val cardViewVersion = "1.0.0"
 
+        const val core = "androidx.core:core-ktx:${coreVersion}"
         const val appcompat = "androidx.appcompat:appcompat:${appcompatVersion}"
         const val material = "com.google.android.material:material:${materialVersion}"
         const val constraintLayout =
@@ -99,6 +89,8 @@ object Dependencies {
             "androidx.swiperefreshlayout:swiperefreshlayout:${swipeRefreshLayoutVersion}"
         const val recyclerView =
             "androidx.recyclerview:recyclerview:${recyclerViewVersion}"
+        const val cardView =
+            "androidx.cardview:cardview:${cardViewVersion}"
     }
 
     /**
@@ -148,6 +140,10 @@ object Dependencies {
             "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}"
         const val lifecycleRuntime =
             "androidx.lifecycle:lifecycle-runtime:${lifecycleVersion}"
+        const val lifecycleLivedataKtx =
+            "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycleVersion}"
+        const val lifecycleViewModelKtx =
+            "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycleVersion}"
 
         const val room = "androidx.room:room-runtime:${roomVersion}"
         const val roomCompiler = "androidx.room:room-compiler:${roomVersion}"
@@ -177,6 +173,15 @@ object Dependencies {
 
     }
 
+    object Helper {
+
+        private const val recyclerViewAdapterHelperVersion = "2.9.50"
+
+        const val recyclerViewAdapterHelper =
+            "com.github.CymChad:BaseRecyclerViewAdapterHelper:${recyclerViewAdapterHelperVersion}"
+
+    }
+
     /**
      * kodein 依赖注入
      * https://docs.kodein.org/kodein-di/7.10/framework/android.html
@@ -198,7 +203,7 @@ object Dependencies {
         private const val okhttp_version = "4.9.3"
 
         const val okhttp = "com.squareup.okhttp3:okhttp:${okhttp_version}"
-        const val okhttp_logging = "com.squareup.okhttp3:logging-interceptor:${okhttp_version}"
+        const val okhttpLogging = "com.squareup.okhttp3:logging-interceptor:${okhttp_version}"
     }
 
     /**
@@ -208,36 +213,36 @@ object Dependencies {
         private const val retrofit_version = "2.9.0"
 
         const val retrofit = "com.squareup.retrofit2:retrofit:${retrofit_version}"
-        const val retrofit_gson = "com.squareup.retrofit2:converter-gson:${retrofit_version}"
+        const val retrofitGson = "com.squareup.retrofit2:converter-gson:${retrofit_version}"
     }
 
     object Logger {
         /**
          * https://github.com/JakeWharton/timber
          */
-        private const val timber_version = "5.0.1"
-        const val timber = "com.jakewharton.timber:timber:${timber_version}"
+        private const val timberVersion = "5.0.1"
+        const val timber = "com.jakewharton.timber:timber:${timberVersion}"
     }
 
     /**
      * https://github.com/bumptech/glide
      */
     object Glide {
-        private const val glide_version = "4.13.1"
-        const val glide = "com.github.bumptech.glide:glide:${glide_version}"
-        const val glide_compiler = "com.github.bumptech.glide:compiler:${glide_version}"
+        private const val glideVersion = "4.13.1"
+        const val glide = "com.github.bumptech.glide:glide:${glideVersion}"
+        const val glideCompiler = "com.github.bumptech.glide:compiler:${glideVersion}"
     }
 
     //test
     object Test {
-        private const val junit_version = "4.12"
-        private const val junit_ext_version = "1.1.2"
-        private const val espresso_core_version = "3.2.0"
+        private const val junitVersion = "4.12"
+        private const val junitExtVersion = "1.1.2"
+        private const val espressoCoreVersion = "3.2.0"
 
-        const val junit = "junit:junit:${junit_version}"
-        const val junit_ext = "androidx.test.ext:junit:${junit_ext_version}"
-        const val espresso_core =
-            "androidx.test.espresso:espresso-core:${espresso_core_version}"
+        const val junit = "junit:junit:${junitVersion}"
+        const val junitExt = "androidx.test.ext:junit:${junitExtVersion}"
+        const val espressoCore =
+            "androidx.test.espresso:espresso-core:${espressoCoreVersion}"
 
     }
 
@@ -252,27 +257,27 @@ object Dependencies {
             return "com.tencent.matrix:$name:$matrix_version"
         }
 
-        const val matrix_gradle_plugin = "com.tencent.matrix:matrix-gradle-plugin:${matrix_version}"
+        const val matrixGradlePlugin = "com.tencent.matrix:matrix-gradle-plugin:${matrix_version}"
 
-        val matrix_android_lib = fullName("matrix-android-lib")
-        val matrix_android_commons = fullName("matrix-android-commons")
-        val matrix_trace_canary = fullName("matrix-trace-canary")
-        val matrix_resource_canary_android = fullName("matrix-resource-canary-android")
-        val matrix_resource_canary_common = fullName("matrix-resource-canary-common")
-        val matrix_io_canary = fullName("matrix-io-canary")
-        val matrix_sqlite_lint_android_sdk = fullName("matrix-sqlite-lint-android-sdk")
-        val matrix_battery_canary = fullName("matrix-battery-canary")
-        val matrix_hooks = fullName("matrix-hooks")
+        val matrixAndroidLib = fullName("matrix-android-lib")
+        val matrixAndroidCommons = fullName("matrix-android-commons")
+        val matrixTraceCanary = fullName("matrix-trace-canary")
+        val matrixResourceCanaryAndroid = fullName("matrix-resource-canary-android")
+        val matrixResourceCanaryCommon = fullName("matrix-resource-canary-common")
+        val matrixIoCanary = fullName("matrix-io-canary")
+        val matrixSqliteLintAndroidSdk = fullName("matrix-sqlite-lint-android-sdk")
+        val matrixBatteryCanary = fullName("matrix-battery-canary")
+        val matrixHooks = fullName("matrix-hooks")
 
-//        implementation Dependencies.Matrix.matrix_android_lib
-//        implementation Dependencies.Matrix.matrix_android_commons
-//        implementation Dependencies.Matrix.matrix_trace_canary
-//        implementation Dependencies.Matrix.matrix_resource_canary_android
-//        implementation Dependencies.Matrix.matrix_resource_canary_common
-//        implementation Dependencies.Matrix.matrix_io_canary
-//        implementation Dependencies.Matrix.matrix_sqlite_lint_android_sdk
-//        implementation Dependencies.Matrix.matrix_battery_canary
-//        implementation Dependencies.Matrix.matrix_hooks
+//        implementation Dependencies.Matrix.matrixAndroidLib
+//        implementation Dependencies.Matrix.matrixAndroidCommons
+//        implementation Dependencies.Matrix.matrixTraceCanary
+//        implementation Dependencies.Matrix.matrixResourceCanaryAndroid
+//        implementation Dependencies.Matrix.matrixResourceCanaryCommon
+//        implementation Dependencies.Matrix.matrixIoCanary
+//        implementation Dependencies.Matrix.matrixSqliteLintAndroidSdk
+//        implementation Dependencies.Matrix.matrixBatteryCanary
+//        implementation Dependencies.Matrix.matrixHooks
 
         @JvmStatic
         fun implementationMatrix(dependencyHandler: DependencyHandler) {
@@ -306,9 +311,9 @@ object Dependencies {
          * 一些Kotlin可以使用的工具方法
          * https://github.com/DylanCaiCoding/Longan
          */
-        private const val longan_version = "1.0.3"
-        const val longan = "com.github.DylanCaiCoding.Longan:longan:${longan_version}"
-        const val longan_design = "com.github.DylanCaiCoding.Longan:longan-design:${longan_version}"
+        private const val longanVersion = "1.0.3"
+        const val longan = "com.github.DylanCaiCoding.Longan:longan:${longanVersion}"
+        const val longanDesign = "com.github.DylanCaiCoding.Longan:longan-design:${longanVersion}"
 
         /**
          * 悬浮窗

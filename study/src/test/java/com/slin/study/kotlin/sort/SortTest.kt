@@ -248,5 +248,23 @@ class SortTest {
         arr[parent] = tmp
     }
 
+    private fun down(arr: Array<Int>, head: Int, last: Int) {
+        var parent = head
+        var child = 2 * parent + 1
+        val tmp = arr[child]
+        while (child <= last) {
+            if(child + 1 < last && arr[child] < arr[child + 1]){
+                child++
+            }
+            if(arr[child] <= tmp){
+                break
+            } else {
+                arr[parent] = arr[child]
+                parent = child
+                child = 2 * parent + 1
+            }
+        }
+        arr[parent] = tmp
+    }
 
 }

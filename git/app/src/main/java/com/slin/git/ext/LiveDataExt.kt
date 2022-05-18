@@ -50,7 +50,7 @@ suspend fun <T> LiveData<Results<T>>.getOrAwaitValue(
     val channel = Channel<Results<T>>()
     val observer = object : Observer<Results<T>> {
         override fun onChanged(o: Results<T>) {
-            channel.offer(o)
+            channel.trySend(o)
             this@getOrAwaitValue.removeObserver(this)
         }
     }

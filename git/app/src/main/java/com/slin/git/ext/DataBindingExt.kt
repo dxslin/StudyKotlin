@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.widget.ImageView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -57,11 +59,17 @@ fun SwipeRefreshLayout.bindColor(previousColor: ColorDrawable, color: ColorDrawa
 
 
 @BindingAdapter("fullscreen")
-fun View.bindLayoutFullscreen(previousFullscreen: Boolean, fullscreen: Boolean) {
-    if (previousFullscreen != fullscreen && fullscreen) {
-        systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-                View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+fun View.bindLayoutFullscreen(fullscreen: Boolean) {
+    if (fullscreen) {
+        ViewCompat.getWindowInsetsController(this)
+            ?.hide(WindowInsetsCompat.Type.systemBars())
+        ViewCompat.getWindowInsetsController(this)
+            ?.hide(WindowInsetsCompat.Type.navigationBars())
+    } else {
+        ViewCompat.getWindowInsetsController(this)
+            ?.show(WindowInsetsCompat.Type.systemBars())
+        ViewCompat.getWindowInsetsController(this)
+            ?.show(WindowInsetsCompat.Type.navigationBars())
     }
 }
 
@@ -91,10 +99,12 @@ fun View.applySystemWindowInsetsPadding(
     }
 
     doOnApplyWindowInsets { view, insets, padding, _ ->
-        val left = if (applyLeft) insets.systemWindowInsetLeft else 0
-        val top = if (applyTop) insets.systemWindowInsetTop else 0
-        val right = if (applyRight) insets.systemWindowInsetRight else 0
-        val bottom = if (applyBottom) insets.systemWindowInsetBottom else 0
+        val inset = WindowInsetsCompat.toWindowInsetsCompat(insets)
+            .getInsets(WindowInsetsCompat.Type.systemBars())
+        val left = if (applyLeft) inset.left else 0
+        val top = if (applyTop) inset.top else 0
+        val right = if (applyRight) inset.right else 0
+        val bottom = if (applyBottom) inset.bottom else 0
 
         view.setPadding(
             padding.left + left,
@@ -131,10 +141,12 @@ fun View.applySystemWindowInsetsMargin(
     }
 
     doOnApplyWindowInsets { view, insets, _, margin ->
-        val left = if (applyLeft) insets.systemWindowInsetLeft else 0
-        val top = if (applyTop) insets.systemWindowInsetTop else 0
-        val right = if (applyRight) insets.systemWindowInsetRight else 0
-        val bottom = if (applyBottom) insets.systemWindowInsetBottom else 0
+        val inset = WindowInsetsCompat.toWindowInsetsCompat(insets)
+            .getInsets(WindowInsetsCompat.Type.systemBars())
+        val left = if (applyLeft) inset.left else 0
+        val top = if (applyTop) inset.top else 0
+        val right = if (applyRight) inset.right else 0
+        val bottom = if (applyBottom) inset.bottom else 0
 
         view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             leftMargin = margin.left + left

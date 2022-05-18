@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -20,7 +21,6 @@ import com.slin.git.ui.common.ContentLoadStateAdapter
 import com.slin.git.ui.common.FooterLoadStateAdapter
 import com.slin.git.ui.common.withLoadStateRefreshAndFooter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
@@ -49,6 +49,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(requireActivity().window, false)
         if (!UserManager.isLoggedIn) {
             UserManager.userInfo.value = UserInfo.dxslin
 //            findNavController().navigate(R.id.action_home_to_login)

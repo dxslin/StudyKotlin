@@ -56,7 +56,6 @@ dependencies {
     implementation Libs.Kotlin.reflect
 
     implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
@@ -84,9 +83,9 @@ dependencies {
     implementation 'org.kodein.di:kodein-di-framework-android-x:6.0.1'
 
     // Preferences DataStore
-    implementation "androidx.datastore:datastore-preferences:1.0.0-rc01"
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
     // Proto DataStore
-    implementation "androidx.datastore:datastore-core:1.0.0-rc01"
+    implementation "androidx.datastore:datastore-core:1.0.0"
     // You need to depend on the lite runtime library, not protobuf-java
     implementation "com.google.protobuf:protobuf-javalite:3.10.0"
 
@@ -98,8 +97,6 @@ dependencies {
 
     implementation Libs.Jetpack.hilt
     kapt Libs.Jetpack.hiltCompiler
-    implementation Libs.Jetpack.hiltViewModel
-    kapt Libs.Jetpack.hiltViewModelCompiler
 
     implementation Libs.Jetpack.startup
 

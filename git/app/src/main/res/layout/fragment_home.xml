@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:background="?attr/colorPrimarySurface"
         app:paddingTopSystemWindowInsets="@{true}"
+        app:fullscreen="@{false}"
         tools:context=".ui.home.view.HomeFragment">
 
         <com.google.android.material.appbar.AppBarLayout

@@ -50,7 +50,7 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
 
 @Suppress("UNCHECKED_CAST")
 class HomeViewModelFactory(private val homeRepository: HomeRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return HomeViewModel(homeRepository) as T
     }
 

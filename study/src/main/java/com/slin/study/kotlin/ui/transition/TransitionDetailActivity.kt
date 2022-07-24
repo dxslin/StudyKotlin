@@ -26,7 +26,6 @@ import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.debounce
 import kotlin.math.absoluteValue
 
-
 /**
  * author: slin
  * date: 2020/8/5
@@ -38,6 +37,7 @@ class TransitionDetailActivity : BaseActivity() {
 
     companion object {
         const val INTENT_TRANSITION_DATA = "intent_transition_data"
+        const val INTENT_TRANSITION_INDEX = "intent_transition_index"
     }
 
     private lateinit var binding: ActivityTransitionDetailBinding
@@ -48,19 +48,19 @@ class TransitionDetailActivity : BaseActivity() {
         binding = ActivityTransitionDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //沉浸式
+        // 沉浸式
         setStatusBarColor(Color.TRANSPARENT)
-        //Toolbar
+        // Toolbar
         setSupportActionBar(binding.toolbar)
         setShowBackButton(true)
 
-        //共享元素的动画
+        // 共享元素的动画
         val changeBounds = ChangeBounds()
         changeBounds.duration = 800
         window?.sharedElementEnterTransition = changeBounds
         window?.sharedElementExitTransition = changeBounds
 
-        //界面切换的过渡动画
+        // 界面切换的过渡动画
 //        val slide = Slide()
 //        val explode = Explode()
         val fade = Fade()
@@ -76,10 +76,12 @@ class TransitionDetailActivity : BaseActivity() {
             binding.tvPageDetail.text = transitionData.detail
         }
 
-        binding.appbarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            val percent = (verticalOffset.toFloat() / appBarLayout.totalScrollRange).absoluteValue
-
-        })
+        binding.appbarLayout.addOnOffsetChangedListener(
+            AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+                val percent =
+                    (verticalOffset.toFloat() / appBarLayout.totalScrollRange).absoluteValue
+            }
+        )
 
         binding.ivPageIcon.setOnClickListener {
             val intent = Intent(this, ViewLargeImageActivity::class.java)
@@ -132,13 +134,13 @@ class TransitionDetailActivity : BaseActivity() {
                         .debounce(50)
                         .collect { progress ->
                             Logger.log(TAG, "channel collect: $progress")
-                            //这里直接使用协程来
+                            // 这里直接使用协程来
                             val bitmap = FastBlurUtil.doBlur(backgroundBitmap, progress, false)
                             withContext(Dispatchers.Main) {
                                 binding.appbarLayout.background = BitmapDrawable(resources, bitmap)
                             }
 
-                            //使用线程处理
+                            // 使用线程处理
 //                            FastBlurUtil.doBlurAsync(
 //                                backgroundBitmap,
 //                                progress,
@@ -171,7 +173,6 @@ class TransitionDetailActivity : BaseActivity() {
 
                     override fun onStopTrackingTouch(seekBar: SeekBar?) {
                     }
-
                 })
                 binding.sbGaussianBlurRadius.post {
                     binding.sbGaussianBlurRadius.progress = 40
@@ -205,9 +206,9 @@ class TransitionDetailActivity : BaseActivity() {
 
     override fun applyThemeResource() {
         super.applyThemeResource()
+        // 不显示ActionBar，使用SupportActionBar代替
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -215,5 +216,4 @@ class TransitionDetailActivity : BaseActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 }

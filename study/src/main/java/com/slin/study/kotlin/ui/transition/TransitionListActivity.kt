@@ -53,7 +53,9 @@ class TransitionListActivity : BaseActivity() {
             )
         }
 
-        val adapter = TransitionAdapter()
+        val adapter = TransitionAdapter { viewHolder, transitionData ->
+            startDetailActivity(viewHolder, transitionData)
+        }
         adapter.adapterAnimation = SlideInRightAnimation()
         binding.rvList.layoutManager = LinearLayoutManager(this)
         binding.rvList.adapter = adapter
@@ -67,7 +69,7 @@ class TransitionListActivity : BaseActivity() {
         adapter.setList(data)
     }
 
-    inner class TransitionAdapter :
+    class TransitionAdapter(private val onItemClick: (ViewHolder, TransitionData) -> Unit) :
         BaseQuickAdapter<TransitionData, ViewHolder>(R.layout.item_horizontal_transition) {
         override fun convert(holder: ViewHolder, item: TransitionData) {
             holder.ivPhoto.setImageResource(item.imgRes)
@@ -75,36 +77,40 @@ class TransitionListActivity : BaseActivity() {
             holder.tvAbstract.text = item.abstract
             holder.tvDetail.text = item.detail
             holder.itemView.setOnClickListener {
-                val p1 = androidx.core.util.Pair(
-                    holder.ivPhoto as View,
-                    ViewCompat.getTransitionName(holder.ivPhoto)
-                )
-                val p2 = androidx.core.util.Pair(
-                    holder.tvTitle as View,
-                    ViewCompat.getTransitionName(holder.tvTitle)
-                )
-                val p3 = androidx.core.util.Pair(
-                    holder.tvAbstract as View,
-                    ViewCompat.getTransitionName(holder.tvAbstract)
-                )
-                val p4 = androidx.core.util.Pair(
-                    holder.tvDetail as View,
-                    ViewCompat.getTransitionName(holder.tvDetail)
-                )
-                val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    this@TransitionListActivity,
-                    p1,
-                    p2,
-                    p3,
-                    p4
-                )
-
-                val intent =
-                    Intent(this@TransitionListActivity, TransitionDetailActivity::class.java)
-                intent.putExtra(TransitionDetailActivity.INTENT_TRANSITION_DATA, item)
-                startActivity(intent, optionsCompat.toBundle())
+                onItemClick(holder, item)
             }
         }
+    }
+
+    private fun startDetailActivity(holder: ViewHolder, item: TransitionData) {
+        val p1 = androidx.core.util.Pair(
+            holder.ivPhoto as View,
+            ViewCompat.getTransitionName(holder.ivPhoto)
+        )
+        val p2 = androidx.core.util.Pair(
+            holder.tvTitle as View,
+            ViewCompat.getTransitionName(holder.tvTitle)
+        )
+        val p3 = androidx.core.util.Pair(
+            holder.tvAbstract as View,
+            ViewCompat.getTransitionName(holder.tvAbstract)
+        )
+        val p4 = androidx.core.util.Pair(
+            holder.tvDetail as View,
+            ViewCompat.getTransitionName(holder.tvDetail)
+        )
+        val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this@TransitionListActivity,
+            p1,
+            p2,
+            p3,
+            p4
+        )
+
+        val intent =
+            Intent(this@TransitionListActivity, TransitionDetailActivity::class.java)
+        intent.putExtra(TransitionDetailActivity.INTENT_TRANSITION_DATA, item)
+        startActivity(intent, optionsCompat.toBundle())
     }
 
 }

@@ -20,7 +20,6 @@ open class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         applyThemeResource()
         super.onCreate(savedInstanceState)
-        setShowBackButton(false)
     }
 
     /**

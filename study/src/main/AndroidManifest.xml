@@ -62,6 +62,7 @@
         <activity android:name=".ui.theory.HandlerTestActivity" />
         <activity android:name=".ui.jetpack.ViewPager2Activity" />
         <activity android:name=".ui.librarycase.matrix.MatrixTestActivity" />
+        <activity android:name=".ui.transition.fragment.TransitionFragmentActivity" />
 
         <service
             android:name="androidx.work.impl.foreground.SystemForegroundService"

@@ -36,8 +36,11 @@
 
         <item name="android:textColorPrimaryInverse">@color/white</item>
 
-        <item name="toolbarStyle">@style/Widget.Material3.Toolbar</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_baseline_arrow_back_white_24</item>
+        <item name="homeAsUpIndicator">?android:homeAsUpIndicator</item>
+        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Primary</item>
+        <item name="toolbarSurfaceStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface
+        </item>
     </style>
 
 

@@ -56,6 +56,7 @@ class SplashActivity : BaseActivity() {
 
     private fun startMainActivity() {
         startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
 }

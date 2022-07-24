@@ -7,6 +7,7 @@ import com.slin.study.kotlin.ui.testlist.TestListFragment
 import com.slin.study.kotlin.ui.testlist.TestPageData
 import com.slin.study.kotlin.ui.transition.LayoutTransitionActivity
 import com.slin.study.kotlin.ui.transition.TransitionListActivity
+import com.slin.study.kotlin.ui.transition.fragment.TransitionFragmentActivity
 
 class MotionLayoutTestActivity : BaseActivity() {
 
@@ -25,6 +26,11 @@ class MotionLayoutTestActivity : BaseActivity() {
             "Layout Transition",
             R.drawable.img_cartoon_pig2,
             LayoutTransitionActivity::class.java
+        ),
+        TestPageData(
+            "Fragment Transition",
+            R.drawable.img_cartoon_2,
+            TransitionFragmentActivity::class.java
         )
     )
 

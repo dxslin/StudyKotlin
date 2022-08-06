@@ -15,11 +15,25 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.slin.study.kotlin.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+
+        <action
+            android:id="@+id/action_copy_download"
+            app:destination="@id/navigation_copy_to_download"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.slin.study.kotlin.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_copy_to_download"
+        android:name="com.slin.study.kotlin.ui.copydown.CopyDownloadFragment"
+        android:label="Copy To Download"
+        tools:layout="@layout/fragment_copy_download" />
 </navigation>

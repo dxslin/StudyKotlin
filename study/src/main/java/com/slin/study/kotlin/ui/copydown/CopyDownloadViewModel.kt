@@ -1,4 +1,4 @@
-package com.slin.study.kotlin.ui.dashboard
+package com.slin.study.kotlin.ui.copydown
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,7 @@ import com.slin.study.kotlin.util.AssetsUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 
-class DashboardViewModel : ViewModel() {
+class CopyDownloadViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"

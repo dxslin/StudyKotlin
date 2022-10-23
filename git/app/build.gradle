@@ -79,7 +79,6 @@ dependencies {
     implementation Libs.AndroidX.navigationUiKtx
     implementation Libs.AndroidX.dynamicAnimation
 
-    implementation Libs.Jetpack.lifecycleExtensions
     implementation Libs.Jetpack.lifecycleRuntime
     //room
     implementation Libs.Jetpack.room

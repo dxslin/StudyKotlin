@@ -4,14 +4,14 @@ import com.slin.version.plugin.Libs
 
 buildscript {
     repositories {
-        maven { url 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/' }
-        maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url 'https://jitpack.io' }
         mavenCentral()
         google()
+        maven { url 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/' }
+        maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots' }
 
     }
     dependencies {
@@ -30,14 +30,14 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/' }
-        maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url 'https://jitpack.io' }
         mavenCentral()
         google()
+        maven { url 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/' }
+        maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots' }
 
     }
 }

@@ -1,9 +1,6 @@
 package com.slin.git.ui.home.data
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.PagingSource
+import androidx.paging.*
 import com.slin.core.net.Results
 import com.slin.core.repository.CoreRepository
 import com.slin.core.repository.IRemoteDataSource
@@ -88,6 +85,13 @@ class HomeRemoteDataSource(private val userService: UserService) :
                     results.throwable
                 )
             }
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState<OneArgPage<String>, ReceivedEvent>): OneArgPage<String>? {
+        return state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.prevKey?.next()
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey
         }
     }
 

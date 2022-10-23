@@ -33,9 +33,9 @@ object Libs {
         const val viewPagerIndicator =
             "io.github.dxslin:ViewPagerIndicator:${slinLibraryVersion}"
         const val stateViewSwitcher =
-            "io.github.dxslin:StateViewSwitcher:${slinLibraryVersion}"
+            "io.github.dxslin:StateViewSwitcher:1.1.3"
         const val stateViewSwitcherExt =
-            "io.github.dxslin:StateViewSwitcher_score-ext:${slinLibraryVersion}"
+            "io.github.dxslin:StateViewSwitcher_score-ext:1.1.3"
     }
 
     object Kotlin {
@@ -101,17 +101,17 @@ object Libs {
         /**
          * https://developer.android.google.cn/jetpack/androidx/releases/lifecycle
          */
-        private const val lifecycleVersion = "2.2.0"
+        private const val lifecycleVersion = "2.5.1"
 
         /**
          * https://developer.android.google.cn/jetpack/androidx/releases/room
          */
-        private const val roomVersion = "2.2.5"
+        private const val roomVersion = "2.4.3"
 
         /**
          * https://developer.android.google.cn/jetpack/androidx/releases/paging
          */
-        private const val pagingVersion = "3.0.0-alpha05"  //3.0.0-alpha05
+        private const val pagingVersion = "3.1.1"  //3.0.0-alpha05
 
         /**
          * https://dagger.dev/hilt/gradle-setup
@@ -136,8 +136,6 @@ object Libs {
          */
         private const val startup_version = "1.1.1"
 
-        const val lifecycleExtensions =
-            "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}"
         const val lifecycleRuntime =
             "androidx.lifecycle:lifecycle-runtime:${lifecycleVersion}"
         const val lifecycleLivedataKtx =

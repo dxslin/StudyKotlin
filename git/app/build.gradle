@@ -1,5 +1,7 @@
+import com.slin.version.plugin.Libs
+
 import java.util.regex.Pattern
-import com.slin.version.plugin.*
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -53,6 +55,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    namespace 'com.slin.git'
 }
 
 dependencies {

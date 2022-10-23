@@ -18,7 +18,7 @@ object Versions {
 }
 
 object Libs {
-    private const val agpVersion = "7.1.1"
+    private const val agpVersion = "7.3.0"
     const val androidGradlePlugin = "com.android.tools.build:gradle:$agpVersion"
 
     object Slin {
@@ -312,7 +312,7 @@ object Libs {
          * 一些Kotlin可以使用的工具方法
          * https://github.com/DylanCaiCoding/Longan
          */
-        private const val longanVersion = "1.0.3"
+        private const val longanVersion = "1.1.1"
         const val longan = "com.github.DylanCaiCoding.Longan:longan:${longanVersion}"
         const val longanDesign = "com.github.DylanCaiCoding.Longan:longan-design:${longanVersion}"
 

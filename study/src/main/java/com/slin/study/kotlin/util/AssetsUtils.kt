@@ -37,15 +37,15 @@ object AssetsUtils {
                 emit(CopyState.Copying(index, filenames.size))
                 filenames.forEach {
                     val source = assets.open("$dir/$it")
-                    context.contentResolver.insertMediaDownload {
-                        put(MediaStore.Files.FileColumns.DISPLAY_NAME, it)
-                        put(MediaStore.Files.FileColumns.RELATIVE_PATH, outDir)
-                        put(MediaStore.Files.FileColumns.TITLE, it)
-                        put(
+                    context.contentResolver.insertMediaDownload(
+                        Pair(MediaStore.Files.FileColumns.DISPLAY_NAME, it),
+                        Pair(MediaStore.Files.FileColumns.RELATIVE_PATH, outDir),
+                        Pair(MediaStore.Files.FileColumns.TITLE, it),
+                        Pair(
                             MediaStore.Files.FileColumns.MIME_TYPE,
-                            URLConnection.guessContentTypeFromName(it)
+                            URLConnection.guessContentTypeFromName(it),
                         )
-                    }?.openOutputStream { sink ->
+                    )?.openOutputStream { sink ->
                         source.use {
                             sink.use {
                                 source.copyTo(sink)

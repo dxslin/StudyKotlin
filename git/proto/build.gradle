@@ -1,4 +1,4 @@
-import com.slin.version.plugin.*
+import com.slin.version.plugin.Libs
 
 plugins {
     id 'com.android.library'
@@ -14,8 +14,6 @@ android {
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 31
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -42,6 +40,7 @@ android {
             }
         }
     }
+    namespace 'com.slin.proto'
 }
 
 dependencies {
@@ -51,6 +50,9 @@ dependencies {
     api Libs.Jetpack.dataStorePreferences
     api Libs.Jetpack.protobufLite
 
+    testImplementation Libs.Test.junit
+    androidTestImplementation Libs.Test.junitExt
+    androidTestImplementation Libs.Test.espressoCore
 }
 
 

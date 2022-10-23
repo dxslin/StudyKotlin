@@ -6,9 +6,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
+import android.graphics.SurfaceTexture
+import android.hardware.display.DisplayManager
+import android.hardware.display.VirtualDisplay
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.util.DisplayMetrics
 import android.util.Log
@@ -61,6 +66,8 @@ class FloatWindowActivity : BaseActivity() {
             btnFloatWinNoPermission.setOnClickListener { easyFloat() }
 
             btnCustomToast.setOnClickListener { showCustomToast() }
+
+            btnVirtualDisplay.setOnClickListener { createVirtualDisplay() }
         }
     }
 
@@ -221,5 +228,52 @@ class FloatWindowActivity : BaseActivity() {
         toast.show()
     }
 
+    private fun createVirtualDisplay() {
+        val handler = Handler(Looper.getMainLooper())
+        val displayManager = getSystemService(DisplayManager::class.java)
+        displayManager.registerDisplayListener(object : DisplayManager.DisplayListener {
+            override fun onDisplayAdded(p0: Int) {
+                logd { "onDisplayAdded: $p0" }
+
+            }
+
+            override fun onDisplayRemoved(p0: Int) {
+                logd { "onDisplayRemoved: $p0" }
+            }
+
+            override fun onDisplayChanged(p0: Int) {
+                logd { "onDisplayChanged: $p0" }
+            }
+
+        }, handler)
+
+        val surface = Surface(SurfaceTexture(false))
+        val display = displayManager.createVirtualDisplay(
+            "SlinDisplay",
+            800,
+            600,
+            160,
+            surface,
+            DisplayManager.VIRTUAL_DISPLAY_FLAG_OWN_CONTENT_ONLY,
+            object : VirtualDisplay.Callback() {
+                override fun onPaused() {
+                    super.onPaused()
+                    logd { "display onPaused" }
+                }
+
+                override fun onResumed() {
+                    super.onResumed()
+                    logd { "display onResumed" }
+                }
+
+                override fun onStopped() {
+                    super.onStopped()
+                    logd { "display onStopped" }
+                }
+            },
+            handler
+        )
+        logd { "Created virtual display: ${display.display.displayId}" }
+    }
 
 }

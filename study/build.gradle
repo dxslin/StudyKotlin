@@ -1,4 +1,5 @@
-import com.slin.version.plugin.*
+import com.slin.version.plugin.Libs
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -37,7 +38,7 @@ android {
     }
     sourceSets{
         main{
-            proto{
+            proto {
                 srcDir 'src/main/proto'
                 include '**/*.proto'
             }
@@ -46,6 +47,26 @@ android {
     packagingOptions {
 //        exclude 'lib/arm64-v8a/libc++_shared.so'
 //        exclude 'lib/armeabi-v7a/libc++_shared.so'
+    }
+    namespace 'com.slin.study.kotlin'
+
+    testOptions {
+        managedDevices {
+            devices {
+                pixel2api30(com.android.build.api.dsl.ManagedVirtualDevice) {
+                    // Use device profiles you typically see in Android Studio.
+                    device = "Pixel 2"
+                    // Use only API levels 27 and higher.
+                    apiLevel = 31
+                    // To include Google services, use "google".
+                    systemImageSource = "aosp"
+                    // Whether the image must be a 64 bit image. Defaults to
+                    // false, in which case the managed device will use a
+                    // 32 bit image. Not applicable to arm64 machines.
+                    require64Bit = false
+                }
+            }
+        }
     }
 }
 

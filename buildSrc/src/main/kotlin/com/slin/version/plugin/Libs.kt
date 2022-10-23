@@ -22,7 +22,7 @@ object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:$agpVersion"
 
     object Slin {
-        private const val slinLibraryVersion = "1.1.4"
+        private const val slinLibraryVersion = "1.1.5"
 
         const val score = "io.github.dxslin:Score:${slinLibraryVersion}"
         const val scoreMvi = "io.github.dxslin:Score-mvi:${slinLibraryVersion}"
@@ -33,9 +33,9 @@ object Libs {
         const val viewPagerIndicator =
             "io.github.dxslin:ViewPagerIndicator:${slinLibraryVersion}"
         const val stateViewSwitcher =
-            "io.github.dxslin:StateViewSwitcher:1.1.3"
+            "io.github.dxslin:StateViewSwitcher:${slinLibraryVersion}"
         const val stateViewSwitcherExt =
-            "io.github.dxslin:StateViewSwitcher_score-ext:1.1.3"
+            "io.github.dxslin:StateViewSwitcher_score-ext:${slinLibraryVersion}"
     }
 
     object Kotlin {
@@ -58,11 +58,11 @@ object Libs {
      */
     object AndroidX {
 
-        private const val appcompatVersion = "1.4.1"
-        private const val materialVersion = "1.5.0"
-        private const val constraintLayoutVersion = "2.1.3"
+        private const val appcompatVersion = "1.5.1"
+        private const val materialVersion = "1.6.0"
+        private const val constraintLayoutVersion = "2.1.4"
         private const val vectorDrawableVersion = "1.1.0"
-        private const val navigationVersion = "2.4.2"
+        private const val navigationVersion = "2.5.2"
         private const val dynamicAnimationVersion = "1.0.0"
         private const val swipeRefreshLayoutVersion = "1.2.0-alpha01"
         private const val recyclerViewVersion = "1.2.1"

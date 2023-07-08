@@ -10,5 +10,5 @@ dependencies {
     implementation Libs.Kotlin.reflect
 }
 
-sourceCompatibility = "7"
-targetCompatibility = "7"
+sourceCompatibility = Versions.javaVersion
+targetCompatibility = Versions.javaVersion

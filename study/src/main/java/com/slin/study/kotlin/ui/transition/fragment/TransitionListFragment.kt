@@ -93,7 +93,7 @@ class TransitionListFragment : BaseFragment(R.layout.fragment_transition_list) {
     private fun updateStatusBarColor() {
         val activity = (requireActivity() as AppCompatActivity)
         activity.statusBarColor =
-            MaterialColors.getColor(requireContext(), R.attr.colorPrimaryDark, Color.WHITE)
+            MaterialColors.getColor(requireContext(), androidx.transition.R.attr.colorPrimaryDark, Color.WHITE)
     }
 
     class TransitionAdapter(private val onItemClick: (ViewHolder, TransitionData) -> Unit) :

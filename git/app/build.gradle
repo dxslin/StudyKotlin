@@ -1,4 +1,5 @@
 import com.slin.version.plugin.Libs
+import com.slin.version.plugin.Versions
 
 import java.util.regex.Pattern
 
@@ -11,12 +12,12 @@ plugins {
 
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.slin.git"
         minSdkVersion 24
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
@@ -50,11 +51,11 @@ android {
         buildConfig = true
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility Versions.javaVersion
+        targetCompatibility Versions.javaVersion
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = Versions.javaVersion
     }
     namespace 'com.slin.git'
 }

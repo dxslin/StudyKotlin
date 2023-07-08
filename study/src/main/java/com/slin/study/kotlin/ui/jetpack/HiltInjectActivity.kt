@@ -66,7 +66,7 @@ class HiltInjectActivity : BaseActivity() {
             btnRequestInfo.setOnClickListener { viewModel.requestUserInfo() }
 
             viewModel.test(object : Observer<Unit> {
-                override fun onChanged(t: Unit?) {
+                override fun onChanged(value: Unit) {
                     Log.d(TAG, "onChanged: $this")
                 }
             })

@@ -1,4 +1,5 @@
 import com.slin.version.plugin.Libs
+import com.slin.version.plugin.Versions
 
 plugins {
     id 'com.android.library'
@@ -8,12 +9,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 31
+        targetSdkVersion 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -26,11 +27,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility Versions.javaVersion
+        targetCompatibility Versions.javaVersion
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = Versions.javaVersion
     }
     sourceSets{
         main{

@@ -26,7 +26,7 @@ import org.kodein.di.generic.singleton
  */
 
 @HiltAndroidApp
-class StudyKotlinApplication : Application(), KodeinAware, Configuration.Provider {
+class StudyKotlinApplication : Application(), KodeinAware {
 
     override val kodein: Kodein
         get() = Kodein.lazy {
@@ -53,11 +53,11 @@ class StudyKotlinApplication : Application(), KodeinAware, Configuration.Provide
         MatrixUtil.init(this)
     }
 
-    override fun getWorkManagerConfiguration(): Configuration {
-        return Configuration.Builder()
-            .setMinimumLoggingLevel(Log.DEBUG)
-            .build()
-    }
+//    override fun getWorkManagerConfiguration(): Configuration {
+//        return Configuration.Builder()
+//            .setMinimumLoggingLevel(Log.DEBUG)
+//            .build()
+//    }
 
     override fun onLowMemory() {
         Logger.log("TouchEventActivity", "onLowMemory")

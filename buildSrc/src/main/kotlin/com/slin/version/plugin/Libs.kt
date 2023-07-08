@@ -11,7 +11,7 @@ object Versions {
     const val androidBuildTools = "30.0.3"
     const val androidMinSdk = 24
 
-    val javaVersion = JavaVersion.VERSION_1_8
+    val javaVersion = JavaVersion.VERSION_17
 
     const val ktlint = "0.40.0"
 
@@ -39,7 +39,7 @@ object Libs {
     }
 
     object Kotlin {
-        private const val kotlin_version = "1.6.21"
+        private const val kotlin_version = "1.8.21"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
         const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${kotlin_version}"
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"
@@ -117,8 +117,8 @@ object Libs {
          * https://dagger.dev/hilt/gradle-setup
          * https://developer.android.google.cn/jetpack/androidx/releases/hilt
          */
-        private const val hiltVersion = "2.42"
-        private const val hiltViewModelVersion = "1.0.0-alpha03"
+        private const val hiltVersion = "2.46.1"
+        private const val hiltViewModelVersion = "1.0.0"
 
         /**
          * https://developer.android.google.cn/jetpack/androidx/releases/datastore
@@ -249,7 +249,7 @@ object Libs {
      * https://github.com/Tencent/matrix
      */
     object Matrix {
-        private const val matrix_version = "2.0.5"
+        private const val matrix_version = "2.1.0"
 
         @JvmStatic
         private fun fullName(name: String): String {

@@ -18,7 +18,7 @@ object Versions {
 }
 
 object Libs {
-    private const val agpVersion = "7.3.0"
+    private const val agpVersion = "8.0.2"
     const val androidGradlePlugin = "com.android.tools.build:gradle:$agpVersion"
 
     object Slin {
@@ -128,7 +128,7 @@ object Libs {
         /**
          * https://github.com/google/protobuf-gradle-plugin/
          */
-        private const val protobufPluginVersion = "0.8.18"
+        private const val protobufPluginVersion = "0.9.3"
         private const val protobufVersion = "3.10.0"
 
         /**

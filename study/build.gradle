@@ -11,14 +11,23 @@ plugins {
 
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion Versions.androidSdk
+    namespace 'com.slin.study.kotlin'
     defaultConfig {
         applicationId "com.slin.study.kotlin"
-        minSdkVersion 24
-        targetSdkVersion 33
+        minSdkVersion Versions.androidMinSdk
+        targetSdkVersion Versions.androidSdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk{
+            abiFilters "arm64-v8a"
+        }
+        externalNativeBuild {
+            cmake {
+                cppFlags '-DANDROID_STL=c++_shared'
+            }
+        }
     }
     signingConfigs {
         pulic {
@@ -51,6 +60,10 @@ android {
         viewBinding = true
         buildConfig = true
         aidl = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Libs.Kotlin.compose
     }
     sourceSets {
         main {
@@ -64,24 +77,10 @@ android {
 //        exclude 'lib/arm64-v8a/libc++_shared.so'
 //        exclude 'lib/armeabi-v7a/libc++_shared.so'
     }
-    namespace 'com.slin.study.kotlin'
-
-    testOptions {
-        managedDevices {
-            devices {
-                pixel2api30(com.android.build.api.dsl.ManagedVirtualDevice) {
-                    // Use device profiles you typically see in Android Studio.
-                    device = "Pixel 2"
-                    // Use only API levels 27 and higher.
-                    apiLevel = 31
-                    // To include Google services, use "google".
-                    systemImageSource = "aosp"
-                    // Whether the image must be a 64 bit image. Defaults to
-                    // false, in which case the managed device will use a
-                    // 32 bit image. Not applicable to arm64 machines.
-                    require64Bit = false
-                }
-            }
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/CMakeLists.txt')
+            version '3.22.1'
         }
     }
 }
@@ -91,6 +90,14 @@ dependencies {
     implementation Libs.Kotlin.stdlib
     implementation Libs.Kotlin.Coroutines.core
     implementation Libs.Kotlin.reflect
+
+    // compose
+    implementation 'androidx.activity:activity-compose:1.7.2'
+    implementation platform('androidx.compose:compose-bom:2022.10.00')
+    implementation 'androidx.compose.ui:ui'
+    implementation 'androidx.compose.ui:ui-graphics'
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    implementation 'androidx.compose.material3:material3'
 
     implementation 'androidx.databinding:viewbinding:8.0.2'
     implementation 'androidx.appcompat:appcompat:1.6.1'

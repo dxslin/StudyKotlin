@@ -12,12 +12,12 @@ plugins {
 
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion Versions.androidSdk
 
     defaultConfig {
         applicationId "com.slin.git"
-        minSdkVersion 24
-        targetSdkVersion 33
+        minSdkVersion Versions.androidMinSdk
+        targetSdkVersion Versions.androidSdk
         versionCode 1
         versionName "1.0"
 

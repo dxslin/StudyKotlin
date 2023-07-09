@@ -7,7 +7,7 @@ import org.gradle.kotlin.dsl.implementation
 object Versions {
 
 
-    const val androidSdk = 31
+    const val androidSdk = 33
     const val androidBuildTools = "30.0.3"
     const val androidMinSdk = 24
 
@@ -39,7 +39,11 @@ object Libs {
     }
 
     object Kotlin {
-        private const val kotlin_version = "1.8.21"
+        /**
+         * https://androidx.dev/storage/compose-compiler/repository
+         */
+        const val compose = "1.4.8"
+        private const val kotlin_version = "1.8.22"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
         const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${kotlin_version}"
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"

@@ -12,6 +12,7 @@ buildscript {
         google()
         maven { url 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/' }
         maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots' }
+        maven { url "https://androidx.dev/storage/compose-compiler/repository/" }
 
     }
     dependencies {
@@ -21,7 +22,7 @@ buildscript {
         classpath Libs.Jetpack.hiltPlugin
         classpath Libs.Jetpack.protobufPlugin
 
-        classpath (Libs.Matrix.matrixGradlePlugin){changing = true}
+        classpath(Libs.Matrix.matrixGradlePlugin) { changing = true }
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

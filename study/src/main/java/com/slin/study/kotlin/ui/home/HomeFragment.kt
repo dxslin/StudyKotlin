@@ -14,6 +14,7 @@ import com.slin.study.kotlin.ui.jetpack.JetPackActivity
 import com.slin.study.kotlin.ui.librarycase.LibraryCaseActivity
 import com.slin.study.kotlin.ui.material.MaterialDesignActivity
 import com.slin.study.kotlin.ui.motion.MotionLayoutTestActivity
+import com.slin.study.kotlin.ui.natively.NativeCaseActivity
 import com.slin.study.kotlin.ui.responsive.ResponsiveActivity
 import com.slin.study.kotlin.ui.testlist.TestListFragment
 import com.slin.study.kotlin.ui.testlist.TestPageData
@@ -57,15 +58,18 @@ val testDataList =
             R.drawable.avatar_1,
             ResponsiveActivity::class.java
         ),
+        TestPageData(
+            "NativeC",
+            R.drawable.avatar_2,
+            NativeCaseActivity::class.java
+        ),
+    )
 
-        )
 class HomeFragment : BaseFragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
 
     private lateinit var binding: FragmentHomeBinding
-
-
 
 
     override fun onCreateView(

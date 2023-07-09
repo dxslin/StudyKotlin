@@ -38,6 +38,27 @@ object Libs {
             "io.github.dxslin:StateViewSwitcher_score-ext:${slinLibraryVersion}"
     }
 
+    /**
+     * Google Compose 扩展库
+     * doc: https://google.github.io/accompanist/
+     */
+    object Accompanist {
+        private const val version = "0.28.0"
+        const val insets = "com.google.accompanist:accompanist-insets:$version"
+        const val theme = "com.google.accompanist:accompanist-appcompat-theme:$version"
+        const val systemUiController =
+            "com.google.accompanist:accompanist-systemuicontroller:$version"
+        const val flowlayout = "com.google.accompanist:accompanist-flowlayout:$version"
+        const val pager = "com.google.accompanist:accompanist-pager:$version"
+        const val pagerIndicators = "com.google.accompanist:accompanist-pager-indicators:$version"
+        const val swipeRefresh = "com.google.accompanist:accompanist-swiperefresh:$version"
+        const val placeholder = "com.google.accompanist:accompanist-placeholder-material:$version"
+        const val drawablePainter = "com.google.accompanist:accompanist-drawablepainter:$version"
+        const val permissions = "com.google.accompanist:accompanist-permissions:$version"
+        const val navMaterial = "com.google.accompanist:accompanist-navigation-material:$version"
+        const val navAnimation = "com.google.accompanist:accompanist-navigation-animation:$version"
+    }
+
     object Kotlin {
         /**
          * https://androidx.dev/storage/compose-compiler/repository
@@ -49,7 +70,7 @@ object Libs {
         const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"
 
         object Coroutines {
-            private const val version = "1.6.1"
+            private const val version = "1.6.4"
             const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
             const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
             const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
@@ -66,7 +87,7 @@ object Libs {
         private const val materialVersion = "1.6.0"
         private const val constraintLayoutVersion = "2.1.4"
         private const val vectorDrawableVersion = "1.1.0"
-        private const val navigationVersion = "2.5.2"
+        private const val navigationVersion = "2.5.3"
         private const val dynamicAnimationVersion = "1.0.0"
         private const val swipeRefreshLayoutVersion = "1.2.0-alpha01"
         private const val recyclerViewVersion = "1.2.1"
@@ -105,12 +126,12 @@ object Libs {
         /**
          * https://developer.android.google.cn/jetpack/androidx/releases/lifecycle
          */
-        private const val lifecycleVersion = "2.5.1"
+        private const val lifecycleVersion = "2.6.1"
 
         /**
          * https://developer.android.google.cn/jetpack/androidx/releases/room
          */
-        private const val roomVersion = "2.4.3"
+        private const val roomVersion = "2.5.0"
 
         /**
          * https://developer.android.google.cn/jetpack/androidx/releases/paging
@@ -238,7 +259,7 @@ object Libs {
 
     //test
     object Test {
-        private const val junitVersion = "4.12"
+        private const val junitVersion = "4.13"
         private const val junitExtVersion = "1.1.2"
         private const val espressoCoreVersion = "3.2.0"
 

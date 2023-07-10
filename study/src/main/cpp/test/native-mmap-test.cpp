@@ -1,4 +1,5 @@
 #include <jni.h>
+#include <android/file_descriptor_jni.h>
 #include "shm/SharedMemory.h"
 
 #pragma clang diagnostic push
@@ -61,10 +62,12 @@ JNIEXPORT jobject JNICALL
 Java_com_slin_study_kotlin_ui_natively_mmap_MMapTestActivity_nativeGetShareMemory(JNIEnv *env,
                                                                                   jobject thiz) {
     jclass shmCls = env->FindClass("com/slin/study/kotlin/ui/natively/mmap/ShareMemory");
-    jmethodID shmCMI = env->GetMethodID(shmCls, "<init>", "(I[JI)V");
-    jlongArray address = env->NewLongArray(1);
-    long data[] = {(long) shm.getAddress()};
-    env->SetLongArrayRegion(address, 0, 1, data);
-    return env->NewObject(shmCls, shmCMI, shm.getFd(), address, shm.getSize());
+    jmethodID shmCMI = env->GetMethodID(shmCls, "<init>", "(Landroid/os/ParcelFileDescriptor;I)V");
+
+    jclass pfdCls = env->FindClass("android/os/ParcelFileDescriptor");
+    jmethodID pfdFromFd = env->GetStaticMethodID(pfdCls, "fromFd", "(I)Landroid/os/ParcelFileDescriptor;");
+    jobject fd = env->CallStaticObjectMethod(pfdCls, pfdFromFd, shm.getFd());
+
+    return env->NewObject(shmCls, shmCMI, fd, shm.getSize());
 }
 #pragma clang diagnostic pop

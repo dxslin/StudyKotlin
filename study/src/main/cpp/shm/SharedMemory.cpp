@@ -12,10 +12,10 @@ SharedMemory::~SharedMemory() {
     closeShm();
 }
 
-int SharedMemory::openShm(const int fd, void *addr, const int size) {
+int SharedMemory::openShm(const int fd, const int size) {
     mFd = fd;
     mSize = size;
-    return createMMAP(addr);
+    return createMMAP();
 }
 
 int SharedMemory::openShm(const char *filePath, const int size) {
@@ -45,11 +45,11 @@ int SharedMemory::openFile(const char *filePath) {
     return 0;
 }
 
-int SharedMemory::createMMAP(void *addr) {
-    void *address = mmap(addr, mSize, PROT_READ | PROT_WRITE, MAP_SHARED, mFd, 0);
+int SharedMemory::createMMAP() {
+    void *address = mmap(nullptr, mSize, PROT_READ | PROT_WRITE, MAP_SHARED, mFd, 0);
     LOGI("mmap addr: %p mAddress: %p", address, mAddress);
     if (address == (void *) -1) {
-        LOGE("mmap failed.");
+        LOGE("mmap failed. err: %s", strerror(errno));
         return -1;
     }
     mAddress = address;

@@ -24,7 +24,7 @@ public:
 
     int openShm(const char *filePath, const int size = DEFAULT_SIZE);
 
-    int openShm(const int fd, void *addr, const int size = DEFAULT_SIZE);
+    int openShm(const int fd, const int size = DEFAULT_SIZE);
 
     int writeShm(const void *data, const size_t size) const;
 
@@ -43,7 +43,7 @@ public:
 private:
     int openFile(const char *filePath);
 
-    int createMMAP(void *addr = nullptr);
+    int createMMAP();
 
 private:
     int mSize = DEFAULT_SIZE;

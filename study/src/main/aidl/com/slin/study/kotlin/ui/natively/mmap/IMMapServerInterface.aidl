@@ -5,7 +5,7 @@ package com.slin.study.kotlin.ui.natively.mmap;
 
 interface IMMapServerInterface {
 
-      void passShm(int fd, in long[] addr, int size);
+      void passShm(in ParcelFileDescriptor fd, int size);
 
       void writeText(String text);
 

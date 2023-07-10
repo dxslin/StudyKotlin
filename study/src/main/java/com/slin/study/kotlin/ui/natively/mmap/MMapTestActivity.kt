@@ -31,13 +31,13 @@ class MMapTestActivity : BaseActivity() {
         }
     }
 
-    private val mMMapClient = MMapClient()
+    private val mMMapTestClient = MMapTestClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setShowBackButton(true)
 
-        mMMapClient.init(this)
+        mMMapTestClient.init(this)
 
         setContent {
             ApplicationTheme() {
@@ -53,6 +53,7 @@ class MMapTestActivity : BaseActivity() {
     @Composable
     fun Content() {
         nativeOpenShm(context.getExternalFilesDir("")!!.absolutePath + "shm/test")
+
         val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS", Locale.getDefault())
         var testText by remember { mutableStateOf(nativeReadText()) }
         var serverText by remember { mutableStateOf("") }
@@ -75,17 +76,17 @@ class MMapTestActivity : BaseActivity() {
             Button(onClick = {
                 val shm = nativeGetShareMemory()
                 logd { "shm: $shm" }
-                mMMapClient.passShm(shm.fd, shm.addr, shm.size)
+                mMMapTestClient.passShm(shm.fd, shm.size)
             }) {
                 Text(text = "Server PassShm")
             }
             Button(onClick = {
-                serverText = mMMapClient.readText()
+                serverText = mMMapTestClient.readText()
             }) {
                 Text(text = "Server Read($serverText)")
             }
             Button(onClick = {
-                mMMapClient.writeText("Server Data")
+                mMMapTestClient.writeText("Server Data")
             }) {
                 Text(text = "Server Write(Server Data)")
             }

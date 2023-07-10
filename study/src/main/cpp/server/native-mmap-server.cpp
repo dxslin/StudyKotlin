@@ -6,16 +6,16 @@ SharedMemory serverShm;
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_slin_study_kotlin_ui_natively_mmap_ServerBinderImpl_nativePassShm(JNIEnv *env,
-                                                                           jobject thiz, jint fd,
-                                                                           jlongArray addr,
+                                                                           jobject thiz, jobject pfd,
                                                                            jint size) {
-    long *address = env->GetLongArrayElements(addr, nullptr);
-    LOGI("fd: %d addr: %p size: %d address: %p address-value: %p", fd, addr, size, address, (void *)*address);
-    int ret = serverShm.openShm(fd, (void *)*address, size);
+    jclass  pfdCls = env->GetObjectClass(pfd);
+    jmethodID pfdGetFd = env->GetMethodID(pfdCls, "getFd", "()I");
+    int fd = env->CallIntMethod(pfd, pfdGetFd);
+    LOGI("fd: %d size: %d ", fd, size);
+    int ret = serverShm.openShm(fd, size);
     if (ret != 0) {
         LOGE("Open shared memory failed.");
     }
-    env->ReleaseLongArrayElements(addr, address, 0);
     LOGI("Open shared memory success.");
 }
 extern "C"

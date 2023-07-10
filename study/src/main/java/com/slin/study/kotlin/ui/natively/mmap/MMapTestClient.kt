@@ -5,12 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
+import android.os.ParcelFileDescriptor
 import android.os.RemoteException
-import android.util.Log
 import com.slin.core.logger.logd
 import com.slin.core.logger.loge
+import java.security.InvalidParameterException
 
-class MMapClient {
+class MMapTestClient {
 
     var isConnected = false
     private lateinit var mContext: Context
@@ -18,9 +19,9 @@ class MMapClient {
 
     private val conn = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-            logd { "onServiceConnected, name: $name" }
+            logd { "onServiceConnected, name: $name  binder: $service" }
             isConnected = true
-            mBinder = service as IMMapServerInterface
+            mBinder = IMMapServerInterface.Stub.asInterface(service)
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
@@ -39,16 +40,22 @@ class MMapClient {
     fun init(context: Context) {
         mContext = context
         context.bindService(
-            Intent(context, MMapServerService::class.java),
+            Intent("com.slin.study.kotlin.ui.natively.mmap.MMapServerService.Bind").apply {
+                `package` = context.packageName
+            },
             conn,
             Context.BIND_AUTO_CREATE
         )
     }
 
     @Throws(RemoteException::class)
-    fun passShm(fd: Int, addr: LongArray, size: Int) {
+    fun passShm(fd: ParcelFileDescriptor?, size: Int){
+        if(fd == null){
+            loge { "fd cannot be null" }
+            throw InvalidParameterException("fd cannot be null")
+        }
         if (isConnected && mBinder != null) {
-            mBinder?.passShm(fd, addr, size)
+            mBinder?.passShm(fd, size)
         } else {
             loge { "Not connected: isConnected = $isConnected mBinder = $mBinder" }
         }

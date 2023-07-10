@@ -73,6 +73,7 @@
         <service
             android:name="com.slin.study.kotlin.ui.natively.mmap.MMapServerService"
             android:exported="true"
+            android:process=":mmap"
             android:permission="com.slin.study.kotlin.ui.natively.mmap.MMapServerService.permission">
             <intent-filter>
                 <action android:name="com.slin.study.kotlin.ui.natively.mmap.MMapServerService.Bind" />

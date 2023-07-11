@@ -46,6 +46,7 @@ int SharedMemory::openFile(const char *filePath) {
 }
 
 int SharedMemory::createMMAP() {
+    ftruncate(mFd, mSize);
     void *address = mmap(nullptr, mSize, PROT_READ | PROT_WRITE, MAP_SHARED, mFd, 0);
     LOGI("mmap addr: %p mAddress: %p", address, mAddress);
     if (address == (void *) -1) {

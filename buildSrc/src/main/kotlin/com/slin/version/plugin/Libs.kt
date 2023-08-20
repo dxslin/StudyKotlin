@@ -18,7 +18,7 @@ object Versions {
 }
 
 object Libs {
-    private const val agpVersion = "8.0.2"
+    private const val agpVersion = "8.1.0"
     const val androidGradlePlugin = "com.android.tools.build:gradle:$agpVersion"
 
     object Slin {

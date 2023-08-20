@@ -12,7 +12,8 @@ plugins {
 
 
 android {
-    compileSdkVersion Versions.androidSdk
+    namespace 'com.slin.git'
+    compileSdk Versions.androidSdk
 
     defaultConfig {
         applicationId "com.slin.git"
@@ -57,7 +58,6 @@ android {
     kotlinOptions {
         jvmTarget = Versions.javaVersion
     }
-    namespace 'com.slin.git'
 }
 
 dependencies {

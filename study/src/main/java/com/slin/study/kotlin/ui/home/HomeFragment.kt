@@ -19,6 +19,7 @@ import com.slin.study.kotlin.ui.responsive.ResponsiveActivity
 import com.slin.study.kotlin.ui.testlist.TestListFragment
 import com.slin.study.kotlin.ui.testlist.TestPageData
 import com.slin.study.kotlin.ui.theory.TheoryTestActivity
+import com.slin.study.kotlin.ui.virtualdisplay.VirtualDisplayActivity
 
 val testDataList =
     arrayListOf(
@@ -26,42 +27,47 @@ val testDataList =
         TestPageData(
             "BottomSheet",
             R.drawable.img_cartoon_3,
-            BottomSheetTestActivity::class.java
+            BottomSheetTestActivity::class.java,
         ),
         TestPageData(
             "MaterialDesign",
             R.drawable.img_cartoon_cat,
-            MaterialDesignActivity::class.java
+            MaterialDesignActivity::class.java,
         ),
         TestPageData(
             "MotionLayout",
             R.drawable.img_cartoon_pig1,
-            MotionLayoutTestActivity::class.java
+            MotionLayoutTestActivity::class.java,
         ),
         TestPageData(
             "LibraryCase",
             R.drawable.img_cartoon_pig2,
-            LibraryCaseActivity::class.java
+            LibraryCaseActivity::class.java,
         ),
         TestPageData(
             "FloatWindow",
             R.drawable.img_cartoon_2,
-            FloatWindowActivity::class.java
+            FloatWindowActivity::class.java,
         ),
         TestPageData(
             "TheoryTest",
             R.drawable.img_cartoon_bear,
-            TheoryTestActivity::class.java
+            TheoryTestActivity::class.java,
         ),
         TestPageData(
             "Responsive",
             R.drawable.avatar_1,
-            ResponsiveActivity::class.java
+            ResponsiveActivity::class.java,
         ),
         TestPageData(
             "NativeC",
             R.drawable.avatar_2,
-            NativeCaseActivity::class.java
+            NativeCaseActivity::class.java,
+        ),
+        TestPageData(
+            "Virtual Display",
+            R.drawable.avatar_2,
+            VirtualDisplayActivity::class.java,
         ),
     )
 
@@ -71,13 +77,11 @@ class HomeFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         val testListFragment = TestListFragment.newInstance(testDataList)
@@ -87,9 +91,6 @@ class HomeFragment : BaseFragment() {
             .addToBackStack(testListFragment.TAG)
             .commit()
 
-
         return binding.root
     }
-
-
 }

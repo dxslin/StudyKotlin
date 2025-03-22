@@ -42,7 +42,8 @@ class MMapTestActivity : BaseActivity() {
         setContent {
             ApplicationTheme() {
                 Surface(
-                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     Content()
                 }
@@ -55,12 +56,12 @@ class MMapTestActivity : BaseActivity() {
         nativeOpenShm(context.getExternalFilesDir("")!!.absolutePath + "shm/test")
 
         val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS", Locale.getDefault())
-        var testText by remember { mutableStateOf(nativeReadText()) }
+        var testText by remember { mutableStateOf("") }
         var serverText by remember { mutableStateOf("") }
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 16.dp),
         ) {
             Button(onClick = {
                 nativeWriteText(format.format(Calendar.getInstance().time))

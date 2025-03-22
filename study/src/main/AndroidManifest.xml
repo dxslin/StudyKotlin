@@ -66,6 +66,8 @@
         <activity android:name=".ui.transition.fragment.TransitionFragmentActivity" />
         <activity android:name="com.slin.study.kotlin.ui.natively.NativeCaseActivity" />
         <activity android:name="com.slin.study.kotlin.ui.natively.mmap.MMapTestActivity" />
+        <activity android:name=".ui.virtualdisplay.VirtualDisplayActivity" />
+        <activity android:name=".ui.transition.fgswicth.FragmentSwitchActivity" />
 
         <service
             android:name="androidx.work.impl.foreground.SystemForegroundService"

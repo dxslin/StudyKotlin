@@ -7,6 +7,7 @@ import com.slin.study.kotlin.ui.testlist.TestListFragment
 import com.slin.study.kotlin.ui.testlist.TestPageData
 import com.slin.study.kotlin.ui.transition.LayoutTransitionActivity
 import com.slin.study.kotlin.ui.transition.TransitionListActivity
+import com.slin.study.kotlin.ui.transition.fgswicth.FragmentSwitchActivity
 import com.slin.study.kotlin.ui.transition.fragment.TransitionFragmentActivity
 
 class MotionLayoutTestActivity : BaseActivity() {
@@ -31,7 +32,12 @@ class MotionLayoutTestActivity : BaseActivity() {
             "Fragment Transition",
             R.drawable.img_cartoon_2,
             TransitionFragmentActivity::class.java
-        )
+        ),
+        TestPageData(
+            "Fragment Switch",
+            R.drawable.img_cartoon_3,
+            FragmentSwitchActivity::class.java
+        ),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

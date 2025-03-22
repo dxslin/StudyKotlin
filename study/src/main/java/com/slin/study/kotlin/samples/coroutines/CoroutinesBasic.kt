@@ -28,10 +28,10 @@ import kotlin.system.measureTimeMillis
  */
 
 fun main() {
-    launchTest()
+//    launchTest()
 //    runBlockingTest()
 //    joinTest()
-//    coroutineScopeTest()
+    coroutineScopeTest()
 //
 //    runBlocking {
 //        launch {

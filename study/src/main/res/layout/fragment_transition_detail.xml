@@ -23,7 +23,7 @@
             android:clipToPadding="true"
             android:fitsSystemWindows="true"
             app:collapsedTitleTextAppearance="@style/TextTitle.Inverse"
-            app:contentScrim="?attr/colorPrimary"
+            app:contentScrim="@color/Blue"
             app:expandedTitleMarginBottom="48dp"
             app:expandedTitleMarginStart="@dimen/activity_horizontal_margin"
             app:expandedTitleTextAppearance="@style/TextTitle.Inverse"
